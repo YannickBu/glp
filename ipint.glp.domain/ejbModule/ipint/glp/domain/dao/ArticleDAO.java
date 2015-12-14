@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Utilisateur;
 
-public class ArticleDAO extends DAO {
+public class ArticleDAO extends DAO<Article> {
 
 	private static final String PERSISTENCE_UNIT_NAME = "PU";
 	private EntityManagerFactory emf;
@@ -19,8 +19,28 @@ public class ArticleDAO extends DAO {
 		em = emf.createEntityManager();
 	}
 
+	public void update(final Article ancienArt, final Article nouvelArt) {
+
+		Article articleMAJ = find(ancienArt);
+
+		if (ancienArt.getContenu() != null) {
+
+			articleMAJ.setContenu(ancienArt.getContenu());
+		}
+		if (ancienArt.getDatePublication() != null) {
+
+			articleMAJ.setDatePublication(ancienArt.getDatePublication());
+		}
+		em.getTransaction().begin();
+
+		em.persist(articleMAJ);
+
+		em.getTransaction().commit();
+
+	}
+
 	@Override
-	public Object find(Object idArticle) {
+	public Article find(Article idArticle) {
 		em.getTransaction().begin();
 
 		Query q = em.createQuery("select e from Utilisateur e where e.idArticle = '" + idArticle + "'");
@@ -32,7 +52,7 @@ public class ArticleDAO extends DAO {
 	}
 
 	@Override
-	public Object create(Object article) {
+	public Article create(Article article) {
 		em.getTransaction().begin();
 
 		em.persist(article);
@@ -43,27 +63,7 @@ public class ArticleDAO extends DAO {
 	}
 
 	@Override
-	public void update(Object ancienArt, Object nouvelArt) {
-		
-
-		if (ancienArt.() != null) {
-
-			utilisateurMAJ.setStatut(ancienUtilisateur.getStatut());
-		}
-		if (ancienUtilisateur.getProfil() != null) {
-
-			utilisateurMAJ.setProfil(ancienUtilisateur.getProfil());
-		}
-		em.getTransaction().begin();
-
-		em.persist(utilisateurMAJ);
-
-		em.getTransaction().commit();
-
-	}
-
-	@Override
-	public void delete(Object obj) {
+	public void delete(Article obj) {
 		// TODO Auto-generated method stub
 
 	}
