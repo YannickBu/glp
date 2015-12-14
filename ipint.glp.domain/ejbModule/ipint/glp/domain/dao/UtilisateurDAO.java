@@ -24,16 +24,11 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
 		em.getTransaction().begin();
 
-		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setNom(util.getNom());
-		utilisateur.setPrenom(util.getPrenom());
-		utilisateur.setEmail(util.getEmail());
-
-		em.persist(utilisateur);
+		em.persist(util);
 
 		em.getTransaction().commit();
 
-		return utilisateur;
+		return util;
 
 	}
 

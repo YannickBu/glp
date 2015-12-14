@@ -21,6 +21,6 @@
 
 
 
-
+<div class="col-md-1"></div>
 </div>
 <!-- fin de la row menu-droite -->

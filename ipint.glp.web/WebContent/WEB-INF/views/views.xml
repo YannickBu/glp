@@ -4,7 +4,7 @@
       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 <definition name="accueil" extends="baseLayout">
-<put-attribute name="body" value="/WEB-INF/views/body.jsp"></put-attribute>
+<put-attribute name="body" value="/WEB-INF/views/accueilBody.jsp"></put-attribute>
 </definition>
 
 </tiles-definitions>
