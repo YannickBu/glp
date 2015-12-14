@@ -20,7 +20,7 @@ public class ArticleDAO extends DAO<Article> {
 		em = emf.createEntityManager();
 	}
 
-	public void update(final Article ancienArt, final Article nouvelArt) {
+	public Article update(final Article ancienArt, final Article nouvelArt) {
 
 		Article articleMAJ = find(ancienArt);
 
@@ -37,6 +37,8 @@ public class ArticleDAO extends DAO<Article> {
 		em.persist(articleMAJ);
 
 		em.getTransaction().commit();
+		
+		return articleMAJ;
 
 	}
 

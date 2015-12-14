@@ -27,7 +27,7 @@ public class ProfilDAO extends DAO<Profil> {
 	}
 
 	@Override
-	public void update(Profil ancienProfil, Profil noouvelProfil) {
+	public Profil update(Profil ancienProfil, Profil noouvelProfil) {
 		Profil profilMAJ = find(ancienProfil);
 
 		if (noouvelProfil.getCentreInteret() != null) {
@@ -50,6 +50,8 @@ public class ProfilDAO extends DAO<Profil> {
 		em.persist(profilMAJ);
 
 		em.getTransaction().commit();
+		
+		return profilMAJ;
 
 	}
 

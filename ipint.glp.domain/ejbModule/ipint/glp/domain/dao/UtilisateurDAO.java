@@ -53,7 +53,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
 	}
 
-	public void update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
+	public Utilisateur update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
 
 		Utilisateur utilisateurMAJ = find(ancienUtilisateur);
 
@@ -70,6 +70,8 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 		em.persist(utilisateurMAJ);
 
 		em.getTransaction().commit();
+		
+		return utilisateurMAJ;
 
 	}
 

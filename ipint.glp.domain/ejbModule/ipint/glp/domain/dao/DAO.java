@@ -38,7 +38,7 @@ public abstract class DAO<T> {
 	 * @param ancienObj
 	 * @param nouvelObj
 	 */
-	public abstract void update(T ancienObj, T nouvelObj);
+	public abstract T update(T ancienObj, T nouvelObj);
 
 	/**
 	 * Permet la suppression d'une entrée de la base
