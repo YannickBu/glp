@@ -58,15 +58,15 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
 	public void update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
 
-		Utilisateur utilisateurMAJ = find(nouvelUtilisateur);
+		Utilisateur utilisateurMAJ = find(ancienUtilisateur);
 
-		if (ancienUtilisateur.getStatut() != null) {
+		if (nouvelUtilisateur.getStatut() != null) {
 
-			utilisateurMAJ.setStatut(ancienUtilisateur.getStatut());
+			utilisateurMAJ.setStatut(nouvelUtilisateur.getStatut());
 		}
-		if (ancienUtilisateur.getProfil() != null) {
+		if (nouvelUtilisateur.getProfil() != null) {
 
-			utilisateurMAJ.setProfil(ancienUtilisateur.getProfil());
+			utilisateurMAJ.setProfil(nouvelUtilisateur.getProfil());
 		}
 		em.getTransaction().begin();
 
