@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <div class="row">
+	<div class="col-md-1"></div>
 	<div class="col-md-2">
 			<ul class="menu-gauche">
 				<a href="#"><li>Mon profil<span
