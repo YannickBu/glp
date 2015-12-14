@@ -7,7 +7,7 @@
         <put-attribute name="title" value="L1nk"></put-attribute>
         <put-attribute name="stylecss" value="/WEB-INF/views/layoutcss.jsp"></put-attribute>
         <put-attribute name="header" value="/WEB-INF/views/header.jsp"></put-attribute>
-        <put-attribute name="body" value=""></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/accueilBody.jsp"></put-attribute>
         <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"></put-attribute>
         <put-attribute name="scriptjs" value="/WEB-INF/views/scriptjs.jsp"></put-attribute>
         <put-attribute name="menu-gauche" value="/WEB-INF/views/menu-gauche.jsp"></put-attribute>

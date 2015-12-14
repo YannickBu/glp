@@ -139,5 +139,17 @@ footer{
 	position:absolute;
 	bottom:0;	
 }
+/*CSS accueilBody*/
+.accueilBody{
+	padding-top : 1%;
+	border : 1px solid #dadbdb;
+	padding-bottom : 1%;
+}
 
+.article{
+	border : 1px solid #dadbdb;
+}
+.accueilBody li{
+	list-style-type: none;
+}
 
