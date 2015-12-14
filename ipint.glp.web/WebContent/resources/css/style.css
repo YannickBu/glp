@@ -1,0 +1,143 @@
+html, body, .container-table {
+	height: 100%;
+	background-color: #ffffff;
+	overflow:hidden;	
+}
+.container-table {
+	background: linear-gradient(180deg, #ffffff 50%, #f6921e 50%);
+	display: table;
+}
+.vertical-center-row {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.small-link{
+	font-size: 12px;
+	color: #000000;	
+}
+
+.container-bas {
+	padding-top: 5%;
+}
+
+@font-face {
+	font-family: 'Huruf Miranti'; 
+    src: url('../fonts/Huruf_Miranti.ttf') format('truetype'); 
+
+}
+    
+
+.name-logo {
+	font-family: 'Huruf Miranti'; 
+}
+
+.row-logo {
+	margin-top: -5%;	
+}
+
+.jumbotron {
+	padding-top: 0px;
+    padding-bottom: 0px; 
+}
+	
+/*
+	--- Code couleur --- 
+
+	#231f20 -> noir du logo
+	#dadbdb -> gris du logo
+	#f6921e -> orange du logo 
+*/
+/* CSS Header */
+.header {
+	background-color : #f6921e	;
+
+}
+
+.name-logo {	
+	font-family : 'Huruf Miranti'; 
+	font-size : 240%;
+	margin-left : 3%;
+}
+
+#img-logo{
+	width : 15%;
+	height : 15%; 
+	padding-bottom : 4%;
+	padding-top : 4%;
+}
+
+.nom-etudiant{
+	margin-top : 6.5%;
+
+}
+
+#barre-recherche{
+	margin-left : -1.8%;
+	margin-top : 0.4%;
+}
+
+.couleurgly{
+	color : black;
+	font-size : 120%;
+}
+
+/*CSS menu-gauche*/
+.gly-menu{
+	color : black;
+	font-size : 120%;
+	float : right;
+}
+
+.menu-gauche{
+	margin-left : 10%;
+	width : 85%;	
+	background-color : #DCDCDC;
+}
+
+.menu-gauche li, .menu-droite-1 li, .menu-droite-2 li{
+	padding-right : 10%;
+	padding-top : 4%;
+	padding-bottom : 4%;
+	list-style-type: none;
+}
+/*
+.menu-gauche li:hover{
+	background-color : #A2B5BF;
+}
+*/
+
+.menu-gauche a:link, .menu-droite-1 a:link, .menu-droite-2 a:link{
+	text-decoration:none; 
+}
+
+.menu-gauche a, .menu-droite-1 a, .menu-droite-2 a {	
+	font-color : black;
+	color : black;
+}
+
+/*CSS menu-droite*/
+
+.suggestion-titre{
+	margin-left : 6%;
+	margin-top : 4%; 
+	margin-bottom : 4%;
+}
+
+.menu-droite-1{
+	margin-bottom : 20%;
+}
+
+.menu-droite-1, .menu-droite-2{
+	margin-left : 6%;
+	width : 85%;	
+	background-color : #DCDCDC;
+}
+/*CSS Footer*/
+footer{
+	width : 100%;
+	position:absolute;
+	bottom:0;	
+}
+
+

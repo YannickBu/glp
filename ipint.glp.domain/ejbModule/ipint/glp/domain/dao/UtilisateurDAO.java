@@ -1,0 +1,85 @@
+package ipint.glp.domain.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import ipint.glp.domain.entity.Utilisateur;
+
+public class UtilisateurDAO extends DAO<Utilisateur> {
+
+	private static final String PERSISTENCE_UNIT_NAME = "PU";
+	private EntityManagerFactory emf;
+	public EntityManager em;
+
+	public UtilisateurDAO() {
+		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		em = emf.createEntityManager();
+	}
+
+	public Utilisateur create(final Utilisateur util) {
+
+		em.getTransaction().begin();
+
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.setNom(util.getNom());
+		utilisateur.setPrenom(util.getPrenom());
+		utilisateur.setEmail(util.getEmail());
+
+		em.persist(utilisateur);
+
+		em.getTransaction().commit();
+
+		return utilisateur;
+
+	}
+
+	public Utilisateur find(final Utilisateur utilisateurATrouver) {
+
+		em.getTransaction().begin();
+
+		Query q;
+
+		if (utilisateurATrouver.getEmail() != null) {
+			q = em.createQuery("select e from Utilisateur e where e.email = '" + utilisateurATrouver.getEmail() + "'");
+		} else {
+			q = em.createQuery("select e from Utilisateur e where e.idUtilisateur = '"
+					+ utilisateurATrouver.getIdUtilisateur() + "'");
+
+		}
+		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
+
+		em.getTransaction().commit();
+
+		return utilisateur;
+
+	}
+
+	public void update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
+
+		Utilisateur utilisateurMAJ = find(nouvelUtilisateur);
+
+		if (ancienUtilisateur.getStatut() != null) {
+
+			utilisateurMAJ.setStatut(ancienUtilisateur.getStatut());
+		}
+		if (ancienUtilisateur.getProfil() != null) {
+
+			utilisateurMAJ.setProfil(ancienUtilisateur.getProfil());
+		}
+		em.getTransaction().begin();
+
+		em.persist(utilisateurMAJ);
+
+		em.getTransaction().commit();
+
+	}
+
+	@Override
+	public void delete(Utilisateur obj) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
