@@ -1,5 +1,7 @@
 package ipint.glp.domain.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -92,6 +94,19 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 		// deux à null
 
 		em.getTransaction().commit();
+
+	}
+
+	@Override
+	public List<Utilisateur> lister(Utilisateur obj) {
+		em.getTransaction().begin();
+
+		Query q = em.createQuery("select e from Utilisateur e");
+		List<Utilisateur> lesUtilisateurs = q.getResultList();
+
+		em.getTransaction().commit();
+
+		return lesUtilisateurs;
 
 	}
 

@@ -1,10 +1,13 @@
 package ipint.glp.domain.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Groupe;
 
 public class GroupeDAO extends DAO<Groupe> {
@@ -84,6 +87,19 @@ public class GroupeDAO extends DAO<Groupe> {
 		// deux à null
 
 		em.getTransaction().commit();
+	}
+
+	@Override
+	public List<Groupe> lister(Groupe obj) {
+		em.getTransaction().begin();
+
+		Query q = em.createQuery("select e from Groupe e");
+		List<Groupe> lesGroupes = q.getResultList();
+
+		em.getTransaction().commit();
+
+		return lesGroupes;
+
 	}
 
 }
