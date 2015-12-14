@@ -52,6 +52,6 @@ public abstract class DAO<T> {
 	 * 
 	 * @param obj
 	 */
-	public abstract List<T> lister(T obj);
+	public abstract List<T> lister();
 
 }

@@ -77,7 +77,7 @@ public class ArticleDAO extends DAO<Article> {
 	}
 
 	@Override
-	public List<Article> lister(Article obj) {
+	public List<Article> lister() {
 		em.getTransaction().begin();
 
 		Query q = em.createQuery("select e from Article e");

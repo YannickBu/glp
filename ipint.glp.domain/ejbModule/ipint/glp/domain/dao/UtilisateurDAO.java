@@ -98,7 +98,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 	}
 
 	@Override
-	public List<Utilisateur> lister(Utilisateur obj) {
+	public List<Utilisateur> lister() {
 		em.getTransaction().begin();
 
 		Query q = em.createQuery("select e from Utilisateur e");

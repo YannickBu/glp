@@ -89,10 +89,4 @@ public class ExperienceDAO extends DAO<Experience> {
 		return lesExperiences;
 	}
 
-	@Override
-	public List<Experience> lister(Experience obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

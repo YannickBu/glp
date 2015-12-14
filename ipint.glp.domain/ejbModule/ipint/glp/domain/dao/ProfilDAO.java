@@ -31,7 +31,7 @@ public class ProfilDAO extends DAO<Profil> {
 	}
 
 	@Override
-	public List<Profil> lister(Profil obj) {
+	public List<Profil> lister() {
 		return null;
 		// TODO Auto-generated method stub
 

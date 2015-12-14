@@ -2,10 +2,10 @@ package ipint.glp.domain.dao;
 
 import java.util.List;
 
-import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import ipint.glp.domain.entity.Groupe;
 
@@ -36,7 +36,7 @@ public class GroupeDAO extends DAO<Groupe> {
 
 		em.getTransaction().begin();
 
-		Query q;
+		javax.persistence.Query q;
 
 		if (groupeATrouver.getNomGroupe() != null) {
 			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeATrouver.getNomGroupe() + "'");
@@ -89,7 +89,7 @@ public class GroupeDAO extends DAO<Groupe> {
 	}
 
 	@Override
-	public List<Groupe> lister(Groupe obj) {
+	public List<Groupe> lister() {
 		em.getTransaction().begin();
 
 		Query q = em.createQuery("select e from Groupe e");
