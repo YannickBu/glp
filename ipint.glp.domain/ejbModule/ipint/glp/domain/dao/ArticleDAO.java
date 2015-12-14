@@ -6,7 +6,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import ipint.glp.domain.entity.Article;
-import ipint.glp.domain.entity.Utilisateur;
 
 public class ArticleDAO extends DAO<Article> {
 
@@ -63,8 +62,15 @@ public class ArticleDAO extends DAO<Article> {
 	}
 
 	@Override
-	public void delete(Article obj) {
-		// TODO Auto-generated method stub
+	public void delete(Article articleASupprimer) {
+		em.getTransaction().begin();
+		if (articleASupprimer.getIdArticle() != null) {
+			em.remove(articleASupprimer);
+		}
+		// TODO gérer les exceptions pour le cas où le nom et l'id sont tous les
+		// deux à null
+
+		em.getTransaction().commit();
 
 	}
 
