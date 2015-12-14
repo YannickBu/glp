@@ -7,7 +7,7 @@
 		<ul>
 			<li class="publierArt">Publier un article</li>
 			<li class="formPubli">
-				<form action="publication.asp" method="get">
+				<form action="publication" method="post">
 					<input class="inputForm" type="text" placeholder="Tapez votre publication..."><br>
 					<input class="inputBtn" type="submit" value="Publier">
 				</form>
