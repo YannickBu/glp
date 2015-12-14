@@ -77,8 +77,21 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 	}
 
 	@Override
-	public void delete(Utilisateur obj) {
-		// TODO Auto-generated method stub
+	public void delete(Utilisateur utilisateurASupprimer) {
+		em.getTransaction().begin();
+		if (utilisateurASupprimer.getIdUtilisateur() != null) {
+			em.remove(utilisateurASupprimer);
+		} else {
+			if (utilisateurASupprimer.getEmail() != null) {
+				Query q = em.createQuery(
+						"delete from Utilisateur g where g.email = '" + utilisateurASupprimer.getEmail() + "'");
+				q.executeUpdate();
+			}
+		}
+		// TODO gérer les exceptions pour le cas où le nom et l'id sont tous les
+		// deux à null
+
+		em.getTransaction().commit();
 
 	}
 
