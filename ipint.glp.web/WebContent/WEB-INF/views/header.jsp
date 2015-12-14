@@ -19,7 +19,7 @@
 									<input type="text" size="50" class="form-control"
 										placeholder="Rechercher...">
 								</div>
-								<button type="submit" class="btn btn-default">Submit</button>
+								<button type="submit" class="btn btn-default">Rechercher</button>
 							</form>
 						</ul>
 						<ul style="margin-top: 0.5%" class="nav navbar-nav navbar-right">

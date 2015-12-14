@@ -1,6 +1,13 @@
+/*
+	--- Code couleur --- 
+
+	#231f20 -> noir du logo
+	#dadbdb -> gris du logo
+	#f6921e -> orange du logo 
+*/
 html, body, .container-table {
 	height: 100%;
-	background-color: #ffffff;
+	background-color: #F1F2F1; 
 	overflow:hidden;	
 }
 .container-table {
@@ -41,13 +48,6 @@ html, body, .container-table {
     padding-bottom: 0px; 
 }
 	
-/*
-	--- Code couleur --- 
-
-	#231f20 -> noir du logo
-	#dadbdb -> gris du logo
-	#f6921e -> orange du logo 
-*/
 /* CSS Header */
 .header {
 	background-color : #f6921e	;
@@ -73,7 +73,7 @@ html, body, .container-table {
 }
 
 #barre-recherche{
-	margin-left : -1.8%;
+	margin-left : 7.9%;
 	margin-top : 0.4%;
 }
 
@@ -90,9 +90,10 @@ html, body, .container-table {
 }
 
 .menu-gauche{
+	border : 1px solid #dadbdb;
 	margin-left : 10%;
 	width : 85%;	
-	background-color : #DCDCDC;
+	background-color :#ffffff;
 }
 
 .menu-gauche li, .menu-droite-1 li, .menu-droite-2 li{
@@ -129,9 +130,10 @@ html, body, .container-table {
 }
 
 .menu-droite-1, .menu-droite-2{
+	border : 1px solid #dadbdb;
 	margin-left : 6%;
 	width : 85%;	
-	background-color : #DCDCDC;
+	background-color : #ffffff;
 }
 /*CSS Footer*/
 footer{
@@ -140,16 +142,39 @@ footer{
 	bottom:0;	
 }
 /*CSS accueilBody*/
-.accueilBody{
-	padding-top : 1%;
-	border : 1px solid #dadbdb;
-	padding-bottom : 1%;
-}
 
 .article{
+	background-color : #ffffff;
+	border : 1px solid #dadbdb;
+	margin-top : 1%;
+	padding-top: 1%;
+}
+
+.publication{
+	padding-top: 1%;
+	background-color : #ffffff;
 	border : 1px solid #dadbdb;
 }
 .accueilBody li{
 	list-style-type: none;
 }
+.nomEtu{
+	color : #f6921e;	
+    font-weight: bold;
+}
 
+.publierArt{
+    font-weight: bold;
+}
+.inputForm{
+	width : 100%;
+	margin-bottom:1%;
+	margin-top:0.5%;
+}
+
+.inputBtn{
+	
+}
+.formPubli{
+	padding-right : 4%;
+}

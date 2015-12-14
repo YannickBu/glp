@@ -5,18 +5,18 @@
 <div class="col-md-6 accueilBody">
 	<div class="publication">
 		<ul>
-			<li>Publier un article</li>
-			<li>
+			<li class="publierArt">Publier un article</li>
+			<li class="formPubli">
 				<form action="publication.asp" method="get">
-					<input type="text" size="50" placeholder="Rechercher...">><br>
-					<input type="submit" value="Submit">
+					<input class="inputForm" type="text" placeholder="Tapez votre publication..."><br>
+					<input class="inputBtn" type="submit" value="Publier">
 				</form>
 			</li>
 		</ul>
 	</div>
 	<div class="article">
 		<ul>
-			<li>Nom Etudiant</li>
+			<li class="nomEtu">Nom Etudiant</li>
 			<li>Texte Texte Texte Texte Texte Texte Texte Texte Texte Texte
 				Texte Texte Texte Texte Texte Texte Texte Texte Texte Texte Texte
 				Texte Texte Texte Texte Texte Texte Texte Texte Texte Texte Texte</li>

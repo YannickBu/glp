@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="col-md-1"></div>
-	<div class="col-md-2">
+	<div class="col-md-2 gauche">
 			<ul class="menu-gauche">
 				<a href="#"><li>Mon profil<span
 						class="glyphicon glyphicon-user gly-menu" aria-hidden="true"></span></li></a>
