@@ -76,7 +76,12 @@
             <artifactId>tiles-template</artifactId>
             <version>3.0.5</version>
         </dependency>
-	</dependencies>
+        <dependency>
+        	<groupId>ipint.glp.api</groupId>
+        	<artifactId>ipint.glp.api</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
   
   
   <build>

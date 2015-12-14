@@ -32,7 +32,7 @@ public class ExperienceDAO extends DAO<Experience> {
 	}
 
 	@Override
-	public void update(Experience ancienneExperience, Experience nouvelleExperience) {
+	public Experience update(Experience ancienneExperience, Experience nouvelleExperience) {
 		Experience experienceMAJ = find(ancienneExperience);
 
 		if (nouvelleExperience.getAnneeDebut() != null) {
@@ -63,6 +63,8 @@ public class ExperienceDAO extends DAO<Experience> {
 		em.persist(experienceMAJ);
 
 		em.getTransaction().commit();
+		
+		return experienceMAJ;
 
 	}
 

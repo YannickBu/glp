@@ -43,29 +43,31 @@ public class GroupeDAO extends DAO<Groupe> {
 		} else {
 			q = em.createQuery("select g from Groupe g where g.idGroupe = '" + groupeATrouver.getIdGroupe() + "'");
 		}
-		Groupe Groupe = (Groupe) q.getSingleResult();
+		Groupe groupe = (Groupe) q.getSingleResult();
 		em.getTransaction().commit();
-		return Groupe;
+		return groupe;
 
 	}
 
-	public void update(final Groupe ancienGroupe, final Groupe nouveauGroupe) {
+	public Groupe update(final Groupe ancienGroupe, final Groupe nouveauGroupe) {
 
-		Groupe GroupeMAJ = find(ancienGroupe);
+		Groupe groupeMAJ = find(ancienGroupe);
 
 		if (nouveauGroupe.getDescription() != null) {
 
-			GroupeMAJ.setDescription(nouveauGroupe.getDescription());
+			groupeMAJ.setDescription(nouveauGroupe.getDescription());
 		}
 		if (ancienGroupe.getUtilisateurResponsable() != null) {
 
-			GroupeMAJ.setUtilisateurResponsable(nouveauGroupe.getUtilisateurResponsable());
+			groupeMAJ.setUtilisateurResponsable(nouveauGroupe.getUtilisateurResponsable());
 		}
 		em.getTransaction().begin();
 
-		em.persist(GroupeMAJ);
+		em.persist(groupeMAJ);
 
 		em.getTransaction().commit();
+		
+		return groupeMAJ;
 
 	}
 

@@ -24,16 +24,11 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
 		em.getTransaction().begin();
 
-		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setNom(util.getNom());
-		utilisateur.setPrenom(util.getPrenom());
-		utilisateur.setEmail(util.getEmail());
-
-		em.persist(utilisateur);
+		em.persist(util);
 
 		em.getTransaction().commit();
 
-		return utilisateur;
+		return util;
 
 	}
 
@@ -58,7 +53,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
 	}
 
-	public void update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
+	public Utilisateur update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
 
 		Utilisateur utilisateurMAJ = find(ancienUtilisateur);
 
@@ -75,6 +70,8 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 		em.persist(utilisateurMAJ);
 
 		em.getTransaction().commit();
+		
+		return utilisateurMAJ;
 
 	}
 
