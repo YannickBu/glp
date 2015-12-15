@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import ipint.glp.api.DTO.enumType.StatutDTO;
+import ipint.glp.api.DTO.enumType.Statut;
 
 public class UtilisateurDTO  extends DTO implements Serializable  {
 	private static final long serialVersionUID = -6174082190617483433L;
@@ -20,7 +20,7 @@ public class UtilisateurDTO  extends DTO implements Serializable  {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
 	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
 	private String prenom;
-	private StatutDTO statut;
+	private Statut statut;
 	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
 	// Identifiant")
 	// private String login;
@@ -73,11 +73,11 @@ public class UtilisateurDTO  extends DTO implements Serializable  {
 		this.prenom = prenom;
 	}
 
-	public StatutDTO getStatut() {
+	public Statut getStatut() {
 		return statut;
 	}
 
-	public void setStatut(StatutDTO statut) {
+	public void setStatut(Statut statut) {
 		this.statut = statut;
 	}
 

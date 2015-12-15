@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import ipint.glp.domain.entity.enumType.Statut;
+import ipint.glp.api.DTO.enumType.Statut;
 
 @Entity
 public class Utilisateur implements Serializable {

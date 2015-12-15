@@ -1,12 +1,12 @@
 package ipint.glp.api.DTO.enumType;
 
-public enum StatutDTO {
+public enum Statut {
 
 	DIPLOME("diplome");
 
 	private String name = "";
 
-	StatutDTO(String name) {
+	Statut(String name) {
 		this.name = name;
 	}
 }
