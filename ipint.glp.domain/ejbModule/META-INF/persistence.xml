@@ -6,24 +6,26 @@
 	<!-- Unite de persistence -->
 	<persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		
 		<jta-data-source>jdbc/l1nk</jta-data-source>
-		
+		<non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
 		<!-- Entites -->
 		<class>ipint.glp.domain.entity.Utilisateur</class>
 		<class>ipint.glp.domain.entity.Experience</class>
 		<class>ipint.glp.domain.entity.Profil</class>
 		<class>ipint.glp.domain.entity.Groupe</class>
 		<class>ipint.glp.domain.entity.Article</class>
-
 		<properties>
-<!-- 			<property name="javax.persistence.jdbc.password" value="miage2016" /> -->
-<!-- 			<property name="javax.persistence.jdbc.user" value="l1nk" /> -->
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 
-<!-- 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
+			<!-- <property name="javax.persistence.jdbc.password" value="miage2016" 
+				/> -->
+			<!-- <property name="javax.persistence.jdbc.user" value="l1nk" /> -->
 
-<!-- 			<property name="javax.persistence.jdbc.url" -->
-<!-- 				value="jdbc:mysql://172.28.1.165:3306/l1nk_rodolphe" /> -->
+			<!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" 
+				/> -->
+
+			<!-- <property name="javax.persistence.jdbc.url" -->
+			<!-- value="jdbc:mysql://172.28.1.165:3306/l1nk_rodolphe" /> -->
 
 			<property name="eclipselink.logging.level" value="INFO" />
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
