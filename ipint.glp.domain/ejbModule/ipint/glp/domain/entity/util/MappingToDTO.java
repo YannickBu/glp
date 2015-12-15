@@ -105,7 +105,7 @@ public class MappingToDTO {
 		return grpDTO;
 	}
 	
-	public ArticleDTO articleToArticleDTO(Article art){
+	public static ArticleDTO articleToArticleDTO(Article art){
 		if(art == null){
 			return null;
 		}
