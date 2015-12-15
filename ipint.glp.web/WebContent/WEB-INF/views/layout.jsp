@@ -15,7 +15,7 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 <tiles:insertAttribute name="stylecss" ignore="true" />
 </head>
-<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="header" />
 <body>
 	<tiles:insertAttribute name="menu-gauche" />
 	<tiles:insertAttribute name="body" />

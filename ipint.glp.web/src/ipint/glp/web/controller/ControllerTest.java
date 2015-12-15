@@ -14,4 +14,9 @@ public class ControllerTest {
 	public ModelAndView welcomeGet() {
 		return new ModelAndView("accueil");
 	}
+	
+	@RequestMapping(value="/connexion", method=RequestMethod.GET)
+	public ModelAndView loginGet() {
+		return new ModelAndView("connexion");
+	}
 }

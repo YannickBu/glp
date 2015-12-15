@@ -6,5 +6,8 @@
 <definition name="accueil" extends="baseLayout">
 <put-attribute name="body" value="/WEB-INF/views/accueilBody.jsp"></put-attribute>
 </definition>
+<definition name="connexion" extends="logLayout">
+<put-attribute name="body" value="/WEB-INF/views/connexion.jsp"></put-attribute>
+</definition>
 
 </tiles-definitions>
