@@ -33,14 +33,14 @@ public class MappingToEntity {
 		return DAOFactory.getUtilisateurDAO().find(util);
 	}
 	
-	public Groupe groupeDTOToGroupe(GroupeDTO grpDTO){
+	public static Groupe groupeDTOToGroupe(GroupeDTO grpDTO){
 		Groupe grp = new Groupe();
 		grp.setIdGroupe(grpDTO.getIdGroupe());
 		grp.setNomGroupe(grpDTO.getNomGroupe());
 		return DAOFactory.getGroupeDAO().find(grp);
 	}
 	
-	public Article articleDTOToArticle(ArticleDTO artDTO){
+	public static Article articleDTOToArticle(ArticleDTO artDTO){
 		Article art = new Article();
 		art.setIdArticle(artDTO.getIdArticle());
 		return DAOFactory.getArticleDAO().find(art);
