@@ -10,8 +10,13 @@ public class ControllerTest {
 
 	public ControllerTest() {}
 
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView welcomeGet() {
 		return new ModelAndView("accueil");
+	}
+	
+	@RequestMapping(value="/connexion", method=RequestMethod.GET)
+	public ModelAndView loginGet() {
+		return new ModelAndView("connexion");
 	}
 }
