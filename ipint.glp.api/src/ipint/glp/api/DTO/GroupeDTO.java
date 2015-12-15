@@ -1,5 +1,6 @@
 package ipint.glp.api.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
-public class GroupeDTO {
+public class GroupeDTO extends DTO implements Serializable  {
+	private static final long serialVersionUID = -975885730285929071L;
+	
 	private Integer idGroupe;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la nom du groupe")
 	@Column(unique = true)

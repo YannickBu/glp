@@ -1,10 +1,13 @@
 package ipint.glp.api.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProfilDTO {
+public class ProfilDTO extends DTO  implements Serializable {
+	private static final long serialVersionUID = 1194522427659253560L;
+	
 	private Integer idProfil;
 	// @Temporal(TemporalType.DATE)
 	// @javax.validation.constraints.Past(message="Date de naissance invalide")

@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 
 import ipint.glp.api.DTO.enumType.StatutDTO;
 
-public class UtilisateurDTO  implements Serializable  {
+public class UtilisateurDTO  extends DTO implements Serializable  {
 	private static final long serialVersionUID = -6174082190617483433L;
 
 	private Integer idUtilisateur;

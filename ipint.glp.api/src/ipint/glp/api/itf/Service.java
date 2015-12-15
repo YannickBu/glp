@@ -1,13 +1,13 @@
 package ipint.glp.api.itf;
 
-public interface Service <T> {
+public interface Service <DTO> {
 	
-	public abstract T creer(T obj);
+	public DTO creer(DTO obj);
 	
-	public abstract T trouver(T obj);
+	public DTO trouver(DTO obj);
 	
-	public T modifier(T ancienObj, T nouvelObj);
+	public DTO modifier(DTO ancienObj, DTO nouvelObj);
 	
-	public void supprimer(T obj);
+	public void supprimer(DTO obj);
 	
 }
