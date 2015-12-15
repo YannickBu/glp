@@ -1,7 +1,10 @@
 package ipint.glp.api.DTO;
 
+import java.io.Serializable;
 
-public class ExperienceDTO {
+public class ExperienceDTO extends DTO implements Serializable  {
+	private static final long serialVersionUID = -1956002340542590931L;
+	
 	private Integer idExperience;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir l'année de début")
 	@javax.validation.constraints.DecimalMin(value = "1900", message = "Année impossible")
