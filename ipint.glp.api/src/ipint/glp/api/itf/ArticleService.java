@@ -1,15 +1,18 @@
 package ipint.glp.api.itf;
 
+import javax.ejb.Remote;
+
 import ipint.glp.api.DTO.ArticleDTO;
 
-public interface ArticleService extends Service<ArticleDTO> {
+@Remote
+public interface ArticleService {
 
-//	public ArticleDTO creerArticle(ArticleDTO article);
-//	
-//	public ArticleDTO trouverArticle(ArticleDTO article);
-//	
-//	public ArticleDTO modifierArticle(ArticleDTO articleAModifier, ArticleDTO nouvelArticle);
-//	
-//	public void supprimerArticle(ArticleDTO article);
+	public ArticleDTO creerArticle(ArticleDTO article);
+	
+	public ArticleDTO trouverArticle(ArticleDTO article);
+	
+	public ArticleDTO modifierArticle(ArticleDTO articleAModifier, ArticleDTO nouvelArticle);
+	
+	public void supprimerArticle(ArticleDTO article);
 	
 }
