@@ -9,9 +9,20 @@ import ipint.glp.domain.entity.Profil;
 public class ProfilDAO extends DAO<Profil> {
 
 	@Override
-	public Profil find(Profil obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public Profil find(Profil profilATrouver) {
+		em.getTransaction().begin();
+
+		Query q;
+		if (profilATrouver.getTelephone() != null) {
+			q = em.createQuery("select p from Profil p where p.telephone = '" + profilATrouver.getTelephone() + "'");
+		} else {
+			q = em.createQuery("select p from Profil p where p.idProfil = '"
+					+ profilATrouver.getIdProfil() + "'");
+		}
+		Profil profil = (Profil) q.getSingleResult();
+		em.getTransaction().commit();
+		return profil;
+
 	}
 
 	@Override

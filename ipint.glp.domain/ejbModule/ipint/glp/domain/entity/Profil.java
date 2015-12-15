@@ -21,7 +21,8 @@ public class Profil {
 	private String cursus;
 	private String competence;
 	private String centreInteret;
-	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#", message = "Téléphone invalide")
+	//TODO peut être le mettre en unique non ?
+	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
 	private String telephone;
 
 	private List<Experience> experiences;

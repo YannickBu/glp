@@ -24,13 +24,13 @@ public class ArticleDAO extends DAO<Article> {
 
 		Article articleMAJ = find(ancienArt);
 
-		if (ancienArt.getContenu() != null) {
+		if (nouvelArt.getContenu() != null) {
 
-			articleMAJ.setContenu(ancienArt.getContenu());
+			articleMAJ.setContenu(nouvelArt.getContenu());
 		}
-		if (ancienArt.getDatePublication() != null) {
+		if (nouvelArt.getDatePublication() != null) {
 
-			articleMAJ.setDatePublication(ancienArt.getDatePublication());
+			articleMAJ.setDatePublication(nouvelArt.getDatePublication());
 		}
 		em.getTransaction().begin();
 
@@ -46,7 +46,7 @@ public class ArticleDAO extends DAO<Article> {
 	public Article find(Article idArticle) {
 		em.getTransaction().begin();
 
-		Query q = em.createQuery("select e from Utilisateur e where e.idArticle = '" + idArticle + "'");
+		Query q = em.createQuery("select e from Article e where e.idArticle = '" + idArticle.getIdArticle() + "'");
 		Article article = (Article) q.getSingleResult();
 
 		em.getTransaction().commit();

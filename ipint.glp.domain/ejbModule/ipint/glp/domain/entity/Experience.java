@@ -18,6 +18,7 @@ public class Experience implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idExperience;
+	//TODO penser à mettre les mois
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir l'année de début")
 	@javax.validation.constraints.DecimalMin(value = "1900", message = "Année impossible")
 	@javax.validation.constraints.DecimalMax(value = "2100", message = "Année impossible")
