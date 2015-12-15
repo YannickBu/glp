@@ -1,5 +1,6 @@
 package ipint.glp.api.DTO;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-public class ArticleDTO {
+public class ArticleDTO extends DTO implements Serializable  {
+	private static final long serialVersionUID = 2382557002234011191L;
+	
 	private Integer idArticle;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le contenu")
 	private String contenu;
