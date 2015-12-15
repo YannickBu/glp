@@ -12,14 +12,15 @@
 <script
 	src="${pageContext.servletContext.contextPath}/resources/js/bootstrap.min.js"></script>
 
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
-<tiles:insertAttribute name="stylecss" ignore="true" />
+<title><tiles:insertAttribute name="title" /></title>
+<tiles:insertAttribute name="stylecss"/>
+<tiles:insertAttribute name="scriptjs" />
 </head>
-	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="header" ignore="true" />
 <body>
-	<tiles:insertAttribute name="menu-gauche" />
+	<tiles:insertAttribute name="menu-gauche" ignore="true" />
 	<tiles:insertAttribute name="body" />
-	<tiles:insertAttribute name="menu-droite" />
+	<tiles:insertAttribute name="menu-droite" ignore="true" />
 </body>
-<tiles:insertAttribute name="footer" />
+<tiles:insertAttribute name="footer" ignore="true" />
 </html>

@@ -9,11 +9,6 @@
         <put-attribute name="stylecss" value="/WEB-INF/views/layoutcss.jsp"></put-attribute>
         <put-attribute name="scriptjs" value="/WEB-INF/views/scriptjs.jsp"></put-attribute>
         <put-attribute name="body" value=""></put-attribute>
-        
-        <put-attribute name="header" value=""></put-attribute>
-	 	<put-attribute name="menu-gauche" value=""></put-attribute>
-        <put-attribute name="menu-droite" value=""></put-attribute>
-         <put-attribute name="footer" value=""></put-attribute>
 	</definition>
 
 
