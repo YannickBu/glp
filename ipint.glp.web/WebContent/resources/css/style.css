@@ -79,10 +79,9 @@ h3{
 .name-logo {	
 	font-family : 'Huruf Miranti'; 
 	font-size : 240%;
-	margin-left : 3%;
 }
 
-#img-logo{
+.img-logo{
 	width : 15%;
 	height : 15%; 
 	padding-bottom : 4%;
@@ -200,4 +199,17 @@ footer{
 }
 .formPubli{
 	padding-right : 4%;
+}
+/*CSS Inscription*/
+
+.entete-inscrip{
+background-color : #F1F2F1; 
+width : 100%;
+
+}
+
+.form-inscrip{
+background-color : #f6921e;
+padding-top : 2.5%;
+padding-bottom : 5%;
 }

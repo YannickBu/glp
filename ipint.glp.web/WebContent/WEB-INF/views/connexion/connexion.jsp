@@ -26,6 +26,7 @@ visible-<type d'ecran>-block
               <center>
                 <img src="${pageContext.servletContext.contextPath}/resources/img/logoA.png" class="img-responsive" alt="Responsive image">
                 <h1 class="name-logo">L1nk</h1>
+                <h3>Le réseau d'anciens de Lille</h3>
               </center>
             </div>
           </div>  

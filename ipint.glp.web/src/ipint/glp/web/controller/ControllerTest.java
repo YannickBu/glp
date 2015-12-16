@@ -14,23 +14,28 @@ import ipint.glp.api.itf.ArticleService;
 @Controller
 public class ControllerTest {
 
-	@Inject
-	ArticleService s;
-	
+//	@Inject
+//	ArticleService s;
+
 	public ControllerTest() {}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView welcomeGet() {
-		ArticleDTO art = new ArticleDTO();
-		art.setContenu("du contenu");
-		art = s.creerArticle(art);
-		System.out.println(art.getContenu());
+		//ArticleDTO art = new ArticleDTO();
+		//art.setContenu("du contenu");
+		//art = s.creerArticle(art);
+		//System.out.println(art.getContenu());
 		return new ModelAndView("accueil");
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
 	public ModelAndView loginGet() {
 		return new ModelAndView("connexion");
+	}
+	
+	@RequestMapping(value="/inscription", method=RequestMethod.GET)
+	public ModelAndView inscriptionGet() {
+		return new ModelAndView("inscription");
 	}
 	
 	@RequestMapping(value="/profil", method=RequestMethod.GET)
