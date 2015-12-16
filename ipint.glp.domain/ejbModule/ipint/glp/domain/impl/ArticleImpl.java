@@ -20,18 +20,21 @@ public class ArticleImpl implements ArticleService {
 	@Override
 	public ArticleDTO creerArticle(ArticleDTO articleDTO) {
 		MappingToEntity mte = new MappingToEntity();
-		Article article = mte.articleDTOToArticle(articleDTO);
-		em.persist(article);
+		//Article article = mte.articleDTOToArticle(articleDTO);
+		Article art = new Article();
+		art.setContenu(articleDTO.getContenu());
+		art.setDatePublication(articleDTO.getDatePublication());
+		art.setIdArticle(articleDTO.getIdArticle());
+		//TODO en cours
+		em.persist(art);
 
 		return articleDTO;
 	}
 
 	@Override
 	public ArticleDTO trouverArticle(ArticleDTO articleDTO) {
-		Query q = em.createQuery("select e from Article e where e.idArticle = '" + articleDTO.getIdArticle() + "'");
-		Article article = (Article) q.getSingleResult();
-		MappingToDTO mtd = new MappingToDTO();
-		articleDTO = mtd.articleToArticleDTO(article);
+		Article art = em.find(Article.class, articleDTO.getIdArticle());
+		articleDTO = MappingToDTO.articleToArticleDTO(art);
 		return articleDTO;
 	}
 
