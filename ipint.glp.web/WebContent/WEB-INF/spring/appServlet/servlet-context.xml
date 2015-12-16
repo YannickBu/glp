@@ -46,6 +46,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
     
-    <jee:remote-slsb id="articleBean" business-interface="ipint.glp.api.itf.ArticleService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl"/>
-    
+  <!--   <jee:remote-slsb id="articleBean" business-interface="ipint.glp.api.itf.ArticleService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl"/>
+   -->  
 </beans:beans>
