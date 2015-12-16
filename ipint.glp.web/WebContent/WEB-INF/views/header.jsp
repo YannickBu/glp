@@ -9,7 +9,7 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="name-logo"><img id="img-logo" alt="Logo"
+							<li class="name-logo"><img class="img-logo" alt="Logo"
 								src="${pageContext.servletContext.contextPath}/resources/img/petit-logo.png">
 								L1nk</li>
 						</ul>
