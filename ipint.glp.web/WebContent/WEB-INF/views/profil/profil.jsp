@@ -8,8 +8,8 @@ pageEncoding="UTF-8"%>
 				<img src="${pageContext.servletContext.contextPath}/resources/img/logoA.png" class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">Nom Etudiant</h1>
-				<h2>Statut de la personne</h2>
+				<h1 class="nomEtu"><%= utilisateur.getPrenom(); %><%= utilisateur.getNom(); %></h1>
+				<h2><%= utilisateur.getStatut(); %></h2>
 			</div>
 			<hr/>
 		</div>
@@ -42,16 +42,13 @@ pageEncoding="UTF-8"%>
 									<div class="col-md-12" id="scrollable">
 										<ul>
 											<li>
-												Formation : 
+												Formation : <%= utilisateur.getProfil().getCursus(); %>
 											</li>
 											<li>
-												Diplomé en :
+												E-mail : <%= utilisateur.getEmail(); %>
 											</li>
 											<li>
-												E-mail : 
-											</li>
-											<li>
-												Ville actuelle :
+												Téléphone : <%= utilisateur.getTelephone(); %>
 											</li>
 											<li>
 												Emploi actuel :
@@ -60,7 +57,7 @@ pageEncoding="UTF-8"%>
 												Entreprise :
 											</li>
 											<li>
-												Groupes :
+												Groupes : 
 											</li>
 											<li>
 												Expériences Professionnelles : <hr/>

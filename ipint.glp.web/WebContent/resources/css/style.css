@@ -8,7 +8,7 @@
 html, body, .container-table {
 	height: 100%;
 	background-color: #F1F2F1; 
-	overflow-x:hidden;
+	overflow-x: hidden;
 	overflow-y: auto;
 }
 .container-table {
@@ -61,7 +61,8 @@ html, body, .container-table {
 
 .jumbotron {
 	padding-top: 0px;
-    padding-bottom: 0px; 
+    padding-bottom: 0px;
+    margin-bottom: 0; 
 }
 h3{
 	padding-bottom : 5%;
