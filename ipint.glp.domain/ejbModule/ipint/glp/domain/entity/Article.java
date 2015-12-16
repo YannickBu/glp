@@ -21,8 +21,9 @@ public class Article {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le contenu")
 	private String contenu;
 	@Temporal(TemporalType.TIMESTAMP)
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir la date de publication")
-	@javax.validation.constraints.Past(message = "Date de publication invalide")
+	//TODO décommenter apres test
+	/*@javax.validation.constraints.NotNull(message = "Veuillez remplir la date de publication")
+	@javax.validation.constraints.Past(message = "Date de publication invalide")*/
 	private Calendar datePublication;
 
 	@ManyToOne
