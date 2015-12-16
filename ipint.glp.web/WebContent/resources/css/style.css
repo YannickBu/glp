@@ -8,7 +8,7 @@
 html, body, .container-table {
 	height: 100%;
 	background-color: #F1F2F1; 
-	overflow:hidden;	
+	overflow:hidden;
 }
 .container-table {
 	background: linear-gradient(180deg, #ffffff 50%, #f6921e 50%);
@@ -34,6 +34,25 @@ html, body, .container-table {
 
 }
     
+.nav-pills>.active>a>.badge {
+	color : #231F20;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	background-color: #F6921E;
+}
+.nav-tabs>li>a{
+	color: #F6921E;
+	text-align: center;
+}
+#panel-2>div {
+	height:100%;
+	overflow: scroll;
+}
+
+#panel-2>div>div>ul>li{
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
 
 .name-logo {
 	font-family: 'Huruf Miranti'; 
@@ -154,6 +173,7 @@ footer{
 
 .publication{
 	padding-top: 1%;
+	padding-bottom: 1%;
 	background-color : #ffffff;
 	border : 1px solid #dadbdb;
 }

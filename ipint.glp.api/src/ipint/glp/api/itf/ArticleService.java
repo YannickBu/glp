@@ -11,7 +11,7 @@ public interface ArticleService {
 	
 	public ArticleDTO trouverArticle(ArticleDTO article);
 	
-	public ArticleDTO modifierArticle(ArticleDTO articleAModifier, ArticleDTO nouvelArticle);
+	public ArticleDTO modifierArticle(ArticleDTO articleAModifier);
 	
 	public void supprimerArticle(ArticleDTO article);
 	
