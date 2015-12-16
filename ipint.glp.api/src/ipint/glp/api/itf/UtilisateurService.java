@@ -1,17 +1,22 @@
 package ipint.glp.api.itf;
 
+import java.util.List;
+
+import javax.ejb.Remote;
+
 import ipint.glp.api.DTO.UtilisateurDTO;
 
-public interface UtilisateurService extends Service<UtilisateurDTO> {
+@Remote
+public interface UtilisateurService {
 
-//	public UtilisateurDTO creerUtilisateur(UtilisateurDTO utilisateur);
-//	
-//	public UtilisateurDTO trouverUtilisateur(UtilisateurDTO utilisateur);
-//	
-//	public UtilisateurDTO modifierUtilisateur(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur);
-//	
-//	public void supprimerUtilisateur(UtilisateurDTO utilisateur);
-//	
+	public UtilisateurDTO creer(UtilisateurDTO utilisateur);
+	
+	public UtilisateurDTO trouver(UtilisateurDTO utilisateur);
+	
+	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur);
+	
+	public void supprimer(UtilisateurDTO utilisateur);
+	
 //	public List<UtilisateurDTO> listerUtilisateur();
 	
 }

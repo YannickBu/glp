@@ -3,6 +3,7 @@ package ipint.glp.domain.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -17,6 +18,7 @@ import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.util.MappingToDTO;
 
+@Stateless
 public class UtilisateurImpl implements UtilisateurService {
 
 	@PersistenceContext(unitName = "PU")
