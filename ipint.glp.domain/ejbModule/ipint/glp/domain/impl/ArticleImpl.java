@@ -3,7 +3,6 @@ package ipint.glp.domain.impl;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import ipint.glp.api.DTO.ArticleDTO;
@@ -15,7 +14,7 @@ import ipint.glp.domain.entity.util.MappingToEntity;
 @Stateless
 public class ArticleImpl implements ArticleService {
 
-	@PersistenceContext(unitName = "PU", type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
 	@Override
