@@ -86,22 +86,56 @@ public class UtilisateurImpl implements Service<UtilisateurDTO> {
 
 	@Override
 	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur) {
-		/*
-		 * Utilisateur utilisateurMAJ = find(ancienUtilisateur);
-		 * 
-		 * if (nouvelUtilisateur.getStatut() != null) {
-		 * 
-		 * utilisateurMAJ.setStatut(nouvelUtilisateur.getStatut()); } if
-		 * (nouvelUtilisateur.getProfil() != null) {
-		 * 
-		 * utilisateurMAJ.setProfil(nouvelUtilisateur.getProfil()); }
-		 * em.getTransaction().begin();
-		 * 
-		 * em.persist(utilisateurMAJ);
-		 * 
-		 * em.getTransaction().commit();
-		 */
-		return null;
+
+		Utilisateur utilisateurMAJ = em.find(Utilisateur.class, ancienUtilisateur.getIdUtilisateur());
+
+		if (nouvelUtilisateur.getStatut() != null) {
+
+			utilisateurMAJ.setStatut(nouvelUtilisateur.getStatut());
+		}
+
+		if (nouvelUtilisateur.getProfil() != null) {
+			Profil profil = new Profil();
+			profil = em.find(Profil.class, nouvelUtilisateur.getProfil());
+			utilisateurMAJ.setProfil(profil);
+		}
+
+		List<Article> lesArticles = new ArrayList<Article>();
+		for (ArticleDTO articleDTO : nouvelUtilisateur.getArticles()) {
+
+			lesArticles.add(em.find(Article.class, articleDTO.getIdArticle()));
+		}
+
+		utilisateurMAJ.setArticles(lesArticles);
+
+		List<Groupe> lesGroupes = new ArrayList<Groupe>();
+		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupes()) {
+			if (groupeDTO.getIdGroupe() != null) {
+				lesGroupes.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
+			} else if (groupeDTO.getNomGroupe() != null) {
+				Query q = em
+						.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
+				lesGroupes.add((Groupe) q.getSingleResult());
+
+			}
+		}
+		utilisateurMAJ.setGroupes(lesGroupes);
+		List<Groupe> lesGroupesGeres = new ArrayList<Groupe>();
+		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupesGeres()) {
+			if (groupeDTO.getIdGroupe() != null) {
+				lesGroupesGeres.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
+			} else if (groupeDTO.getNomGroupe() != null) {
+				Query q = em
+						.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
+				lesGroupesGeres.add((Groupe) q.getSingleResult());
+
+			}
+		}
+		utilisateurMAJ.setGroupesGeres(lesGroupesGeres);
+
+		em.persist(utilisateurMAJ);
+
+		return MappingToDTO.utilisateurToUtilisateurDTO(utilisateurMAJ);
 
 	}
 

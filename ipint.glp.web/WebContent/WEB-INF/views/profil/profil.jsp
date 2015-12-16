@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 <div class="col-md-6 publication">
 	<div class="container">
 		<div class="row">
@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
 							</div>
 							<div class="tab-pane" id="panel-2">
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-12" id="scrollable">
 										<ul>
 											<li>
 												Formation : 
