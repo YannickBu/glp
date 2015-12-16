@@ -3,10 +3,13 @@ package ipint.glp.domain.impl;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.DTO.enumType.Statut;
 import ipint.glp.api.itf.ArticleService;
 import ipint.glp.domain.entity.Article;
+import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.util.MappingToDTO;
 
 @Stateless
@@ -17,11 +20,21 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public ArticleDTO creerArticle(ArticleDTO articleDTO) {
+		Utilisateur u = new Utilisateur();
+		u.setEmail("yan.bu@gmail.com");
+		u.setNom("bu");
+		u.setPrenom("ya");
+		u.setPassword("psw");
+		u.setStatut(Statut.DIPLOME);
+		em.persist(u);
+		
+		articleDTO.setUtilisateur(MappingToDTO.utilisateurToUtilisateurDTO(u));
+		
 		Article art = new Article();
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
 		
-		/*Utilisateur util = null;
+		Utilisateur util = null;
 		Query q;
 		if(articleDTO.getUtilisateur().getEmail()!=null){
 			q = em.createQuery("select e from Utilisateur e where e.email = '" + articleDTO.getUtilisateur().getEmail() + "'");
@@ -36,7 +49,7 @@ public class ArticleImpl implements ArticleService {
 			em.persist(util);
 		}
 		art.setUtilisateur(util);
-		
+		/*
 		List<Groupe> listGrp = new ArrayList<>();
 		for(GroupeDTO grpDTO : articleDTO.getGroupes()){
 			Groupe grp=null;
