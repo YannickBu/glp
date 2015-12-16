@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 
 import ipint.glp.api.DTO.enumType.Statut;
 
-public class UtilisateurDTO  extends DTO implements Serializable  {
+public class UtilisateurDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = -6174082190617483433L;
 
 	private Integer idUtilisateur;
@@ -24,9 +24,8 @@ public class UtilisateurDTO  extends DTO implements Serializable  {
 	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
 	// Identifiant")
 	// private String login;
-	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
-	// Mot de passe")
-	// private String password;
+	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Mot de passe")
+	private String password;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Email")
 	// TODO regex email
 	// @javax.validation.constraints.Pattern(regexp="\b[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}\b",message="Email
@@ -119,6 +118,18 @@ public class UtilisateurDTO  extends DTO implements Serializable  {
 
 	public void setGroupes(List<GroupeDTO> groupes) {
 		this.groupes = groupes;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
