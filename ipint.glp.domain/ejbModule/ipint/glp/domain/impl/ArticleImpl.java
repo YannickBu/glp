@@ -19,13 +19,13 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public ArticleDTO creerArticle(ArticleDTO articleDTO) {
-		MappingToEntity mte = new MappingToEntity();
-		//Article article = mte.articleDTOToArticle(articleDTO);
+		// MappingToEntity mte = new MappingToEntity();
+		// Article article = mte.articleDTOToArticle(articleDTO);
 		Article art = new Article();
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
 		art.setIdArticle(articleDTO.getIdArticle());
-		//TODO en cours
+		// TODO en cours
 		em.persist(art);
 
 		return articleDTO;
