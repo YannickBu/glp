@@ -1,11 +1,5 @@
 package ipint.glp.domain.dao;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 public abstract class DAO<T> {
 
 //	protected static final String PERSISTENCE_UNIT_NAME = "PU";

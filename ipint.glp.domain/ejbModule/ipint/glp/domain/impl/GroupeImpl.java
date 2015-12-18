@@ -72,7 +72,7 @@ public class GroupeImpl implements GroupeService {
 	}
 
 	@Override
-	public GroupeDTO trouverGroupe(GroupeDTO obj) {
+	public GroupeDTO trouver(GroupeDTO obj) {
 		if(obj.getIdGroupe() != null){
 			return MappingToDTO.groupeToGroupeDTO(em.find(Groupe.class, obj.getIdGroupe()));
 		}
@@ -100,12 +100,6 @@ public class GroupeImpl implements GroupeService {
 //
 //		return groupeMAJ;
 		//TODO
-		return null;
-	}
-
-	@Override
-	public GroupeDTO trouver(GroupeDTO obj) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -8,12 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.itf.UtilisateurService;
-import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;

@@ -1,9 +1,5 @@
 package ipint.glp.domain.dao;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
 import ipint.glp.domain.entity.Profil;
 
 public class ProfilDAO extends DAO<Profil> {

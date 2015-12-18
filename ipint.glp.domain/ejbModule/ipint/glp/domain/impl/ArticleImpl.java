@@ -23,7 +23,7 @@ public class ArticleImpl implements ArticleService {
 	private EntityManager em;
 
 	@Override
-	public ArticleDTO creerArticle(ArticleDTO articleDTO) {		
+	public ArticleDTO creer(ArticleDTO articleDTO) {		
 		Article art = new Article();
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
@@ -72,13 +72,13 @@ public class ArticleImpl implements ArticleService {
 	}
 
 	@Override
-	public ArticleDTO trouverArticle(ArticleDTO articleDTO) {
+	public ArticleDTO trouver(ArticleDTO articleDTO) {
 		Article art = em.find(Article.class, articleDTO.getIdArticle());
 		return MappingToDTO.articleToArticleDTO(art);
 	}
 
 	@Override
-	public ArticleDTO modifierArticle(ArticleDTO ancienArt) {
+	public ArticleDTO modifier(ArticleDTO ancienArt) {
 //		MappingToEntity mte = new MappingToEntity();
 //		Article articleMAJ = mte.articleDTOToArticle(ancienArt);
 //
@@ -107,7 +107,7 @@ public class ArticleImpl implements ArticleService {
 	}
 
 	@Override
-	public void supprimerArticle(ArticleDTO articleASupprimer) {
+	public void supprimer(ArticleDTO articleASupprimer) {
 
 		if (articleASupprimer.getIdArticle() != null) {
 			Article art = em.find(Article.class, articleASupprimer.getIdArticle());

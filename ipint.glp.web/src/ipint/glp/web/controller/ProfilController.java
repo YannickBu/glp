@@ -1,8 +1,5 @@
 package ipint.glp.web.controller;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
