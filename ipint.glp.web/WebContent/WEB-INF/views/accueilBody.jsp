@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8"%>
         
@@ -21,7 +22,7 @@
         
                 <div class="article">
                         <ul>
-                        <li class="nomEtu">${utilisateur.nom}</li>
+                        <li class="nomEtu"><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/> - ${utilisateur.nom} ${utilisateur.prenom}</li>
                         <li>${art.contenu}</li>
                         </ul>
                 </div>
