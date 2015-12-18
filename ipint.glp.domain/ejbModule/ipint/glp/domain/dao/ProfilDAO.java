@@ -1,25 +1,24 @@
 package ipint.glp.domain.dao;
 
+import javax.persistence.Query;
+
 import ipint.glp.domain.entity.Profil;
 
 public class ProfilDAO extends DAO<Profil> {
-//
-//	@Override
-//	public Profil find(Profil profilATrouver) {
-//		em.getTransaction().begin();
-//
-//		Query q;
-//		if (profilATrouver.getTelephone() != null) {
-//			q = em.createQuery("select p from Profil p where p.telephone = '" + profilATrouver.getTelephone() + "'");
-//		} else {
-//			q = em.createQuery("select p from Profil p where p.idProfil = '"
-//					+ profilATrouver.getIdProfil() + "'");
-//		}
-//		Profil profil = (Profil) q.getSingleResult();
-//		em.getTransaction().commit();
-//		return profil;
-//
-//	}
+
+	@Override
+	public Profil find(Profil profilATrouver) {
+		Profil profil = null;
+		if (profilATrouver.getTelephone() != null) {
+			Query q = em.createQuery("select p from Profil p where p.telephone = '" + profilATrouver.getTelephone() + "'");
+			profil = (Profil) q.getSingleResult();
+		} else {
+			profil = em.find(Profil.class, profilATrouver.getIdProfil());
+		}
+
+		return profil;
+
+	}
 //
 //	@Override
 //	public Profil create(Profil profil) {

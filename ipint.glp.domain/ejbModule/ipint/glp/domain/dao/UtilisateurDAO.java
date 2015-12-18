@@ -1,5 +1,7 @@
 package ipint.glp.domain.dao;
 
+import javax.persistence.Query;
+
 import ipint.glp.domain.entity.Utilisateur;
 
 public class UtilisateurDAO extends DAO<Utilisateur> {
@@ -24,27 +26,20 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 //		return util;
 //
 //	}
-//
-//	public Utilisateur find(final Utilisateur utilisateurATrouver) {
-//
-//		em.getTransaction().begin();
-//
-//		Query q;
-//
-//		if (utilisateurATrouver.getEmail() != null) {
-//			q = em.createQuery("select e from Utilisateur e where e.email = '" + utilisateurATrouver.getEmail() + "'");
-//		} else {
-//			q = em.createQuery("select e from Utilisateur e where e.idUtilisateur = '"
-//					+ utilisateurATrouver.getIdUtilisateur() + "'");
-//
-//		}
-//		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
-//
-//		em.getTransaction().commit();
-//
-//		return utilisateur;
-//
-//	}
+
+	public Utilisateur find(final Utilisateur utilisateurATrouver) {
+		Utilisateur utilisateur = null;
+
+		if (utilisateurATrouver.getEmail() != null) {
+			Query q = em.createQuery("select e from Utilisateur e where e.email = '" + utilisateurATrouver.getEmail() + "'");
+			utilisateur = (Utilisateur) q.getSingleResult();
+		} else {
+			utilisateur = em.find(Utilisateur.class, utilisateurATrouver.getIdUtilisateur());
+		}
+
+		return utilisateur;
+
+	}
 //
 //	public Utilisateur update(final Utilisateur ancienUtilisateur, final Utilisateur nouvelUtilisateur) {
 //

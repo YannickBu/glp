@@ -1,5 +1,7 @@
 package ipint.glp.domain.dao;
 
+import javax.persistence.Query;
+
 import ipint.glp.domain.entity.Groupe;
 
 public class GroupeDAO extends DAO<Groupe> {
@@ -25,22 +27,19 @@ public class GroupeDAO extends DAO<Groupe> {
 //
 //	}
 //
-//	public Groupe find(final Groupe groupeATrouver) {
-//
-//		em.getTransaction().begin();
-//
-//		javax.persistence.Query q;
-//
-//		if (groupeATrouver.getNomGroupe() != null) {
-//			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeATrouver.getNomGroupe() + "'");
-//		} else {
-//			q = em.createQuery("select g from Groupe g where g.idGroupe = '" + groupeATrouver.getIdGroupe() + "'");
-//		}
-//		Groupe groupe = (Groupe) q.getSingleResult();
-//		em.getTransaction().commit();
-//		return groupe;
-//
-//	}
+	public Groupe find(final Groupe groupeATrouver) {
+		Groupe groupe = null;
+
+		if (groupeATrouver.getNomGroupe() != null) {
+			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeATrouver.getNomGroupe() + "'");
+			groupe = (Groupe) q.getSingleResult();
+		} else {
+			groupe = em.find(Groupe.class, groupeATrouver.getIdGroupe());
+		}
+		
+		return groupe;
+
+	}
 //
 //	public Groupe update(final Groupe ancienGroupe, final Groupe nouveauGroupe) {
 //

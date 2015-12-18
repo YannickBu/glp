@@ -1,22 +1,24 @@
 package ipint.glp.domain.dao;
 
+import javax.persistence.Query;
+
 import ipint.glp.domain.entity.Experience;
 
 public class ExperienceDAO extends DAO<Experience> {
 
-//	@Override
-//	public Experience find(Experience experienceATrouver) {
-//		em.getTransaction().begin();
-//		Experience experience = null;
-//		if (experienceATrouver.getIdExperience() != null) {
-//			Query q = em.createQuery(
-//					"select e from Experience e where e.idExperience = '" + experienceATrouver.getIdExperience() + "'");
-//			experience = (Experience) q.getSingleResult();
-//		}
-//		// TODO lever une exception si id = null
-//		em.getTransaction().commit();
-//		return experience;
-//	}
+	@Override
+	public Experience find(Experience experienceATrouver) {
+		em.getTransaction().begin();
+		Experience experience = null;
+		if (experienceATrouver.getIdExperience() != null) {
+			Query q = em.createQuery(
+					"select e from Experience e where e.idExperience = '" + experienceATrouver.getIdExperience() + "'");
+			experience = (Experience) q.getSingleResult();
+		}
+		// TODO lever une exception si id = null
+		em.getTransaction().commit();
+		return experience;
+	}
 //
 //	@Override
 //	public Experience create(Experience experience) {

@@ -1,24 +1,25 @@
 package ipint.glp.domain.dao;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 public abstract class DAO<T> {
 
-//	protected static final String PERSISTENCE_UNIT_NAME = "PU";
-//	protected EntityManagerFactory emf;
-//	protected EntityManager em;
-//
-//	public DAO() {
-//		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-//		em = emf.createEntityManager();
-//	}
-//
-//	/**
-//	 * Permet de récupérer un objet
-//	 * 
-//	 * @param obj
-//	 * @return
-//	 */
-//	public abstract T find(T obj);
-//
+	@PersistenceContext
+	protected EntityManager em;
+
+	public DAO() {}
+
+	/**
+	 * Permet de récupérer un objet
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	public abstract T find(T obj);
+
 //	/**
 //	 * Permet de créer une entrée dans la base de données par rapport à un objet
 //	 * 

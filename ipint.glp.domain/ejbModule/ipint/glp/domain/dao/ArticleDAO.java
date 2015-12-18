@@ -1,9 +1,15 @@
 package ipint.glp.domain.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import ipint.glp.domain.entity.Article;
 
 public class ArticleDAO extends DAO<Article> {
 
+	@PersistenceContext
+	protected EntityManager em;
+	
 //	private static final String PERSISTENCE_UNIT_NAME = "PU";
 //	private EntityManagerFactory emf;
 //	public EntityManager em;
@@ -35,17 +41,10 @@ public class ArticleDAO extends DAO<Article> {
 //
 //	}
 //
-//	@Override
-//	public Article find(Article idArticle) {
-//		em.getTransaction().begin();
-//
-//		Query q = em.createQuery("select e from Article e where e.idArticle = '" + idArticle.getIdArticle() + "'");
-//		Article article = (Article) q.getSingleResult();
-//
-//		em.getTransaction().commit();
-//
-//		return article;
-//	}
+	@Override
+	public Article find(Article idArticle) {
+		return em.find(Article.class, idArticle.getIdArticle());
+	}
 //
 //	@Override
 //	public Article create(Article article) {
