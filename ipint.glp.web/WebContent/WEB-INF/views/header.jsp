@@ -23,7 +23,7 @@
 							</form>
 						</ul>
 						<ul style="margin-top: 0.5%" class="nav navbar-nav navbar-right">
-							<li class="nom-etudiant">Nom Etudiant</li>
+							<li class="nom-etudiant">${utilisateur.nom}</li>
 							<li><a href="#"><span
 									class="glyphicon glyphicon-user couleurgly" aria-hidden="true"></span></a></li>
 							<li><a href="#"><span
@@ -34,6 +34,7 @@
 									class="glyphicon glyphicon-cog couleurgly" aria-hidden="true"></span><span
 									class="caret"></span></a>
 								<ul class="dropdown-menu">
+									<li><a href='${pageContext.servletContext.contextPath}/modifprofil/${utilisateur.idUtilisateur}'>Modifier profil</a></li>
 									<li><a href="#">Déconnexion</a></li>
 								</ul></li>
 						</ul>

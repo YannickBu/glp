@@ -1,10 +1,11 @@
 package ipint.glp.api.itf;
 
+import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import ipint.glp.api.DTO.ArticleDTO;
 
-@Remote
+@Local
 public interface ArticleService {
 
 	public ArticleDTO creerArticle(ArticleDTO article);

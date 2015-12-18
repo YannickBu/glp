@@ -6,4 +6,8 @@
 <definition name="profil" extends="baseLayout">
 <put-attribute name="body" value="/WEB-INF/views/profil/profil.jsp"></put-attribute>
 </definition>
+
+<definition name="modifprofil" extends="baseLayout">
+<put-attribute name="body" value="/WEB-INF/views/profil/modifprofil.jsp"></put-attribute>
+</definition>
 </tiles-definitions>

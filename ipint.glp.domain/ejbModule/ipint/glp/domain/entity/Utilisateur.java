@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import ipint.glp.api.DTO.enumType.Statut;
 
@@ -25,17 +26,17 @@ public class Utilisateur implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idUtilisateur;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Nom")
-	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
+//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Nom")
+//	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
 	private String nom;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
-	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
+//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
+//	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
 	private String prenom;
 	private Statut statut;
 	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
 	// Identifiant")
 	// private String login;
-	@javax.validation.constraints.NotNull(message="Veuillez remplir le champ Mot de passe")
+//	@javax.validation.constraints.NotNull(message="Veuillez remplir le champ Mot de passe")
 	 private String password;
 	
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Email")
@@ -45,6 +46,7 @@ public class Utilisateur implements Serializable {
 	@Column(unique = true)
 	private String email;
 
+	@OneToOne
 	private Profil profil;
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Article> articles;

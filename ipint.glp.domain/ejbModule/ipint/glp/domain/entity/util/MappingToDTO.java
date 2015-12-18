@@ -59,6 +59,7 @@ public class MappingToDTO {
 		}
 
 		UtilisateurDTO utilDTO = utilisateurToUtilisateurDTOHorsRelation(util);
+		utilDTO.setProfil(profilToProfilDTO(util.getProfil()));
 		utilDTO.setArticles(new ArrayList<>());
 		if (util.getArticles() != null && !util.getArticles().isEmpty()) {
 			for (Article art : util.getArticles()) {

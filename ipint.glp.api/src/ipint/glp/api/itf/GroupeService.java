@@ -1,10 +1,11 @@
 package ipint.glp.api.itf;
 
+import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import ipint.glp.api.DTO.GroupeDTO;
 
-@Remote
+@Local
 public interface GroupeService extends Service<GroupeDTO> {
 
 	public GroupeDTO creer(GroupeDTO groupe);

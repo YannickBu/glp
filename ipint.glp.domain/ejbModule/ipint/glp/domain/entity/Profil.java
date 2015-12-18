@@ -17,12 +17,12 @@ public class Profil {
 	// @Temporal(TemporalType.DATE)
 	// @javax.validation.constraints.Past(message="Date de naissance invalide")
 	// private Calendar dateNaiss;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
+//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
 	private String cursus;
 	private String competence;
 	private String centreInteret;
 	//TODO peut être le mettre en unique non ?
-	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
+//	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
 	private String telephone;
 
 	private List<Experience> experiences;

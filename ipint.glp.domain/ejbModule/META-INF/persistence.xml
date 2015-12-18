@@ -8,7 +8,7 @@
 	<!-- Unite de persistence -->
 	<persistence-unit name="PU" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>l1nk</jta-data-source>
+		<jta-data-source>jdbc/__default</jta-data-source>
 
 		<!-- Entites -->
 		<class>ipint.glp.domain.entity.Utilisateur</class>
@@ -30,9 +30,9 @@
 			<!-- value="jdbc:mysql://172.28.1.165:3306/l1nk_rodolphe" /> -->
 
 			<property name="eclipselink.logging.level" value="INFO" />
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<property name="javax.persistence.schema-generation.database.action"
-           value="drop-and-create"/>
+           value="create-or-extend-tables"/>
 		</properties>
 	</persistence-unit>
 </persistence>

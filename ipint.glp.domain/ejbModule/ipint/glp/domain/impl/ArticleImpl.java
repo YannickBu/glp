@@ -1,14 +1,18 @@
 package ipint.glp.domain.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ipint.glp.api.DTO.ArticleDTO;
-import ipint.glp.api.DTO.enumType.Statut;
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.itf.ArticleService;
 import ipint.glp.domain.entity.Article;
+import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.util.MappingToDTO;
 
@@ -19,17 +23,7 @@ public class ArticleImpl implements ArticleService {
 	private EntityManager em;
 
 	@Override
-	public ArticleDTO creerArticle(ArticleDTO articleDTO) {
-		Utilisateur u = new Utilisateur();
-		u.setEmail("yan.bu@gmail.com");
-		u.setNom("bu");
-		u.setPrenom("ya");
-		u.setPassword("psw");
-		u.setStatut(Statut.DIPLOME);
-		em.persist(u);
-		
-		articleDTO.setUtilisateur(MappingToDTO.utilisateurToUtilisateurDTO(u));
-		
+	public ArticleDTO creerArticle(ArticleDTO articleDTO) {		
 		Article art = new Article();
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
@@ -49,27 +43,29 @@ public class ArticleImpl implements ArticleService {
 			em.persist(util);
 		}
 		art.setUtilisateur(util);
-		/*
-		List<Groupe> listGrp = new ArrayList<>();
-		for(GroupeDTO grpDTO : articleDTO.getGroupes()){
-			Groupe grp=null;
-			if(grpDTO.getIdGroupe()!=null){
-				grp = em.find(Groupe.class, grpDTO.getIdGroupe());
-			}else{
-				q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + grpDTO.getNomGroupe() + "'");
-				grp = (Groupe)q.getSingleResult();
+		
+		if(articleDTO.getGroupes()!=null && !articleDTO.getGroupes().isEmpty()){
+			List<Groupe> listGrp = new ArrayList<>();
+			for(GroupeDTO grpDTO : articleDTO.getGroupes()){
+				Groupe grp=null;
+				if(grpDTO.getIdGroupe()!=null){
+					grp = em.find(Groupe.class, grpDTO.getIdGroupe());
+				}else{
+					q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + grpDTO.getNomGroupe() + "'");
+					grp = (Groupe)q.getSingleResult();
+				}
+				if(grp!=null){
+					listGrp.add(grp);
+					grp.getArticles().add(art);
+					em.persist(grp);
+				}
 			}
-			if(grp!=null){
-				listGrp.add(grp);
-				grp.getArticles().add(art);
-				em.persist(grp);
+			if(listGrp.isEmpty()){
+				return null;
 			}
+			art.setGroupes(listGrp);
 		}
-		if(listGrp.isEmpty()){
-			return null;
-		}
-		art.setGroupes(listGrp);
-		*/
+		
 		em.persist(art);
 
 		return MappingToDTO.articleToArticleDTO(art);

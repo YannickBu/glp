@@ -3,6 +3,6 @@
 <section class="footer-container" itemscope itemtype="http://schema.org/WPFooter">
 	<footer>
 		<div class="footer" style="witdh: 100%; background-color: #dadbdb">
-			Contenu footer</div>
+			</div>
 	</footer>
 </section>
