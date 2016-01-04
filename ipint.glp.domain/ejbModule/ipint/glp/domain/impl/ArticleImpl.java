@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.itf.ArticleService;
-import ipint.glp.domain.dao.DAOFactory;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Utilisateur;
@@ -29,9 +28,14 @@ public class ArticleImpl implements ArticleService {
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
 		
-		Utilisateur util = new Utilisateur();
-		util.setIdUtilisateur(articleDTO.getUtilisateur().getIdUtilisateur());
-		util = DAOFactory.getUtilisateurDAO().find(util);
+		Utilisateur util = null;
+		Query q;
+		if(articleDTO.getUtilisateur().getEmail()!=null){
+			q = em.createQuery("select e from Utilisateur e where e.email = '" + articleDTO.getUtilisateur().getEmail() + "'");
+			util = (Utilisateur) q.getSingleResult();
+		}else{
+			util = em.find(Utilisateur.class, articleDTO.getUtilisateur().getIdUtilisateur());
+		}
 		if(util == null){
 			return null;
 		}else{
@@ -44,7 +48,6 @@ public class ArticleImpl implements ArticleService {
 			List<Groupe> listGrp = new ArrayList<>();
 			for(GroupeDTO grpDTO : articleDTO.getGroupes()){
 				Groupe grp=null;
-				Query q;
 				if(grpDTO.getIdGroupe()!=null){
 					grp = em.find(Groupe.class, grpDTO.getIdGroupe());
 				}else{
@@ -70,9 +73,8 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public ArticleDTO trouver(ArticleDTO articleDTO) {
-		Article art = new Article();
-		art.setIdArticle(articleDTO.getIdArticle());
-		return MappingToDTO.articleToArticleDTO(DAOFactory.getArticleDAO().find(art));
+		Article art = em.find(Article.class, articleDTO.getIdArticle());
+		return MappingToDTO.articleToArticleDTO(art);
 	}
 
 	@Override
