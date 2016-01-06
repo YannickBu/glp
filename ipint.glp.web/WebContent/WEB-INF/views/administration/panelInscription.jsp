@@ -7,24 +7,26 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="text-center">Panel d'administation des inscriptions </h2>
-				<label>Informations du demandeur :</label>
+				<h1 class="text-center">Panel d'administation des inscriptions </h1>
+				<br/>
+				<label>Informations du demandeur:</label>
 				<ul>
-					<li>Nom : utilisateurTmp.nom</li>
-					<li>Prénom : utilisateurTmp.prenom</li>
-					<li>Date de naissance : utilisateurTmp.birthday</li>
-					<li>E-mail : utilisateurTmp.email</li>
-					<li>Diplome obtenu : utilisateurTmp.diplome</li>
-					<li>Année d'obtention : utilisateurTmp.anneeDiplome</li>
-					<li>Groupe sélectionné : utilisateurTmp.groupePrincipal</li>
+					<li><u>Nom:</u>  {utilisateurTmp.nom}</li>
+					<li><u>Prénom:</u>  {utilisateurTmp.prenom}</li>
+					<li><u>Date de naissance:</u>  {utilisateurTmp.birthday}</li>
+					<li><u>E-mail:</u>  {utilisateurTmp.email}</li>
+					<li><u>Diplome obtenu:</u>  {utilisateurTmp.diplome}</li>
+					<li><u>Année d'obtention:</u>  {utilisateurTmp.anneeDiplome}</li>
+					<li><u>Groupe sélectionné:</u>  {utilisateurTmp.groupePrincipal}</li>
 
 				</ul>
+				<br/>
 				<form:form role="form" method="post" action="2"
 					commandName="utilisateurTmp">
 					<div class="form-group">
-						<label for="OptionalMessage"> Message complémentaire : </label>
-						<form:textarea path="profil.competence" type="text-aera" rows="3"
-							class="form-control" id="OptionalMessage"></form:textarea>
+						<label for="OptionalMessage"> Message complémentaire (optionnel): </label>
+						<form:textarea path="profil.competence" type="text-aera" rows="4"
+							class="form-control" id="OptionalMessage" placeholder="Entrer un message à ajouter au mail automatique de réponse à la demande d'inscription."></form:textarea>
 					</div>
 
 					<button type="submit" class="btn btn-default">Accepter</button>
