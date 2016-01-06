@@ -83,7 +83,9 @@ public class GroupeImpl implements GroupeService {
 			return MappingToDTO.groupeToGroupeDTO(em.find(Groupe.class, obj.getIdGroupe()));
 		}
 		else if(obj.getNomGroupe() != null){
-			return MappingToDTO.groupeToGroupeDTO(em.find(Groupe.class, obj.getNomGroupe()));
+			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() +"'");
+			Groupe grp = (Groupe) q.getSingleResult();
+			return MappingToDTO.groupeToGroupeDTO(grp);
 		}
 		return null;
 	}

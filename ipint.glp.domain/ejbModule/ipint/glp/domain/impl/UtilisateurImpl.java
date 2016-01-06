@@ -178,19 +178,18 @@ public class UtilisateurImpl implements UtilisateurService {
 //
 //		utilisateurMAJ.setArticles(lesArticles);
 
-		//TODO 
-//		List<Groupe> lesGroupes = new ArrayList<Groupe>();
-//		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupes()) {
-//			if (groupeDTO.getIdGroupe() != null) {
-//				lesGroupes.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
-//			} else if (groupeDTO.getNomGroupe() != null) {
-//				Query q = em
-//						.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-//				lesGroupes.add((Groupe) q.getSingleResult());
-//
-//			}
-//		}
-//		utilisateurMAJ.setGroupes(lesGroupes);
+		List<Groupe> lesGroupes = new ArrayList<Groupe>();
+		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupes()) {
+			if (groupeDTO.getIdGroupe() != null) {
+				lesGroupes.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
+			} else if (groupeDTO.getNomGroupe() != null) {
+				Query q = em
+						.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
+				lesGroupes.add((Groupe) q.getSingleResult());
+
+			}
+		}
+		utilisateurMAJ.setGroupes(lesGroupes);
 //		List<Groupe> lesGroupesGeres = new ArrayList<Groupe>();
 //		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupesGeres()) {
 //			if (groupeDTO.getIdGroupe() != null) {
