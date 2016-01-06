@@ -22,6 +22,9 @@ public class ArticleImpl implements ArticleService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.ArticleService#creer(ipint.glp.api.DTO.ArticleDTO)
+	 */
 	@Override
 	public ArticleDTO creer(ArticleDTO articleDTO) {		
 		Article art = new Article();
@@ -78,7 +81,7 @@ public class ArticleImpl implements ArticleService {
 	}
 
 	@Override
-	public ArticleDTO modifier(ArticleDTO ancienArt) {
+	public ArticleDTO modifier(ArticleDTO nouvelArt) {
 //		MappingToEntity mte = new MappingToEntity();
 //		Article articleMAJ = mte.articleDTOToArticle(ancienArt);
 //
@@ -97,15 +100,18 @@ public class ArticleImpl implements ArticleService {
 //
 //		return nouvelArt;
 		
-		Article art = em.find(Article.class, ancienArt.getIdArticle());
-		art.setContenu(ancienArt.getContenu());
-		art.setDatePublication(ancienArt.getDatePublication());
+		Article art = em.find(Article.class, nouvelArt.getIdArticle());
+		art.setContenu(nouvelArt.getContenu());
+		art.setDatePublication(nouvelArt.getDatePublication());
 		
 		em.persist(art);
 		
 		return MappingToDTO.articleToArticleDTO(art);
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.ArticleService#supprimer(ipint.glp.api.DTO.ArticleDTO)
+	 */
 	@Override
 	public void supprimer(ArticleDTO articleASupprimer) {
 
@@ -117,5 +123,7 @@ public class ArticleImpl implements ArticleService {
 		// deux à null
 
 	}
+
+	
 
 }

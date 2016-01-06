@@ -24,6 +24,9 @@ public class UtilisateurImpl implements UtilisateurService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.UtilisateurService#creer(ipint.glp.api.DTO.UtilisateurDTO)
+	 */
 	@Override
 	public UtilisateurDTO creer(UtilisateurDTO utilisateurDTO) {
 		Utilisateur utilisateur = new Utilisateur();
@@ -113,6 +116,9 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.UtilisateurService#trouver(ipint.glp.api.DTO.UtilisateurDTO)
+	 */
 	@Override
 	public UtilisateurDTO trouver(UtilisateurDTO utilisateurDTO) {
 		Utilisateur utilisateur = new Utilisateur();
@@ -130,6 +136,9 @@ public class UtilisateurImpl implements UtilisateurService {
 		return utilisateurDTO;
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.UtilisateurService#modifier(ipint.glp.api.DTO.UtilisateurDTO, ipint.glp.api.DTO.UtilisateurDTO)
+	 */
 	@Override
 	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur) {
 
@@ -169,19 +178,18 @@ public class UtilisateurImpl implements UtilisateurService {
 //
 //		utilisateurMAJ.setArticles(lesArticles);
 
-		//TODO 
-//		List<Groupe> lesGroupes = new ArrayList<Groupe>();
-//		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupes()) {
-//			if (groupeDTO.getIdGroupe() != null) {
-//				lesGroupes.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
-//			} else if (groupeDTO.getNomGroupe() != null) {
-//				Query q = em
-//						.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-//				lesGroupes.add((Groupe) q.getSingleResult());
-//
-//			}
-//		}
-//		utilisateurMAJ.setGroupes(lesGroupes);
+		List<Groupe> lesGroupes = new ArrayList<Groupe>();
+		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupes()) {
+			if (groupeDTO.getIdGroupe() != null) {
+				lesGroupes.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
+			} else if (groupeDTO.getNomGroupe() != null) {
+				Query q = em
+						.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
+				lesGroupes.add((Groupe) q.getSingleResult());
+
+			}
+		}
+		utilisateurMAJ.setGroupes(lesGroupes);
 //		List<Groupe> lesGroupesGeres = new ArrayList<Groupe>();
 //		for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupesGeres()) {
 //			if (groupeDTO.getIdGroupe() != null) {
@@ -201,6 +209,9 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.UtilisateurService#supprimer(ipint.glp.api.DTO.UtilisateurDTO)
+	 */
 	@Override
 	public void supprimer(UtilisateurDTO obj) {
 		// TODO Auto-generated method stub

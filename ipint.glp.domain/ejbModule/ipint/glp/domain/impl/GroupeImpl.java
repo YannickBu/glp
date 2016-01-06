@@ -23,6 +23,9 @@ public class GroupeImpl implements GroupeService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.GroupeService#creer(ipint.glp.api.DTO.GroupeDTO)
+	 */
 	@Override
 	public GroupeDTO creer(GroupeDTO obj) {
 		Groupe groupe = new Groupe();
@@ -71,17 +74,25 @@ public class GroupeImpl implements GroupeService {
 		return MappingToDTO.groupeToGroupeDTO(groupeCreated);
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.GroupeService#trouver(ipint.glp.api.DTO.GroupeDTO)
+	 */
 	@Override
 	public GroupeDTO trouver(GroupeDTO obj) {
 		if(obj.getIdGroupe() != null){
 			return MappingToDTO.groupeToGroupeDTO(em.find(Groupe.class, obj.getIdGroupe()));
 		}
 		else if(obj.getNomGroupe() != null){
-			return MappingToDTO.groupeToGroupeDTO(em.find(Groupe.class, obj.getNomGroupe()));
+			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() +"'");
+			Groupe grp = (Groupe) q.getSingleResult();
+			return MappingToDTO.groupeToGroupeDTO(grp);
 		}
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.GroupeService#modifier(ipint.glp.api.DTO.GroupeDTO, ipint.glp.api.DTO.GroupeDTO)
+	 */
 	public GroupeDTO modifier(GroupeDTO ancienObj, GroupeDTO nouvelObj) {
 //		Groupe groupeMAJ = em.find(Groupe.class,ancienObj.getIdGroupe());
 //
@@ -103,6 +114,9 @@ public class GroupeImpl implements GroupeService {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see ipint.glp.api.itf.GroupeService#supprimer(ipint.glp.api.DTO.GroupeDTO)
+	 */
 	@Override
 	public void supprimer(GroupeDTO obj) {
 		// TODO Auto-generated method stub

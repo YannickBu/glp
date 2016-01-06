@@ -1,5 +1,8 @@
 package ipint.glp.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
@@ -19,6 +24,8 @@ public class ProfilController {
 
 	@Inject
 	UtilisateurService utilisateurService;
+	@Inject
+	GroupeService groupeS;
 
 	public ProfilController() {
 	}
@@ -30,6 +37,23 @@ public class ProfilController {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setIdUtilisateur(Integer.parseInt(id));
 		uDTO = utilisateurService.trouver(uDTO);
+		
+		UtilisateurDTO uDTO2 = new UtilisateurDTO();
+		GroupeDTO gDTO = new GroupeDTO();
+		gDTO.setNomGroupe("MIAGE");
+		gDTO = groupeS.trouver(gDTO);
+		GroupeDTO gDTO2 = new GroupeDTO();
+		gDTO2.setNomGroupe("SIAD");
+		gDTO2 = groupeS.trouver(gDTO2);		
+		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
+		grp.add(gDTO);
+		grp.add(gDTO2);
+		uDTO2.setGroupes(grp);
+		uDTO = utilisateurService.modifier(uDTO, uDTO2);
+		
+		
+		
+		
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
 		System.out.println(uDTO.getNom());
