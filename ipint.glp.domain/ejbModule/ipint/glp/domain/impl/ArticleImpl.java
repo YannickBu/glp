@@ -80,34 +80,34 @@ public class ArticleImpl implements ArticleService {
 		return MappingToDTO.articleToArticleDTO(art);
 	}
 
-//	@Override
-//	public ArticleDTO modifier(ArticleDTO ancienArt) {
-////		MappingToEntity mte = new MappingToEntity();
-////		Article articleMAJ = mte.articleDTOToArticle(ancienArt);
-////
-////		if (nouvelArt.getContenu() != null) {
-////
-////			articleMAJ.setContenu(nouvelArt.getContenu());
-////		}
-////		if (nouvelArt.getDatePublication() != null) {
-////
-////			articleMAJ.setDatePublication(nouvelArt.getDatePublication());
-////		}
-////
-////		em.persist(articleMAJ);
-////		MappingToDTO mtd = new MappingToDTO();
-////		nouvelArt = mtd.articleToArticleDTO(articleMAJ);
-////
-////		return nouvelArt;
-//		
-//		Article art = em.find(Article.class, ancienArt.getIdArticle());
-//		art.setContenu(ancienArt.getContenu());
-//		art.setDatePublication(ancienArt.getDatePublication());
-//		
-//		em.persist(art);
-//		
-//		return MappingToDTO.articleToArticleDTO(art);
-//	}
+	@Override
+	public ArticleDTO modifier(ArticleDTO nouvelArt) {
+//		MappingToEntity mte = new MappingToEntity();
+//		Article articleMAJ = mte.articleDTOToArticle(ancienArt);
+//
+//		if (nouvelArt.getContenu() != null) {
+//
+//			articleMAJ.setContenu(nouvelArt.getContenu());
+//		}
+//		if (nouvelArt.getDatePublication() != null) {
+//
+//			articleMAJ.setDatePublication(nouvelArt.getDatePublication());
+//		}
+//
+//		em.persist(articleMAJ);
+//		MappingToDTO mtd = new MappingToDTO();
+//		nouvelArt = mtd.articleToArticleDTO(articleMAJ);
+//
+//		return nouvelArt;
+		
+		Article art = em.find(Article.class, nouvelArt.getIdArticle());
+		art.setContenu(nouvelArt.getContenu());
+		art.setDatePublication(nouvelArt.getDatePublication());
+		
+		em.persist(art);
+		
+		return MappingToDTO.articleToArticleDTO(art);
+	}
 
 	/* (non-Javadoc)
 	 * @see ipint.glp.api.itf.ArticleService#supprimer(ipint.glp.api.DTO.ArticleDTO)
@@ -124,13 +124,6 @@ public class ArticleImpl implements ArticleService {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see ipint.glp.api.itf.ArticleService#modifier(ipint.glp.api.DTO.ArticleDTO, ipint.glp.api.DTO.ArticleDTO)
-	 */
-	@Override
-	public ArticleDTO modifier(ArticleDTO ancienArticle, ArticleDTO nouvelArticle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

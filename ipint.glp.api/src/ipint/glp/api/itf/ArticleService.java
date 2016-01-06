@@ -32,7 +32,7 @@ public interface ArticleService {
 	 * @param nouvelArticle le nouvel article avec les mises à jour
 	 * @return l'ancien article mis à jour
 	 */
-	public ArticleDTO modifier(ArticleDTO ancienArticle, ArticleDTO nouvelArticle);
+	public ArticleDTO modifier(ArticleDTO nouvelArticle);
 	
 	/** Supprimer
 	 * @param article l'article à supprimer
