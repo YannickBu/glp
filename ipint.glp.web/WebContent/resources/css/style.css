@@ -211,3 +211,8 @@ background-color : #f6921e;
 padding-top : 2.5%;
 padding-bottom : 5%;
 }
+
+/*CSS Panel Administration Inscription*/
+textarea{
+	width: inherit;
+}
