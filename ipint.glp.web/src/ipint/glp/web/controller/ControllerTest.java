@@ -92,6 +92,34 @@ public class ControllerTest {
 		utilDTO.setProfil(pDTO);
 		
 		utilDTO = utilS.creer(utilDTO);
+		
+//		try{
+//			ProfilDTO pDTO = new ProfilDTO();
+//			pDTO.setCentreInteret("cent");
+//			pDTO.setCompetence("comp");
+//			pDTO.setCursus("cur");
+//			pDTO.setTelephone("0311111111");
+//			
+//			UtilisateurDTO utilDTO = new UtilisateurDTO();
+//			utilDTO.setEmail("yannick.buchart@g.com");
+//			utilDTO.setNom("Buchart");
+//			utilDTO.setPrenom("Yannick");
+//			utilDTO.setPassword("psw");
+//			utilDTO.setStatut(Statut.DIPLOME);
+//			utilDTO.setProfil(pDTO);
+//			
+//			utilDTO = utilS.creer(utilDTO);
+//			if(utilDTO!=null)
+//				System.out.println("idUtil : " + utilDTO.getIdUtilisateur());
+//				System.out.println(utilDTO.getEmail());
+//			if(utilDTO.getProfil()!=null){
+//				System.out.println(utilDTO.getProfil().getCentreInteret());
+//			}
+//		}
+//		catch (Exception e){
+//			
+//		}
+		
 		return new ModelAndView("accueil");
 	}
 	
