@@ -3,6 +3,8 @@ package ipint.glp.domain.entity;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Classe definissant un utilisateur en attente de validation par un modérateur.
@@ -51,6 +53,7 @@ public class UtilisateurEnAttente {
 	/**
 	 * Date de naissance de l'utilisateur en attente de validation.
 	 */
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dateNaissance;
 
 	/**
