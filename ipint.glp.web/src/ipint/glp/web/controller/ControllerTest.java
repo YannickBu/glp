@@ -31,27 +31,31 @@ public class ControllerTest {
 //		art = s.creerArticle(art);
 //		System.out.println(art.getContenu());
 //		System.out.println(art.getUtilisateur().getPrenom());
-		
-		ProfilDTO pDTO = new ProfilDTO();
-		pDTO.setCentreInteret("cent");
-		pDTO.setCompetence("comp");
-		pDTO.setCursus("cur");
-		pDTO.setTelephone("0311111111");
-		
-		UtilisateurDTO utilDTO = new UtilisateurDTO();
-		utilDTO.setEmail("yannick.buchart@g.com");
-		utilDTO.setNom("Buchart");
-		utilDTO.setPrenom("Yannick");
-		utilDTO.setPassword("psw");
-		utilDTO.setStatut(Statut.DIPLOME);
-		utilDTO.setProfil(pDTO);
-		
-		utilDTO = utilS.creer(utilDTO);
-		if(utilDTO!=null)
-			System.out.println("idUtil : " + utilDTO.getIdUtilisateur());
-			System.out.println(utilDTO.getEmail());
-		if(utilDTO.getProfil()!=null){
-			System.out.println(utilDTO.getProfil().getCentreInteret());
+		try{
+			ProfilDTO pDTO = new ProfilDTO();
+			pDTO.setCentreInteret("cent");
+			pDTO.setCompetence("comp");
+			pDTO.setCursus("cur");
+			pDTO.setTelephone("0311111111");
+			
+			UtilisateurDTO utilDTO = new UtilisateurDTO();
+			utilDTO.setEmail("yannick.buchart@g.com");
+			utilDTO.setNom("Buchart");
+			utilDTO.setPrenom("Yannick");
+			utilDTO.setPassword("psw");
+			utilDTO.setStatut(Statut.DIPLOME);
+			utilDTO.setProfil(pDTO);
+			
+			utilDTO = utilS.creer(utilDTO);
+			if(utilDTO!=null)
+				System.out.println("idUtil : " + utilDTO.getIdUtilisateur());
+				System.out.println(utilDTO.getEmail());
+			if(utilDTO.getProfil()!=null){
+				System.out.println(utilDTO.getProfil().getCentreInteret());
+			}
+		}
+		catch (Exception e){
+			
 		}
 		
 		return new ModelAndView("accueil");
@@ -60,11 +64,6 @@ public class ControllerTest {
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
 	public ModelAndView loginGet() {
 		return new ModelAndView("connexion");
-	}
-	
-	@RequestMapping(value="/inscription", method=RequestMethod.GET)
-	public ModelAndView inscriptionGet() {
-		return new ModelAndView("inscription");
 	}
 	
 	@RequestMapping(value="/profil", method=RequestMethod.GET)
