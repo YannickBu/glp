@@ -7,11 +7,13 @@ import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
+import ipint.glp.domain.entity.UtilisateurEnAttente;
 
 public class MappingToDTO {
 
@@ -236,6 +238,20 @@ public class MappingToDTO {
 		grpDTO.setNomGroupe(grp.getNomGroupe());
 
 		return grpDTO;
+	}
+
+	public static UtilisateurEnAttenteDTO utilisateurEnAttenteToUtilisateurEnAttenteDTO(
+			UtilisateurEnAttente utilisateurEnAttente) {
+		UtilisateurEnAttenteDTO utilisateurEnAttenteDTO = new UtilisateurEnAttenteDTO();
+		utilisateurEnAttenteDTO.setAnneeDiplome(utilisateurEnAttente.getAnneeDiplome());
+		utilisateurEnAttenteDTO.setDiplome(utilisateurEnAttente.getDiplome());
+		utilisateurEnAttenteDTO.setEmail(utilisateurEnAttente.getEmail());
+		utilisateurEnAttenteDTO.setGroupePrincipal(groupeToGroupeDTO(utilisateurEnAttente.getGroupePrincipal()));
+		utilisateurEnAttenteDTO.setIdUtilisateurEnAttente(utilisateurEnAttente.getIdUtilisateurEnAttente());
+		utilisateurEnAttenteDTO.setNom(utilisateurEnAttente.getNom());
+		utilisateurEnAttenteDTO.setPrenom(utilisateurEnAttente.getPrenom());
+		return utilisateurEnAttenteDTO;
+
 	}
 
 }
