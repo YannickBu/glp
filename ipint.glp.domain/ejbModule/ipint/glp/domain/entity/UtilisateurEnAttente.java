@@ -3,6 +3,9 @@ package ipint.glp.domain.entity;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,6 +21,8 @@ public class UtilisateurEnAttente {
 	/**
 	 * Identifiant de l'utilisateur en attente de validation.
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idUtilisateurEnAttente;
 
 	/**
