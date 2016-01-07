@@ -13,6 +13,13 @@
 			<scope>test</scope>
 		</dependency>
  
+	 <dependency>
+		<groupId>javax.inject</groupId>
+		<artifactId>javax.inject</artifactId>
+		<version>1</version>
+	</dependency>
+ 
+ 
 		<!-- spring-context which provides core functionality -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -76,7 +83,12 @@
             <artifactId>tiles-template</artifactId>
             <version>3.0.5</version>
         </dependency>
-	</dependencies>
+        <dependency>
+        	<groupId>ipint.glp.api</groupId>
+        	<artifactId>ipint.glp.api</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
   
   
   <build>
