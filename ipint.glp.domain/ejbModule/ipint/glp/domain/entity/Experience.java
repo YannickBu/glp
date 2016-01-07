@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import ipint.glp.api.DTO.ProfilDTO;
 
 /**
  * Entity implementation class for Entity: Experience
@@ -33,6 +36,9 @@ public class Experience implements Serializable {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le lieu")
 	private String lieu;
 	private String description;
+	
+	@ManyToOne
+	private Profil profil;
 
 	public Experience() {
 		super();

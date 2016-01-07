@@ -40,8 +40,8 @@
 
 											<div class="article">
 												<ul>
-													<li class="nomEtu"><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/> - ${utilisateur.nom} ${utilisateur.prenom}</li>
-													<li>${art.contenu}</li>
+													<li class="nomEtu" style="list-style-type: none;">${utilisateur.nom} ${utilisateur.prenom} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
+													<li style="list-style-type: none;" >${art.contenu}</li>
 												</ul>
 											</div>
 										</c:forEach>
@@ -64,42 +64,31 @@
 											<li>Cursus : 
 												<ul>
 												<c:forEach items="${utilisateur.profil.diplomes}" var="diplomes">
-												<li><a href="#">${diplomes}</a></li>
+												<li>${diplomes}</li>
 												</c:forEach>
 												</ul>		</li>					
-<!-- 											<li>Expériences Professionnelles : -->
-<!-- 												<hr /> -->
-<!-- 												<div class="panel-group" id="panel-1"> -->
-<!-- 													<div class="panel panel-default"> -->
-<!-- 														<div class="panel-heading"> -->
-<!-- 															<a class="panel-title" data-toggle="collapse" -->
-<!-- 																data-parent="#panel-1" href="#panel-element-1">Metier -->
-<!-- 																2 - boite 2</a> -->
-<!-- 														</div> -->
-<!-- 														<div id="panel-element-1" class="panel-collapse collapse"> -->
-<!-- 															<div class="panel-body">Missions du métier 2</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 													<div class="panel panel-default"> -->
-<!-- 														<div class="panel-heading"> -->
-<!-- 															<a class="panel-title" data-toggle="collapse" -->
-<!-- 																data-parent="#panel-1" href="#panel-element-2">Metier -->
-<!-- 																1 - boite 1</a> -->
-<!-- 														</div> -->
-<!-- 														<div id="panel-element-2" class="panel-collapse collapse"> -->
-<!-- 															<div class="panel-body">Missions du métier 1</div> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</li> -->
-											<li>Compétences : ${utilisateur.profil.competence}
-<!-- 												<hr /> -->
-<!-- 												<ul class="nav nav-pills"> -->
-<!-- 													<li class="active"><a><span -->
-<!-- 															class="badge pull-right">3</span> Java </a></li> -->
-<!-- 													<li class="active"><a><span -->
-<!-- 															class="badge pull-right">1</span> SQL </a></li> -->
-<!-- 												</ul> -->
+											<li>Expériences Professionnelles :
+												<div class="panel-group" id="panel-1">
+													<c:forEach items="${utilisateur.profil.experiences}" var="exp">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<a class="panel-title" data-toggle="collapse"
+																data-parent="#panel-1" href="#panel-element-1">${exp.anneeDebut}/${exp.anneFin} - ${exp.poste} - ${exp.entreprise} à ${exp.lieu}</a>
+														</div>
+														<div id="panel-element-1" class="panel-collapse collapse">
+															<div class="panel-body">${exp.description}</div>
+														</div>														
+													</div>
+													</c:forEach>
+												</div>
+											</li>
+											<li>Compétences : 
+												<ul class="nav nav-pills">
+												<c:forEach items="${utilisateur.profil.competence}" var="comp">
+													<li class="active"><a><!-- <span 
+															class="badge pull-right">3</span>  --> ${comp} </a></li>
+												</c:forEach>
+												</ul>
 											</li>
 											<li>Centre d'interet : ${utilisateur.profil.centreInteret}</li>
 										</ul>

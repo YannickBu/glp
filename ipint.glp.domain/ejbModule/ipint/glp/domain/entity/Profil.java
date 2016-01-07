@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Profil {
@@ -20,12 +22,13 @@ public class Profil {
 //	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
 	private String cursus;
 	private List<String> diplomes;
-	private String competence;
+	private List<String> competence;
 	private String centreInteret;
 	//TODO peut être le mettre en unique non ?
 //	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
 	private String telephone;
 
+	@OneToMany(mappedBy = "profil")
 	private List<Experience> experiences;
 
 	public Profil() {
@@ -48,12 +51,12 @@ public class Profil {
 		this.cursus = cursus;
 	}
 
-	public String getCompetence() {
+	public List<String> getCompetence() {
 		return competence;
 	}
 
-	public void setCompetence(String competence) {
-		this.competence = competence;
+	public void setCompetence(List<String> list) {
+		this.competence = list;
 	}
 
 	public String getCentreInteret() {

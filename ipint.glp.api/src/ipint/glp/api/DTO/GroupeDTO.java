@@ -9,6 +9,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
+
 public class GroupeDTO extends DTO implements Serializable  {
 	private static final long serialVersionUID = -975885730285929071L;
 	
@@ -25,10 +26,27 @@ public class GroupeDTO extends DTO implements Serializable  {
 	private List<UtilisateurDTO> utilisateurs;
 	@ManyToMany
 	private List<ArticleDTO> articles;
+	
+//	@OneToMany(mappedBy = "groupePrincipal")
+//	private UtilisateurDTO utilisateur;
 
 	public GroupeDTO() {
 		this.utilisateurs = new ArrayList<>();
 	}
+	
+	
+
+//	public UtilisateurDTO getUtilisateur() {
+//		return utilisateur;
+//	}
+//
+//
+//
+//	public void setUtilisateur(UtilisateurDTO utilisateur) {
+//		this.utilisateur = utilisateur;
+//	}
+
+
 
 	public Integer getIdGroupe() {
 		return idGroupe;

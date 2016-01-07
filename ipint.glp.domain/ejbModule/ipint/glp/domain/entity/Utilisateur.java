@@ -46,6 +46,8 @@ public class Utilisateur implements Serializable {
 	@Column(unique = true)
 	private String email;
 
+//	@ManyToOne
+//	private Groupe groupePrincipal;
 	@OneToOne
 	private Profil profil;
 	@OneToMany(mappedBy = "utilisateur")
@@ -69,6 +71,15 @@ public class Utilisateur implements Serializable {
 	public void setIdUtilisateur(Integer idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
+
+	
+//	public Groupe getGroupePrincipal() {
+//		return groupePrincipal;
+//	}
+//
+//	public void setGroupePrincipal(Groupe groupePrincipal) {
+//		this.groupePrincipal = groupePrincipal;
+//	}
 
 	public String getNom() {
 		return nom;

@@ -2,6 +2,8 @@ package ipint.glp.api.DTO;
 
 import java.io.Serializable;
 
+import javax.persistence.ManyToOne;
+
 public class ExperienceDTO extends DTO implements Serializable  {
 	private static final long serialVersionUID = -1956002340542590931L;
 	
@@ -21,6 +23,10 @@ public class ExperienceDTO extends DTO implements Serializable  {
 	private String lieu;
 	private String description;
 
+	@ManyToOne
+	private ProfilDTO profil;
+	
+	
 	public ExperienceDTO() {
 		super();
 	}
