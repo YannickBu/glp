@@ -1,5 +1,6 @@
 package ipint.glp.domain.impl;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,6 +15,7 @@ import ipint.glp.domain.entity.util.MappingToDTO;
  * @author declerck
  *
  */
+@Stateless
 public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
 	@PersistenceContext(unitName = "PU")
