@@ -117,26 +117,8 @@ public class ControllerTest {
 	
 				
 				utilDTO = utilS.creer(utilDTO);
-			UtilisateurDTO utilDTO = new UtilisateurDTO();
-			utilDTO.setEmail("yannick.buchart@g.com");
-			utilDTO.setNom("Buchart");
-			utilDTO.setPrenom("Yannick");
-			utilDTO.setPassword("psw");
-			utilDTO.setStatut(Statut.DIPLOME);
-			utilDTO.setProfil(pDTO);
-			
-			utilDTO = utilS.creer(utilDTO);
-			if(utilDTO!=null)
-				System.out.println("idUtil : " + utilDTO.getIdUtilisateur());
-				System.out.println(utilDTO.getEmail());
-			if(utilDTO.getProfil()!=null){
-				System.out.println(utilDTO.getProfil().getCentreInteret());
-			}
-		}
-		catch (Exception e){
-		}
 		
-
+				
 		return new ModelAndView("accueil");
 	
 	}

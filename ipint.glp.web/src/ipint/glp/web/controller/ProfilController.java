@@ -66,7 +66,7 @@ public class ProfilController {
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
 		System.out.println(uDTO.getNom());
-		System.out.println(uDTO.getProfil());
+		//System.out.println(uDTO.getProfil());
 
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("articles", uDTO.getArticles());
