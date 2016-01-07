@@ -66,10 +66,11 @@ public class ControllerTest {
 			}
 		}
 		catch (Exception e){
-			
-
+		}
+		
 
 		return new ModelAndView("accueil");
+	
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
