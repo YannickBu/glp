@@ -42,6 +42,7 @@ public class MappingToDTO {
 		proDTO.setCentreInteret(pro.getCentreInteret());
 		proDTO.setCompetence(pro.getCompetence());
 		proDTO.setCursus(pro.getCursus());
+		proDTO.setDiplomes(pro.getDiplomes());
 		proDTO.setTelephone(pro.getTelephone());
 		proDTO.setExperiences(new ArrayList<>());
 		if (pro.getExperiences() != null && !pro.getExperiences().isEmpty()) {

@@ -14,6 +14,7 @@ public class ProfilDTO extends DTO  implements Serializable {
 	// private Calendar dateNaiss;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
 	private String cursus;
+	private List<String> diplomes;
 	private String competence;
 	private String centreInteret;
 	//@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#", message = "Téléphone invalide")
@@ -55,6 +56,15 @@ public class ProfilDTO extends DTO  implements Serializable {
 
 	public void setCentreInteret(String centreInteret) {
 		this.centreInteret = centreInteret;
+	}
+	
+
+	public List<String> getDiplomes() {
+		return diplomes;
+	}
+
+	public void setDiplomes(List<String> diplomes) {
+		this.diplomes = diplomes;
 	}
 
 	public String getTelephone() {

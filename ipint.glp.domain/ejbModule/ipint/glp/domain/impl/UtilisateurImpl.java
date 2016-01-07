@@ -88,6 +88,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			pro.setCentreInteret(utilisateurDTO.getProfil().getCentreInteret());
 			pro.setCompetence(utilisateurDTO.getProfil().getCompetence());
 			pro.setCursus(utilisateurDTO.getProfil().getCursus());
+			pro.setDiplomes(utilisateurDTO.getProfil().getDiplomes());
 			pro.setTelephone(utilisateurDTO.getProfil().getTelephone());
 			
 			if(utilisateurDTO.getProfil().getExperiences()!=null && !utilisateurDTO.getProfil().getExperiences().isEmpty()){
@@ -167,6 +168,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			profil.setCompetence(nouvelUtilisateur.getProfil().getCompetence());
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
 			profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
+			profil.setDiplomes(nouvelUtilisateur.getProfil().getDiplomes());
 			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
 		}
 

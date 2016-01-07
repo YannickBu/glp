@@ -26,13 +26,14 @@
 				<div class="col-md-12">
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
-							<li class="active col-md-6"><a href="#panel-1"
-								data-toggle="tab">Voir les publications</a></li>
-							<li class="col-md-6"><a href="#panel-2" data-toggle="tab">Informations
+							<li class="active col-md-6"><a href="#panel-2" data-toggle="tab">Informations
 									profil</a></li>
+							<li class="col-md-6"><a href="#panel-1"
+								data-toggle="tab">Voir les publications</a></li>
+							
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="panel-1">
+							<div class="tab-pane " id="panel-1">
 								<div class="row">
 									<div class="col-md-12">
 										<c:forEach items="${articles}" var="art">
@@ -47,16 +48,25 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane" id="panel-2">
+							<div class="tab-pane active" id="panel-2">
 								<div class="row">
 									<div class="col-md-12" id="scrollable">
 										<ul>
-<%-- 											<li>Formation : ${utilisateur.profil.cursus}</li> --%>
+<%-- 											<li>Groupe principal : ${utilisateur.groupePrincipal}</li> --%>
+											<li>Mes groupes : 
+												<ul>
+												<c:forEach items="${utilisateur.groupes}" var="groupe">
+												<li><a href="#">${groupe.nomGroupe}</a></li>
+												</c:forEach>
+												</ul>			</li>								
 											<li>E-mail : ${utilisateur.email}</li>
 											<li>Téléphone : ${utilisateur.profil.telephone}</li>
-<!-- 											<li>Emploi actuel :</li> -->
-<!-- 											<li>Entreprise :</li> -->
-<!-- 											<li>Groupes :</li> -->
+											<li>Cursus : 
+												<ul>
+												<c:forEach items="${utilisateur.profil.diplomes}" var="diplomes">
+												<li><a href="#">${diplomes}</a></li>
+												</c:forEach>
+												</ul>		</li>					
 <!-- 											<li>Expériences Professionnelles : -->
 <!-- 												<hr /> -->
 <!-- 												<div class="panel-group" id="panel-1"> -->

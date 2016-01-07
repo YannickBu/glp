@@ -19,6 +19,7 @@ public class Profil {
 	// private Calendar dateNaiss;
 //	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
 	private String cursus;
+	private List<String> diplomes;
 	private String competence;
 	private String centreInteret;
 	//TODO peut être le mettre en unique non ?
@@ -61,6 +62,14 @@ public class Profil {
 
 	public void setCentreInteret(String centreInteret) {
 		this.centreInteret = centreInteret;
+	}
+
+	public List<String> getDiplomes() {
+		return diplomes;
+	}
+
+	public void setDiplomes(List<String> diplomes) {
+		this.diplomes = diplomes;
 	}
 
 	public String getTelephone() {
