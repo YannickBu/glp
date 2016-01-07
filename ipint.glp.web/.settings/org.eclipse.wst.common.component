@@ -3,9 +3,6 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <dependent-module archiveName="ipint.glp.api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ipint.glp.api/ipint.glp.api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="ipint.glp.web"/>
         <property name="java-output-path" value="/ipint.glp.web/build/classes"/>
     </wb-module>
