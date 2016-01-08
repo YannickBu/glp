@@ -23,6 +23,8 @@ public class Groupe {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la description du groupe")
 	private String description;
 
+//	@OneToMany(mappedBy = "groupePrincipal")
+//	private Utilisateur utilisateur;
 	@ManyToOne
 	private Utilisateur utilisateurResponsable;
 	@ManyToMany
@@ -33,6 +35,20 @@ public class Groupe {
 	public Groupe() {
 		this.utilisateurs = new ArrayList<>();
 	}
+	
+	
+
+//	public Utilisateur getUtilisateur() {
+//		return utilisateur;
+//	}
+//
+//
+//
+//	public void setUtilisateur(Utilisateur utilisateur) {
+//		this.utilisateur = utilisateur;
+//	}
+
+
 
 	public Integer getIdGroupe() {
 		return idGroupe;
