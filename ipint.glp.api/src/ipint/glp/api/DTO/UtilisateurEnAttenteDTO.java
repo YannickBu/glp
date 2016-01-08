@@ -1,7 +1,8 @@
 package ipint.glp.api.DTO;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,7 +49,7 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	 * Date de naissance de l'utilisateur en attente de validation.
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateNaissance;
+	private Calendar dateNaissance;
 
 	/**
 	 * @return the idUtilisateurEnAttente
@@ -158,7 +159,7 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	/**
 	 * @return the dateNaissance
 	 */
-	public Date getDateNaissance() {
+	public Calendar getDateNaissance() {
 		return dateNaissance;
 	}
 
@@ -166,7 +167,7 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	 * @param dateNaissance
 	 *            the dateNaissance to set
 	 */
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(Calendar dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 

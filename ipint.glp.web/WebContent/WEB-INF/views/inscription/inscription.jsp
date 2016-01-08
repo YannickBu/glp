@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
 <div class="entete-inscrip">
 	<div class="row">
 		<center>
@@ -53,7 +52,7 @@
 				</div>
 				<script type="text/javascript">
 					$("#inputBirthday").datetimepicker({
-						format : "yyyy/mm/dd",
+						format : "dd MM yyyy",
 						startView : 'decade',
 						minView : 'month',
 						autoclose : true,

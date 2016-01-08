@@ -28,7 +28,6 @@ public class InscriptionController {
 	
 	@RequestMapping(value="/inscription", method=RequestMethod.GET)
 	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur, BindingResult result, Model model) {
-		//TODO importer list groupe
 		model.addAttribute("utilisateurTmp", utilisateur);
 		return new ModelAndView("inscription");
 	}
@@ -47,6 +46,6 @@ public class InscriptionController {
 	    	ueaDTO.setGroupePrincipal(groupeDTO);
             utilisateurTmp = utilisateurEnAttenteService.créer(ueaDTO);
             model.addAttribute("utilisateurTmp", utilisateurTmp);
-            return "connexion";
+            return "profil";
     }
 }
