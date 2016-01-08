@@ -44,14 +44,18 @@ pageEncoding="UTF-8"%>
 				<!-- <input type="date" class="form-control" id="inputBirthday"
 						placeholder=""> -->
 				<div class="input-append date form_datetime">
-					<form:input path="birthday" type="text" class="form-control" id="inputBirthday"></form:input>
+					<form:input path="dateNaissance" type="text" class="form-control" id="inputBirthday"></form:input>
 					<span class="add-on"><i
 						class="icon-th"></i></span>
 				</div>
 				<script type="text/javascript">
 					$(".form_datetime").datetimepicker({
 						format : "dd MM yyyy",
-						startView : 'decade'
+						startView : 'decade',
+						minView: 'month',
+						autoclose: true,
+						endDate: new Date(),
+						language: "fr"
 					});
 				</script>
 			</div>
@@ -68,9 +72,8 @@ pageEncoding="UTF-8"%>
 			<label for="selectAnnee" class="col-md-4 control-label">Année
 				d'obtention du diplôme :</label>
 			<div class="input col-md-4">
-				<form:select path="anneeDiplome" name="annee" id="selectAnnee" class="form-control">
-					<option>2000</option>
-				</form:select>
+				<form:input path="anneeDiplome" name="annee" id="selectAnnee" class="form-control">
+				</form:input>
 			</div>
 		</div>
 		<div class="form-group">
