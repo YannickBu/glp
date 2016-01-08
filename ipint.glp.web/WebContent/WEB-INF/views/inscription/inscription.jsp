@@ -52,7 +52,7 @@
 				</div>
 				<script type="text/javascript">
 					$("#inputBirthday").datetimepicker({
-						format : "dd MM yyyy",
+						format : "yyyy/mm/dd",
 						startView : 'decade',
 						minView : 'month',
 						autoclose : true,
