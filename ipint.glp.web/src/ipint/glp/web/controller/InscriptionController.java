@@ -44,8 +44,8 @@ public class InscriptionController {
 	    	ueaDTO.setDiplome(utilisateurTmp.getDiplome());
 	    	ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
 	    	ueaDTO.setGroupePrincipal(groupeDTO);
-            utilisateurTmp = utilisateurEnAttenteService.créer(ueaDTO);
+            utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
             model.addAttribute("utilisateurTmp", utilisateurTmp);
-            return "profil";
+            return "redirect:/profil";
     }
 }
