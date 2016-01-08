@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
@@ -35,6 +36,14 @@ public class InscriptionController {
     public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp, BindingResult result,
                     Model model) {
 	    	UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
+	    	GroupeDTO groupeDTO = new GroupeDTO();
+	    	ueaDTO.setNom(utilisateurTmp.getNom());
+	    	ueaDTO.setPrenom(utilisateurTmp.getPrenom());
+	    	ueaDTO.setDateNaissance(utilisateurTmp.getDateNaissance());
+	    	ueaDTO.setEmail(utilisateurTmp.getEmail());
+	    	ueaDTO.setDiplome(utilisateurTmp.getDiplome());
+	    	ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
+	    	ueaDTO.setGroupePrincipal(groupeDTO);
             utilisateurTmp = utilisateurEnAttenteService.créer(ueaDTO);
             model.addAttribute("utilisateurTmp", utilisateurTmp);
             return "profil";
