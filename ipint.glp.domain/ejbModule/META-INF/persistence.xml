@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
-             version="2.1">
+	version="2.1">
 
 	<!-- Unite de persistence -->
 	<persistence-unit name="PU" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>jdbc/__default</jta-data-source>
+		<jta-data-source>l1nk</jta-data-source>
 
 		<!-- Entites -->
+		<class>ipint.glp.domain.entity.UtilisateurEnAttente</class>
 		<class>ipint.glp.domain.entity.Utilisateur</class>
 		<class>ipint.glp.domain.entity.Experience</class>
 		<class>ipint.glp.domain.entity.Profil</class>
 		<class>ipint.glp.domain.entity.Groupe</class>
 		<class>ipint.glp.domain.entity.Article</class>
+		<class>ipint.glp.domain.entity.UtilisateurEnAttente</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 
@@ -32,7 +34,7 @@
 			<property name="eclipselink.logging.level" value="INFO" />
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<property name="javax.persistence.schema-generation.database.action"
-           value="create-or-extend-tables"/>
+				value="create-or-extend-tables" />
 		</properties>
 	</persistence-unit>
 </persistence>
