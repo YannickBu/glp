@@ -30,9 +30,4 @@ public class GenererMotDePasse {
 			buf[idx] = symbols[random.nextInt(symbols.length)];
 		return new String(buf);
 	}
-
-	public static void main(String args[]) {
-		GenererMotDePasse genrerMotDePasse = new GenererMotDePasse(6);
-		System.out.println(genrerMotDePasse.nextString());
-	}
 }

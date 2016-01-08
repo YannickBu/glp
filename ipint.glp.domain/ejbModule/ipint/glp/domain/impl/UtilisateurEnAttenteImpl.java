@@ -63,10 +63,9 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurDTO.setEmail(utilisateurEnAttenteAValiderDTO.getEmail());
 		utilisateurDTO.setNom(utilisateurEnAttenteAValiderDTO.getNom());
 		utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
-		// TODO : Gérer date de naissance
-		utilisateurDTO.setStatut(Statut.DIPLOME);
-		// TODO : Gérer génération aléatoire du mot de passe
-		utilisateurDTO.setPassword("password");
+ 		utilisateurDTO.setStatut(Statut.DIPLOME);
+		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
+		utilisateurDTO.setPassword(generationMotDePasse.nextString());
 		UtilisateurImpl utilisateurService = new UtilisateurImpl();
 		utilisateurService.creer(utilisateurDTO);
 		supprimer(utilisateurEnAttenteAValiderDTO);
