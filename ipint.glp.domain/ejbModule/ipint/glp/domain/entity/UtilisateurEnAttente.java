@@ -1,6 +1,6 @@
 package ipint.glp.domain.entity;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,7 +59,7 @@ public class UtilisateurEnAttente {
 	 * Date de naissance de l'utilisateur en attente de validation.
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dateNaissance;
+	private Date dateNaissance;
 
 	/**
 	 * @return the idUtilisateurEnAttente
@@ -169,16 +169,16 @@ public class UtilisateurEnAttente {
 	/**
 	 * @return the dateNaissance
 	 */
-	public Calendar getDateNaissance() {
+	public Date getDateNaissance() {
 		return dateNaissance;
 	}
 
 	/**
-	 * @param dateNaissance
+	 * @param calendar
 	 *            the dateNaissance to set
 	 */
-	public void setDateNaissance(Calendar dateNaissance) {
-		this.dateNaissance = dateNaissance;
+	public void setDateNaissance(Date date) {
+		this.dateNaissance = date;
 	}
 
 }
