@@ -1,5 +1,7 @@
 package ipint.glp.api.itf;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
@@ -37,5 +39,13 @@ public interface UtilisateurEnAttenteService {
 	 * @param utilisateurEnAttenteDTOAValider
 	 */
 	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider);
+
+	/**
+	 * Methode de listing des utilisateurs en attente de validation par le
+	 * modérateur.
+	 * 
+	 * @return la liste des utilisateur en attente.
+	 */
+	public List<UtilisateurEnAttenteDTO> lister();
 
 }
