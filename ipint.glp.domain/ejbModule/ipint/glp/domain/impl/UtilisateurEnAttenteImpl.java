@@ -1,10 +1,14 @@
 package ipint.glp.domain.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.api.DTO.enumType.Statut;
@@ -63,12 +67,24 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurDTO.setEmail(utilisateurEnAttenteAValiderDTO.getEmail());
 		utilisateurDTO.setNom(utilisateurEnAttenteAValiderDTO.getNom());
 		utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
- 		utilisateurDTO.setStatut(Statut.DIPLOME);
+		utilisateurDTO.setStatut(Statut.DIPLOME);
 		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
 		utilisateurDTO.setPassword(generationMotDePasse.nextString());
 		UtilisateurImpl utilisateurService = new UtilisateurImpl();
 		utilisateurService.creer(utilisateurDTO);
 		supprimer(utilisateurEnAttenteAValiderDTO);
+	}
+
+	@Override
+	public List<UtilisateurEnAttenteDTO> lister() {
+		Query q = em.createQuery("select u from UtilisateurEnAttente u ");
+		List<UtilisateurEnAttente> lesUtilisateurEnAttente = q.getResultList();
+		List<UtilisateurEnAttenteDTO> lesUtilisateurEnAttenteDTO = new ArrayList<UtilisateurEnAttenteDTO>();
+		for (UtilisateurEnAttente utilisateurEnAttente : lesUtilisateurEnAttente) {
+			lesUtilisateurEnAttenteDTO
+					.add(MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente));
+		}
+		return lesUtilisateurEnAttenteDTO;
 	}
 
 }
