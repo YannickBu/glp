@@ -28,9 +28,11 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	@Override
 	public UtilisateurEnAttenteDTO creer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTO) {
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
+
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getNom());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
+
 		// Groupe groupe = null;
 		// if (utilisateurEnAttenteDTO.getGroupePrincipal() != null) {
 		// Query q = em.createQuery("select g from Groupe g where u.idGroupe =
