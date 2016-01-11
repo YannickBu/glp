@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="entete-inscrip">
 	<div class="row">
@@ -52,7 +53,7 @@
 				</div>
 				<script type="text/javascript">
 					$("#inputBirthday").datetimepicker({
-						format : "dd MM yyyy",
+						format : "yyyy/mm/dd",
 						startView : 'decade',
 						minView : 'month',
 						autoclose : true,
@@ -82,9 +83,12 @@
 			<label for="selectFormation" class="col-md-4 control-label">Groupe
 				selectionné :</label>
 			<div class="input col-md-4">
-				<form:select path="groupePrincipal" name="groupe" id="selectFormation"
+				<form:select path="groupePrincipal.idGroupe" name="groupe" id="selectFormation"
 					class="form-control">
-					<option>1</option>
+					<form:option value="NONE"> -- Choissez un groupe --</form:option>
+					<c:forEach var="groupe" items="${groupes}">
+    					<form:option value="${groupe.idGroupe}">${groupe.nomGroupe}</form:option>
+    				</c:forEach>
 				</form:select>
 			</div>
 		</div>
