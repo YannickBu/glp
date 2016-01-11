@@ -98,6 +98,6 @@ public class ProfilController {
             utilisateur = utilisateurService.modifier(uDTO,utilisateur);
     		model.addAttribute("articles", uDTO.getArticles());
             model.addAttribute("utilisateur", utilisateur);
-            return "profil";
+            return "redirect:/profil/{id}";
     }
 }

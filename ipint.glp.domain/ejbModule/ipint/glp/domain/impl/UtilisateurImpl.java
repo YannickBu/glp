@@ -11,11 +11,13 @@ import javax.persistence.Query;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.DTO.enumType.Statut;
 import ipint.glp.api.itf.UtilisateurService;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
+import ipint.glp.domain.entity.UtilisateurGroupes;
 import ipint.glp.domain.entity.util.MappingToDTO;
 
 @Stateless
@@ -35,6 +37,17 @@ public class UtilisateurImpl implements UtilisateurService {
 		utilisateur.setPrenom(utilisateurDTO.getPrenom());
 		utilisateur.setPassword(utilisateurDTO.getPassword());
 		utilisateur.setStatut(utilisateurDTO.getStatut());
+		
+		GroupeDTO groupeDTOm = utilisateurDTO.getGroupePrincipal();
+		Groupe grpm = null;
+		if (groupeDTOm.getIdGroupe() != null) {
+			grpm = em.find(Groupe.class, groupeDTOm.getIdGroupe());
+		} else if (groupeDTOm.getNomGroupe() != null) {
+			Query q = em
+					.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOm.getNomGroupe() + "'");
+			grpm = (Groupe) q.getSingleResult();		}
+		
+		utilisateur.setGroupePrincipal(grpm);
 		
 		//Profil profil = em.find(Profil.class, utilisateurDTO.getProfil().getIdProfil());
 		//utilisateur.setProfil(profil);
@@ -111,10 +124,17 @@ public class UtilisateurImpl implements UtilisateurService {
 
 		}
 		em.persist(utilisateur);
-		
-		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
 
-		return utilisateurDTO;
+		if(utilisateur!=null && utilisateur.getStatut()!=null && utilisateur.getEmail()!=null){
+			UtilisateurGroupes utilGrp = new UtilisateurGroupes();
+			utilGrp.setEmail(utilisateur.getEmail());
+			if(utilisateur.getStatut()==Statut.DIPLOME){
+				utilGrp.setGroupe("diplome");
+			}
+			em.persist(utilGrp);
+		}
+		
+		return MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
 
 	}
 

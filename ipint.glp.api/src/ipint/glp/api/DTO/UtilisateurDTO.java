@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import ipint.glp.api.DTO.enumType.Statut;
@@ -42,8 +43,8 @@ public class UtilisateurDTO extends DTO implements Serializable {
 	@ManyToMany(mappedBy = "utilisateurs")
 	private List<GroupeDTO> groupes;
 	
-//	@ManyToOne
-//	private GroupeDTO groupePrincipal;
+	@ManyToOne
+	private GroupeDTO groupePrincipal;
 
 	public UtilisateurDTO() {
 		super();
@@ -53,14 +54,14 @@ public class UtilisateurDTO extends DTO implements Serializable {
 	}
 	
 
-//	public GroupeDTO getGroupePrincipal() {
-//		return groupePrincipal;
-//	}
-//
-//
-//	public void setGroupePrincipal(GroupeDTO groupePrincipal) {
-//		this.groupePrincipal = groupePrincipal;
-//	}
+	public GroupeDTO getGroupePrincipal() {
+		return groupePrincipal;
+	}
+
+
+	public void setGroupePrincipal(GroupeDTO groupePrincipal) {
+		this.groupePrincipal = groupePrincipal;
+	}
 
 
 	public Integer getIdUtilisateur() {

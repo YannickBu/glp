@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 
@@ -27,8 +28,8 @@ public class GroupeDTO extends DTO implements Serializable  {
 	@ManyToMany
 	private List<ArticleDTO> articles;
 	
-//	@OneToMany(mappedBy = "groupePrincipal")
-//	private UtilisateurDTO utilisateur;
+	@OneToMany(mappedBy = "groupePrincipal")
+	private List<UtilisateurDTO> utilisateursPrincipals;
 
 	public GroupeDTO() {
 		this.utilisateurs = new ArrayList<>();
@@ -36,15 +37,21 @@ public class GroupeDTO extends DTO implements Serializable  {
 	
 	
 
-//	public UtilisateurDTO getUtilisateur() {
-//		return utilisateur;
-//	}
-//
-//
-//
-//	public void setUtilisateur(UtilisateurDTO utilisateur) {
-//		this.utilisateur = utilisateur;
-//	}
+
+
+	public List<UtilisateurDTO> getUtilisateursPrincipals() {
+		return utilisateursPrincipals;
+	}
+
+
+
+
+
+	public void setUtilisateursPrincipals(List<UtilisateurDTO> utilisateursPrincipals) {
+		this.utilisateursPrincipals = utilisateursPrincipals;
+	}
+
+
 
 
 

@@ -52,13 +52,14 @@
 								<div class="row">
 									<div class="col-md-12" id="scrollable">
 										<ul>
-<%-- 											<li>Groupe principal : ${utilisateur.groupePrincipal}</li> --%>
-											<li>Mes groupes : 
+											<li>Groupe principal : ${utilisateur.groupePrincipal.nomGroupe}</li> 
+											<li>Mes groupes : 	
 												<ul>
-												<c:forEach items="${utilisateur.groupes}" var="groupe">
-												<li><a href="#">${groupe.nomGroupe}</a></li>
+												<c:forEach items="${utilisateur.groupes}" var="grp">
+												<li><a href="#">${grp.nomGroupe}</a></li>
 												</c:forEach>
-												</ul>			</li>								
+												</ul>
+											</li>										
 											<li>E-mail : ${utilisateur.email}</li>
 											<li>Téléphone : ${utilisateur.profil.telephone}</li>
 											<li>Cursus : 

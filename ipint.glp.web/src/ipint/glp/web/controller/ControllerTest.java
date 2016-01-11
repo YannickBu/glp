@@ -71,19 +71,19 @@ public class ControllerTest {
 //		}
 		
 		//Creation utilisateur Manon
-				ProfilDTO pDTO = new ProfilDTO();
-				pDTO.setCentreInteret("Shopping, Cinema");
-				List<String> comp = new ArrayList<String>();
+				ProfilDTO pDTOm = new ProfilDTO();
+				pDTOm.setCentreInteret("Shopping, Cinema");
+				ArrayList<String> comp = new ArrayList<String>();
 				comp.add("JAVA");
 				comp.add("SQL");
-				pDTO.setCompetence(comp);
-				pDTO.setCursus("");
-				pDTO.setTelephone("06.20.30.20.52");
-				List<String> dipl = new ArrayList<String>();
+				pDTOm.setCompetence(comp);
+				pDTOm.setCursus("");
+				pDTOm.setTelephone("06.20.30.20.52");
+				ArrayList<String> dipl = new ArrayList<String>();
 				dipl.add("2015/2016 - M2MIAGE");
 				dipl.add("2012/2013 - L3MIAGE");
 				dipl.add("2010/2011 - DUT Informatique");
-				pDTO.setDiplomes(dipl);
+				pDTOm.setDiplomes(dipl);
 				
 				ExperienceDTO expDTO = new ExperienceDTO();
 				expDTO.setAnneeDebut(2011);
@@ -94,14 +94,14 @@ public class ControllerTest {
 				expDTO.setPoste("Developpeur web");
 				List<ExperienceDTO> exp = new ArrayList<ExperienceDTO>();
 				exp.add(expDTO);
-				pDTO.setExperiences(exp);
+				pDTOm.setExperiences(exp);
 				
-				UtilisateurDTO utilDTO = new UtilisateurDTO();
-				utilDTO.setEmail("manon.barrois@gmail.com");
-				utilDTO.setNom("Barrois");
-				utilDTO.setPrenom("Manon");
-				utilDTO.setPassword("psw");
-				utilDTO.setStatut(Statut.DIPLOME);
+				UtilisateurDTO utilDTOm = new UtilisateurDTO();
+				utilDTOm.setEmail("manon.barrois6@gmail.com");
+				utilDTOm.setNom("Barrois");
+				utilDTOm.setPrenom("Manon");
+				utilDTOm.setPassword("psw");
+				utilDTOm.setStatut(Statut.DIPLOME);
 				GroupeDTO gDTO = new GroupeDTO();
 				gDTO.setNomGroupe("MIAGE");
 				gDTO = groupeS.trouver(gDTO);
@@ -111,41 +111,18 @@ public class ControllerTest {
 				List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
 				grp.add(gDTO);
 				grp.add(gDTO2);
-				utilDTO.setGroupes(grp);
-				utilDTO.setProfil(pDTO);
-			
-	
+				utilDTOm.setGroupes(grp);
 				
-				utilDTO = utilS.creer(utilDTO);
+				GroupeDTO gPrincDTO = new GroupeDTO();
+				gPrincDTO.setNomGroupe("Informatique");
+				gPrincDTO = groupeS.trouver(gPrincDTO);
+				utilDTOm.setGroupePrincipal(gPrincDTO);
+				
+				utilDTOm.setProfil(pDTOm);	
+				
+				utilDTOm = utilS.creer(utilDTOm);
 
-		try{
-			ProfilDTO pDTO = new ProfilDTO();
-			pDTO.setCentreInteret("cent");
-			pDTO.setCompetence("comp");
-			pDTO.setCursus("cur");
-			pDTO.setTelephone("0311111111");
-			
-			UtilisateurDTO utilDTO = new UtilisateurDTO();
-			utilDTO.setEmail("yannick.buchart@g.com");
-			utilDTO.setNom("Buchart");
-			utilDTO.setPrenom("Yannick");
-			utilDTO.setPassword("psw");
-			utilDTO.setStatut(Statut.DIPLOME);
-			utilDTO.setProfil(pDTO);
-			
-			utilDTO = utilS.creer(utilDTO);
-			if(utilDTO!=null)
-				System.out.println("idUtil : " + utilDTO.getIdUtilisateur());
-				System.out.println(utilDTO.getEmail());
-			if(utilDTO.getProfil()!=null){
-				System.out.println(utilDTO.getProfil().getCentreInteret());
-			}
-		}
-		catch (Exception e){
-		}
-		
-
-		return new ModelAndView("accueil");
+			return new ModelAndView("accueil");
 	
 	}
 	
