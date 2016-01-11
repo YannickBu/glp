@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OneToMany;
+
 
 public class ProfilDTO extends DTO  implements Serializable {
 	private static final long serialVersionUID = 1194522427659253560L;
@@ -14,11 +16,12 @@ public class ProfilDTO extends DTO  implements Serializable {
 	// private Calendar dateNaiss;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
 	private String cursus;
-	private String competence;
+	private List<String> diplomes;
+	private List<String> competence;
 	private String centreInteret;
 	//@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#", message = "Téléphone invalide")
 	private String telephone;
-
+	@OneToMany(mappedBy = "profil")
 	private List<ExperienceDTO> experiences;
 
 	public ProfilDTO() {
@@ -41,11 +44,11 @@ public class ProfilDTO extends DTO  implements Serializable {
 		this.cursus = cursus;
 	}
 
-	public String getCompetence() {
+	public List<String> getCompetence() {
 		return competence;
 	}
 
-	public void setCompetence(String competence) {
+	public void setCompetence(List<String> competence) {
 		this.competence = competence;
 	}
 
@@ -55,6 +58,15 @@ public class ProfilDTO extends DTO  implements Serializable {
 
 	public void setCentreInteret(String centreInteret) {
 		this.centreInteret = centreInteret;
+	}
+	
+
+	public List<String> getDiplomes() {
+		return diplomes;
+	}
+
+	public void setDiplomes(List<String> diplomes) {
+		this.diplomes = diplomes;
 	}
 
 	public String getTelephone() {

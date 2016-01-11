@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.GroupeDTO;
+import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
@@ -37,27 +38,35 @@ public class ProfilController {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setIdUtilisateur(Integer.parseInt(id));
 		uDTO = utilisateurService.trouver(uDTO);
-		
-		UtilisateurDTO uDTO2 = new UtilisateurDTO();
-		GroupeDTO gDTO = new GroupeDTO();
-		gDTO.setNomGroupe("MIAGE");
-		gDTO = groupeS.trouver(gDTO);
-		GroupeDTO gDTO2 = new GroupeDTO();
-		gDTO2.setNomGroupe("SIAD");
-		gDTO2 = groupeS.trouver(gDTO2);		
-		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
-		grp.add(gDTO);
-		grp.add(gDTO2);
-		uDTO2.setGroupes(grp);
-		uDTO = utilisateurService.modifier(uDTO, uDTO2);
-		
+//		
+//		UtilisateurDTO uDTO2 = new UtilisateurDTO();
+//		GroupeDTO gDTO = new GroupeDTO();
+//		gDTO.setNomGroupe("MIAGE");
+//		gDTO = groupeS.trouver(gDTO);
+//		GroupeDTO gDTO2 = new GroupeDTO();
+//		gDTO2.setNomGroupe("SIAD");
+//		gDTO2 = groupeS.trouver(gDTO2);		
+//		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
+//		grp.add(gDTO);
+//		grp.add(gDTO2);
+//		uDTO2.setGroupes(grp);
+//		List<String> dipl = new ArrayList<String>();
+//		dipl.add("2015/2016 - M2MIAGE");
+//		dipl.add("2012/2013 - L3MIAGE");
+//		dipl.add("2010/2011 - DUT Informatique");
+//		ProfilDTO pDTO= uDTO.getProfil();
+//		pDTO.setDiplomes(dipl);
+//		uDTO2.setProfil(pDTO);
+//			
+//		uDTO = utilisateurService.modifier(uDTO, uDTO2);
+//		
 		
 		
 		
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
 		System.out.println(uDTO.getNom());
-		System.out.println(uDTO.getProfil());
+		//System.out.println(uDTO.getProfil());
 
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("articles", uDTO.getArticles());
@@ -89,6 +98,6 @@ public class ProfilController {
             utilisateur = utilisateurService.modifier(uDTO,utilisateur);
     		model.addAttribute("articles", uDTO.getArticles());
             model.addAttribute("utilisateur", utilisateur);
-            return "profil";
+            return "redirect:/profil/{id}";
     }
 }
