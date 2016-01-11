@@ -9,20 +9,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
-public class ArticleDTO extends DTO implements Serializable  {
+/**
+ * 
+ * @author declerck
+ *
+ */
+public class ArticleDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = 2382557002234011191L;
-	
+
+	/**
+	 * 
+	 */
 	private Integer idArticle;
+	/**
+	 * 
+	 */
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le contenu")
 	private String contenu;
+
+	/**
+	 * 
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la date de publication")
 	@javax.validation.constraints.Past(message = "Date de publication invalide")
 	private Calendar datePublication;
 
+	/**
+	 * 
+	 */
 	@ManyToOne
 	private UtilisateurDTO utilisateur;
+
+	/**
+	 * 
+	 */
 	@ManyToMany(mappedBy = "articles")
 	private List<GroupeDTO> groupes;
 

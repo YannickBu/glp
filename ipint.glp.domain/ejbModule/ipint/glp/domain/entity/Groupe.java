@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Groupe {
@@ -23,6 +24,8 @@ public class Groupe {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la description du groupe")
 	private String description;
 
+	@OneToMany(mappedBy = "groupePrincipal")
+	private List<Utilisateur> utilisateursPrincipals;
 	@ManyToOne
 	private Utilisateur utilisateurResponsable;
 	@ManyToMany
@@ -33,6 +36,23 @@ public class Groupe {
 	public Groupe() {
 		this.utilisateurs = new ArrayList<>();
 	}
+	
+
+
+
+	public List<Utilisateur> getUtilisateurPrincipal() {
+		return utilisateursPrincipals;
+	}
+
+
+
+
+	public void setUtilisateurPrincipal(List<Utilisateur> utilisateurPrincipal) {
+		this.utilisateursPrincipals = utilisateurPrincipal;
+	}
+
+
+
 
 	public Integer getIdGroupe() {
 		return idGroupe;

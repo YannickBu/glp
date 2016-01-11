@@ -2,6 +2,10 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
+
+
+
+
 <div class="col-md-6 publication">
         <div class="container">
                 <div class="row">
@@ -9,7 +13,7 @@ pageEncoding="UTF-8"%>
                                 <img src="${pageContext.servletContext.contextPath}/resources/img/logoA.png" class="img-responsive" alt="Responsive image">
                         </div>
                         <div class="col-md-10">
-                                <h1 class="nomEtu">${utilisateur.nom} ${utilisateur.prenom}</h1>
+                                <h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
                                 <h2>${utilisateur.statut}</h2>
                         </div>
                         <hr/>
@@ -40,15 +44,9 @@ pageEncoding="UTF-8"%>
                                                         </label>
                                                         <form:input path="prenom" type="text" class="form-control" id="InputPrenom" placeholder="ex: Jean"/>
                                                 </div>
-                                                <div class="form-group"> 
-                                                        <label for="InputEmail">
-                                                                Email address
-                                                        </label>
-                                                        <form:input path="email" type="email" class="form-control" id="InputEmail" placeholder="ex: Jean.dupont@mail.com"/>
-                                                </div>
                                                 <div class="form-group">         
                                                         <label for="InputPassword">
-                                                                New Password
+                                                                Mot de passe
                                                         </label>
                                                         <form:input path="password" type="password" class="form-control" id="InputPassword"/>
                                                 </div>
@@ -59,16 +57,46 @@ pageEncoding="UTF-8"%>
                                                         <form:input path="profil.telephone" type="text" class="form-control" id="InputTel"/>
                                                 </div>
                                                 <div class="form-group">         
+                                                        <label for="InputCursus">
+                                                                Cursus
+                                                        </label>
+                                                        <form:textarea path="profil.diplomes" type="text-aera" rows="3" class="form-control" placeholder="ex: [annéeDébut/annéeFin - Diplome1],[annéeDébut/annéeFin - Diplome1],..." id="InputCursus"/>                                                      
+                                                </div>
+                                                <div class="form-group">         
+                                                        <label for="InputExp">
+                                                                Expériences Professionnelles
+                                                        </label>
+                                                        <div id="expForm">
+	                                                        <div class="row">
+		                                                        <div class="col-md-1"><form:input path="" type="text" class="form-control" id="InputExpDebut" placeholder="Début"/></div>
+		                                                        <div class="col-md-1"><form:input path="" type="text" class="form-control" id="InputExpAnneFin" placeholder="Fin"/></div>
+		                                                        <div class="col-md-3"><form:input path="" type="text" class="form-control" id="InputExpEnt" placeholder="Entreprise"/></div>
+		                                                        <div class="col-md-3"><form:input path="" type="text" class="form-control" id="InputExpLieu"  placeholder="Ville"/></div>                                                    
+		                                                        <div class="col-md-4"><form:input path="" type="text" class="form-control" id="InputExpPoste" placeholder="Poste"/> </div>
+		                                                    </div>	                    
+		                                                    <div class="row" style="margin-top:1%">
+		                                                        <div class="col-md-12"><form:textarea path="" type="text-area" class="form-control" id="InputExpDesc" placeholder="Description de votre mission"/></div>   
+	                                                       </div>
+	                                                       </div>
+                                                      <div id="nouvelle_exp"></div>
+                                                       
+                                                       <button type="button" style="margin-top:1%;" class="btn btn-default" id="btn_new_exp">
+                                                        +
+                                               	   	 </button>  
+                                                       <hr>      
+                                                                          
+                                                </div>
+                                                <div class="form-group">         
                                                         <label for="InputSkills">
                                                                 Compétences
                                                         </label>
-                                                        <form:textarea path="profil.competence" type="text-aera" rows="3" class="form-control" id="InputSkills" placeholder="ex: Java 3; SQL 1; (<Langage> <NIVEAU>;...)"></form:textarea>
+                                                        <form:textarea path="profil.competence" type="text-aera" rows="3" class="form-control" id="InputSkills" placeholder="ex: [Compétence1],[Compétence2],..."></form:textarea>
                                                 </div>
                                                 <div class="form-group">         
                                                         <label for="InputInterets">
                                                                 Centres d'interets
                                                         </label>
-                                                        <form:textarea path="profil.centreInteret" type="text-aera" rows="3" class="form-control" id="InputInterets" placeholder="ex: Emeu, Aqua-poney, ..."></form:textarea>
+                                                        <form:textarea path="profil.centreInteret" type="text-aera" rows="3" class="form-control" id="InputInterets" placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
                                                 </div>
                                                 <button type="submit" class="btn btn-default">
                                                         Modifier
@@ -79,3 +107,13 @@ pageEncoding="UTF-8"%>
                 </div>
         </div>
 </div>
+
+<script type="text/javascript">
+var btn = document.getElementById("btn_new_exp");
+var comp = document.getElementById("nouvelle_exp");
+var create = document.createElement("<p>LOLLLLL</p>");
+btn.addEventListener("click",function(){window.alert("lol");
+comp.appendChild(create);});
+
+
+</script>
