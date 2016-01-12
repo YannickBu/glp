@@ -8,11 +8,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ipint.glp.api.DTO.CompetenceDTO;
+import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.enumType.Statut;
 import ipint.glp.api.itf.UtilisateurService;
+import ipint.glp.domain.entity.Competence;
+import ipint.glp.domain.entity.Diplome;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
@@ -99,13 +103,38 @@ public class UtilisateurImpl implements UtilisateurService {
 		if(utilisateurDTO.getProfil()!=null){
 			Profil pro = new Profil();
 			pro.setCentreInteret(utilisateurDTO.getProfil().getCentreInteret());
-			pro.setCompetence(utilisateurDTO.getProfil().getCompetence());
+			//pro.setCompetence(utilisateurDTO.getProfil().getCompetence());
+			if(utilisateurDTO.getProfil().getCompetence()!=null && !utilisateurDTO.getProfil().getCompetence().isEmpty()){
+				List<Competence> listComp = new ArrayList<Competence>();
+				for(CompetenceDTO compDTO : utilisateurDTO.getProfil().getCompetence()){
+					Competence comp = new Competence();
+					comp.setLibelle(compDTO.getLibelle());
+					comp.setNote(compDTO.getNote());
+					comp.setProfil(pro);
+					listComp.add(comp);
+					em.persist(comp);
+				}
+				pro.setCompetence(listComp);
+			}
 			pro.setCursus(utilisateurDTO.getProfil().getCursus());
-			pro.setDiplomes(utilisateurDTO.getProfil().getDiplomes());
+			//pro.setDiplomes(utilisateurDTO.getProfil().getDiplomes());
+			if(utilisateurDTO.getProfil().getDiplomes()!=null && !utilisateurDTO.getProfil().getDiplomes().isEmpty()){
+				List<Diplome> listDipl = new ArrayList<Diplome>();
+				for(DiplomeDTO diplDTO : utilisateurDTO.getProfil().getDiplomes()){
+					Diplome dipl = new Diplome();
+					dipl.setAnneeDebut(diplDTO.getAnneeDebut());
+					dipl.setAnneFin(diplDTO.getAnneFin());
+					dipl.setLibelle(diplDTO.getLibelle());
+					dipl.setProfil(pro);
+					listDipl.add(dipl);
+					em.persist(dipl);
+				}
+				pro.setDiplomes(listDipl);
+			}
 			pro.setTelephone(utilisateurDTO.getProfil().getTelephone());
 			
 			if(utilisateurDTO.getProfil().getExperiences()!=null && !utilisateurDTO.getProfil().getExperiences().isEmpty()){
-				List<Experience> listExp = new ArrayList<>();
+				List<Experience> listExp = new ArrayList<Experience>();
 				for(ExperienceDTO expDTO : utilisateurDTO.getProfil().getExperiences()){
 					Experience exp = new Experience();
 					exp.setAnneeDebut(expDTO.getAnneeDebut());
@@ -186,10 +215,24 @@ public class UtilisateurImpl implements UtilisateurService {
 			Profil profil = new Profil();
 			profil = em.find(Profil.class, ancienUtilisateur.getProfil().getIdProfil());
 			utilisateurMAJ.setProfil(profil);
-			profil.setCompetence(nouvelUtilisateur.getProfil().getCompetence());
+			//profil.setCompetence(nouvelUtilisateur.getProfil().getCompetence());
+			List<Competence> lesComps = new ArrayList<Competence>();
+			for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
+				if (compDTO.getIdCompetence() != null) {
+					lesComps.add(em.find(Competence.class, compDTO.getIdCompetence()));
+				}
+			}
+			profil.setCompetence(lesComps);
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
 			profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
-			profil.setDiplomes(nouvelUtilisateur.getProfil().getDiplomes());
+			//profil.setDiplomes(nouvelUtilisateur.getProfil().getDiplomes());
+			List<Diplome> lesDipls = new ArrayList<Diplome>();
+			for (DiplomeDTO diplDTO : nouvelUtilisateur.getProfil().getDiplomes()) {
+				if (diplDTO.getIdDiplome() != null) {
+					lesDipls.add(em.find(Diplome.class, diplDTO.getIdDiplome()));
+				}
+			}
+			profil.setDiplomes(lesDipls);
 			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
 		}
 

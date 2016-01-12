@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ipint.glp.api.DTO.CompetenceDTO;
+import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.ProfilDTO;
@@ -73,16 +75,38 @@ public class ControllerTest {
 		//Creation utilisateur Manon
 				ProfilDTO pDTOm = new ProfilDTO();
 				pDTOm.setCentreInteret("Shopping, Cinema");
-				ArrayList<String> comp = new ArrayList<String>();
-				comp.add("JAVA");
-				comp.add("SQL");
+				//ArrayList<String> comp = new ArrayList<String>();
+				//comp.add("JAVA");
+				//comp.add("SQL");
+				//pDTOm.setCompetence(comp);
+				CompetenceDTO compDTO = new CompetenceDTO();
+				compDTO.setLibelle("Java J2EE");
+				compDTO.setNote(3);
+				List<CompetenceDTO> comp = new ArrayList<CompetenceDTO>();
+				comp.add(compDTO);
+				compDTO = new CompetenceDTO();
+				compDTO.setLibelle("Angular JS");
+				compDTO.setNote(2);
+				comp.add(compDTO);
 				pDTOm.setCompetence(comp);
 				pDTOm.setCursus("");
 				pDTOm.setTelephone("06.20.30.20.52");
-				ArrayList<String> dipl = new ArrayList<String>();
-				dipl.add("2015/2016 - M2MIAGE");
-				dipl.add("2012/2013 - L3MIAGE");
-				dipl.add("2010/2011 - DUT Informatique");
+				//ArrayList<String> dipl = new ArrayList<String>();
+				//dipl.add("2015/2016 - M2MIAGE");
+				//dipl.add("2012/2013 - L3MIAGE");
+				//dipl.add("2010/2011 - DUT Informatique");
+				//pDTOm.setDiplomes(dipl);
+				DiplomeDTO diplDTO = new DiplomeDTO();
+				diplDTO.setAnneeDebut(2011);
+				diplDTO.setAnneFin(2013);
+				diplDTO.setLibelle("DUT Informatique");
+				List<DiplomeDTO> dipl = new ArrayList<DiplomeDTO>();
+				dipl.add(diplDTO);
+				diplDTO = new DiplomeDTO();
+				diplDTO.setAnneeDebut(2009);
+				diplDTO.setAnneFin(2010);
+				diplDTO.setLibelle("Master 2 MIAGE");
+				dipl.add(diplDTO);
 				pDTOm.setDiplomes(dipl);
 				
 				ExperienceDTO expDTO = new ExperienceDTO();
@@ -97,7 +121,7 @@ public class ControllerTest {
 				pDTOm.setExperiences(exp);
 				
 				UtilisateurDTO utilDTOm = new UtilisateurDTO();
-				utilDTOm.setEmail("manon.barrois6@gmail.com");
+				utilDTOm.setEmail("sarra.diagne6@gmail.com");
 				utilDTOm.setNom("Barrois");
 				utilDTOm.setPrenom("Manon");
 				utilDTOm.setPassword("psw");
@@ -112,7 +136,6 @@ public class ControllerTest {
 				grp.add(gDTO);
 				grp.add(gDTO2);
 				utilDTOm.setGroupes(grp);
-				
 				GroupeDTO gPrincDTO = new GroupeDTO();
 				gPrincDTO.setNomGroupe("Informatique");
 				gPrincDTO = groupeS.trouver(gPrincDTO);

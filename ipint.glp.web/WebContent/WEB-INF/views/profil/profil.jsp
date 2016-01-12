@@ -52,7 +52,7 @@
 								<div class="row">
 									<div class="col-md-12" id="scrollable">
 										<ul>
-											<li>Groupe principal : ${utilisateur.groupePrincipal.nomGroupe}</li> 
+											<li>Groupe principal : <a href="#">${utilisateur.groupePrincipal.nomGroupe}</a></li> 
 											<li>Mes groupes : 	
 												<ul>
 												<c:forEach items="${utilisateur.groupes}" var="grp">
@@ -64,8 +64,8 @@
 											<li>Téléphone : ${utilisateur.profil.telephone}</li>
 											<li>Cursus : 
 												<ul>
-												<c:forEach items="${utilisateur.profil.diplomes}" var="diplomes">
-												<li>${diplomes}</li>
+												<c:forEach items="${utilisateur.profil.diplomes}" var="diplome">
+												<li>${diplome.anneeDebut}/${diplome.anneFin} - ${diplome.libelle}</li>
 												</c:forEach>
 												</ul>		</li>					
 											<li>Expériences Professionnelles :
@@ -86,8 +86,8 @@
 											<li>Compétences : 
 												<ul class="nav nav-pills">
 												<c:forEach items="${utilisateur.profil.competence}" var="comp">
-													<li class="active"><a><!-- <span 
-															class="badge pull-right">3</span>  --> ${comp} </a></li>
+													<li class="active"><a> <span 
+															class="badge pull-right"> ${comp.note}</span> ${comp.libelle} </a></li>
 												</c:forEach>
 												</ul>
 											</li>
