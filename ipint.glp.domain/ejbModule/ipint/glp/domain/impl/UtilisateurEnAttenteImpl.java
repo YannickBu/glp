@@ -36,19 +36,17 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
 
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
-		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getNom());
+		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
-
-		// Groupe groupe = null;
-		// if (utilisateurEnAttenteDTO.getGroupePrincipal() != null) {
-		// Query q = em.createQuery("select g from Groupe g where u.idGroupe =
-		// '"
-		// + utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe() + "'");
-		// groupe = (Groupe) q.getSingleResult();
-		// }
-		// utilisateurEnAttente.setGroupePrincipal(groupe);
+		 Groupe groupe = null;
+		 if (utilisateurEnAttenteDTO.getGroupePrincipal() != null) {
+		 Query q = em.createQuery("select g from Groupe g where g.idGroupe = '"
+		 + utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe() + "'");
+		 groupe = (Groupe) q.getSingleResult();
+		 }
+		utilisateurEnAttente.setGroupePrincipal(groupe);
 		utilisateurEnAttente.setAnneeDiplome(utilisateurEnAttenteDTO.getAnneeDiplome());
-		utilisateurEnAttente.setNom(utilisateurEnAttenteDTO.getPrenom());
+		utilisateurEnAttente.setNom(utilisateurEnAttenteDTO.getNom());
 		utilisateurEnAttente.setPrenom(utilisateurEnAttenteDTO.getPrenom());
 		em.persist(utilisateurEnAttente);
 		utilisateurEnAttente = em.find(UtilisateurEnAttente.class, utilisateurEnAttente.getIdUtilisateurEnAttente());
@@ -87,6 +85,12 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 					.add(MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente));
 		}
 		return lesUtilisateurEnAttenteDTO;
+	}
+
+	@Override
+	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente) {
+		UtilisateurEnAttente utilisateurEnAttente = em.find(UtilisateurEnAttente.class, idUtilisateurEnAttente);
+		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
 	}
 
 }
