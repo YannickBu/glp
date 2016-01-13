@@ -40,7 +40,7 @@
 
 											<div class="article">
 												<ul>
-													<li class="nomEtu" style="list-style-type: none;">${utilisateur.nom} ${utilisateur.prenom} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
+													<li class="nomEtu" style="list-style-type: none;">${utilisateur.prenom} ${utilisateur.nom} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
 													<li style="list-style-type: none;" >${art.contenu}</li>
 												</ul>
 											</div>
@@ -52,19 +52,20 @@
 								<div class="row">
 									<div class="col-md-12" id="scrollable">
 										<ul>
-<%-- 											<li>Groupe principal : ${utilisateur.groupePrincipal}</li> --%>
-											<li>Mes groupes : 
+											<li>Groupe principal : <a href="#">${utilisateur.groupePrincipal.nomGroupe}</a></li> 
+											<li>Mes groupes : 	
 												<ul>
-												<c:forEach items="${utilisateur.groupes}" var="groupe">
-												<li><a href="#">${groupe.nomGroupe}</a></li>
+												<c:forEach items="${utilisateur.groupes}" var="grp">
+												<li><a href="#">${grp.nomGroupe}</a></li>
 												</c:forEach>
-												</ul>			</li>								
+												</ul>
+											</li>										
 											<li>E-mail : ${utilisateur.email}</li>
 											<li>Téléphone : ${utilisateur.profil.telephone}</li>
 											<li>Cursus : 
 												<ul>
-												<c:forEach items="${utilisateur.profil.diplomes}" var="diplomes">
-												<li>${diplomes}</li>
+												<c:forEach items="${utilisateur.profil.diplomes}" var="diplome">
+												<li>${diplome.anneeDebut}/${diplome.anneFin} - ${diplome.libelle}</li>
 												</c:forEach>
 												</ul>		</li>					
 											<li>Expériences Professionnelles :
@@ -85,14 +86,16 @@
 											<li>Compétences : 
 												<ul class="nav nav-pills">
 												<c:forEach items="${utilisateur.profil.competence}" var="comp">
-													<li class="active"><a><!-- <span 
-															class="badge pull-right">3</span>  --> ${comp} </a></li>
+													<li class="active"><a> <span 
+															class="badge pull-right"> ${comp.note}</span> ${comp.libelle} </a></li>
 												</c:forEach>
 												</ul>
 											</li>
 											<li>Centre d'interet : ${utilisateur.profil.centreInteret}</li>
 										</ul>
-
+										<a href="${pageContext.servletContext.contextPath}/modifprofil/${utilisateur.idUtilisateur}"><button type="button" style="margin-top:1%; float:right" class="btn btn-default" id="btn_new_exp">
+                                                        Modifier mon profil
+                                               	   	 </button></a> 
 									</div>
 								</div>
 							</div>

@@ -3,12 +3,16 @@ package ipint.glp.domain.entity.util;
 import java.util.ArrayList;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.DTO.CompetenceDTO;
+import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.domain.entity.Article;
+import ipint.glp.domain.entity.Competence;
+import ipint.glp.domain.entity.Diplome;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
@@ -33,6 +37,32 @@ public class MappingToDTO {
 
 		return expDTO;
 	}
+	
+	public static CompetenceDTO competenceToCompetenceDTO(Competence comp) {
+		if (comp == null) {
+			return null;
+		}
+
+		CompetenceDTO compDTO = new CompetenceDTO();
+		compDTO.setIdCompetence(comp.getIdCompetence());
+		compDTO.setLibelle(comp.getLibelle());
+		compDTO.setNote(comp.getNote());
+		return compDTO;
+	}
+	
+	public static DiplomeDTO diplomeToDiplomeDTO(Diplome dipl) {
+		if (dipl == null) {
+			return null;
+		}
+
+		DiplomeDTO diplDTO = new DiplomeDTO();
+		diplDTO.setIdDiplome(dipl.getIdDiplome());
+		diplDTO.setAnneeDebut(dipl.getAnneeDebut());
+		diplDTO.setAnneFin(dipl.getAnneFin());
+		diplDTO.setLibelle(dipl.getLibelle());
+
+		return diplDTO;
+	}
 
 	public static ProfilDTO profilToProfilDTO(Profil pro) {
 		if (pro == null) {
@@ -42,9 +72,21 @@ public class MappingToDTO {
 		ProfilDTO proDTO = new ProfilDTO();
 		proDTO.setIdProfil(pro.getIdProfil());
 		proDTO.setCentreInteret(pro.getCentreInteret());
-		proDTO.setCompetence(pro.getCompetence());
+		//proDTO.setCompetence(pro.getCompetence());
+		proDTO.setCompetence(new ArrayList<>());
+		if (pro.getCompetence() != null && !pro.getCompetence().isEmpty()) {
+			for (Competence exp : pro.getCompetence()) {
+				proDTO.getCompetence().add(competenceToCompetenceDTO(exp));
+			}
+		}
 		proDTO.setCursus(pro.getCursus());
-		proDTO.setDiplomes(pro.getDiplomes());
+		//roDTO.setDiplomes(pro.getDiplomes());
+		proDTO.setDiplomes(new ArrayList<>());
+		if (pro.getDiplomes() != null && !pro.getDiplomes().isEmpty()) {
+			for (Diplome exp : pro.getDiplomes()) {
+				proDTO.getDiplomes().add(diplomeToDiplomeDTO(exp));
+			}
+		}
 		proDTO.setTelephone(pro.getTelephone());
 		proDTO.setExperiences(new ArrayList<>());
 		if (pro.getExperiences() != null && !pro.getExperiences().isEmpty()) {
@@ -64,6 +106,7 @@ public class MappingToDTO {
 		UtilisateurDTO utilDTO = utilisateurToUtilisateurDTOHorsRelation(util);
 		utilDTO.setProfil(profilToProfilDTO(util.getProfil()));
 		utilDTO.setArticles(new ArrayList<>());
+		utilDTO.setGroupePrincipal(groupeToGroupeDTO(util.getGroupePrincipal()));
 		if (util.getArticles() != null && !util.getArticles().isEmpty()) {
 			for (Article art : util.getArticles()) {
 				utilDTO.getArticles().add(articleTOArticleDTOLazy(art));

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -46,8 +47,9 @@ public class Utilisateur implements Serializable {
 	@Column(unique = true)
 	private String email;
 
-//	@ManyToOne
-//	private Groupe groupePrincipal;
+	@ManyToOne
+	private Groupe groupePrincipal;
+
 	@OneToOne
 	private Profil profil;
 	@OneToMany(mappedBy = "utilisateur")
@@ -73,13 +75,13 @@ public class Utilisateur implements Serializable {
 	}
 
 	
-//	public Groupe getGroupePrincipal() {
-//		return groupePrincipal;
-//	}
-//
-//	public void setGroupePrincipal(Groupe groupePrincipal) {
-//		this.groupePrincipal = groupePrincipal;
-//	}
+	public Groupe getGroupePrincipal() {
+		return groupePrincipal;
+	}
+
+	public void setGroupePrincipal(Groupe groupePrincipal) {
+		this.groupePrincipal = groupePrincipal;
+	}
 
 	public String getNom() {
 		return nom;

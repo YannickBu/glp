@@ -99,6 +99,22 @@ public class Experience implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
+
+	/**
+	 * @return the profil
+	 */
+	public Profil getProfil() {
+		return profil;
+	}
+
+	/**
+	 * @param profil the profil to set
+	 */
+	public void setProfil(Profil profil) {
+		this.profil = profil;
+	}
 
 	@Override
 	public int hashCode() {

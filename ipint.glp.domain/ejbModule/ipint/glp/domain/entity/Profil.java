@@ -21,8 +21,10 @@ public class Profil {
 	// private Calendar dateNaiss;
 //	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
 	private String cursus;
-	private List<String> diplomes;
-	private List<String> competence;
+	@OneToMany(mappedBy = "profil")
+	private List<Diplome> diplomes;
+	@OneToMany(mappedBy = "profil")
+	private List<Competence> competence;
 	private String centreInteret;
 	//TODO peut être le mettre en unique non ?
 //	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
@@ -51,11 +53,11 @@ public class Profil {
 		this.cursus = cursus;
 	}
 
-	public List<String> getCompetence() {
+	public List<Competence> getCompetence() {
 		return competence;
 	}
 
-	public void setCompetence(List<String> list) {
+	public void setCompetence(List<Competence> list) {
 		this.competence = list;
 	}
 
@@ -67,11 +69,11 @@ public class Profil {
 		this.centreInteret = centreInteret;
 	}
 
-	public List<String> getDiplomes() {
+	public List<Diplome> getDiplomes() {
 		return diplomes;
 	}
 
-	public void setDiplomes(List<String> diplomes) {
+	public void setDiplomes(List<Diplome> diplomes) {
 		this.diplomes = diplomes;
 	}
 
@@ -115,5 +117,4 @@ public class Profil {
 			return false;
 		return true;
 	}
-
 }
