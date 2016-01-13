@@ -73,6 +73,7 @@ public class ProfilController {
 		//System.out.println(uDTO.getProfil());
 
 		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);
