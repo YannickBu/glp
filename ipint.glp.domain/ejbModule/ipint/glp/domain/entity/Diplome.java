@@ -2,6 +2,7 @@ package ipint.glp.domain.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Diplome implements Serializable{
 	private Integer anneFin;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le nom du diplome")
 	private String libelle;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
 	
 	public Diplome() {
