@@ -25,44 +25,29 @@ public class InscriptionController {
 
 	public InscriptionController() {
 	}
-	
+
 	@RequestMapping(value="/inscription", method=RequestMethod.GET)
 	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {
 		model.addAttribute("groupes",groupeS.lister());
 		model.addAttribute("utilisateurTmp", utilisateur);
 		return new ModelAndView("inscription");
 	}
-		
-    @RequestMapping(value = "/inscription", method = RequestMethod.POST)
-    public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result,
-                    Model model) {
-	    	UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
-	    	GroupeDTO groupeDTO = new GroupeDTO();
-	    	groupeDTO.setIdGroupe(utilisateurTmp.getGroupePrincipal().getIdGroupe());
-	    	ueaDTO.setNom(utilisateurTmp.getNom());
-	    	ueaDTO.setPrenom(utilisateurTmp.getPrenom());
-	    	ueaDTO.setDateNaissance(utilisateurTmp.getDateNaissance());
-	    	ueaDTO.setEmail(utilisateurTmp.getEmail());
-	    	ueaDTO.setDiplome(utilisateurTmp.getDiplome());
-	    	ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
-	    	ueaDTO.setGroupePrincipal(groupeDTO);
-            utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
-            model.addAttribute("utilisateurTmp", utilisateurTmp);
-            return "redirect:/connexion";
-    }
-    
-    @RequestMapping(value="/connexion", method=RequestMethod.POST)
-	public ModelAndView connexionPost() {
-		return new ModelAndView("profil");
-	}
-    
-    @RequestMapping(value="/error", method=RequestMethod.POST)
-	public ModelAndView connexionErrorPost() {
-		return new ModelAndView("connexion");
-	}
-    
-    @RequestMapping(value="/error", method=RequestMethod.GET)
-	public ModelAndView connexionErrorGet() {
-		return new ModelAndView("connexion");
+
+	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
+	public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result,
+			Model model) {
+		UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
+		GroupeDTO groupeDTO = new GroupeDTO();
+		groupeDTO.setIdGroupe(utilisateurTmp.getGroupePrincipal().getIdGroupe());
+		ueaDTO.setNom(utilisateurTmp.getNom());
+		ueaDTO.setPrenom(utilisateurTmp.getPrenom());
+		ueaDTO.setDateNaissance(utilisateurTmp.getDateNaissance());
+		ueaDTO.setEmail(utilisateurTmp.getEmail());
+		ueaDTO.setDiplome(utilisateurTmp.getDiplome());
+		ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
+		ueaDTO.setGroupePrincipal(groupeDTO);
+		utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
+		model.addAttribute("utilisateurTmp", utilisateurTmp);
+		return "redirect:/connexion";
 	}
 }
