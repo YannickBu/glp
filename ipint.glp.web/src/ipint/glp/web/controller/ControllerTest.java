@@ -121,7 +121,7 @@ public class ControllerTest {
 				pDTOm.setExperiences(exp);
 				
 				UtilisateurDTO utilDTOm = new UtilisateurDTO();
-				utilDTOm.setEmail("sar.diagne6@gmail.com");
+				utilDTOm.setEmail("nana@gmail.com");
 				utilDTOm.setNom("Barrois");
 				utilDTOm.setPrenom("Manon");
 				utilDTOm.setPassword("psw");
