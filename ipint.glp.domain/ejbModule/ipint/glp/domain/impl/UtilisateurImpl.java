@@ -143,8 +143,9 @@ public class UtilisateurImpl implements UtilisateurService {
 					exp.setEntreprise(expDTO.getEntreprise());
 					exp.setLieu(expDTO.getLieu());
 					exp.setPoste(expDTO.getPoste());
-					em.persist(exp);
+					exp.setProfil(pro);
 					listExp.add(exp);
+					em.persist(exp);
 				}
 				pro.setExperiences(listExp);
 			}

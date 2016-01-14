@@ -48,4 +48,13 @@ public interface UtilisateurEnAttenteService {
 	 */
 	public List<UtilisateurEnAttenteDTO> lister();
 
+	/**
+	 * Methode de récupération d'un utilisateur en attente de validation par le
+	 * modérateur.
+	 * 
+	 * @param idUtilisateurEnAttente
+	 * @return
+	 */
+	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente);
+
 }

@@ -87,4 +87,10 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		return lesUtilisateurEnAttenteDTO;
 	}
 
+	@Override
+	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente) {
+		UtilisateurEnAttente utilisateurEnAttente = em.find(UtilisateurEnAttente.class, idUtilisateurEnAttente);
+		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
+	}
+
 }

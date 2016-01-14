@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript"
@@ -40,7 +40,7 @@
 
 											<div class="article">
 												<ul>
-													<li class="nomEtu" style="list-style-type: none;">${utilisateur.nom} ${utilisateur.prenom} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
+													<li class="nomEtu" style="list-style-type: none;">${utilisateur.prenom} ${utilisateur.nom} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
 													<li style="list-style-type: none;" >${art.contenu}</li>
 												</ul>
 											</div>
@@ -93,7 +93,9 @@
 											</li>
 											<li>Centre d'interet : ${utilisateur.profil.centreInteret}</li>
 										</ul>
-
+										<a href="${pageContext.servletContext.contextPath}/modifprofil/${utilisateur.idUtilisateur}"><button type="button" style="margin-top:1%; float:right" class="btn btn-default" id="btn_new_exp">
+                                                        Modifier mon profil
+                                               	   	 </button></a> 
 									</div>
 								</div>
 							</div>
