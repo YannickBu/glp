@@ -50,4 +50,19 @@ public class InscriptionController {
             model.addAttribute("utilisateurTmp", utilisateurTmp);
             return "redirect:/connexion";
     }
+    
+    @RequestMapping(value="/connexion", method=RequestMethod.POST)
+	public ModelAndView connexionPost() {
+		return new ModelAndView("profil");
+	}
+    
+    @RequestMapping(value="/error", method=RequestMethod.POST)
+	public ModelAndView connexionErrorPost() {
+		return new ModelAndView("connexion");
+	}
+    
+    @RequestMapping(value="/error", method=RequestMethod.GET)
+	public ModelAndView connexionErrorGet() {
+		return new ModelAndView("connexion");
+	}
 }

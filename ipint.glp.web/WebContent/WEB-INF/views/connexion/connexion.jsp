@@ -12,24 +12,25 @@
           </div>  
           <div class="row container-bas">
             <div class="col-md-5 col-md-offset-3">
-              <form class="form-horizontal">
+              <form class="form-horizontal" action="j_security_check" method="POST">
                 <div class="form-group">
                   <label for="inputEmail" class="col-md-4 control-label">Adresse email :</label>
                   <div class="input-group col-md-8">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="j_username">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword" class="col-md-4 control-label">Mot de passe :</label>
                   <div class="input-group col-md-8">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="j_password">
                   </div>
                 </div>  
                 <div class="row ">
                   <button type="submit" class="btn btn-default col-md-offset-2 col-md-5">S'inscrire</button>
-                  <button type="submit" class="btn btn-default col-md-5">Connexion</button>
+<!--                   <button type="submit" class="btn btn-default col-md-5">Connexion</button> -->
+                  <input type="submit" class="btn btn-default col-md-5"/>
                 </div>
               </form>
               <div class="row">
