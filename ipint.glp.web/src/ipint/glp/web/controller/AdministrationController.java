@@ -1,32 +1,59 @@
 package ipint.glp.web.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ipint.glp.api.DTO.UtilisateurDTO;
-import ipint.glp.api.itf.UtilisateurService;
-
+import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
+import ipint.glp.api.itf.UtilisateurEnAttenteService;
+/**
+ * 
+ * 
+ * 
+ * @author hequet
+ *
+ */
 @Controller
 public class AdministrationController {
 
 	@Inject
-	UtilisateurService utilisateurService;
+	UtilisateurEnAttenteService utilisateurEnAttenteService;
 
 	public AdministrationController() {
 	}
 
-	@RequestMapping(value = "/panelInscription", method = RequestMethod.GET)
-	public ModelAndView profilGet(@ModelAttribute UtilisateurDTO utilisateurTmp, Model model) {
-		UtilisateurDTO uDTO = new UtilisateurDTO();
+	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.GET)
+	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
+		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
+		uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 		model.addAttribute("utilisateurTmp", uDTO);
+		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
+		model.addAttribute("list",list);
 		return new ModelAndView("panelInscription");
+	}
+
+	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.POST)
+	public ModelAndView profilPost(@RequestParam String action, @PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
+		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
+		uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
+		if(action.equals("Accepter") ){
+			utilisateurEnAttenteService.valider(uDTO);
+		}
+		else if( action.equals("Refuser") ){
+			utilisateurEnAttenteService.supprimer(uDTO);
+		}
+		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
+		int idPremierList = list.get(0).getIdUtilisateurEnAttente();
+		model.addAttribute("utilisateurTmp", uDTO);
+		return new ModelAndView("redirect:/panelInscription/"+idPremierList);
 	}
 }

@@ -127,10 +127,10 @@ public class ControllerTest {
 				utilDTOm.setPassword("psw");
 				utilDTOm.setStatut(Statut.DIPLOME);
 				GroupeDTO gDTO = new GroupeDTO();
-				gDTO.setNomGroupe("MIAGE");
+				gDTO.setIdGroupe(1);
 				gDTO = groupeS.trouver(gDTO);
 				GroupeDTO gDTO2 = new GroupeDTO();
-				gDTO2.setNomGroupe("SIAD");
+				gDTO.setIdGroupe(2);
 				gDTO2 = groupeS.trouver(gDTO2);		
 				List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
 				grp.add(gDTO);

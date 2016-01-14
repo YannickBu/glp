@@ -3,12 +3,12 @@ package ipint.glp.domain.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.api.DTO.enumType.Statut;
@@ -28,8 +28,10 @@ import ipint.glp.domain.entity.util.MappingToDTO;
 @Stateless
 public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
-	@PersistenceContext(unitName = "PU")
+	@PersistenceContext(unitName="PU")
 	private EntityManager em;
+//	@EJB
+//	UtilisateurImpl utilisateurService;
 
 	@Override
 	public UtilisateurEnAttenteDTO creer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTO) {
@@ -38,12 +40,12 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
-		 Groupe groupe = null;
-		 if (utilisateurEnAttenteDTO.getGroupePrincipal() != null) {
-		 Query q = em.createQuery("select g from Groupe g where g.idGroupe = '"
-		 + utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe() + "'");
-		 groupe = (Groupe) q.getSingleResult();
-		 }
+		Groupe groupe = null;
+		if (utilisateurEnAttenteDTO.getGroupePrincipal() != null) {
+			Query q = em.createQuery("select g from Groupe g where g.idGroupe = '"
+					+ utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe() + "'");
+			groupe = (Groupe) q.getSingleResult();
+		}
 		utilisateurEnAttente.setGroupePrincipal(groupe);
 		utilisateurEnAttente.setAnneeDiplome(utilisateurEnAttenteDTO.getAnneeDiplome());
 		utilisateurEnAttente.setNom(utilisateurEnAttenteDTO.getNom());
@@ -58,6 +60,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) {
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
 		utilisateurEnAttente.setIdUtilisateurEnAttente(utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente());
+		utilisateurEnAttente = em.merge(utilisateurEnAttente);
 		em.remove(utilisateurEnAttente);
 	}
 
@@ -68,6 +71,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurDTO.setNom(utilisateurEnAttenteAValiderDTO.getNom());
 		utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
 		utilisateurDTO.setStatut(Statut.DIPLOME);
+		utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
 		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
 		utilisateurDTO.setPassword(generationMotDePasse.nextString());
 		UtilisateurImpl utilisateurService = new UtilisateurImpl();
