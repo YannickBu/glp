@@ -3,7 +3,6 @@ package ipint.glp.domain.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,10 +27,10 @@ import ipint.glp.domain.entity.util.MappingToDTO;
 @Stateless
 public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
-	@PersistenceContext(unitName="PU")
+	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
-//	@EJB
-//	UtilisateurImpl utilisateurService;
+	// @EJB
+	// UtilisateurImpl utilisateurService;
 
 	@Override
 	public UtilisateurEnAttenteDTO creer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTO) {
@@ -74,7 +73,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
 		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
 		utilisateurDTO.setPassword(generationMotDePasse.nextString());
-		UtilisateurImpl utilisateurService = new UtilisateurImpl();
+		UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
 		utilisateurService.creer(utilisateurDTO);
 		supprimer(utilisateurEnAttenteAValiderDTO);
 	}

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
+
 /**
  * 
  * 
@@ -32,28 +33,45 @@ public class AdministrationController {
 	}
 
 	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.GET)
-	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
+	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
+			Model model) {
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
 		uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 		model.addAttribute("utilisateurTmp", uDTO);
 		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return new ModelAndView("panelInscription");
 	}
 
+	@RequestMapping(value = "/panelInscription", method = RequestMethod.GET)
+	public ModelAndView administrationGET(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
+			Model model) {
+		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
+		model.addAttribute("list", list);
+		return new ModelAndView("menuInscriptionVide");
+	}
+
+	@RequestMapping(value = "/panelInscription", method = RequestMethod.POST)
+	public ModelAndView administrationPOST(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
+			Model model) {
+		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
+		model.addAttribute("list", list);
+		return new ModelAndView("menuInscriptionVide");
+	}
+
 	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.POST)
-	public ModelAndView profilPost(@RequestParam String action, @PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
+	public ModelAndView profilPost(@RequestParam String action, @PathVariable String id,
+			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
 		uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
-		if(action.equals("Accepter") ){
+		if (action.equals("Accepter")) {
 			utilisateurEnAttenteService.valider(uDTO);
-		}
-		else if( action.equals("Refuser") ){
+		} else if (action.equals("Refuser")) {
 			utilisateurEnAttenteService.supprimer(uDTO);
 		}
 		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
 		int idPremierList = list.get(0).getIdUtilisateurEnAttente();
 		model.addAttribute("utilisateurTmp", uDTO);
-		return new ModelAndView("redirect:/panelInscription/"+idPremierList);
+		return new ModelAndView("redirect:/panelInscription/" + idPremierList);
 	}
 }
