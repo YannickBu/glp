@@ -57,6 +57,51 @@
 		<servlet-name>Connexion</servlet-name>
 		<url-pattern>/connexion</url-pattern>
 	</servlet-mapping> -->
+	
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>not usee</web-resource-name>
+			<url-pattern>/profil/</url-pattern>
+			<url-pattern>/profil/*/</url-pattern>
+			<url-pattern>/profil</url-pattern>
+			<url-pattern>/profil/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		
+		<auth-constraint>
+			<role-name>diplome</role-name>
+		</auth-constraint>
+		
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>l1nk_realm</realm-name>
+		<form-login-config>
+			<form-login-page>/connexion</form-login-page>
+			<form-error-page>/error</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+	<security-role>
+		<role-name>diplome</role-name>
+	</security-role>
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/connexion</location>
+	</error-page>
+	
+		<error-page>
+		<error-code>401</error-code>
+		<location>/connexion</location>
+	</error-page>
+	
 </web-app>
 
 

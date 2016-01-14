@@ -45,6 +45,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		GroupeDTO groupeDTOm = utilisateurDTO.getGroupePrincipal();
 		Groupe grpm = null;
 		if (groupeDTOm.getIdGroupe() != null) {
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"+ em);
 			grpm = em.find(Groupe.class, groupeDTOm.getIdGroupe());
 		} else if (groupeDTOm.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOm.getNomGroupe() + "'");

@@ -294,6 +294,7 @@ public class MappingToDTO {
 		utilisateurEnAttenteDTO.setIdUtilisateurEnAttente(utilisateurEnAttente.getIdUtilisateurEnAttente());
 		utilisateurEnAttenteDTO.setNom(utilisateurEnAttente.getNom());
 		utilisateurEnAttenteDTO.setPrenom(utilisateurEnAttente.getPrenom());
+		utilisateurEnAttenteDTO.setDateNaissance(utilisateurEnAttente.getDateNaissance());
 		return utilisateurEnAttenteDTO;
 
 	}

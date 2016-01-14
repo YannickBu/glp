@@ -25,29 +25,41 @@ public class InscriptionController {
 
 	public InscriptionController() {
 	}
-	
+
 	@RequestMapping(value="/inscription", method=RequestMethod.GET)
 	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {
 		model.addAttribute("groupes",groupeS.lister());
 		model.addAttribute("utilisateurTmp", utilisateur);
 		return new ModelAndView("inscription");
 	}
-		
-    @RequestMapping(value = "/inscription", method = RequestMethod.POST)
-    public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result,
-                    Model model) {
-	    	UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
-	    	GroupeDTO groupeDTO = new GroupeDTO();
-	    	groupeDTO.setIdGroupe(utilisateurTmp.getGroupePrincipal().getIdGroupe());
-	    	ueaDTO.setNom(utilisateurTmp.getNom());
-	    	ueaDTO.setPrenom(utilisateurTmp.getPrenom());
-	    	ueaDTO.setDateNaissance(utilisateurTmp.getDateNaissance());
-	    	ueaDTO.setEmail(utilisateurTmp.getEmail());
-	    	ueaDTO.setDiplome(utilisateurTmp.getDiplome());
-	    	ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
-	    	ueaDTO.setGroupePrincipal(groupeDTO);
-            utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
-            model.addAttribute("utilisateurTmp", utilisateurTmp);
-            return "redirect:/connexion";
-    }
+
+
+	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
+	public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result,
+			Model model) {
+		UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
+		GroupeDTO groupeDTO = new GroupeDTO();
+		groupeDTO.setIdGroupe(utilisateurTmp.getGroupePrincipal().getIdGroupe());
+		ueaDTO.setNom(utilisateurTmp.getNom());
+		ueaDTO.setPrenom(utilisateurTmp.getPrenom());
+		ueaDTO.setDateNaissance(utilisateurTmp.getDateNaissance());
+		ueaDTO.setEmail(utilisateurTmp.getEmail());
+		ueaDTO.setDiplome(utilisateurTmp.getDiplome());
+		ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
+		ueaDTO.setGroupePrincipal(groupeDTO);
+		utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
+		model.addAttribute("utilisateurTmp", utilisateurTmp);
+		return "redirect:/connexion";
+	}
+
+	@RequestMapping(value="/error")
+	public ModelAndView connexionError() {
+		return new ModelAndView("connexion");
+	}
+
+	@RequestMapping(value="/profil/js/bootstrap.min.js")
+	public ModelAndView connexionOk() {
+		return new ModelAndView("redirect:/publication/2");
+
+	}
 }
