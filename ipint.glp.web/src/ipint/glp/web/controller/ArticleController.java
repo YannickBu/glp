@@ -21,45 +21,45 @@ import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
 public class ArticleController {
-        
-        @Inject
-        ArticleService as;
-        @Inject
-        UtilisateurService us;
-        
-        @RequestMapping(value = "/publication/{id}", method = RequestMethod.GET)
-        public ModelAndView welcomeGet(@PathVariable("id") String id, Model model) {
-        	UtilisateurDTO uDTO = new UtilisateurDTO();
-    		uDTO.setIdUtilisateur(Integer.parseInt(id));
-    		uDTO = us.trouver(uDTO);
-    		model.addAttribute("articles", uDTO.getArticles());
-            model.addAttribute("utilisateur", uDTO);
-            return new ModelAndView("accueil", "article", new ArticleDTO());
-        }
-        
-        @RequestMapping(value = "/publication/{id}", method = RequestMethod.POST)
-        public ModelAndView publicationGet(@ModelAttribute("article") ArticleDTO article, BindingResult result, @PathVariable("id") String id, Model model) {
-                //TODO
-        	
-        	UtilisateurDTO uDTO = new UtilisateurDTO();
-    		uDTO.setIdUtilisateur(Integer.parseInt(id));
-    		uDTO = us.trouver(uDTO);
-    		
-    		System.out.println("artCont id : "+id);
-    		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
-    		System.out.println("artCont id uDTO : "+uDTO.getNom());
-        	
-        	ArticleDTO articleDto = new ArticleDTO();
-            articleDto.setContenu(article.getContenu());
-            Calendar cal = Calendar.getInstance();
-            articleDto.setDatePublication(cal);
-            articleDto.setUtilisateur(uDTO);
-            articleDto = as.creer(articleDto);
-            //TODO recuperer en base les articles
-            List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
-            model.addAttribute("articles", articles);
-            model.addAttribute("utilisateur", uDTO);
-            return new ModelAndView("accueil");
-        }
+
+	@Inject
+	ArticleService as;
+	@Inject
+	UtilisateurService us;
+
+	@RequestMapping(value = "/publication/{id}", method = RequestMethod.GET)
+	public ModelAndView welcomeGet(@PathVariable("id") String id, Model model) {
+		UtilisateurDTO uDTO = new UtilisateurDTO();
+		uDTO.setIdUtilisateur(Integer.parseInt(id));
+		uDTO = us.trouver(uDTO);
+		model.addAttribute("articles", uDTO.getArticles());
+		model.addAttribute("utilisateur", uDTO);
+		return new ModelAndView("accueil", "article", new ArticleDTO());
+	}
+
+	@RequestMapping(value = "/publication/{id}", method = RequestMethod.POST)
+	public ModelAndView publicationGet(@ModelAttribute("article") ArticleDTO article, BindingResult result, @PathVariable("id") String id, Model model) {
+		//TODO
+
+		UtilisateurDTO uDTO = new UtilisateurDTO();
+		uDTO.setIdUtilisateur(Integer.parseInt(id));
+		uDTO = us.trouver(uDTO);
+
+		System.out.println("artCont id : "+id);
+		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
+		System.out.println("artCont id uDTO : "+uDTO.getNom());
+
+		ArticleDTO articleDto = new ArticleDTO();
+		articleDto.setContenu(article.getContenu());
+		Calendar cal = Calendar.getInstance();
+		articleDto.setDatePublication(cal);
+		articleDto.setUtilisateur(uDTO);
+		articleDto = as.creer(articleDto);
+		//TODO recuperer en base les articles
+		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
+		model.addAttribute("articles", articles);
+		model.addAttribute("utilisateur", uDTO);
+		return new ModelAndView("accueil");
+	}
 
 }
