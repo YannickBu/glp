@@ -3,6 +3,7 @@ package ipint.glp.domain.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,12 +30,13 @@ public class Profil {
 	//TODO peut être le mettre en unique non ?
 //	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
 	private String telephone;
-
 	@OneToMany(mappedBy = "profil")
 	private List<Experience> experiences;
 
 	public Profil() {
-		this.experiences = new ArrayList<>();
+		this.competence = new ArrayList<Competence>();
+		this.diplomes = new ArrayList<Diplome>();
+		this.experiences = new ArrayList<Experience>();
 	}
 
 	public Integer getIdProfil() {

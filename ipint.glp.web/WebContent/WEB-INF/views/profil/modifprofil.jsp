@@ -17,7 +17,7 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
+				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
 				<h2>${utilisateur.statut}</h2>
 			</div>
 			<hr />
@@ -34,7 +34,7 @@
 						<strong>Warning!</strong> Best check yo self, you're not looking
 						too good. <a href="#" class="alert-link">alert link</a>
 					</div>
-					<form:form role="form" method="post" action="2"
+					<form:form role="form" method="post" action="${utilisateur.idUtilisateur}"
 						commandName="utilisateur">
 						<div class="form-group">
 							<label for="InputNom"> Nom </label>
@@ -60,18 +60,18 @@
 							<label for="InputCursus"> Cursus </label>
 
 							<div id="diplForm">
-								<c:forEach items="${utilisateur.profil.diplomes}" var="dipl">
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()-1}" var="i">
 									<div class="row">
 										<div class="col-md-2">
-											<form:input path="" value="${dipl.anneeDebut}" type="text"
+											<form:input path="profil.diplomes[${i}].anneeDebut" value="${profil.diplomes[i].anneeDebut}" type="text"
 												class="form-control" id="InputDipDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="" value="${dipl.anneFin}" type="text"
+											<form:input path="profil.diplomes[${i}].anneFin" value="${profil.diplomes[i].anneFin}" type="text"
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-8">
-											<form:input path="" value="${dipl.libelle}" type="text"
+											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
 										</div>
 
@@ -79,41 +79,42 @@
 								</c:forEach>
 								<div class="nouveau_dipl"></div>
 
-								<button type="button" style="margin-top: 1%;" 
-									class="btn btn-default" id="btn_new_dipl" onClick="newDiplome();">+</button>
+								<button type="button" style="margin-top: 1%;"
+									class="btn btn-default" id="btn_new_dipl"
+									onClick="newDiplome();">+</button>
 							</div>
 
 						</div>
 						<div class="form-group">
 							<label for="InputExp"> Expériences Professionnelles </label>
 							<div id="expForm">
-								<c:forEach items="${utilisateur.profil.experiences}" var="exp">
+								<c:forEach begin="0" end="${utilisateur.profil.experiences.size()-1}" var="i">
 									<div class="row">
 										<div class="col-md-2">
-											<form:input path="" value="${exp.anneeDebut}" type="text"
+											<form:input path="profil.experiences[${i}].anneeDebut" value="${profil.experiences[i].anneeDebut}" type="text"
 												class="form-control" id="InputExpDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="" value="${exp.anneFin}" type="text"
+											<form:input path="profil.experiences[${i}].anneFin" value="${profil.experiences[i].anneFin}" type="text"
 												class="form-control" id="InputExpAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="" value="${exp.entreprise}" type="text"
+											<form:input path="profil.experiences[${i}].entreprise" value="${profil.experiences[i].entreprise}" type="text"
 												class="form-control" id="InputExpEnt"
 												placeholder="Entreprise" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="" value="${exp.lieu}" type="text"
+											<form:input path="profil.experiences[${i}].lieu" value="${profil.experiences[i].lieu}" type="text"
 												class="form-control" id="InputExpLieu" placeholder="Ville" />
 										</div>
 										<div class="col-md-4">
-											<form:input path="" value="${exp.poste}" type="text"
+											<form:input path="profil.experiences[${i}].poste" value="${profil.experiences[i].poste}" type="text"
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
 									</div>
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12">
-											<form:input path="" value="${exp.description}" type="text"
+											<form:input path="profil.experiences[${i}].description" value="${profil.experiences[i].description}" type="text"
 												class="form-control" id="InputExpDesc"
 												placeholder="Description de votre mission" />
 										</div>
@@ -124,30 +125,37 @@
 							<div class="nouvelle_exp"></div>
 
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_exp" onClick="newExperience();">+</button>
+								class="btn btn-default" id="btn_new_exp"
+								onClick="newExperience();">+</button>
 							<hr>
 
 						</div>
 						<div class="form-group">
 							<label for="InputSkills"> Compétences </label>
 							<div id="compForm">
-								<c:forEach items="${utilisateur.profil.competence}" var="comp">
+								<c:forEach begin="0" end="${utilisateur.profil.competence.size()-1}" var="i">
 									<div class="row" id="idComp">
 										<div class="col-md-3">
-											<form:input path="" value="${comp.libelle}" type="text"
+											<form:input path="profil.competence[${i}].libelle" value="${profil.competence[i].libelle}" type="text"
 												class="form-control" id="InputDipDebut"
 												placeholder="Libelle" />
 										</div>
-										<div class="col-md-1">
-											<form:input path="" value="${comp.note}" type="text"
+										<div class="col-md-2">
+											<form:input path="profil.competence[${i}].note" value="${profil.competence[i].note}" type="text"
 												class="form-control" id="InputDipAnneFin" placeholder="Note" />
+										</div>
+										<div class="col-md-1">
+											<button type="button" style="margin-top: 1%;"
+												class="btn btn-default" id="btn_new_comp"
+												onClick="deleteCompetence();">-</button>
 										</div>
 									</div>
 								</c:forEach>
 								<div id="nouvelle_comp"></div>
 
 								<button type="button" style="margin-top: 1%;"
-									class="btn btn-default" id="btn_new_comp" onClick="newCompetence();">+</button>
+									class="btn btn-default" id="btn_new_comp"
+									onClick="newCompetence();">+</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -165,11 +173,18 @@
 </div>
 
 <script type="text/javascript">
-
 	function newCompetence() {
 		var comp = document.getElementById('nouvelle_comp');
-		comp.innerHTML = comp.innerHTML + '<div class="row">' + '<div class="col-md-3">' + '<form:input path="utilisateur" type="text" class="form-control" id="InputDipDebut" placeholder="Libelle" />'
-		+ '</div><div class="col-md-1"><form:input path="utilisateur" type="text" class="form-control" id="InputDipAnneFin" placeholder="Note" /></div></div>';
+		comp.innerHTML = comp.innerHTML
+				+ '<div class="row">'
+				+ '<div class="col-md-3">'
+				+ '<form:input path="utilisateur" type="text" class="form-control" id="InputDipDebut" placeholder="Libelle" />'
+				+ '</div><div class="col-md-1"><form:input path="utilisateur" type="text" class="form-control" id="InputDipAnneFin" placeholder="Note" /></div>'
+				+ '<div class="col-md-1"><button type="button" style="margin-top: 1%;" class="btn btn-default" id="btn_new_comp" onClick="deleteCompetence();">-</button> </div></div>';
+	};
+	function deleteCompetence() {
+		var comp = document.getElementById('nouvelle_comp');
+		comp.innerHTML = '';
 	};
 	function newDiplome() {
 		var comp = document.getElementById('nouveau_dipl');

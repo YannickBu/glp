@@ -1,7 +1,6 @@
 package ipint.glp.domain.entity;
 
-import java.io.Serializable;
-
+import java.io.Serializable;import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +23,7 @@ public class Competence implements Serializable{
 	@javax.validation.constraints.DecimalMin(value = "1", message = "Minimum 1")
 	@javax.validation.constraints.DecimalMax(value = "5", message = "Maximum 5")
 	private int note;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
 	
 	public Competence() {
