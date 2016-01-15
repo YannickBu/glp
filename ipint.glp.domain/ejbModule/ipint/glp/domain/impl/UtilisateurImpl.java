@@ -30,7 +30,12 @@ public class UtilisateurImpl implements UtilisateurService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
+	public UtilisateurImpl(){
+		super();
+	}
+	
 	public UtilisateurImpl(EntityManager em) {
+		super();
 		this.em = em;
 	}
 
