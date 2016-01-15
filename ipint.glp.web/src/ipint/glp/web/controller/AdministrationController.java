@@ -72,6 +72,12 @@ public class AdministrationController {
 		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
 		int idPremierList = list.get(0).getIdUtilisateurEnAttente();
 		model.addAttribute("utilisateurTmp", uDTO);
-		return new ModelAndView("redirect:/panelInscription/" + idPremierList);
+		System.out.println(list.toString());
+		if(!list.isEmpty()){
+			return new ModelAndView("redirect:/panelInscription/" + idPremierList);
+		}
+		else {
+			return new ModelAndView("redirect:/menuInscription/");
+		}
 	}
 }

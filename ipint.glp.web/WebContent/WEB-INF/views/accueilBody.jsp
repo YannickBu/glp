@@ -11,7 +11,7 @@
                 <ul>
                         <li class="publierArt">Publier un article</li>
                         <li class="formPubli">
-                                <form:form action="${pageContext.servletContext.contextPath}/publication/${utilisateur.idUtilisateur}"  method="post" commandName="article">
+                                <form:form action="${pageContext.servletContext.contextPath}/publication"  method="post" commandName="article">
                                         <form:input class="inputForm" path="contenu" placeholder="Tapez votre publication..." /><br>
                                         <input class="inputBtn" type="submit" value="Publier"/>
                                 </form:form>

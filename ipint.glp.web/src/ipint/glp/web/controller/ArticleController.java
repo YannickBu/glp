@@ -4,12 +4,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,25 +27,25 @@ public class ArticleController {
 	@Inject
 	UtilisateurService us;
 
-	@RequestMapping(value = "/publication/{id}", method = RequestMethod.GET)
-	public ModelAndView welcomeGet(@PathVariable("id") String id, Model model) {
+	@RequestMapping(value = "/publication", method = RequestMethod.GET)
+	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
-		uDTO.setIdUtilisateur(Integer.parseInt(id));
+		uDTO.setEmail(request.getUserPrincipal().getName());
 		uDTO = us.trouver(uDTO);
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("accueil", "article", new ArticleDTO());
 	}
 
-	@RequestMapping(value = "/publication/{id}", method = RequestMethod.POST)
-	public ModelAndView publicationGet(@ModelAttribute("article") ArticleDTO article, BindingResult result, @PathVariable("id") String id, Model model) {
+	@RequestMapping(value = "/publication", method = RequestMethod.POST)
+	public ModelAndView publicationGet(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article, BindingResult result, Model model) {
 		//TODO
-
+		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
-		uDTO.setIdUtilisateur(Integer.parseInt(id));
+		uDTO.setEmail(request.getUserPrincipal().getName());
 		uDTO = us.trouver(uDTO);
 
-		System.out.println("artCont id : "+id);
+//		System.out.println("artCont id : "+id);
 		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
 		System.out.println("artCont id uDTO : "+uDTO.getNom());
 

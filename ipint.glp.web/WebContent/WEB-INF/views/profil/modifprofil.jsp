@@ -34,7 +34,7 @@
 						<strong>Warning!</strong> Best check yo self, you're not looking
 						too good. <a href="#" class="alert-link">alert link</a>
 					</div>
-					<form:form role="form" method="post" action="${utilisateur.idUtilisateur}"
+					<form:form role="form" method="post" action=""
 						commandName="utilisateur">
 						<div class="form-group">
 							<label for="InputNom"> Nom </label>

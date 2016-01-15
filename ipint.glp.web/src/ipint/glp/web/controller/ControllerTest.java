@@ -154,8 +154,4 @@ public class ControllerTest {
 //		return new ModelAndView("connexion");
 //	}
 	
-	@RequestMapping(value="/profil", method=RequestMethod.GET)
-	public ModelAndView profilGet() {
-		return new ModelAndView("profil");
-	}
 }

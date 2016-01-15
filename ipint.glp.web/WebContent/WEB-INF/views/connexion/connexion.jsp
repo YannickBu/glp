@@ -37,7 +37,13 @@
 									placeholder="Password" name="j_password">
 							</div>
 						</div>
-
+						<div class="row ">
+							
+							<% if(request.getAttribute("errorConnexion")!=null && (Boolean)request.getAttribute("errorConnexion")){ %>
+								<p class="col-md-12" style="color:red;text-align:center;font-size:14px"> Combinaison adresse électronique/mot de passe incorrecte </p>
+							<% } %>
+							
+						</div>
 						<div class="row ">
 							<button type="button" onclick="window.location='./inscription'"
 								class="btn btn-default col-md-offset-2 col-md-5">S'inscrire</button>

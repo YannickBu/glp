@@ -5,9 +5,9 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2 gauche">
 			<ul class="menu-gauche">
-				<a href="${pageContext.servletContext.contextPath}/profil/2"><li>Mon profil<span
+				<a href="${pageContext.servletContext.contextPath}/profil"><li>Mon profil<span
 						class="glyphicon glyphicon-user gly-menu" aria-hidden="true"></span></li></a>
-				<a href="${pageContext.servletContext.contextPath}/publication/2"><li>Fil d'actualité<span
+				<a href="${pageContext.servletContext.contextPath}/publication"><li>Fil d'actualité<span
 						class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span></li></a>
 				<a href="#"><li>Mes groupes<span
 						class="glyphicon glyphicon-heart gly-menu" aria-hidden="true"></span></a>

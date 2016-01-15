@@ -66,6 +66,14 @@
 			<url-pattern>/profil/*/</url-pattern>
 			<url-pattern>/profil</url-pattern>
 			<url-pattern>/profil/*</url-pattern>
+			<url-pattern>/publication/</url-pattern>
+			<url-pattern>/publication/*/</url-pattern>
+			<url-pattern>/publication</url-pattern>
+			<url-pattern>/publication/*</url-pattern>
+			<url-pattern>/deconnexion/</url-pattern>
+			<url-pattern>/deconnexion/*/</url-pattern>
+			<url-pattern>/deconnexion</url-pattern>
+			<url-pattern>/deconnexion/*</url-pattern>
 			<http-method>POST</http-method>
 			<http-method>GET</http-method>
 		</web-resource-collection>
@@ -84,7 +92,7 @@
 		<realm-name>l1nk_realm</realm-name>
 		<form-login-config>
 			<form-login-page>/connexion</form-login-page>
-			<form-error-page>/error</form-error-page>
+			<form-error-page>/errorConnexion</form-error-page>
 		</form-login-config>
 	</login-config>
 	
