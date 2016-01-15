@@ -11,7 +11,6 @@
 		<jta-data-source>l1nk</jta-data-source>
 
 		<!-- Entites -->
-		<class>ipint.glp.domain.entity.UtilisateurEnAttente</class>
 		<class>ipint.glp.domain.entity.Utilisateur</class>
 		<class>ipint.glp.domain.entity.Experience</class>
 		<class>ipint.glp.domain.entity.Profil</class>
@@ -19,6 +18,8 @@
 		<class>ipint.glp.domain.entity.Article</class>
 		<class>ipint.glp.domain.entity.UtilisateurEnAttente</class>
 		<class>ipint.glp.domain.entity.UtilisateurGroupes</class>
+		<class>ipint.glp.domain.entity.Competence</class>
+		<class>ipint.glp.domain.entity.Diplome</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 
@@ -38,8 +39,4 @@
 				value="create-or-extend-tables" />
 		</properties>
 	</persistence-unit>
-</persistence>
-
-
-                             
-                              
+</persistence>                              
