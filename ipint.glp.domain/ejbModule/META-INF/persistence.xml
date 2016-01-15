@@ -11,7 +11,6 @@
 		<jta-data-source>l1nk</jta-data-source>
 
 		<!-- Entites -->
-		<class>ipint.glp.domain.entity.UtilisateurEnAttente</class>
 		<class>ipint.glp.domain.entity.Utilisateur</class>
 		<class>ipint.glp.domain.entity.Experience</class>
 		<class>ipint.glp.domain.entity.Profil</class>
@@ -40,8 +39,4 @@
 				value="create-or-extend-tables" />
 		</properties>
 	</persistence-unit>
-</persistence>
-
-
-                             
-                              
+</persistence>                              
