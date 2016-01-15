@@ -34,7 +34,7 @@ public class ControllerTest {
 	
 	public ControllerTest() {}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ModelAndView welcomeGet() {
 //		ArticleDTO art = new ArticleDTO();
 //		art.setContenu("du contenu");
@@ -149,10 +149,10 @@ public class ControllerTest {
 	
 	}
 	
-	@RequestMapping(value="/connexion", method=RequestMethod.GET)
-	public ModelAndView loginGet() {
-		return new ModelAndView("connexion");
-	}
+//	@RequestMapping(value="/connexion", method=RequestMethod.GET)
+//	public ModelAndView loginGet() {
+//		return new ModelAndView("connexion");
+//	}
 	
 	@RequestMapping(value="/profil", method=RequestMethod.GET)
 	public ModelAndView profilGet() {
