@@ -59,7 +59,7 @@ public class InscriptionController {
 
 	@RequestMapping(value="/profil/js/bootstrap.min.js")
 	public ModelAndView connexionOk() {
-		return new ModelAndView("redirect:/publication/2");
+		return new ModelAndView("redirect:/profil/2");
 
 	}
 }
