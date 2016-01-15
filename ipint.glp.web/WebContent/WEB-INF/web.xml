@@ -62,8 +62,10 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>not usee</web-resource-name>
+			<url-pattern>/profil/</url-pattern>
+			<url-pattern>/profil/*/</url-pattern>
 			<url-pattern>/profil</url-pattern>
-			<url-pattern>/profil/2</url-pattern>
+			<url-pattern>/profil/*</url-pattern>
 			<http-method>POST</http-method>
 			<http-method>GET</http-method>
 		</web-resource-collection>

@@ -15,11 +15,13 @@
 				<ul>
 					<li><u>Nom:</u> ${utilisateurTmp.nom}</li>
 					<li><u>Prénom:</u> ${utilisateurTmp.prenom}</li>
-					<li><u>Date de naissance:</u><fmt:formatDate value="${utilisateurTmp.dateNaissance}" pattern="yyyy-mm-dd" /> </li>
+					<li><u>Date de naissance:</u> <fmt:formatDate
+							value="${utilisateurTmp.dateNaissance}" pattern="dd/MM/yyyy" /></li>
 					<li><u>E-mail:</u> ${utilisateurTmp.email}</li>
 					<li><u>Diplome obtenu:</u> ${utilisateurTmp.diplome}</li>
 					<li><u>Année d'obtention:</u> ${utilisateurTmp.anneeDiplome}</li>
-					<li><u>Groupe sélectionné:</u> ${utilisateurTmp.groupePrincipal.nomGroupe}</li>
+					<li><u>Groupe sélectionné:</u>
+						${utilisateurTmp.groupePrincipal.nomGroupe}</li>
 
 				</ul>
 				<br />

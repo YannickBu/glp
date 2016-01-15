@@ -33,6 +33,7 @@ public class InscriptionController {
 		return new ModelAndView("inscription");
 	}
 
+
 	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
 	public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result,
 			Model model) {
@@ -49,5 +50,16 @@ public class InscriptionController {
 		utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
 		model.addAttribute("utilisateurTmp", utilisateurTmp);
 		return "redirect:/connexion";
+	}
+
+	@RequestMapping(value="/error")
+	public ModelAndView connexionError() {
+		return new ModelAndView("connexion");
+	}
+
+	@RequestMapping(value="/profil/js/bootstrap.min.js")
+	public ModelAndView connexionOk() {
+		return new ModelAndView("redirect:/publication/2");
+
 	}
 }
