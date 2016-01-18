@@ -38,7 +38,7 @@ public interface UtilisateurService {
 	 *            le nouvel utilisateur avec les mises à jour
 	 * @return l'ancien utilisateur mis à jour
 	 */
-	public UtilisateurDTO modifier(UtilisateurDTO nouvelUtilisateur);
+	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur,UtilisateurDTO nouvelUtilisateur);
 
 	/**
 	 * Supprimer un utilisateur

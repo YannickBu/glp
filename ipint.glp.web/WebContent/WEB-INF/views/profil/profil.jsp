@@ -14,7 +14,7 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
+				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
 				<h2>${utilisateur.statut}</h2>
 			</div>
 			<hr />

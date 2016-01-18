@@ -1,8 +1,5 @@
 package ipint.glp.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ipint.glp.api.DTO.GroupeDTO;
-import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
@@ -122,7 +117,7 @@ public class ProfilController {
 		uDTO.setProfil(utilisateur.getProfil());
 		uDTO.getProfil().setIdProfil(idTemp);
 
-		utilisateur = utilisateurService.modifier(uDTO);
+		utilisateur = utilisateurService.modifier(utilisateur,uDTO);
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", utilisateur);
 		//return "redirect:/profil/{id}";

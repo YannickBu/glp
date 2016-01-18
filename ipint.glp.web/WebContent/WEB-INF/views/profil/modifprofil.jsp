@@ -60,7 +60,7 @@
 							<label for="InputCursus"> Cursus </label>
 
 							<div id="diplForm">
-								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}" var="i">
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()-1}" var="i">
 									<div class="row">
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneeDebut" value="${profil.diplomes[i].anneeDebut}" type="text"
@@ -88,7 +88,7 @@
 						<div class="form-group">
 							<label for="InputExp"> Expériences Professionnelles </label>
 							<div id="expForm">
-								<c:forEach begin="0" end="${utilisateur.profil.experiences.size()}" var="i">
+								<c:forEach begin="0" end="${utilisateur.profil.experiences.size()-1}" var="i">
 									<div class="row">
 										<div class="col-md-2">
 											<form:input path="profil.experiences[${i}].anneeDebut" value="${profil.experiences[i].anneeDebut}" type="text"
@@ -133,7 +133,7 @@
 						<div class="form-group">
 							<label for="InputSkills"> Compétences </label>
 							<div id="compForm">
-								<c:forEach begin="0" end="${utilisateur.profil.competence.size()}" var="i">
+								<c:forEach begin="0" end="${utilisateur.profil.competence.size()-1}" var="i">
 									<div class="row" id="idComp">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle" value="${profil.competence[i].libelle}" type="text"

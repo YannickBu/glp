@@ -33,7 +33,7 @@ public class UtilisateurImpl implements UtilisateurService {
 	public UtilisateurImpl(){
 		super();
 	}
-	
+
 	public UtilisateurImpl(EntityManager em) {
 		super();
 		this.em = em;
@@ -217,7 +217,7 @@ public class UtilisateurImpl implements UtilisateurService {
 	 * UtilisateurDTO, ipint.glp.api.DTO.UtilisateurDTO)
 	 */
 	@Override
-	public UtilisateurDTO modifier(UtilisateurDTO nouvelUtilisateur) {
+	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur) {
 
 		Utilisateur utilisateurMAJ = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur());
 
@@ -236,181 +236,115 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getEmail() != null && !"".equals(nouvelUtilisateur.getEmail())) {
 			utilisateurMAJ.setEmail(nouvelUtilisateur.getEmail());
 		}
-
 		if (nouvelUtilisateur.getProfil() != null) {
-			Profil profil = new Profil();
+			Profil profil = em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil());
+			int idProfil = nouvelUtilisateur.getProfil().getIdProfil();
+			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
+			
+			//les competences
 			List<Competence> comps = new ArrayList<Competence>();
-			// profil = em.find(Profil.class,
-			// nouvelUtilisateur.getProfil().getIdProfil());
-			if (nouvelUtilisateur.getProfil().getCompetence() != null
+			if (nouvelUtilisateur.getProfil().getCompetence() != null 
 					&& !nouvelUtilisateur.getProfil().getCompetence().isEmpty()) {
+				Competence comp = new Competence();
 				for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
-					// Query q = em.createQuery("select c from Competence c
-					// where c.libelle = '" + compDTO.getLibelle() + "' and
-					// c.profil_idprofil = '" + profil.getIdProfil() + "'");
-					System.out.println("Id Comp : " + compDTO.getIdCompetence());
-					System.out.println("Id Profil : " + nouvelUtilisateur.getProfil().getIdProfil());
-					Competence comp = new Competence();
-					if (compDTO.getIdCompetence() != null) {
-						System.out.println("ICI1");
-						comp = em.find(Competence.class, compDTO.getIdCompetence());
-						// Query q = em.createQuery("update Competence set
-						// note="+compDTO.getNote()+" where libelle = '" +
-						// compDTO.getLibelle() + "' and profil_idprofil = '" +
-						// profil.getIdProfil() + "'");
-						// q.executeUpdate();
-						// nouvelUtilisateur.getProfil().getCompetence().add(MappingToDTO.competenceToCompetenceDTO(comp));
-						em.merge(comp);
-					} else {
-						System.out.println("ICI2");
-						comp = new Competence();
-						comp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
-						comp.setLibelle(compDTO.getLibelle());
-						comp.setNote(compDTO.getNote());
-						em.persist(comp);
-					}
-					comps.add(comp);
+					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() !=0) {
+						Query q = em.createQuery("select c from Competence c where c.libelle = '"+compDTO.getLibelle()+"' and c.profil.idProfil = :idProfil") ;
+						q.setParameter("idProfil", idProfil);
+						if(!q.getResultList().isEmpty()){
+							comp = (Competence) q.getSingleResult();
+							if(comp != null){
+								comp.setNote(compDTO.getNote());
+								comps.add(comp);
+								em.merge(comp);
+							}
+						}
+						else {
+							comp = new Competence();
+							comp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
+							comp.setLibelle(compDTO.getLibelle());
+							comp.setNote(compDTO.getNote());
+							comps.add(comp);
+							em.persist(comp);
+						}
+					} 
 				}
-
 			}
 			profil.setCompetence(comps);
 
+			//les diplomes
 			List<Diplome> dipls = new ArrayList<Diplome>();
-			// profil = em.find(Profil.class,
-			// nouvelUtilisateur.getProfil().getIdProfil());
 			if (nouvelUtilisateur.getProfil().getDiplomes() != null
 					&& !nouvelUtilisateur.getProfil().getDiplomes().isEmpty()) {
+				Diplome dipl = new Diplome();
 				for (DiplomeDTO diplDTO : nouvelUtilisateur.getProfil().getDiplomes()) {
-					// Query q = em.createQuery("select c from Diplome c where
-					// c.libelle = '" + compDTO.getLibelle() + "' and
-					// c.profil_idprofil = '" + profil.getIdProfil() + "'");
-					Diplome dipl = new Diplome();
-					if (diplDTO.getIdDiplome() != null) {
-						dipl = em.find(Diplome.class, diplDTO.getIdDiplome());
-						// Query q = em.createQuery("update Diplome set
-						// note="+compDTO.getNote()+" where libelle = '" +
-						// compDTO.getLibelle() + "' and profil_idprofil = '" +
-						// profil.getIdProfil() + "'");
-						// q.executeUpdate();
-						// nouvelUtilisateur.getProfil().getDiplome().add(MappingToDTO.DiplomeToDiplomeDTO(comp));
-						em.merge(dipl);
-					} else {
-						dipl = new Diplome();
-						dipl.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
-						dipl.setLibelle(diplDTO.getLibelle());
-						dipl.setAnneeDebut(diplDTO.getAnneeDebut());
-						dipl.setAnneFin(diplDTO.getAnneFin());
-						em.persist(dipl);
+					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle()) && diplDTO.getAnneeDebut()!=null && diplDTO.getAnneFin()!=null) {
+						Query q = em.createQuery("select d from Diplome d where d.libelle = '"+diplDTO.getLibelle()+"' and d.profil.idProfil = :idProfil") ;
+						q.setParameter("idProfil", idProfil);
+						if(!q.getResultList().isEmpty()){
+							dipl = (Diplome) q.getSingleResult();
+							if(dipl != null){
+								dipl.setAnneeDebut(diplDTO.getAnneeDebut());
+								dipl.setAnneFin(diplDTO.getAnneFin());
+								dipl.setLibelle(diplDTO.getLibelle());
+								dipls.add(dipl);
+								em.merge(dipl);
+							}
+						} else {
+							dipl = new Diplome();
+							dipl.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
+							dipl.setLibelle(diplDTO.getLibelle());
+							dipl.setAnneeDebut(diplDTO.getAnneeDebut());
+							dipl.setAnneFin(diplDTO.getAnneFin());
+							dipls.add(dipl);
+							em.persist(dipl);
+						}
 					}
-					dipls.add(dipl);
 				}
-
 			}
 			profil.setDiplomes(dipls);
+
+			//les experiences
 			List<Experience> exps = new ArrayList<Experience>();
-			// profil = em.find(Profil.class,
-			// nouvelUtilisateur.getProfil().getIdProfil());
 			if (nouvelUtilisateur.getProfil().getExperiences() != null
 					&& !nouvelUtilisateur.getProfil().getExperiences().isEmpty()) {
+				Experience exp = new Experience();
 				for (ExperienceDTO expDTO : nouvelUtilisateur.getProfil().getExperiences()) {
-					// Query q = em.createQuery("select c from Experience c
-					// where c.libelle = '" + compDTO.getLibelle() + "' and
-					// c.profil_idprofil = '" + profil.getIdProfil() + "'");
-					Experience exp = new Experience();
-					if (expDTO.getIdExperience() != null) {
-						exp = em.find(Experience.class, expDTO.getIdExperience());
-						// Query q = em.createQuery("update Experience set
-						// note="+compDTO.getNote()+" where libelle = '" +
-						// compDTO.getLibelle() + "' and profil_idprofil = '" +
-						// profil.getIdProfil() + "'");
-						// q.executeUpdate();
-						// nouvelUtilisateur.getProfil().getExperience().add(MappingToDTO.ExperienceToExperienceDTO(comp));
-						em.merge(exp);
-					} else {
-						exp = new Experience();
-						exp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
-						exp.setDescription(expDTO.getDescription());
-						exp.setAnneeDebut(expDTO.getAnneeDebut());
-						exp.setAnneFin(expDTO.getAnneFin());
-						exp.setEntreprise(expDTO.getEntreprise());
-						exp.setLieu(expDTO.getLieu());
-						exp.setPoste(expDTO.getPoste());
-						em.persist(exp);
+					if (expDTO.getAnneeDebut()!=null && expDTO.getAnneFin()!=null && expDTO.getEntreprise() != null && expDTO.getDescription() != null && !"".equals(expDTO.getDescription()) && expDTO.getLieu()!=null && !"".equals(expDTO.getLieu()) && expDTO.getPoste()!= null && !"".equals(expDTO.getPoste())) {
+						Query q = em.createQuery("select e from Experience e where e.entreprise = '"+expDTO.getEntreprise()+"' and e.profil.idProfil = :idProfil") ;
+						q.setParameter("idProfil", idProfil);
+						if(!q.getResultList().isEmpty()){
+							exp = (Experience) q.getSingleResult();
+							if(exp != null){
+								exp.setDescription(expDTO.getDescription());
+								exp.setAnneeDebut(expDTO.getAnneeDebut());
+								exp.setAnneFin(expDTO.getAnneFin());
+								exp.setEntreprise(expDTO.getEntreprise());
+								exp.setLieu(expDTO.getLieu());
+								exp.setPoste(expDTO.getPoste());
+								exps.add(exp);
+								em.merge(exp);
+							}
+						} 
+						else {
+							exp = new Experience();
+							exp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
+							exp.setDescription(expDTO.getDescription());
+							exp.setAnneeDebut(expDTO.getAnneeDebut());
+							exp.setAnneFin(expDTO.getAnneFin());
+							exp.setEntreprise(expDTO.getEntreprise());
+							exp.setLieu(expDTO.getLieu());
+							exp.setPoste(expDTO.getPoste());
+							exps.add(exp);
+							em.persist(exp);
+						}
 					}
-					exps.add(exp);
 				}
-
 			}
 			profil.setExperiences(exps);
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
 			profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
-
-			// profil.setDiplomes(nouvelUtilisateur.getProfil().getDiplomes());
-			// List<Diplome> lesDipls = new ArrayList<Diplome>();
-			// for (DiplomeDTO diplDTO :
-			// nouvelUtilisateur.getProfil().getDiplomes()) {
-			// if (diplDTO.getIdDiplome() != null) {
-			// lesDipls.add(em.find(Diplome.class, diplDTO.getIdDiplome()));
-			// }
-			// else if (diplDTO.getLibelle() != null) {
-			// Query q = em.createQuery("select d from Diplome d where d.libelle
-			// = '" + diplDTO.getLibelle() + "'");
-			// lesDipls.add((Diplome) q.getSingleResult());
-			// }
-			// }
-
-			// List<Experience> lesExps = new ArrayList<Experience>();
-			// for (ExperienceDTO expDTO :
-			// nouvelUtilisateur.getProfil().getExperiences()) {
-			// if (expDTO.getIdExperience() != null) {
-			// lesDipls.add(em.find(Diplome.class, expDTO.getIdExperience()));
-			// }
-			// else if (expDTO.getAnneeDebut() != null && expDTO.getAnneFin() !=
-			// null && expDTO.getEntreprise() != null) {
-			// Query q = em.createQuery("select d from Diplome d where d.libelle
-			// = '" + expDTO.getLibelle() + "'");
-			// lesDipls.add((Diplome) q.getSingleResult());
-			// }
-			// }
-			// profil.setDiplomes(lesDipls);
-			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
 			utilisateurMAJ.setProfil(profil);
 		}
-
-		// List<Article> lesArticles = new ArrayList<Article>();
-		// for (ArticleDTO articleDTO : nouvelUtilisateur.getArticles()) {
-		//
-		// lesArticles.add(em.find(Article.class, articleDTO.getIdArticle()));
-		// }
-		//
-		// utilisateurMAJ.setArticles(lesArticles);
-
-		// if (nouvelUtilisateur.getGroupes() != null) {
-		// List<Groupe> lesGroupes = new ArrayList<Groupe>();
-		// for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupes()) {
-		// if (groupeDTO.getIdGroupe() != null) {
-		// lesGroupes.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
-		// } else if (groupeDTO.getNomGroupe() != null) {
-		// Query q = em.createQuery("select g from Groupe g where g.nomGroupe =
-		// '" + groupeDTO.getNomGroupe() + "'");
-		// lesGroupes.add((Groupe) q.getSingleResult());
-		// }
-		// }
-		// utilisateurMAJ.setGroupes(lesGroupes);
-		// }
-		// List<Groupe> lesGroupesGeres = new ArrayList<Groupe>();
-		// for (GroupeDTO groupeDTO : nouvelUtilisateur.getGroupesGeres()) {
-		// if (groupeDTO.getIdGroupe() != null) {
-		// lesGroupesGeres.add(em.find(Groupe.class, groupeDTO.getIdGroupe()));
-		// } else if (groupeDTO.getNomGroupe() != null) {
-		// Query q = em
-		// .createQuery("select g from Groupe g where g.nomGroupe = '" +
-		// groupeDTO.getNomGroupe() + "'");
-		// lesGroupesGeres.add((Groupe) q.getSingleResult());
-		//
-		// }
-		// }
-		// utilisateurMAJ.setGroupesGeres(lesGroupesGeres);
 
 		em.persist(utilisateurMAJ);
 

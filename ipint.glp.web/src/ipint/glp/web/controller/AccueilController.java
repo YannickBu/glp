@@ -9,6 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class AccueilController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView accueil() {
-		return new ModelAndView("redirect:/connexion");
+		return new ModelAndView("redirect:/publication");
 	}
 }
