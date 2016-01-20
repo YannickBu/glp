@@ -8,7 +8,7 @@
 	<!-- Unite de persistence -->
 	<persistence-unit name="PU" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>l1nk</jta-data-source>
+		<jta-data-source>jdbc/__default</jta-data-source>
 
 		<!-- Entites -->
 		<class>ipint.glp.domain.entity.Utilisateur</class>
