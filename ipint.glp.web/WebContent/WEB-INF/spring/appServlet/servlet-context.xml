@@ -46,10 +46,15 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
     
-    <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl" business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb>
-    <jee:local-slsb id="groupeBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl" business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb>
-    <jee:local-slsb id="utilisateurBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl" business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb>
-    <jee:local-slsb id="utilisateurEnAttenteBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurEnAttenteImpl" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb>
+    <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/ArticleImpl" business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb>
+    <jee:local-slsb id="groupeBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/GroupeImpl" business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb>
+    <jee:local-slsb id="utilisateurBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilisateurImpl" business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb>
+    <jee:local-slsb id="utilisateurEnAttenteBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilisateurEnAttenteImpl" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb>
+    
+<!--     <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl" business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb> -->
+<!--     <jee:local-slsb id="groupeBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl" business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb> -->
+<!--     <jee:local-slsb id="utilisateurBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl" business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb> -->
+<!--     <jee:local-slsb id="utilisateurEnAttenteBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurEnAttenteImpl" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb> -->
 <!--    <jee:remote-slsb id="articleBean" business-interface="ipint.glp.api.itf.ArticleService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl"/> -->
 <!--    <jee:remote-slsb id="groupeBean" business-interface="ipint.glp.api.itf.GroupeService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl"/> -->
 <!--    <jee:remote-slsb id="utilisateurBean" business-interface="ipint.glp.api.itf.UtilisateurService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl"/> -->
