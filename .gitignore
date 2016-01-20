@@ -1,2 +1,2 @@
 target
-/ipint.glp.domain/ejbModule/META-INF/persistence.xml
+./ipint.glp.domain/ejbModule/META-INF/persistence.xml
