@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
+import ipint.glp.api.exception.MetierException;
 
 /**
  * Interface definissant les différent service liés à la gestion d'un
@@ -22,7 +23,7 @@ public interface UtilisateurEnAttenteService {
 	 * 
 	 * @param utilisateurEnAttenteDTOATrouver 
 	 */
-	public UtilisateurEnAttenteDTO creer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOATrouver);
+	public UtilisateurEnAttenteDTO creer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOATrouver) throws MetierException;
 
 	/**
 	 * Methode de validation d'un utilisateur en attente de validation par le
@@ -30,7 +31,7 @@ public interface UtilisateurEnAttenteService {
 	 * 
 	 * @param utilisateurEnAttenteDTOAValider
 	 */
-	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider);
+	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider) throws MetierException;
 
 	/**
 	 * Methode de suppression d'un utilisateur en attente de validation par le
@@ -38,7 +39,7 @@ public interface UtilisateurEnAttenteService {
 	 * 
 	 * @param utilisateurEnAttenteDTOAValider
 	 */
-	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider);
+	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider) throws MetierException;
 
 	/**
 	 * Methode de listing des utilisateurs en attente de validation par le
@@ -46,7 +47,7 @@ public interface UtilisateurEnAttenteService {
 	 * 
 	 * @return la liste des utilisateur en attente.
 	 */
-	public List<UtilisateurEnAttenteDTO> lister();
+	public List<UtilisateurEnAttenteDTO> lister() throws MetierException;
 
 	/**
 	 * Methode de récupération d'un utilisateur en attente de validation par le
@@ -55,6 +56,6 @@ public interface UtilisateurEnAttenteService {
 	 * @param idUtilisateurEnAttente
 	 * @return
 	 */
-	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente);
+	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente) throws MetierException;
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
 
 /**
@@ -36,26 +37,45 @@ public class AdministrationController {
 	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
-		uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
+		try {
+			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		model.addAttribute("utilisateurTmp", uDTO);
-		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
-		model.addAttribute("list", list);
+		List<UtilisateurEnAttenteDTO> list;
+		try {
+			list = utilisateurEnAttenteService.lister();
+			model.addAttribute("list", list);
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		return new ModelAndView("panelInscription");
 	}
 
 	@RequestMapping(value = "/panelInscription", method = RequestMethod.GET)
 	public ModelAndView administrationGET(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
-		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
-		model.addAttribute("list", list);
+		List<UtilisateurEnAttenteDTO> list;
+		try {
+			list = utilisateurEnAttenteService.lister();
+			model.addAttribute("list", list);
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		return new ModelAndView("menuInscriptionVide");
 	}
 
 	@RequestMapping(value = "/panelInscription", method = RequestMethod.POST)
 	public ModelAndView administrationPOST(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
-		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
-		model.addAttribute("list", list);
+		List<UtilisateurEnAttenteDTO> list;
+		try {
+			list = utilisateurEnAttenteService.lister();
+			model.addAttribute("list", list);
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		return new ModelAndView("menuInscriptionVide");
 	}
 
@@ -63,21 +83,30 @@ public class AdministrationController {
 	public ModelAndView profilPost(@RequestParam String action, @PathVariable String id,
 			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
-		uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
-		if (action.equals("Accepter")) {
-			utilisateurEnAttenteService.valider(uDTO);
-		} else if (action.equals("Refuser")) {
-			utilisateurEnAttenteService.supprimer(uDTO);
+		try{
+			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
+			if (action.equals("Accepter")) {
+				utilisateurEnAttenteService.valider(uDTO);
+			} else if (action.equals("Refuser")) {
+				utilisateurEnAttenteService.supprimer(uDTO);
+			}
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
 		}
-		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
+		List<UtilisateurEnAttenteDTO> list = null;
+		try {
+			list = utilisateurEnAttenteService.lister();
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		int idPremierList = list.get(0).getIdUtilisateurEnAttente();
 		model.addAttribute("utilisateurTmp", uDTO);
 		System.out.println(list.toString());
-		if(!list.isEmpty()){
+		if(list==null || !list.isEmpty()){
 			return new ModelAndView("redirect:/panelInscription/" + idPremierList);
 		}
 		else {
-			return new ModelAndView("redirect:/menuInscription/");
+			return new ModelAndView("redirect:/menuInscriptionVide/");
 		}
 	}
 }
