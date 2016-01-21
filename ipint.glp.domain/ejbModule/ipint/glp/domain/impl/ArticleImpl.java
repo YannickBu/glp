@@ -28,9 +28,7 @@ public class ArticleImpl implements ArticleService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
-	/* (non-Javadoc)
-	 * @see ipint.glp.api.itf.ArticleService#creer(ipint.glp.api.DTO.ArticleDTO)
-	 */
+	
 	@Override
 	public ArticleDTO creer(ArticleDTO articleDTO) throws MetierException {
 		if(articleDTO==null){
@@ -39,7 +37,7 @@ public class ArticleImpl implements ArticleService {
 		if(articleDTO.getUtilisateur().getEmail()==null && articleDTO.getUtilisateur().getIdUtilisateur()==null){
 			throw new InformationManquanteException("L'utilisateur dans +"+articleDTO.toString()+"+ est null");
 		}
-		if(articleDTO.getGroupes()!=null && !articleDTO.getGroupes().isEmpty()){
+		if(articleDTO.getGroupes()==null || articleDTO.getGroupes().isEmpty()){
 			throw new InformationManquanteException(articleDTO.toString()+" n'est associé à aucun groupe");
 		}
 
