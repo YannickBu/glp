@@ -70,14 +70,14 @@ public class AdministrationController {
 			utilisateurEnAttenteService.supprimer(uDTO);
 		}
 		List<UtilisateurEnAttenteDTO> list = utilisateurEnAttenteService.lister();
-		int idPremierList = list.get(0).getIdUtilisateurEnAttente();
 		model.addAttribute("utilisateurTmp", uDTO);
 		System.out.println(list.toString());
 		if(!list.isEmpty()){
+			int idPremierList = list.get(0).getIdUtilisateurEnAttente();
 			return new ModelAndView("redirect:/panelInscription/" + idPremierList);
 		}
 		else {
-			return new ModelAndView("redirect:/menuInscription/");
+			return new ModelAndView("redirect:/panelInscription");
 		}
 	}
 }

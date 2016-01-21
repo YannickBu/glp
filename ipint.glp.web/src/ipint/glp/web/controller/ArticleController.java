@@ -54,6 +54,7 @@ public class ArticleController {
 		Calendar cal = Calendar.getInstance();
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
+		articleDto.setGroupe(uDTO.getGroupePrincipal());
 		articleDto = as.creer(articleDto);
 		//TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();

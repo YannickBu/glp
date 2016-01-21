@@ -9,9 +9,9 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="name-logo"><img class="img-logo" alt="Logo"
+							<a href="${pageContext.servletContext.contextPath}/publication"><li class="name-logo"><img class="img-logo" alt="Logo"
 								src="${pageContext.servletContext.contextPath}/resources/img/petit-logo.png">
-								L1nk</li>
+								L1nk</li></a>
 						</ul>
 						<ul id="barre-recherche" class="nav navbar-nav navbar-left">
 							<form class="navbar-form" role="search">

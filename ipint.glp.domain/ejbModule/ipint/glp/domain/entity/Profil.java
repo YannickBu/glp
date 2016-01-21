@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Profil {
 
@@ -20,15 +19,17 @@ public class Profil {
 	// @Temporal(TemporalType.DATE)
 	// @javax.validation.constraints.Past(message="Date de naissance invalide")
 	// private Calendar dateNaiss;
-//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
-	private String cursus;
+	// @javax.validation.constraints.NotNull(message = "Veuillez remplir le
+	// champ cursus")
+	// private String cursus;
 	@OneToMany(mappedBy = "profil")
 	private List<Diplome> diplomes;
 	@OneToMany(mappedBy = "profil")
 	private List<Competence> competence;
 	private String centreInteret;
-	//TODO peut être le mettre en unique non ?
-//	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#", message = "Téléphone invalide")
+	// TODO peut être le mettre en unique non ?
+	// @javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{10}$#",
+	// message = "Téléphone invalide")
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<Experience> experiences;
@@ -47,13 +48,13 @@ public class Profil {
 		this.idProfil = idProfil;
 	}
 
-	public String getCursus() {
-		return cursus;
-	}
+	/*
+	 * public String getCursus() { return cursus; }
+	 */
 
-	public void setCursus(String cursus) {
-		this.cursus = cursus;
-	}
+	/*
+	 * public void setCursus(String cursus) { this.cursus = cursus; }
+	 */
 
 	public List<Competence> getCompetence() {
 		return competence;

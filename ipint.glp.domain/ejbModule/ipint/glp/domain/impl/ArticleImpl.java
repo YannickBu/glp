@@ -31,6 +31,7 @@ public class ArticleImpl implements ArticleService {
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
 		
+		//Gestion de l'utilisateur de la publication
 		Utilisateur util = null;
 		Query q;
 		if(articleDTO.getUtilisateur().getEmail()!=null){
@@ -47,6 +48,15 @@ public class ArticleImpl implements ArticleService {
 		}
 		art.setUtilisateur(util);
 		
+		//Gestion du groupe de publication
+		Groupe groupe = null;
+		Query q2;
+		if(articleDTO.getGroupe()!=null){
+			groupe = em.find(Groupe.class, articleDTO.getGroupe().getIdGroupe());
+		}
+		art.setGroupe(groupe);
+		
+		//
 		if(articleDTO.getGroupes()!=null && !articleDTO.getGroupes().isEmpty()){
 			List<Groupe> listGrp = new ArrayList<>();
 			for(GroupeDTO grpDTO : articleDTO.getGroupes()){

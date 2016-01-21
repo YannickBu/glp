@@ -79,7 +79,7 @@ public class MappingToDTO {
 				proDTO.getCompetence().add(competenceToCompetenceDTO(exp));
 			}
 		}
-		proDTO.setCursus(pro.getCursus());
+		//proDTO.setCursus(pro.getCursus());
 		//roDTO.setDiplomes(pro.getDiplomes());
 		proDTO.setDiplomes(new ArrayList<>());
 		if (pro.getDiplomes() != null && !pro.getDiplomes().isEmpty()) {
@@ -160,6 +160,9 @@ public class MappingToDTO {
 		if (art.getUtilisateur() != null) {
 			artDTO.setUtilisateur(utilisateurToUtilisateurDTOLazy(art.getUtilisateur()));
 		}
+		if (art.getGroupe() != null) {
+			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
+		}
 		artDTO.setGroupes(new ArrayList<>());
 		if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
 			for (Groupe grp : art.getGroupes()) {
@@ -207,6 +210,10 @@ public class MappingToDTO {
 		if (art.getUtilisateur() != null) {
 			artDTO.setUtilisateur(utilisateurToUtilisateurDTOHorsRelation(art.getUtilisateur()));
 		}
+		if (art.getGroupe() != null) {
+			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
+		}
+		
 		artDTO.setGroupes(new ArrayList<>());
 		if (art.getGroupes() != null) {
 			for (Groupe grp : art.getGroupes()) {
