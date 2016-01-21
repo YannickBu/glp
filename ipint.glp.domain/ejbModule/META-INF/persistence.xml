@@ -19,6 +19,7 @@
 		<class>ipint.glp.domain.entity.UtilisateurGroupes</class>
 		<class>ipint.glp.domain.entity.Competence</class>
 		<class>ipint.glp.domain.entity.Diplome</class>
+		<class>ipint.glp.domain.entity.UtilisateurEnAttente</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 
