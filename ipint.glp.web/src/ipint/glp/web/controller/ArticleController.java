@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.ArticleService;
 import ipint.glp.api.itf.UtilisateurService;
 
@@ -54,7 +55,11 @@ public class ArticleController {
 		Calendar cal = Calendar.getInstance();
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
-		articleDto = as.creer(articleDto);
+		try{
+			articleDto = as.creer(articleDto);
+		}catch(MetierException e){
+			//TODO redirection vers une page d'erreur
+		}
 		//TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
 		model.addAttribute("articles", articles);

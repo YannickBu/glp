@@ -105,25 +105,20 @@ public class Diplome implements Serializable{
 	public void setProfil(Profil profil) {
 		this.profil = profil;
 	}
+	
+	@Override
+	public String toString(){
+		return "[Diplome - id="+this.idDiplome+", libelle="+this.libelle+"]";
+	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((anneFin == null) ? 0 : anneFin.hashCode());
-		result = prime * result + ((anneeDebut == null) ? 0 : anneeDebut.hashCode());
 		result = prime * result + ((idDiplome == null) ? 0 : idDiplome.hashCode());
-		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
-		result = prime * result + ((profil == null) ? 0 : profil.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -133,37 +128,13 @@ public class Diplome implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Diplome other = (Diplome) obj;
-		if (anneFin == null) {
-			if (other.anneFin != null)
-				return false;
-		} else if (!anneFin.equals(other.anneFin))
-			return false;
-		if (anneeDebut == null) {
-			if (other.anneeDebut != null)
-				return false;
-		} else if (!anneeDebut.equals(other.anneeDebut))
-			return false;
 		if (idDiplome == null) {
 			if (other.idDiplome != null)
 				return false;
 		} else if (!idDiplome.equals(other.idDiplome))
 			return false;
-		if (libelle == null) {
-			if (other.libelle != null)
-				return false;
-		} else if (!libelle.equals(other.libelle))
-			return false;
-		if (profil == null) {
-			if (other.profil != null)
-				return false;
-		} else if (!profil.equals(other.profil))
-			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
+
 
 }

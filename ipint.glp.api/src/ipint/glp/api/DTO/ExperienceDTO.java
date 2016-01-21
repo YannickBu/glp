@@ -86,6 +86,11 @@ public class ExperienceDTO extends DTO implements Serializable  {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@Override
+	public String toString(){
+		return "[ExperienceDTO - id="+this.idExperience+", poste="+this.poste+"]";
+	}
 
 	@Override
 	public int hashCode() {

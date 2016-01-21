@@ -116,6 +116,11 @@ public class Experience implements Serializable {
 	public void setProfil(Profil profil) {
 		this.profil = profil;
 	}
+	
+	@Override
+	public String toString(){
+		return "[Experience - id="+this.idExperience+", poste="+this.poste+"]";
+	}
 
 	@Override
 	public int hashCode() {

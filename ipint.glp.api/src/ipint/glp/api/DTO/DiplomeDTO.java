@@ -102,6 +102,11 @@ public class DiplomeDTO extends DTO implements Serializable{
 		this.profil = profil;
 	}
 
+	@Override
+	public String toString(){
+		return "[DiplomeDTO - id="+this.idDiplome+", libelle="+this.libelle+"]";
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

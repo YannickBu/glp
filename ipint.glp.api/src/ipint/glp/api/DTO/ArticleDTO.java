@@ -91,6 +91,11 @@ public class ArticleDTO extends DTO implements Serializable {
 	}
 
 	@Override
+	public String toString(){
+		return "[ArticleDTO - id="+this.idArticle+"]";
+	}
+	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

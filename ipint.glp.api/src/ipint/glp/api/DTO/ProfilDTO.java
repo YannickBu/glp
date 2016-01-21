@@ -86,6 +86,11 @@ public class ProfilDTO extends DTO  implements Serializable {
 	public void setExperiences(List<ExperienceDTO> experiences) {
 		this.experiences = experiences;
 	}
+	
+	@Override
+	public String toString(){
+		return "[ProfilDTO - id="+this.idProfil+", cursus="+this.cursus+"]";
+	}
 
 	@Override
 	public int hashCode() {
