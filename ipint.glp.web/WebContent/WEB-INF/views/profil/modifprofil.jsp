@@ -74,12 +74,9 @@
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-6">
-<<<<<<< HEAD
 											<form:input path="profil.diplomes[${i}].libelle"
-												value="${profil.diplomes[i].libelle}" type="text"
-=======
+												value="${profil.diplomes[i].libelle}" type="text"/>
 											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
