@@ -32,7 +32,13 @@ public class ArticleController {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		uDTO = us.trouver(uDTO);
+		   
 		model.addAttribute("articles", uDTO.getArticles());
+		for (ArticleDTO a : uDTO.getArticles()){
+			if(a.getGroupe()!= null){
+				System.out.println("GROUUUUUUUUUUUUPE" + a.getGroupe().getNomGroupe());
+			}
+		}
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("accueil", "article", new ArticleDTO());
 	}
@@ -56,6 +62,7 @@ public class ArticleController {
 		articleDto.setUtilisateur(uDTO);
 		articleDto.setGroupe(uDTO.getGroupePrincipal());
 		articleDto = as.creer(articleDto);
+		System.out.println(articleDto.getGroupe().getNomGroupe());
 		//TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
 		model.addAttribute("articles", articles);
