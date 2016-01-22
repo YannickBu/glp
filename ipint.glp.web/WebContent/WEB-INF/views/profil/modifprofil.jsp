@@ -57,7 +57,7 @@
 								class="form-control" id="InputTel" />
 						</div>
 						<div class="form-group">
-							<label for="InputCursus"> Cursus </label>
+							<label for="InputCursus"> Diplômes </label>
 
 							<div id="diplForm">
 								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}" var="i">
@@ -70,9 +70,13 @@
 											<form:input path="profil.diplomes[${i}].anneFin" value="${profil.diplomes[i].anneFin}" type="text"
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
-										<div class="col-md-8">
+										<div class="col-md-6">
 											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
+										</div>
+										<div class="col-md-2">
+											<form:input path="profil.diplomes[${i}].lieu" value="${profil.diplomes[i].lieu}" type="text"
+												class="form-control" id="InputDipDesc" placeholder="Lieu" />
 										</div>
 
 									</div>
@@ -107,7 +111,18 @@
 											<form:input path="profil.experiences[${i}].lieu" value="${profil.experiences[i].lieu}" type="text"
 												class="form-control" id="InputExpLieu" placeholder="Ville" />
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-2">
+											<form:input path="profil.experiences[${i}].region" value="${profil.experiences[i].region}" type="text"
+												class="form-control" id="InputExpRegion" placeholder="Region" />
+										</div>
+										<div class="col-md-2">
+											<form:input path="profil.experiences[${i}].pays" value="${profil.experiences[i].pays}" type="text"
+												class="form-control" id="InputExpPays" placeholder="Pays" />
+										</div>
+										
+									</div>
+									<div class="row" style="margin-top: 1%">
+									<div class="col-md-12">
 											<form:input path="profil.experiences[${i}].poste" value="${profil.experiences[i].poste}" type="text"
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>

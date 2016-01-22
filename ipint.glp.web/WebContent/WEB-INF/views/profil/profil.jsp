@@ -66,12 +66,11 @@
 											</li>
 											<li>E-mail : ${utilisateur.email}</li>
 											<li>Téléphone : ${utilisateur.profil.telephone}</li>
-											<li>Cursus :
+											<li>Diplômes :
 												<ul>
 													<c:forEach items="${utilisateur.profil.diplomes}"
 														var="diplome">
-														<li>${diplome.anneeDebut}/${diplome.anneFin}-
-															${diplome.libelle}</li>
+														<li>${diplome.anneeDebut}/${diplome.anneFin} - ${diplome.libelle} - Fait à ${diplome.lieu}</li>
 													</c:forEach>
 												</ul>
 											</li>
@@ -83,7 +82,7 @@
 															<div class="panel-heading">
 																<a class="panel-title" data-toggle="collapse"
 																	data-parent="#panel-1" href="#panel-element-1">${exp.anneeDebut}/${exp.anneFin}
-																	- ${exp.poste} - ${exp.entreprise} à ${exp.lieu}</a>
+																	- ${exp.poste} - ${exp.entreprise} à ${exp.lieu} (${exp.region},${exp.pays})</a>
 															</div>
 															<div id="panel-element-1" class="panel-collapse collapse">
 																<div class="panel-body">${exp.description}</div>

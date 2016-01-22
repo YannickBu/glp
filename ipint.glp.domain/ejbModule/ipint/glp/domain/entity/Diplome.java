@@ -32,8 +32,24 @@ public class Diplome implements Serializable{
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
 	
+	private String lieu;
+	
 	public Diplome() {
 		super();
+	}
+	
+	/**
+	 * @return the lieu
+	 */
+	public String getLieu() {
+		return lieu;
+	}
+	
+	/**
+	 * @param lieu the lieu to set
+	 */
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
 	}
 
 	/**

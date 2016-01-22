@@ -31,8 +31,6 @@ public class Article {
 	private Groupe groupe;
 	@ManyToOne
 	private Utilisateur utilisateur;
-	@ManyToMany(mappedBy = "articles")
-	private List<Groupe> groupes;
 
 	public Article() {
 	}
@@ -75,14 +73,6 @@ public class Article {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
-	}
-
-	public List<Groupe> getGroupes() {
-		return groupes;
-	}
-
-	public void setGroupes(List<Groupe> groupes) {
-		this.groupes = groupes;
 	}
 
 	@Override

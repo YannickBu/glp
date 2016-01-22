@@ -140,6 +140,7 @@ public class UtilisateurImpl implements UtilisateurService {
 					dipl.setAnneeDebut(diplDTO.getAnneeDebut());
 					dipl.setAnneFin(diplDTO.getAnneFin());
 					dipl.setLibelle(diplDTO.getLibelle());
+					dipl.setLieu(diplDTO.getLieu());
 					dipl.setProfil(pro);
 					listDipl.add(dipl);
 					em.persist(dipl);
@@ -159,6 +160,8 @@ public class UtilisateurImpl implements UtilisateurService {
 					exp.setEntreprise(expDTO.getEntreprise());
 					exp.setLieu(expDTO.getLieu());
 					exp.setPoste(expDTO.getPoste());
+					exp.setRegion(expDTO.getRegion());
+					exp.setPays(expDTO.getPays());
 					exp.setProfil(pro);
 					listExp.add(exp);
 					em.persist(exp);
@@ -288,6 +291,7 @@ public class UtilisateurImpl implements UtilisateurService {
 								dipl.setAnneeDebut(diplDTO.getAnneeDebut());
 								dipl.setAnneFin(diplDTO.getAnneFin());
 								dipl.setLibelle(diplDTO.getLibelle());
+								dipl.setLieu(diplDTO.getLieu());
 								dipls.add(dipl);
 								em.merge(dipl);
 							}
@@ -327,6 +331,8 @@ public class UtilisateurImpl implements UtilisateurService {
 								exp.setEntreprise(expDTO.getEntreprise());
 								exp.setLieu(expDTO.getLieu());
 								exp.setPoste(expDTO.getPoste());
+								exp.setRegion(expDTO.getRegion());
+								exp.setPays(expDTO.getPays());
 								exps.add(exp);
 								em.merge(exp);
 							}
@@ -339,6 +345,8 @@ public class UtilisateurImpl implements UtilisateurService {
 							exp.setEntreprise(expDTO.getEntreprise());
 							exp.setLieu(expDTO.getLieu());
 							exp.setPoste(expDTO.getPoste());
+							exp.setRegion(expDTO.getRegion());
+							exp.setPays(expDTO.getPays());
 							exps.add(exp);
 							em.persist(exp);
 						}

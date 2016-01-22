@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import ipint.glp.api.DTO.ArticleDTO;
+
 @Entity
 public class Groupe {
 
@@ -30,29 +32,29 @@ public class Groupe {
 	private Utilisateur utilisateurResponsable;
 	@ManyToMany
 	private List<Utilisateur> utilisateurs;
-	@ManyToMany
+	
+	@OneToMany(mappedBy = "groupe")
 	private List<Article> articles;
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
 
 	public Groupe() {
 		this.utilisateurs = new ArrayList<>();
 	}
 	
-
-
-
 	public List<Utilisateur> getUtilisateurPrincipal() {
 		return utilisateursPrincipals;
 	}
 
-
-
-
 	public void setUtilisateurPrincipal(List<Utilisateur> utilisateurPrincipal) {
 		this.utilisateursPrincipals = utilisateurPrincipal;
 	}
-
-
-
 
 	public Integer getIdGroupe() {
 		return idGroupe;
@@ -94,13 +96,6 @@ public class Groupe {
 		this.utilisateurs = utilisateurs;
 	}
 
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
-	}
 
 	@Override
 	public String toString() {
