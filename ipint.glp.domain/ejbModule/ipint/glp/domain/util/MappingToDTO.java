@@ -1,4 +1,4 @@
-package ipint.glp.domain.entity.util;
+package ipint.glp.domain.util;
 
 import java.util.ArrayList;
 
@@ -34,8 +34,6 @@ public class MappingToDTO {
 		expDTO.setEntreprise(exp.getEntreprise());
 		expDTO.setLieu(exp.getLieu());
 		expDTO.setPoste(exp.getPoste());
-		expDTO.setRegion(exp.getRegion());
-		expDTO.setPays(exp.getPays());
 
 		return expDTO;
 	}
@@ -62,7 +60,6 @@ public class MappingToDTO {
 		diplDTO.setAnneeDebut(dipl.getAnneeDebut());
 		diplDTO.setAnneFin(dipl.getAnneFin());
 		diplDTO.setLibelle(dipl.getLibelle());
-		diplDTO.setLieu(dipl.getLieu());
 
 		return diplDTO;
 	}
@@ -166,12 +163,12 @@ public class MappingToDTO {
 		if (art.getGroupe() != null) {
 			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
 		}
-//		artDTO.setGroupes(new ArrayList<>());
-//		if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
-//			for (Groupe grp : art.getGroupes()) {
-//				artDTO.getGroupes().add(groupeToGroupeDTOLazy(grp));
-//			}
-//		}
+		artDTO.setGroupes(new ArrayList<>());
+		if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
+			for (Groupe grp : art.getGroupes()) {
+				artDTO.getGroupes().add(groupeToGroupeDTOLazy(grp));
+			}
+		}
 
 		return artDTO;
 	}
@@ -217,12 +214,12 @@ public class MappingToDTO {
 			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
 		}
 		
-//		artDTO.setGroupes(new ArrayList<>());
-//		if (art.getGroupes() != null) {
-//			for (Groupe grp : art.getGroupes()) {
-//				artDTO.getGroupes().add(groupeToGroupeDTOHorsRelation(grp));
-//			}
-//		}
+		artDTO.setGroupes(new ArrayList<>());
+		if (art.getGroupes() != null) {
+			for (Groupe grp : art.getGroupes()) {
+				artDTO.getGroupes().add(groupeToGroupeDTOHorsRelation(grp));
+			}
+		}
 
 		return artDTO;
 	}

@@ -28,8 +28,24 @@ public class DiplomeDTO extends DTO implements Serializable{
 	@ManyToOne
 	private ProfilDTO profil;
 	
+	private String lieu;
+	
 	public DiplomeDTO() {
 		super();
+	}
+	
+	/**
+	 * @return the lieu
+	 */
+	public String getLieu() {
+		return lieu;
+	}
+
+	/**
+	 * @param lieu the lieu to set
+	 */
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
 	}
 
 	/**

@@ -27,7 +27,7 @@ import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurGroupes;
-import ipint.glp.domain.entity.util.MappingToDTO;
+import ipint.glp.domain.util.MappingToDTO;
 
 @Stateless
 public class UtilisateurImpl implements UtilisateurService {
@@ -175,6 +175,7 @@ public class UtilisateurImpl implements UtilisateurService {
 					dipl.setAnneeDebut(diplDTO.getAnneeDebut());
 					dipl.setAnneFin(diplDTO.getAnneFin());
 					dipl.setLibelle(diplDTO.getLibelle());
+					dipl.setLieu(diplDTO.getLieu());
 					dipl.setProfil(pro);
 					listDipl.add(dipl);
 					em.persist(dipl);
@@ -195,6 +196,8 @@ public class UtilisateurImpl implements UtilisateurService {
 					exp.setEntreprise(expDTO.getEntreprise());
 					exp.setLieu(expDTO.getLieu());
 					exp.setPoste(expDTO.getPoste());
+					exp.setRegion(expDTO.getRegion());
+					exp.setPays(expDTO.getPays());
 					exp.setProfil(pro);
 					listExp.add(exp);
 					em.persist(exp);
