@@ -74,14 +74,8 @@
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-6">
-<<<<<<< HEAD
 											<form:input path="profil.diplomes[${i}].libelle"
-												value="${profil.diplomes[i].libelle}" type="text"/>
-											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
-=======
-											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
-
->>>>>>> 8795249a77d73b5790646c6c5d7f4ca04e007f08
+												value="${profil.diplomes[i].libelle}" type="text"
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
@@ -126,20 +120,9 @@
 												value="${profil.experiences[i].lieu}" type="text"
 												class="form-control" id="InputExpLieu" placeholder="Ville" />
 										</div>
-										<div class="col-md-2">
-											<form:input path="profil.experiences[${i}].region" value="${profil.experiences[i].region}" type="text"
-												class="form-control" id="InputExpRegion" placeholder="Region" />
-										</div>
-										<div class="col-md-2">
-											<form:input path="profil.experiences[${i}].pays" value="${profil.experiences[i].pays}" type="text"
-												class="form-control" id="InputExpPays" placeholder="Pays" />
-										</div>
-										
-									</div>
-									<div class="row" style="margin-top: 1%">
-									<div class="col-md-12">
-
-											<form:input path="profil.experiences[${i}].poste" value="${profil.experiences[i].poste}" type="text"
+										<div class="col-md-4">
+											<form:input path="profil.experiences[${i}].poste"
+												value="${profil.experiences[i].poste}" type="text"
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
 									</div>
