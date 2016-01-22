@@ -15,6 +15,7 @@ import ipint.glp.api.DTO.enumType.Statut;
 import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
+import ipint.glp.api.exception.UtilisateurEnAttenteInconnuException;
 import ipint.glp.api.exception.UtilisateurExistantException;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
 import ipint.glp.domain.entity.Groupe;
@@ -82,14 +83,28 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
 	@Override
 	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
+		if(utilisateurEnAttenteAValiderDTO==null){
+			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
+		}
+		if(utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente()==null){
+			throw new InformationManquanteException("L'utilisateurEnAttenteDTO n'a pas d'id");
+		}
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
-		utilisateurEnAttente.setIdUtilisateurEnAttente(utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente());
-		utilisateurEnAttente = em.merge(utilisateurEnAttente);
+		utilisateurEnAttente = em.find(UtilisateurEnAttente.class, utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente());
+		if(utilisateurEnAttente==null){
+			throw new UtilisateurEnAttenteInconnuException(utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
+		}
 		em.remove(utilisateurEnAttente);
 	}
 
 	@Override
 	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
+		if(utilisateurEnAttenteAValiderDTO==null){
+			throw new InformationManquanteException("L'utilisateurEnAttenteAValiderDTO est null");
+		}
+		if(utilisateurEnAttenteAValiderDTO.getEmail()==null){
+			throw new InformationManquanteException("L'utilisateurEnAttenteAValiderDTO n'a pas de mail");
+		}
 		UtilisateurDTO utilisateurDTO = new UtilisateurDTO();
 		utilisateurDTO.setEmail(utilisateurEnAttenteAValiderDTO.getEmail());
 		utilisateurDTO.setNom(utilisateurEnAttenteAValiderDTO.getNom());
@@ -118,6 +133,9 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	@Override
 	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente) throws MetierException {
 		UtilisateurEnAttente utilisateurEnAttente = em.find(UtilisateurEnAttente.class, idUtilisateurEnAttente);
+		if(utilisateurEnAttente==null){
+			throw new UtilisateurEnAttenteInconnuException("L'utilisateurEnAttente ayyant pour id "+idUtilisateurEnAttente+" n'existe pas");
+		}
 		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
 	}
 
