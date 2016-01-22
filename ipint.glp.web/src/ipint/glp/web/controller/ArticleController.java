@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.ArticleService;
+import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
@@ -27,6 +29,8 @@ public class ArticleController {
 	ArticleService as;
 	@Inject
 	UtilisateurService us;
+	@Inject
+	GroupeService gs;
 
 	@RequestMapping(value = "/publication", method = RequestMethod.GET)
 	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
@@ -38,13 +42,16 @@ public class ArticleController {
 			//TODO rediriger page erreur
 		}
 		   
-		model.addAttribute("articles", uDTO.getArticles());
+		
 		for (ArticleDTO a : uDTO.getArticles()){
 			if(a.getGroupe()!= null){
 				System.out.println("GROUUUUUUUUUUUUPE" + a.getGroupe().getNomGroupe());
 			}
 		}
+		
+		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("groupePrincipal", uDTO.getGroupePrincipal());
 		return new ModelAndView("accueil", "article", new ArticleDTO());
 	}
 
@@ -75,11 +82,14 @@ public class ArticleController {
 		}catch(MetierException e){
 			//TODO redirection vers une page d'erreur
 		}
+		GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
+		
 		System.out.println(articleDto.getGroupe().getNomGroupe());
 		//TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("groupePrincipal", articleDto.getGroupe());
 		return new ModelAndView("accueil");
 	}
 

@@ -74,9 +74,14 @@
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-6">
+<<<<<<< HEAD
 											<form:input path="profil.diplomes[${i}].libelle"
 												value="${profil.diplomes[i].libelle}" type="text"/>
 											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
+=======
+											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
+
+>>>>>>> 8795249a77d73b5790646c6c5d7f4ca04e007f08
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
@@ -133,12 +138,8 @@
 									</div>
 									<div class="row" style="margin-top: 1%">
 									<div class="col-md-12">
-<<<<<<< HEAD
-											<form:input path="profil.experiences[${i}].poste"
-												value="${profil.experiences[i].poste}" type="text"
-=======
+
 											<form:input path="profil.experiences[${i}].poste" value="${profil.experiences[i].poste}" type="text"
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
 									</div>
