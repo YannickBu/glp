@@ -27,7 +27,7 @@ import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurGroupes;
-import ipint.glp.domain.entity.util.MappingToDTO;
+import ipint.glp.domain.util.MappingToDTO;
 
 @Stateless
 public class UtilisateurImpl implements UtilisateurService {
@@ -61,7 +61,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		if(utilisateurDTO.getGroupePrincipal()==null){
 			throw new InformationManquanteException(utilisateurDTO.toString() + " n'a pas de groupe principal");
 		}
-		
+
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setEmail(utilisateurDTO.getEmail());
 		utilisateur.setNom(utilisateurDTO.getNom());
@@ -92,9 +92,9 @@ public class UtilisateurImpl implements UtilisateurService {
 		// utilisateur.setProfil(profil);
 
 		//TODO gerer les exceptions lorsque cette liste de groupes sera utilisée
-		
+
 		//Gestion liste des groupes
-		
+
 		if (utilisateurDTO.getGroupes() != null && !utilisateurDTO.getGroupes().isEmpty()) {
 			List<Groupe> lesGroupes = new ArrayList<Groupe>();
 			for (GroupeDTO groupeDTO : utilisateurDTO.getGroupes()) {
@@ -117,9 +117,9 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 
 		//TODO gerer les exceptions lorsque cette liste de groupes gérés sera utilisée
-		
+
 		//Gestion de la liste des groupes gérés par l'utilisateur
-		
+
 		if (utilisateurDTO.getGroupesGeres() != null && !utilisateurDTO.getGroupesGeres().isEmpty()) {
 			List<Groupe> lesGroupesGeres = new ArrayList<Groupe>();
 			for (GroupeDTO groupeDTO : utilisateurDTO.getGroupesGeres()) {
@@ -142,15 +142,15 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 
 		// Gestion profil
-		
+
 		Profil pro = new Profil();
 		if (utilisateurDTO.getProfil() != null) {
 			//Champs non assoc
 			pro.setCentreInteret(utilisateurDTO.getProfil().getCentreInteret());
 			pro.setTelephone(utilisateurDTO.getProfil().getTelephone());
-			
+
 			//Assoc competence
-			
+
 			if (utilisateurDTO.getProfil().getCompetence() != null
 					&& !utilisateurDTO.getProfil().getCompetence().isEmpty()) {
 				List<Competence> listComp = new ArrayList<Competence>();
@@ -164,9 +164,9 @@ public class UtilisateurImpl implements UtilisateurService {
 				}
 				pro.setCompetence(listComp);
 			}
-			
+
 			//Assoc diplome
-			
+
 			if (utilisateurDTO.getProfil().getDiplomes() != null
 					&& !utilisateurDTO.getProfil().getDiplomes().isEmpty()) {
 				List<Diplome> listDipl = new ArrayList<Diplome>();
@@ -184,7 +184,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			}
 
 			//Assoc experience
-			
+
 			if (utilisateurDTO.getProfil().getExperiences() != null
 					&& !utilisateurDTO.getProfil().getExperiences().isEmpty()) {
 				List<Experience> listExp = new ArrayList<Experience>();
@@ -205,17 +205,28 @@ public class UtilisateurImpl implements UtilisateurService {
 				pro.setExperiences(listExp);
 			}
 
+			//Assoc reseaux sociaux
+
+			if (utilisateurDTO.getProfil().getReseauxSociaux() != null
+					&& !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
+				List<String> listRes = new ArrayList<String>();
+				for (String res : utilisateurDTO.getProfil().getReseauxSociaux()) {
+					em.persist(res);
+				}
+				pro.setReseauxSociaux(listRes);
+			}
+
 		}
 		em.persist(pro);
 		utilisateur.setProfil(pro);
 
 		//Gestion des droits - ajout de dans la table UTILISATEURGROUPES en fonction du statut
-		
+
 		UtilisateurGroupes utilGrp = new UtilisateurGroupes();
 		utilGrp.setEmail(utilisateur.getEmail());
 		utilGrp.setGroupe(Statut.DIPLOME.name().toLowerCase());
 		em.persist(utilGrp);
-		
+
 
 		em.persist(utilisateur);
 
@@ -223,7 +234,7 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	}
 
-	
+
 	@Override
 	public UtilisateurDTO trouver(UtilisateurDTO utilisateurDTO) throws MetierException {
 		if(utilisateurDTO==null){
@@ -232,7 +243,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		if(utilisateurDTO.getEmail()==null && utilisateurDTO.getIdUtilisateur()==null){
 			throw new InformationManquanteException("L'utilisateurDTO n'a ni email ni id");
 		}
-		
+
 		Utilisateur utilisateur = new Utilisateur();
 		if (utilisateurDTO.getIdUtilisateur() != null) {
 			utilisateur = em.find(Utilisateur.class, utilisateurDTO.getIdUtilisateur());
@@ -252,13 +263,13 @@ public class UtilisateurImpl implements UtilisateurService {
 		return utilisateurDTO;
 	}
 
-	
+
 	@Override
 	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur) throws MetierException {
 		if(nouvelUtilisateur==null){
 			throw new InformationManquanteException("Le nouvelUtilisateurDTO est null");
 		}
-		
+
 		Utilisateur utilisateurMAJ = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur());
 
 		if (nouvelUtilisateur.getStatut() != null) {
@@ -289,7 +300,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
 					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() != 0) {
 						Query q = em.createQuery("select c from Competence c where c.libelle = '" + compDTO.getLibelle()
-								+ "' and c.profil.idProfil = :idProfil");
+						+ "' and c.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						if (!q.getResultList().isEmpty()) {
 							comp = (Competence) q.getSingleResult();
@@ -320,7 +331,7 @@ public class UtilisateurImpl implements UtilisateurService {
 					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle())
 							&& diplDTO.getAnneeDebut() != null && diplDTO.getAnneFin() != null) {
 						Query q = em.createQuery("select d from Diplome d where d.libelle = '" + diplDTO.getLibelle()
-								+ "' and d.profil.idProfil = :idProfil");
+						+ "' and d.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						if (!q.getResultList().isEmpty()) {
 							dipl = (Diplome) q.getSingleResult();

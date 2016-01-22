@@ -2,33 +2,41 @@ package ipint.glp.api.DTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 public class ProfilDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = 1194522427659253560L;
 
 	private Integer idProfil;
-	// @Temporal(TemporalType.DATE)
-	// @javax.validation.constraints.Past(message="Date de naissance invalide")
-	// private Calendar dateNaiss;
-	// @javax.validation.constraints.NotNull(message = "Veuillez remplir le
-	// champ cursus")
-	// private String cursus;
+	 @Temporal(TemporalType.DATE)
+	 @javax.validation.constraints.Past(message="Date de naissance invalide")
+	 private Calendar dateNaiss;
+	 @javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
+	 private String cursus;
 	@OneToMany(mappedBy = "profil")
 	private List<DiplomeDTO> diplomes;
 	@OneToMany(mappedBy = "profil")
 	private List<CompetenceDTO> competence;
 	private String centreInteret;
-	// @javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#",
-	// message = "Téléphone invalide")
+	 @javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#",
+	 message = "Téléphone invalide")
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<ExperienceDTO> experiences;
+	
+	@OneToMany(mappedBy = "profil")
+	private List<String> reseauxSociaux;
 
 	public ProfilDTO() {
-		this.experiences = new ArrayList<>();
+		this.diplomes = new ArrayList<DiplomeDTO>();
+		this.experiences = new ArrayList<ExperienceDTO>();
+		this.competence = new ArrayList<CompetenceDTO>();
+		this.reseauxSociaux = new ArrayList<String>();
 	}
 
 	public Integer getIdProfil() {
@@ -89,29 +97,30 @@ public class ProfilDTO extends DTO implements Serializable {
 		return "[ProfilDTO - id="+this.idProfil+"]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idProfil == null) ? 0 : idProfil.hashCode());
-		return result;
+	public Calendar getDateNaiss() {
+		return dateNaiss;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProfilDTO other = (ProfilDTO) obj;
-		if (idProfil == null) {
-			if (other.idProfil != null)
-				return false;
-		} else if (!idProfil.equals(other.idProfil))
-			return false;
-		return true;
+	public void setDateNaiss(Calendar dateNaiss) {
+		this.dateNaiss = dateNaiss;
 	}
+
+	public String getCursus() {
+		return cursus;
+	}
+
+	public void setCursus(String cursus) {
+		this.cursus = cursus;
+	}
+
+	public List<String> getReseauxSociaux() {
+		return reseauxSociaux;
+	}
+
+	public void setReseauxSociaux(List<String> reseauxSociaux) {
+		this.reseauxSociaux = reseauxSociaux;
+	}
+
+	
 
 }

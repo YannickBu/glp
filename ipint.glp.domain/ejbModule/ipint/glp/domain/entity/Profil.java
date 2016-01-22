@@ -33,11 +33,14 @@ public class Profil {
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<Experience> experiences;
+	@OneToMany(mappedBy = "profil")
+	private List<String> reseauxSociaux;
 
 	public Profil() {
 		this.competence = new ArrayList<Competence>();
 		this.diplomes = new ArrayList<Diplome>();
 		this.experiences = new ArrayList<Experience>();
+		this.reseauxSociaux = new ArrayList<String>();
 	}
 
 	public Integer getIdProfil() {
@@ -100,12 +103,26 @@ public class Profil {
 	public String toString(){
 		return "[Profil - id="+this.idProfil+"]";
 	}
-	
+
+	public List<String> getReseauxSociaux() {
+		return reseauxSociaux;
+	}
+
+	public void setReseauxSociaux(List<String> reseauxSociaux) {
+		this.reseauxSociaux = reseauxSociaux;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((centreInteret == null) ? 0 : centreInteret.hashCode());
+		result = prime * result + ((competence == null) ? 0 : competence.hashCode());
+		result = prime * result + ((diplomes == null) ? 0 : diplomes.hashCode());
+		result = prime * result + ((experiences == null) ? 0 : experiences.hashCode());
 		result = prime * result + ((idProfil == null) ? 0 : idProfil.hashCode());
+		result = prime * result + ((reseauxSociaux == null) ? 0 : reseauxSociaux.hashCode());
+		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
 		return result;
 	}
 
@@ -118,11 +135,43 @@ public class Profil {
 		if (getClass() != obj.getClass())
 			return false;
 		Profil other = (Profil) obj;
+		if (centreInteret == null) {
+			if (other.centreInteret != null)
+				return false;
+		} else if (!centreInteret.equals(other.centreInteret))
+			return false;
+		if (competence == null) {
+			if (other.competence != null)
+				return false;
+		} else if (!competence.equals(other.competence))
+			return false;
+		if (diplomes == null) {
+			if (other.diplomes != null)
+				return false;
+		} else if (!diplomes.equals(other.diplomes))
+			return false;
+		if (experiences == null) {
+			if (other.experiences != null)
+				return false;
+		} else if (!experiences.equals(other.experiences))
+			return false;
 		if (idProfil == null) {
 			if (other.idProfil != null)
 				return false;
 		} else if (!idProfil.equals(other.idProfil))
 			return false;
+		if (reseauxSociaux == null) {
+			if (other.reseauxSociaux != null)
+				return false;
+		} else if (!reseauxSociaux.equals(other.reseauxSociaux))
+			return false;
+		if (telephone == null) {
+			if (other.telephone != null)
+				return false;
+		} else if (!telephone.equals(other.telephone))
+			return false;
 		return true;
 	}
+	
+	
 }

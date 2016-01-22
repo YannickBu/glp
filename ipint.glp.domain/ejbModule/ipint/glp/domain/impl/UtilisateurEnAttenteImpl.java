@@ -20,8 +20,9 @@ import ipint.glp.api.exception.UtilisateurExistantException;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.UtilisateurEnAttente;
-import ipint.glp.domain.entity.util.GenererMotDePasse;
-import ipint.glp.domain.entity.util.MappingToDTO;
+import ipint.glp.domain.util.GenererMotDePasse;
+import ipint.glp.domain.util.Mail;
+import ipint.glp.domain.util.MappingToDTO;
 
 /**
  * Implementation des services liés à la gestion d'un utilisateur en attente de
@@ -83,6 +84,10 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
 	@Override
 	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
+
+		String messageOptionel ="";
+		String password = "";
+
 		if(utilisateurEnAttenteAValiderDTO==null){
 			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
 		}
@@ -94,11 +99,15 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		if(utilisateurEnAttente==null){
 			throw new UtilisateurEnAttenteInconnuException(utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
 		}
+		String messageMail = Mail.construireMail(3, messageOptionel, password);
+		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 		em.remove(utilisateurEnAttente);
 	}
 
 	@Override
 	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
+
+		String messageOptionel ="";
 		if(utilisateurEnAttenteAValiderDTO==null){
 			throw new InformationManquanteException("L'utilisateurEnAttenteAValiderDTO est null");
 		}
@@ -111,8 +120,11 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
 		utilisateurDTO.setStatut(Statut.DIPLOME);
 		utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
-		// GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
-		utilisateurDTO.setPassword("pwd");
+		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
+		String password = generationMotDePasse.nextString();
+		utilisateurDTO.setPassword(password);
+		String messageMail = Mail.construireMail(1, messageOptionel, password);
+		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 		UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
 		utilisateurService.creer(utilisateurDTO);
 		supprimer(utilisateurEnAttenteAValiderDTO);

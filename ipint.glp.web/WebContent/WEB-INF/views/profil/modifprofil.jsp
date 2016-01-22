@@ -17,7 +17,7 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
+				<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
 				<h2>${utilisateur.statut}</h2>
 			</div>
 			<hr />
@@ -60,18 +60,26 @@
 							<label for="InputCursus"> Diplômes </label>
 
 							<div id="diplForm">
-								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}" var="i">
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
+									var="i">
 									<div class="row">
 										<div class="col-md-2">
-											<form:input path="profil.diplomes[${i}].anneeDebut" value="${profil.diplomes[i].anneeDebut}" type="text"
+											<form:input path="profil.diplomes[${i}].anneeDebut"
+												value="${profil.diplomes[i].anneeDebut}" type="text"
 												class="form-control" id="InputDipDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.diplomes[${i}].anneFin" value="${profil.diplomes[i].anneFin}" type="text"
+											<form:input path="profil.diplomes[${i}].anneFin"
+												value="${profil.diplomes[i].anneFin}" type="text"
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-6">
+<<<<<<< HEAD
+											<form:input path="profil.diplomes[${i}].libelle"
+												value="${profil.diplomes[i].libelle}" type="text"
+=======
 											<form:input path="profil.diplomes[${i}].libelle" value="${profil.diplomes[i].libelle}" type="text"
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
@@ -92,23 +100,28 @@
 						<div class="form-group">
 							<label for="InputExp"> Expériences Professionnelles </label>
 							<div id="expForm">
-								<c:forEach begin="0" end="${utilisateur.profil.experiences.size()}" var="i">
+								<c:forEach begin="0"
+									end="${utilisateur.profil.experiences.size()}" var="i">
 									<div class="row">
 										<div class="col-md-2">
-											<form:input path="profil.experiences[${i}].anneeDebut" value="${profil.experiences[i].anneeDebut}" type="text"
+											<form:input path="profil.experiences[${i}].anneeDebut"
+												value="${profil.experiences[i].anneeDebut}" type="text"
 												class="form-control" id="InputExpDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.experiences[${i}].anneFin" value="${profil.experiences[i].anneFin}" type="text"
+											<form:input path="profil.experiences[${i}].anneFin"
+												value="${profil.experiences[i].anneFin}" type="text"
 												class="form-control" id="InputExpAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.experiences[${i}].entreprise" value="${profil.experiences[i].entreprise}" type="text"
+											<form:input path="profil.experiences[${i}].entreprise"
+												value="${profil.experiences[i].entreprise}" type="text"
 												class="form-control" id="InputExpEnt"
 												placeholder="Entreprise" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.experiences[${i}].lieu" value="${profil.experiences[i].lieu}" type="text"
+											<form:input path="profil.experiences[${i}].lieu"
+												value="${profil.experiences[i].lieu}" type="text"
 												class="form-control" id="InputExpLieu" placeholder="Ville" />
 										</div>
 										<div class="col-md-2">
@@ -123,13 +136,19 @@
 									</div>
 									<div class="row" style="margin-top: 1%">
 									<div class="col-md-12">
+<<<<<<< HEAD
+											<form:input path="profil.experiences[${i}].poste"
+												value="${profil.experiences[i].poste}" type="text"
+=======
 											<form:input path="profil.experiences[${i}].poste" value="${profil.experiences[i].poste}" type="text"
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
 									</div>
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12">
-											<form:input path="profil.experiences[${i}].description" value="${profil.experiences[i].description}" type="text"
+											<form:input path="profil.experiences[${i}].description"
+												value="${profil.experiences[i].description}" type="text"
 												class="form-control" id="InputExpDesc"
 												placeholder="Description de votre mission" />
 										</div>
@@ -148,15 +167,18 @@
 						<div class="form-group">
 							<label for="InputSkills"> Compétences </label>
 							<div id="compForm">
-								<c:forEach begin="0" end="${utilisateur.profil.competence.size()}" var="i">
+								<c:forEach begin="0"
+									end="${utilisateur.profil.competence.size()}" var="i">
 									<div class="row" id="idComp">
 										<div class="col-md-3">
-											<form:input path="profil.competence[${i}].libelle" value="${profil.competence[i].libelle}" type="text"
+											<form:input path="profil.competence[${i}].libelle"
+												value="${profil.competence[i].libelle}" type="text"
 												class="form-control" id="InputDipDebut"
 												placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.competence[${i}].note" value="${profil.competence[i].note}" type="text"
+											<form:input path="profil.competence[${i}].note"
+												value="${profil.competence[i].note}" type="text"
 												class="form-control" id="InputDipAnneFin" placeholder="Note" />
 										</div>
 										<div class="col-md-1">
@@ -178,6 +200,15 @@
 							<form:textarea path="profil.centreInteret" type="text-aera"
 								rows="3" class="form-control" id="InputInterets"
 								placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
+						</div>
+						<div class="form-group">
+							<label for="InputInterets"> Réseaux sociaux </label>
+							<c:forEach begin="0"
+								end="${utilisateur.profil.reseauxSociaux.size()}" var="i">
+								<form:input path="profil.centreInteret" type="text-aera"
+									rows="3" class="form-control" id="InputInterets"
+									placeholder="ex: https://www.facebook.com/mon.facebook"></form:input>
+							</c:forEach>
 						</div>
 						<button type="submit" class="btn btn-default">Modifier</button>
 					</form:form>
