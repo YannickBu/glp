@@ -45,7 +45,7 @@
 											<div class="article">
 												<ul>
 													<li class="nomEtu" style="list-style-type: none;">${utilisateur.prenom}
-														${utilisateur.nom} - <fmt:formatDate type="both"
+														${utilisateur.nom} via ${art.groupe.nomGroupe}- <fmt:formatDate type="both"
 															dateStyle="short" timeStyle="short"
 															value="${art.datePublication.time}" />
 													</li>
@@ -108,6 +108,7 @@
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
 															<li>${diplome.anneeDebut}/${diplome.anneFin}-
+																${diplome.libelle}-
 																${diplome.libelle}</li>
 														</c:forEach>
 													</ul>
