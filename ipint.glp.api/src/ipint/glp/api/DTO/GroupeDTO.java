@@ -94,10 +94,8 @@ public class GroupeDTO extends DTO implements Serializable  {
 	}
 
 	@Override
-	public String toString() {
-		return "Groupe [idGroupe=" + idGroupe + ", nomGroupe=" + nomGroupe + ", description=" + description
-				+ ", utilisateurResponsable=" + utilisateurResponsable + ", utilisateurs=" + utilisateurs
-				+ ", articles=" + articles + "]";
+	public String toString(){
+		return "[GroupeDTO - id="+this.idGroupe+", nomGroupe="+this.nomGroupe+"]";
 	}
 
 }

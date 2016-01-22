@@ -85,24 +85,20 @@ public class Competence implements Serializable{
 	public void setProfil(Profil profil) {
 		this.profil = profil;
 	}
+	
+	@Override
+	public String toString(){
+		return "[Competence - id="+this.idCompetence+", libelle="+this.libelle+"]";
+	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((idCompetence == null) ? 0 : idCompetence.hashCode());
-		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
-		result = prime * result + note;
-		result = prime * result + ((profil == null) ? 0 : profil.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -117,21 +113,6 @@ public class Competence implements Serializable{
 				return false;
 		} else if (!idCompetence.equals(other.idCompetence))
 			return false;
-		if (libelle == null) {
-			if (other.libelle != null)
-				return false;
-		} else if (!libelle.equals(other.libelle))
-			return false;
-		if (note != other.note)
-			return false;
-		if (profil == null) {
-			if (other.profil != null)
-				return false;
-		} else if (!profil.equals(other.profil))
-			return false;
 		return true;
 	}
-	
-	
-
 }

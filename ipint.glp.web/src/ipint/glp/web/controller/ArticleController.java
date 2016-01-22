@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.ArticleService;
 import ipint.glp.api.itf.UtilisateurService;
 
@@ -31,7 +32,11 @@ public class ArticleController {
 	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = us.trouver(uDTO);
+		try {
+			uDTO = us.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		   
 		model.addAttribute("articles", uDTO.getArticles());
 		for (ArticleDTO a : uDTO.getArticles()){
@@ -49,7 +54,11 @@ public class ArticleController {
 		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = us.trouver(uDTO);
+		try {
+			uDTO = us.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 
 //		System.out.println("artCont id : "+id);
 		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
@@ -61,7 +70,11 @@ public class ArticleController {
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
 		articleDto.setGroupe(uDTO.getGroupePrincipal());
-		articleDto = as.creer(articleDto);
+		try{
+			articleDto = as.creer(articleDto);
+		}catch(MetierException e){
+			//TODO redirection vers une page d'erreur
+		}
 		System.out.println(articleDto.getGroupe().getNomGroupe());
 		//TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();

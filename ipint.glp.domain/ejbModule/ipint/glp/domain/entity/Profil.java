@@ -97,6 +97,11 @@ public class Profil {
 	}
 
 	@Override
+	public String toString(){
+		return "[Profil - id="+this.idProfil+"]";
+	}
+	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

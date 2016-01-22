@@ -84,6 +84,11 @@ public class CompetenceDTO extends DTO implements Serializable{
 		this.profil = profil;
 	}
 
+	@Override
+	public String toString(){
+		return "[CompetenceDTO - id="+this.idCompetence+", libelle="+this.libelle+"]";
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

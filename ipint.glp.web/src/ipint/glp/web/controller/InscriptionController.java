@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
 
@@ -47,7 +48,11 @@ public class InscriptionController {
 		ueaDTO.setDiplome(utilisateurTmp.getDiplome());
 		ueaDTO.setAnneeDiplome(utilisateurTmp.getAnneeDiplome());
 		ueaDTO.setGroupePrincipal(groupeDTO);
-		utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
+		try {
+			utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		model.addAttribute("utilisateurTmp", utilisateurTmp);
 		return "redirect:/connexion";
 	}

@@ -3,6 +3,7 @@ package ipint.glp.api.itf;
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.exception.MetierException;
 
 /**
  * @author diagnem
@@ -15,13 +16,13 @@ public interface ArticleService {
 	 * @param article l'article à créer
 	 * @return l'article créé
 	 */
-	public ArticleDTO creer(ArticleDTO article);
+	public ArticleDTO creer(ArticleDTO article) throws MetierException ;
 	
 	/** Trouver un article
 	 * @param article l'article à trouver
 	 * @return l'article trouvé
 	 */
-	public ArticleDTO trouver(ArticleDTO article);
+	public ArticleDTO trouver(ArticleDTO article) throws MetierException ;
 	
 	/** Modifier un article
 	 * @param article l'article à modifier
@@ -32,11 +33,11 @@ public interface ArticleService {
 	 * @param nouvelArticle le nouvel article avec les mises à jour
 	 * @return l'ancien article mis à jour
 	 */
-	public ArticleDTO modifier(ArticleDTO nouvelArticle);
+	public ArticleDTO modifier(ArticleDTO nouvelArticle) throws MetierException ;
 	
 	/** Supprimer
 	 * @param article l'article à supprimer
 	 */
-	public void supprimer(ArticleDTO article);
+	public void supprimer(ArticleDTO article) throws MetierException ;
 	
 }

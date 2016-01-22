@@ -98,10 +98,47 @@ public class Groupe {
 
 
 	@Override
-	public String toString() {
-		return "Groupe [idGroupe=" + idGroupe + ", nomGroupe=" + nomGroupe + ", description=" + description
-				+ ", utilisateurResponsable=" + utilisateurResponsable + ", utilisateurs=" + utilisateurs
-				+ ", articles=" + articles + "]";
+	public String toString(){
+		return "[Groupe - id="+this.idGroupe+", nomGroupe="+this.nomGroupe+"]";
 	}
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idGroupe == null) ? 0 : idGroupe.hashCode());
+		result = prime * result + ((nomGroupe == null) ? 0 : nomGroupe.hashCode());
+		return result;
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Groupe other = (Groupe) obj;
+		if (idGroupe == null) {
+			if (other.idGroupe != null)
+				return false;
+		} else if (!idGroupe.equals(other.idGroupe))
+			return false;
+		if (nomGroupe == null) {
+			if (other.nomGroupe != null)
+				return false;
+		} else if (!nomGroupe.equals(other.nomGroupe))
+			return false;
+		return true;
+	}
+	
+	
 
 }
