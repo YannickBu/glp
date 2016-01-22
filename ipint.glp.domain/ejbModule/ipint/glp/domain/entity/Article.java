@@ -25,13 +25,24 @@ public class Article {
 	/*@javax.validation.constraints.NotNull(message = "Veuillez remplir la date de publication")
 	@javax.validation.constraints.Past(message = "Date de publication invalide")*/
 	private Calendar datePublication;
-
+	
+	//Si on garde cet attribut, pensez a rajouter le OneToMany dans groupe et toute l'impl qui va avec
+	@ManyToOne
+	private Groupe groupe;
 	@ManyToOne
 	private Utilisateur utilisateur;
 	@ManyToMany(mappedBy = "articles")
 	private List<Groupe> groupes;
 
 	public Article() {
+	}
+	
+	public Groupe getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(Groupe groupe) {
+		this.groupe = groupe;
 	}
 
 	public Integer getIdArticle() {

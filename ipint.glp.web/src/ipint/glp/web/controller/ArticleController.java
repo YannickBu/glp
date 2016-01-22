@@ -55,6 +55,7 @@ public class ArticleController {
 		Calendar cal = Calendar.getInstance();
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
+		articleDto.setGroupe(uDTO.getGroupePrincipal());
 		try{
 			articleDto = as.creer(articleDto);
 		}catch(MetierException e){

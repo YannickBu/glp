@@ -30,7 +30,7 @@ public class UtilisateurImpl implements UtilisateurService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
-	public UtilisateurImpl(){
+	public UtilisateurImpl() {
 		super();
 	}
 
@@ -113,8 +113,8 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 
 		// Gestion profil
+		Profil pro = new Profil();
 		if (utilisateurDTO.getProfil() != null) {
-			Profil pro = new Profil();
 			pro.setCentreInteret(utilisateurDTO.getProfil().getCentreInteret());
 			// pro.setCompetence(utilisateurDTO.getProfil().getCompetence());
 			if (utilisateurDTO.getProfil().getCompetence() != null
@@ -165,10 +165,10 @@ public class UtilisateurImpl implements UtilisateurService {
 				}
 				pro.setExperiences(listExp);
 			}
-			em.persist(pro);
-			utilisateur.setProfil(pro);
 
 		}
+		em.persist(pro);
+		utilisateur.setProfil(pro);
 
 		if (utilisateur != null && utilisateur.getStatut() != null && utilisateur.getEmail() != null) {
 			UtilisateurGroupes utilGrp = new UtilisateurGroupes();
@@ -240,25 +240,25 @@ public class UtilisateurImpl implements UtilisateurService {
 			Profil profil = em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil());
 			int idProfil = nouvelUtilisateur.getProfil().getIdProfil();
 			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
-			
-			//les competences
+
+			// les competences
 			List<Competence> comps = new ArrayList<Competence>();
-			if (nouvelUtilisateur.getProfil().getCompetence() != null 
+			if (nouvelUtilisateur.getProfil().getCompetence() != null
 					&& !nouvelUtilisateur.getProfil().getCompetence().isEmpty()) {
 				Competence comp = new Competence();
 				for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
-					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() !=0) {
-						Query q = em.createQuery("select c from Competence c where c.libelle = '"+compDTO.getLibelle()+"' and c.profil.idProfil = :idProfil") ;
+					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() != 0) {
+						Query q = em.createQuery("select c from Competence c where c.libelle = '" + compDTO.getLibelle()
+								+ "' and c.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
-						if(!q.getResultList().isEmpty()){
+						if (!q.getResultList().isEmpty()) {
 							comp = (Competence) q.getSingleResult();
-							if(comp != null){
+							if (comp != null) {
 								comp.setNote(compDTO.getNote());
 								comps.add(comp);
 								em.merge(comp);
 							}
-						}
-						else {
+						} else {
 							comp = new Competence();
 							comp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
 							comp.setLibelle(compDTO.getLibelle());
@@ -266,23 +266,25 @@ public class UtilisateurImpl implements UtilisateurService {
 							comps.add(comp);
 							em.persist(comp);
 						}
-					} 
+					}
 				}
 			}
 			profil.setCompetence(comps);
 
-			//les diplomes
+			// les diplomes
 			List<Diplome> dipls = new ArrayList<Diplome>();
 			if (nouvelUtilisateur.getProfil().getDiplomes() != null
 					&& !nouvelUtilisateur.getProfil().getDiplomes().isEmpty()) {
 				Diplome dipl = new Diplome();
 				for (DiplomeDTO diplDTO : nouvelUtilisateur.getProfil().getDiplomes()) {
-					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle()) && diplDTO.getAnneeDebut()!=null && diplDTO.getAnneFin()!=null) {
-						Query q = em.createQuery("select d from Diplome d where d.libelle = '"+diplDTO.getLibelle()+"' and d.profil.idProfil = :idProfil") ;
+					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle())
+							&& diplDTO.getAnneeDebut() != null && diplDTO.getAnneFin() != null) {
+						Query q = em.createQuery("select d from Diplome d where d.libelle = '" + diplDTO.getLibelle()
+								+ "' and d.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
-						if(!q.getResultList().isEmpty()){
+						if (!q.getResultList().isEmpty()) {
 							dipl = (Diplome) q.getSingleResult();
-							if(dipl != null){
+							if (dipl != null) {
 								dipl.setAnneeDebut(diplDTO.getAnneeDebut());
 								dipl.setAnneFin(diplDTO.getAnneFin());
 								dipl.setLibelle(diplDTO.getLibelle());
@@ -303,18 +305,22 @@ public class UtilisateurImpl implements UtilisateurService {
 			}
 			profil.setDiplomes(dipls);
 
-			//les experiences
+			// les experiences
 			List<Experience> exps = new ArrayList<Experience>();
 			if (nouvelUtilisateur.getProfil().getExperiences() != null
 					&& !nouvelUtilisateur.getProfil().getExperiences().isEmpty()) {
 				Experience exp = new Experience();
 				for (ExperienceDTO expDTO : nouvelUtilisateur.getProfil().getExperiences()) {
-					if (expDTO.getAnneeDebut()!=null && expDTO.getAnneFin()!=null && expDTO.getEntreprise() != null && expDTO.getDescription() != null && !"".equals(expDTO.getDescription()) && expDTO.getLieu()!=null && !"".equals(expDTO.getLieu()) && expDTO.getPoste()!= null && !"".equals(expDTO.getPoste())) {
-						Query q = em.createQuery("select e from Experience e where e.entreprise = '"+expDTO.getEntreprise()+"' and e.profil.idProfil = :idProfil") ;
+					if (expDTO.getAnneeDebut() != null && expDTO.getAnneFin() != null && expDTO.getEntreprise() != null
+							&& expDTO.getDescription() != null && !"".equals(expDTO.getDescription())
+							&& expDTO.getLieu() != null && !"".equals(expDTO.getLieu()) && expDTO.getPoste() != null
+							&& !"".equals(expDTO.getPoste())) {
+						Query q = em.createQuery("select e from Experience e where e.entreprise = '"
+								+ expDTO.getEntreprise() + "' and e.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
-						if(!q.getResultList().isEmpty()){
+						if (!q.getResultList().isEmpty()) {
 							exp = (Experience) q.getSingleResult();
-							if(exp != null){
+							if (exp != null) {
 								exp.setDescription(expDTO.getDescription());
 								exp.setAnneeDebut(expDTO.getAnneeDebut());
 								exp.setAnneFin(expDTO.getAnneFin());
@@ -324,8 +330,7 @@ public class UtilisateurImpl implements UtilisateurService {
 								exps.add(exp);
 								em.merge(exp);
 							}
-						} 
-						else {
+						} else {
 							exp = new Experience();
 							exp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
 							exp.setDescription(expDTO.getDescription());
@@ -342,7 +347,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			}
 			profil.setExperiences(exps);
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
-			profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
+			// profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
 			utilisateurMAJ.setProfil(profil);
 		}
 

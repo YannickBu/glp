@@ -93,20 +93,22 @@ public class AdministrationController {
 		} catch (MetierException e) {
 			//TODO redirection vers une page d'erreur
 		}
+		
 		List<UtilisateurEnAttenteDTO> list = null;
 		try {
 			list = utilisateurEnAttenteService.lister();
 		} catch (MetierException e) {
 			//TODO redirection vers une page d'erreur
 		}
-		int idPremierList = list.get(0).getIdUtilisateurEnAttente();
+		
 		model.addAttribute("utilisateurTmp", uDTO);
 		System.out.println(list.toString());
-		if(list==null || !list.isEmpty()){
-			return new ModelAndView("redirect:/panelInscription/" + idPremierList);
+		
+		if(list!=null && !list.isEmpty()){
+			return new ModelAndView("redirect:/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
 		}
 		else {
-			return new ModelAndView("redirect:/menuInscriptionVide/");
+			return new ModelAndView("redirect:/panelInscription");
 		}
 	}
 }

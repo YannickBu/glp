@@ -34,6 +34,12 @@ public class ArticleDTO extends DTO implements Serializable {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la date de publication")
 	@javax.validation.constraints.Past(message = "Date de publication invalide")
 	private Calendar datePublication;
+	
+	/**
+	 * 
+	 */
+	@ManyToOne
+	private GroupeDTO groupe;
 
 	/**
 	 * 
@@ -48,6 +54,14 @@ public class ArticleDTO extends DTO implements Serializable {
 	private List<GroupeDTO> groupes;
 
 	public ArticleDTO() {
+	}
+	
+	public GroupeDTO getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(GroupeDTO groupe) {
+		this.groupe = groupe;
 	}
 
 	public Integer getIdArticle() {

@@ -96,8 +96,8 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
 		utilisateurDTO.setStatut(Statut.DIPLOME);
 		utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
-		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
-		utilisateurDTO.setPassword(generationMotDePasse.nextString());
+		// GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
+		utilisateurDTO.setPassword("pwd");
 		UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
 		utilisateurService.creer(utilisateurDTO);
 		supprimer(utilisateurEnAttenteAValiderDTO);

@@ -128,11 +128,11 @@ h3{
 }
 */
 
-.menu-gauche a:link, .menu-droite-1 a:link, .menu-droite-2 a:link{
+.menu-gauche a:link, .menu-droite-1 a:link, .menu-droite-2 a:link, .header a:link{
 	text-decoration:none; 
 }
 
-.menu-gauche a, .menu-droite-1 a, .menu-droite-2 a {	
+.menu-gauche a, .menu-droite-1 a, .menu-droite-2 a, .header a {	
 	font-color : black;
 	color : black;
 }

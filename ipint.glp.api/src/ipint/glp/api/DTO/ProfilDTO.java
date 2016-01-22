@@ -6,22 +6,23 @@ import java.util.List;
 
 import javax.persistence.OneToMany;
 
-
-public class ProfilDTO extends DTO  implements Serializable {
+public class ProfilDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = 1194522427659253560L;
-	
+
 	private Integer idProfil;
 	// @Temporal(TemporalType.DATE)
 	// @javax.validation.constraints.Past(message="Date de naissance invalide")
 	// private Calendar dateNaiss;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
-	private String cursus;
+	// @javax.validation.constraints.NotNull(message = "Veuillez remplir le
+	// champ cursus")
+	// private String cursus;
 	@OneToMany(mappedBy = "profil")
 	private List<DiplomeDTO> diplomes;
 	@OneToMany(mappedBy = "profil")
 	private List<CompetenceDTO> competence;
 	private String centreInteret;
-	//@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#", message = "Téléphone invalide")
+	// @javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#",
+	// message = "Téléphone invalide")
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<ExperienceDTO> experiences;
@@ -38,14 +39,11 @@ public class ProfilDTO extends DTO  implements Serializable {
 		this.idProfil = idProfil;
 	}
 
-	public String getCursus() {
-		return cursus;
-	}
-
-	public void setCursus(String cursus) {
-		this.cursus = cursus;
-	}
-
+	/*
+	 * public String getCursus() { return cursus; }
+	 * 
+	 * public void setCursus(String cursus) { this.cursus = cursus; }
+	 */
 	public List<CompetenceDTO> getCompetence() {
 		return competence;
 	}
@@ -61,7 +59,6 @@ public class ProfilDTO extends DTO  implements Serializable {
 	public void setCentreInteret(String centreInteret) {
 		this.centreInteret = centreInteret;
 	}
-	
 
 	public List<DiplomeDTO> getDiplomes() {
 		return diplomes;
@@ -89,7 +86,7 @@ public class ProfilDTO extends DTO  implements Serializable {
 	
 	@Override
 	public String toString(){
-		return "[ProfilDTO - id="+this.idProfil+", cursus="+this.cursus+"]";
+		return "[ProfilDTO - id="+this.idProfil+"]";
 	}
 
 	@Override

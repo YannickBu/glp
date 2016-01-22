@@ -35,15 +35,20 @@ public class ArticleImpl implements ArticleService {
 			throw new InformationManquanteException("L'articleDTO est null");
 		}
 		if(articleDTO.getUtilisateur().getEmail()==null && articleDTO.getUtilisateur().getIdUtilisateur()==null){
-			throw new InformationManquanteException("L'utilisateur dans +"+articleDTO.toString()+"+ est null");
+			throw new InformationManquanteException("L'utilisateur dans l'articleDTO est null");
 		}
-		if(articleDTO.getGroupes()==null || articleDTO.getGroupes().isEmpty()){
-			throw new InformationManquanteException(articleDTO.toString()+" n'est associé à aucun groupe");
+		if(articleDTO.getGroupe()==null){
+			throw new InformationManquanteException("L'articleDTO n'a pas de groupe principal associé");
 		}
+//		if(articleDTO.getGroupes()==null || articleDTO.getGroupes().isEmpty()){
+//			throw new InformationManquanteException("L'articleDTO n'est associé à aucun groupe");
+//		}
 
 		Article art = new Article();
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
+		
+		//Gestion de l'utilisateur de la publication
 
 		Utilisateur util = null;
 		Query q;
@@ -65,30 +70,39 @@ public class ArticleImpl implements ArticleService {
 		em.persist(util);
 
 		art.setUtilisateur(util);
-
-
-		List<Groupe> listGrp = new ArrayList<>();
-		for(GroupeDTO grpDTO : articleDTO.getGroupes()){
-			Groupe grp=null;
-			if(grpDTO.getIdGroupe()!=null){
-				grp = em.find(Groupe.class, grpDTO.getIdGroupe());
-				if(grp==null){
-					throw new GroupeInconnuException(grpDTO.toString()+" n'existe pas");
-				}
-			}else{
-				q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + grpDTO.getNomGroupe() + "'");
-				try{
-					grp = (Groupe)q.getSingleResult();
-				}catch(NoResultException e){
-					throw new GroupeInconnuException(grpDTO.toString()+" n'existe pas");
-				}
-			}
-			listGrp.add(grp);
-			grp.getArticles().add(art);
-			em.persist(grp);
+		
+		//Gestion du groupe de publication
+		Groupe groupe = null;
+		groupe = em.find(Groupe.class, articleDTO.getGroupe().getIdGroupe());
+		if(groupe == null){
+			throw new GroupeInconnuException("Le groupe ayant pour id "+articleDTO.getGroupe().getIdGroupe()+" n'existe pas");
 		}
-		art.setGroupes(listGrp);
-
+		art.setGroupe(groupe);
+		
+		if(articleDTO.getGroupes()!=null && !articleDTO.getGroupes().isEmpty()){
+			List<Groupe> listGrp = new ArrayList<>();
+			for(GroupeDTO grpDTO : articleDTO.getGroupes()){
+				groupe=null;
+				if(grpDTO.getIdGroupe()!=null){
+					groupe = em.find(Groupe.class, grpDTO.getIdGroupe());
+					if(groupe==null){
+						throw new GroupeInconnuException(grpDTO.toString()+" n'existe pas");
+					}
+				}else{
+					q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + grpDTO.getNomGroupe() + "'");
+					try{
+						groupe = (Groupe)q.getSingleResult();
+					}catch(NoResultException e){
+						throw new GroupeInconnuException(grpDTO.toString()+" n'existe pas");
+					}
+				}
+				listGrp.add(groupe);
+				groupe.getArticles().add(art);
+				em.persist(groupe);
+			}
+			art.setGroupes(listGrp);
+		}
+		
 
 		em.persist(art);
 
