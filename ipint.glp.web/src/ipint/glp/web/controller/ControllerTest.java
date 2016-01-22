@@ -17,6 +17,7 @@ import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.enumType.Statut;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.ArticleService;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
@@ -142,7 +143,11 @@ public class ControllerTest {
 
 		utilDTOm.setProfil(pDTOm);
 
-		utilDTOm = utilS.creer(utilDTOm);
+		try {
+			utilDTOm = utilS.creer(utilDTOm);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 
 		return new ModelAndView("accueil");
 

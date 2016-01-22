@@ -134,7 +134,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente) throws MetierException {
 		UtilisateurEnAttente utilisateurEnAttente = em.find(UtilisateurEnAttente.class, idUtilisateurEnAttente);
 		if(utilisateurEnAttente==null){
-			throw new UtilisateurEnAttenteInconnuException("L'utilisateurEnAttente ayyant pour id "+idUtilisateurEnAttente+" n'existe pas");
+			throw new UtilisateurEnAttenteInconnuException("L'utilisateurEnAttente ayant pour id "+idUtilisateurEnAttente+" n'existe pas");
 		}
 		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
 	}

@@ -3,6 +3,7 @@ package ipint.glp.api.itf;
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.exception.MetierException;
 
 /**
  * @author declerck
@@ -18,7 +19,7 @@ public interface UtilisateurService {
 	 *            l'utilisateur à créer
 	 * @return l'utilisateur créé
 	 */
-	public UtilisateurDTO creer(UtilisateurDTO utilisateur);
+	public UtilisateurDTO creer(UtilisateurDTO utilisateur) throws MetierException;
 
 	/**
 	 * Touver un utilisateur
@@ -27,7 +28,7 @@ public interface UtilisateurService {
 	 *            l'utilisateur à trouver
 	 * @return l'utilisateur trouvé
 	 */
-	public UtilisateurDTO trouver(UtilisateurDTO utilisateur);
+	public UtilisateurDTO trouver(UtilisateurDTO utilisateur) throws MetierException;
 
 	/**
 	 * Modifier un utilisateur
@@ -38,7 +39,7 @@ public interface UtilisateurService {
 	 *            le nouvel utilisateur avec les mises à jour
 	 * @return l'ancien utilisateur mis à jour
 	 */
-	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur,UtilisateurDTO nouvelUtilisateur);
+	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur,UtilisateurDTO nouvelUtilisateur) throws MetierException;
 
 	/**
 	 * Supprimer un utilisateur
@@ -46,7 +47,7 @@ public interface UtilisateurService {
 	 * @param utilisateur
 	 *            l'utilisateur à supprimer
 	 */
-	public void supprimer(UtilisateurDTO utilisateur);
+	public void supprimer(UtilisateurDTO utilisateur) throws MetierException;
 
 	// public List<UtilisateurDTO> listerUtilisateur();
 

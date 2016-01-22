@@ -32,7 +32,11 @@ public class ArticleController {
 	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = us.trouver(uDTO);
+		try {
+			uDTO = us.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("accueil", "article", new ArticleDTO());
@@ -44,7 +48,11 @@ public class ArticleController {
 		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = us.trouver(uDTO);
+		try {
+			uDTO = us.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 
 //		System.out.println("artCont id : "+id);
 		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
