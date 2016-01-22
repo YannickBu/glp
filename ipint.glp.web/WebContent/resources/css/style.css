@@ -25,7 +25,7 @@ html, body, .container-table {
 	color: #000000;	
 }
 
-.container-bas {
+.container-bas {a
 	padding-bottom: 5%;
 }
 
@@ -169,16 +169,37 @@ footer{
 	padding-top: 1%;
 }
 
+.bloc{
+	background-color : #ffffff;
+	border : 1px solid #dadbdb;
+	margin-top : 1%;
+	padding-top: 1%;
+}
+
 .publication{
 	padding-top: 1%;
 	padding-bottom: 1%;
 	background-color : #ffffff;
 	border : 1px solid #dadbdb;
 }
+
+.img-responsive2{
+	width: 25px;
+    height: 25px;
+}
+
+.glyphicon-map-marker{
+    font-size: 2em;
+}
 .accueilBody li{
 	list-style-type: none;
 }
 .nomEtu{
+	color : #f6921e;	
+    font-weight: bold;
+}
+
+.nomBloc{
 	color : #f6921e;	
     font-weight: bold;
 }

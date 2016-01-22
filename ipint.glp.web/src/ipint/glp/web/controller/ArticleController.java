@@ -32,8 +32,18 @@ public class ArticleController {
 	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = us.trouver(uDTO);
+		try {
+			uDTO = us.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
+		   
 		model.addAttribute("articles", uDTO.getArticles());
+		for (ArticleDTO a : uDTO.getArticles()){
+			if(a.getGroupe()!= null){
+				System.out.println("GROUUUUUUUUUUUUPE" + a.getGroupe().getNomGroupe());
+			}
+		}
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("accueil", "article", new ArticleDTO());
 	}
@@ -44,7 +54,11 @@ public class ArticleController {
 		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = us.trouver(uDTO);
+		try {
+			uDTO = us.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 
 //		System.out.println("artCont id : "+id);
 		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
@@ -61,6 +75,7 @@ public class ArticleController {
 		}catch(MetierException e){
 			//TODO redirection vers une page d'erreur
 		}
+		System.out.println(articleDto.getGroupe().getNomGroupe());
 		//TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
 		model.addAttribute("articles", articles);

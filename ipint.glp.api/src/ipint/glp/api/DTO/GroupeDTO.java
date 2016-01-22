@@ -25,7 +25,8 @@ public class GroupeDTO extends DTO implements Serializable  {
 	private UtilisateurDTO utilisateurResponsable;
 	@ManyToMany
 	private List<UtilisateurDTO> utilisateurs;
-	@ManyToMany
+	
+	@OneToMany(mappedBy = "groupe")
 	private List<ArticleDTO> articles;
 	
 	@OneToMany(mappedBy = "groupePrincipal")
@@ -35,26 +36,15 @@ public class GroupeDTO extends DTO implements Serializable  {
 		this.utilisateurs = new ArrayList<>();
 	}
 	
-	
-
-
-
 	public List<UtilisateurDTO> getUtilisateursPrincipals() {
 		return utilisateursPrincipals;
 	}
-
-
-
-
 
 	public void setUtilisateursPrincipals(List<UtilisateurDTO> utilisateursPrincipals) {
 		this.utilisateursPrincipals = utilisateursPrincipals;
 	}
 
-
-
-
-
+	
 	public Integer getIdGroupe() {
 		return idGroupe;
 	}

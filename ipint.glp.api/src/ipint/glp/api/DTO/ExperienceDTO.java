@@ -22,13 +22,39 @@ public class ExperienceDTO extends DTO implements Serializable  {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le lieu")
 	private String lieu;
 	private String description;
-
+	private String region;
+	private String pays;
+	
 	@ManyToOne
 	private ProfilDTO profil;
 	
 	
 	public ExperienceDTO() {
 		super();
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getPays() {
+		return pays;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+	public ProfilDTO getProfil() {
+		return profil;
+	}
+
+	public void setProfil(ProfilDTO profil) {
+		this.profil = profil;
 	}
 
 	public Integer getIdExperience() {

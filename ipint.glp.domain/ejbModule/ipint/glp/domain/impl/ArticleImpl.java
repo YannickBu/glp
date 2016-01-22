@@ -1,7 +1,5 @@
 package ipint.glp.domain.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -65,44 +63,50 @@ public class ArticleImpl implements ArticleService {
 				throw new UtilisateurInconnuException(articleDTO.getUtilisateur().toString()+" n'existe pas");
 			}
 		}
-
-		util.getArticles().add(art);
-		em.persist(util);
-
+		if (util == null) {
+			return null;
+		} else {
+			util.getArticles().add(art);
+			em.persist(util);
+		}
 		art.setUtilisateur(util);
-		
-		//Gestion du groupe de publication
+
+		// Gestion du groupe de publication
 		Groupe groupe = null;
-		groupe = em.find(Groupe.class, articleDTO.getGroupe().getIdGroupe());
+
+		if (articleDTO.getGroupe() != null) {
+			groupe = em.find(Groupe.class, articleDTO.getGroupe().getIdGroupe());
+		}
 		if(groupe == null){
 			throw new GroupeInconnuException("Le groupe ayant pour id "+articleDTO.getGroupe().getIdGroupe()+" n'existe pas");
 		}
 		art.setGroupe(groupe);
-		
-		if(articleDTO.getGroupes()!=null && !articleDTO.getGroupes().isEmpty()){
-			List<Groupe> listGrp = new ArrayList<>();
-			for(GroupeDTO grpDTO : articleDTO.getGroupes()){
-				groupe=null;
-				if(grpDTO.getIdGroupe()!=null){
-					groupe = em.find(Groupe.class, grpDTO.getIdGroupe());
-					if(groupe==null){
-						throw new GroupeInconnuException(grpDTO.toString()+" n'existe pas");
-					}
-				}else{
-					q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + grpDTO.getNomGroupe() + "'");
-					try{
-						groupe = (Groupe)q.getSingleResult();
-					}catch(NoResultException e){
-						throw new GroupeInconnuException(grpDTO.toString()+" n'existe pas");
-					}
-				}
-				listGrp.add(groupe);
-				groupe.getArticles().add(art);
-				em.persist(groupe);
-			}
-			art.setGroupes(listGrp);
-		}
-		
+
+		//
+		// if(articleDTO.getGroupes()!=null &&
+		// !articleDTO.getGroupes().isEmpty()){
+		// List<Groupe> listGrp = new ArrayList<>();
+		// for(GroupeDTO grpDTO : articleDTO.getGroupes()){
+		// Groupe grp=null;
+		// if(grpDTO.getIdGroupe()!=null){
+		// grp = em.find(Groupe.class, grpDTO.getIdGroupe());
+		// }else{
+		// q = em.createQuery("select g from Groupe g where g.nomGroupe = '" +
+		// grpDTO.getNomGroupe() + "'");
+		// grp = (Groupe)q.getSingleResult();
+		// }
+		// if(grp!=null){
+		// listGrp.add(grp);
+		// grp.getArticles().add(art);
+		// em.persist(grp);
+		// }
+		// }
+		// if(listGrp.isEmpty()){
+		// return null;
+		// }
+		// art.setGroupes(listGrp);
+		// }
+
 
 		em.persist(art);
 
@@ -151,6 +155,7 @@ public class ArticleImpl implements ArticleService {
 		//
 		//		return nouvelArt;
 
+
 		Article art = em.find(Article.class, nouvelArt.getIdArticle());
 		if(art==null){
 			throw new ArticleInconnuException(nouvelArt.toString()+" n'existe pas");
@@ -158,13 +163,20 @@ public class ArticleImpl implements ArticleService {
 		art.setContenu(nouvelArt.getContenu());
 		art.setDatePublication(nouvelArt.getDatePublication());
 
+		//Recupération du groupe du nouvel article
+		Groupe groupeTmp = em.find(Groupe.class, nouvelArt.getGroupe().getIdGroupe());
+		art.setGroupe(groupeTmp);
+
 		em.persist(art);
 
 		return MappingToDTO.articleToArticleDTO(art);
 	}
 
-	/* (non-Javadoc)
-	 * @see ipint.glp.api.itf.ArticleService#supprimer(ipint.glp.api.DTO.ArticleDTO)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ipint.glp.api.itf.ArticleService#supprimer(ipint.glp.api.DTO.ArticleDTO)
 	 */
 	@Override
 	public void supprimer(ArticleDTO articleASupprimer) throws MetierException {
@@ -181,7 +193,4 @@ public class ArticleImpl implements ArticleService {
 		}
 		em.remove(art);
 	}
-
-
-
 }

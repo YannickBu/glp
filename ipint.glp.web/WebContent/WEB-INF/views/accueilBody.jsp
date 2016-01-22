@@ -22,7 +22,7 @@
         
                 <div class="article">
                         <ul>
-                        <li class="nomEtu">${utilisateur.prenom} ${utilisateur.nom} via ${art.groupe} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
+                        <li class="nomEtu">${utilisateur.prenom} ${utilisateur.nom} via ${art.groupe.nomGroupe} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
                         <li>${art.contenu}</li>
                         </ul>
                 </div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
 
@@ -33,7 +34,11 @@ public class ProfilController {
 
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = utilisateurService.trouver(uDTO);
+		try {
+			uDTO = utilisateurService.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		//		
 		//		UtilisateurDTO uDTO2 = new UtilisateurDTO();
 		//		GroupeDTO gDTO = new GroupeDTO();
@@ -81,7 +86,11 @@ public class ProfilController {
 		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setIdUtilisateur(Integer.parseInt(id));
-		uDTO = utilisateurService.trouver(uDTO);
+		try {
+			uDTO = utilisateurService.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
@@ -102,7 +111,11 @@ public class ProfilController {
 			Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = utilisateurService.trouver(uDTO);
+		try {
+			uDTO = utilisateurService.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("modifprofil", "utilisateur",uDTO);
 	}
@@ -112,12 +125,20 @@ public class ProfilController {
 			Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
-		uDTO = utilisateurService.trouver(uDTO);
+		try {
+			uDTO = utilisateurService.trouver(uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		Integer idTemp = uDTO.getProfil().getIdProfil();
 		uDTO.setProfil(utilisateur.getProfil());
 		uDTO.getProfil().setIdProfil(idTemp);
 
-		utilisateur = utilisateurService.modifier(utilisateur,uDTO);
+		try {
+			utilisateur = utilisateurService.modifier(utilisateur,uDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", utilisateur);
 		//return "redirect:/profil/{id}";

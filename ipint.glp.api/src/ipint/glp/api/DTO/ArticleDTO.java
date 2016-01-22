@@ -47,11 +47,6 @@ public class ArticleDTO extends DTO implements Serializable {
 	@ManyToOne
 	private UtilisateurDTO utilisateur;
 
-	/**
-	 * 
-	 */
-	@ManyToMany(mappedBy = "articles")
-	private List<GroupeDTO> groupes;
 
 	public ArticleDTO() {
 	}
@@ -94,14 +89,6 @@ public class ArticleDTO extends DTO implements Serializable {
 
 	public void setUtilisateur(UtilisateurDTO utilisateur) {
 		this.utilisateur = utilisateur;
-	}
-
-	public List<GroupeDTO> getGroupes() {
-		return groupes;
-	}
-
-	public void setGroupes(List<GroupeDTO> groupes) {
-		this.groupes = groupes;
 	}
 
 	@Override
