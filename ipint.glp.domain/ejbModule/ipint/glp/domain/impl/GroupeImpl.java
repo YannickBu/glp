@@ -87,6 +87,9 @@ public class GroupeImpl implements GroupeService {
 		} else if (obj.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
 			Groupe grp = (Groupe) q.getSingleResult();
+//			Query q2 = em.createQuery("select a from Article a where a.groupe_idgroupe = '" + grp.getIdGroupe() + "'");
+//			List<Article> lesArt = q2.getResultList();
+//			grp.setArticles(lesArt);
 			return MappingToDTO.groupeToGroupeDTO(grp);
 		}
 		return null;
