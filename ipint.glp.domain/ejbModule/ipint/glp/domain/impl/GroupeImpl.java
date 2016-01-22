@@ -15,7 +15,7 @@ import ipint.glp.api.itf.GroupeService;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Utilisateur;
-import ipint.glp.domain.entity.util.MappingToDTO;
+import ipint.glp.domain.util.MappingToDTO;
 
 @Stateless
 public class GroupeImpl implements GroupeService {

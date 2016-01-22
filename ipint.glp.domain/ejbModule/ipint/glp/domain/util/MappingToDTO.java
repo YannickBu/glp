@@ -1,4 +1,4 @@
-package ipint.glp.domain.entity.util;
+package ipint.glp.domain.util;
 
 import java.util.ArrayList;
 

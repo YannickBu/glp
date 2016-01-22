@@ -22,7 +22,7 @@ import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurGroupes;
-import ipint.glp.domain.entity.util.MappingToDTO;
+import ipint.glp.domain.util.MappingToDTO;
 
 @Stateless
 public class UtilisateurImpl implements UtilisateurService {
