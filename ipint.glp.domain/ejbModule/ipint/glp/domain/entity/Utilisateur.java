@@ -28,11 +28,11 @@ public class Utilisateur implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idUtilisateur;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Nom")
-	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Nom invalide")
+//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Nom")
+//	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Nom invalide")
 	private String nom;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
-	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
+//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
+//	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
 	private String prenom;
 	private Statut statut;
 	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ

@@ -74,7 +74,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (groupeDTOm.getIdGroupe() != null) {
 			grpm = em.find(Groupe.class, groupeDTOm.getIdGroupe());
 			if(grpm==null){
-				throw new GroupeInconnuException("Le groupe d'id=" + grpm.getIdGroupe() + " n'existe pas");
+				throw new GroupeInconnuException("Le groupe d'id=" + groupeDTOm.getIdGroupe() + " n'existe pas");
 			}
 		} else if (groupeDTOm.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOm.getNomGroupe() + "'");
@@ -265,13 +265,19 @@ public class UtilisateurImpl implements UtilisateurService {
 
 
 	@Override
-	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur, UtilisateurDTO nouvelUtilisateur) throws MetierException {
+	public UtilisateurDTO modifier(UtilisateurDTO nouvelUtilisateur) throws MetierException {
 		if(nouvelUtilisateur==null){
 			throw new InformationManquanteException("Le nouvelUtilisateurDTO est null");
 		}
+		if(nouvelUtilisateur.getIdUtilisateur()==null){
+			throw new InformationManquanteException("Le nouvelUtilisateurDTO n'a pas d'id");
+		}
 
 		Utilisateur utilisateurMAJ = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur());
-
+		if(utilisateurMAJ==null){
+			throw new UtilisateurInconnuException("L'utilisateur à modifier n'existe pas (id="+nouvelUtilisateur.getIdUtilisateur()+")");
+		}
+		
 		if (nouvelUtilisateur.getStatut() != null) {
 			utilisateurMAJ.setStatut(nouvelUtilisateur.getStatut());
 		}

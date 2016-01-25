@@ -82,7 +82,11 @@ public class ArticleController {
 		}catch(MetierException e){
 			//TODO redirection vers une page d'erreur
 		}
-		GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
+		try {
+			GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		
 		System.out.println(articleDto.getGroupe().getNomGroupe());
 		//TODO recuperer en base les articles

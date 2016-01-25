@@ -33,13 +33,11 @@ public interface UtilisateurService {
 	/**
 	 * Modifier un utilisateur
 	 * 
-	 * @param ancienUtilisateur
-	 *            l'utilisateur à modifier
 	 * @param nouvelUtilisateur
 	 *            le nouvel utilisateur avec les mises à jour
 	 * @return l'ancien utilisateur mis à jour
 	 */
-	public UtilisateurDTO modifier(UtilisateurDTO ancienUtilisateur,UtilisateurDTO nouvelUtilisateur) throws MetierException;
+	public UtilisateurDTO modifier(UtilisateurDTO nouvelUtilisateur) throws MetierException;
 
 	/**
 	 * Supprimer un utilisateur

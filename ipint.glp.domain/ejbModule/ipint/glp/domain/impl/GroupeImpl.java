@@ -5,12 +5,17 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.exception.GroupeInconnuException;
+import ipint.glp.api.exception.InformationManquanteException;
+import ipint.glp.api.exception.MetierException;
+import ipint.glp.api.exception.UtilisateurInconnuException;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Groupe;
@@ -23,85 +28,112 @@ public class GroupeImpl implements GroupeService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ipint.glp.api.itf.GroupeService#creer(ipint.glp.api.DTO.GroupeDTO)
-	 */
 	@Override
-	public GroupeDTO creer(GroupeDTO obj) {
+	public GroupeDTO creer(GroupeDTO obj) throws MetierException {
+		if(obj==null){
+			throw new InformationManquanteException("Le groupeDTO est null");
+		}
+		if(obj.getNomGroupe()==null){
+			throw new InformationManquanteException("Le groupeDTO n'a pas de nom");
+		}
+		if(obj.getUtilisateurResponsable()==null){
+			throw new InformationManquanteException("Le groupeDTO n'a pas d'utilisateur responsable");
+		}
+		if(obj.getUtilisateurResponsable().getIdUtilisateur()==null && obj.getUtilisateurResponsable().getEmail()==null){
+			throw new InformationManquanteException("L'utilisateur responsable du groupeDTO n'a ni id ni email");
+		}
+		
 		Groupe groupe = new Groupe();
 		groupe.setNomGroupe(obj.getNomGroupe());
 		groupe.setDescription(obj.getDescription());
+		
 		Utilisateur utilisateur = null;
 		if (obj.getUtilisateurResponsable().getIdUtilisateur() != null) {
 			utilisateur = em.find(Utilisateur.class, obj.getUtilisateurResponsable().getIdUtilisateur());
+			if(utilisateur==null){
+				throw new UtilisateurInconnuException(obj.getUtilisateurResponsable().toString()+" n'existe pas pour cet id");
+			}
 		} else if (obj.getUtilisateurResponsable().getEmail() != null) {
 			Query q = em.createQuery(
-					"select u from Utilisateur u where u.nom = '" + obj.getUtilisateurResponsable().getNom() + "'");
-			utilisateur = (Utilisateur) q.getSingleResult();
+					"select u from Utilisateur u where u.email = '" + obj.getUtilisateurResponsable().getEmail() + "'");
+			try{
+				utilisateur = (Utilisateur) q.getSingleResult();
+			}catch(NoResultException e){
+				throw new UtilisateurInconnuException(obj.getUtilisateurResponsable().toString()+" n'existe pas pour cet email");
+			}
 		}
-		// TODO gérer les exceptions si id et email sont null
 		groupe.setUtilisateurResponsable(utilisateur);
+		
 		List<Article> articles = new ArrayList<Article>();
-		if (obj.getArticles().size() > 0) {
+		if (obj.getArticles()!=null && !obj.getArticles().isEmpty()) {
 			for (ArticleDTO articleDto : obj.getArticles()) {
 				Article article = null;
 				if (articleDto.getIdArticle() != null) {
 					article = em.find(Article.class, articleDto.getIdArticle());
-					articles.add(article);
+					if(article!=null){
+						articles.add(article);						
+					}
 				}
-				// TODO gérer l'exception si id = null
 			}
 		}
 		groupe.setArticles(articles);
+		
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
-		if (obj.getUtilisateurs().size() > 0) {
+		if (obj.getUtilisateurs()!=null && !obj.getUtilisateurs().isEmpty()) {
 			for (UtilisateurDTO utilisateurDto : obj.getUtilisateurs()) {
 				Utilisateur u = null;
 				if (utilisateurDto.getIdUtilisateur() != null) {
 					u = em.find(Utilisateur.class, utilisateurDto.getIdUtilisateur());
-					utilisateurs.add(u);
+					if(u!=null){
+						utilisateurs.add(u);						
+					}
 				} else if (utilisateurDto.getEmail() != null) {
-					u = em.find(Utilisateur.class, utilisateurDto.getEmail());
-					utilisateurs.add(u);
+					Query q = em.createQuery(
+							"select u from Utilisateur u where u.email = '" + utilisateurDto.getEmail() + "'");
+					if(!q.getResultList().isEmpty()){
+						u = (Utilisateur) q.getSingleResult();	
+						utilisateurs.add(u);					
+					}
 				}
-				// TODO gérer l'exception si id et email = null
 			}
 		}
 		groupe.setUtilisateurs(utilisateurs);
+		
 		em.persist(groupe);
-		Groupe groupeCreated = em.find(Groupe.class, groupe.getIdGroupe());
-		return MappingToDTO.groupeToGroupeDTO(groupeCreated);
+		
+		return MappingToDTO.groupeToGroupeDTO(groupe);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ipint.glp.api.itf.GroupeService#trouver(ipint.glp.api.DTO.GroupeDTO)
-	 */
 	@Override
-	public GroupeDTO trouver(GroupeDTO obj) {
+	public GroupeDTO trouver(GroupeDTO obj) throws MetierException {
+		if(obj==null){
+			throw new InformationManquanteException("Le groupeDTO est null");
+		}
+		if(obj.getIdGroupe()==null && obj.getNomGroupe()==null){
+			throw new InformationManquanteException("Le groupeDTO n'a ni id ni nom de groupe");
+		}
+		
+		Groupe gr = null;
+		
 		if (obj.getIdGroupe() != null) {
-			return MappingToDTO.groupeToGroupeDTO(em.find(Groupe.class, obj.getIdGroupe()));
+			gr = em.find(Groupe.class, obj.getIdGroupe());
+			if(gr==null){
+				throw new GroupeInconnuException(obj.toString()+" n'existe pas pour cet id");
+			}
 		} else if (obj.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
-			Groupe grp = (Groupe) q.getSingleResult();
+			try{
+				Groupe grp = (Groupe) q.getSingleResult();
+			}catch(NoResultException e){
+				throw new GroupeInconnuException(obj.toString()+" n'existe pas pour ce nom de groupe");
+			}
 //			Query q2 = em.createQuery("select a from Article a where a.groupe_idgroupe = '" + grp.getIdGroupe() + "'");
 //			List<Article> lesArt = q2.getResultList();
 //			grp.setArticles(lesArt);
-			return MappingToDTO.groupeToGroupeDTO(grp);
 		}
-		return null;
+		return MappingToDTO.groupeToGroupeDTO(gr);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ipint.glp.api.itf.GroupeService#modifier(ipint.glp.api.DTO.GroupeDTO,
-	 * ipint.glp.api.DTO.GroupeDTO)
-	 */
 	public GroupeDTO modifier(GroupeDTO ancienObj, GroupeDTO nouvelObj) {
 		// Groupe groupeMAJ = em.find(Groupe.class,ancienObj.getIdGroupe());
 		//
@@ -123,23 +155,12 @@ public class GroupeImpl implements GroupeService {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ipint.glp.api.itf.GroupeService#supprimer(ipint.glp.api.DTO.GroupeDTO)
-	 */
 	@Override
 	public void supprimer(GroupeDTO obj) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ipint.glp.api.itf.GroupeService#lister()
-	 */
 	public List<GroupeDTO> lister() {
 		Query q = em.createQuery("select g from Groupe g ");
 		List<Groupe> lesGroupes = q.getResultList();
