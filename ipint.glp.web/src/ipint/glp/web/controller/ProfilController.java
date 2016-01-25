@@ -135,7 +135,7 @@ public class ProfilController {
 		uDTO.getProfil().setIdProfil(idTemp);
 
 		try {
-			utilisateur = utilisateurService.modifier(utilisateur,uDTO);
+			utilisateur = utilisateurService.modifier(uDTO);
 		} catch (MetierException e) {
 			//TODO rediriger page erreur
 		}

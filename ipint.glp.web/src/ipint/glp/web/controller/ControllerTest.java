@@ -128,17 +128,29 @@ public class ControllerTest {
 		utilDTOm.setStatut(Statut.DIPLOME);
 		GroupeDTO gDTO = new GroupeDTO();
 		gDTO.setNomGroupe("MIAGE");
-		gDTO = groupeS.trouver(gDTO);
+		try {
+			gDTO = groupeS.trouver(gDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		GroupeDTO gDTO2 = new GroupeDTO();
 		gDTO2.setNomGroupe("SIAD");
-		gDTO2 = groupeS.trouver(gDTO2);
+		try {
+			gDTO2 = groupeS.trouver(gDTO2);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
 		grp.add(gDTO);
 		grp.add(gDTO2);
 		utilDTOm.setGroupes(grp);
 		GroupeDTO gPrincDTO = new GroupeDTO();
 		gPrincDTO.setNomGroupe("Informatique");
-		gPrincDTO = groupeS.trouver(gPrincDTO);
+		try {
+			gPrincDTO = groupeS.trouver(gPrincDTO);
+		} catch (MetierException e) {
+			//TODO rediriger page erreur
+		}
 		utilDTOm.setGroupePrincipal(gPrincDTO);
 
 		utilDTOm.setProfil(pDTOm);

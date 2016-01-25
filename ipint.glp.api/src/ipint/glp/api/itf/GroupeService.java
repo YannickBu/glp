@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.GroupeDTO;
+import ipint.glp.api.exception.MetierException;
 
 @Local
 public interface GroupeService {
@@ -16,7 +17,7 @@ public interface GroupeService {
 	 *            le groupe à créer
 	 * @return le groupe créé
 	 */
-	public GroupeDTO creer(GroupeDTO groupe);
+	public GroupeDTO creer(GroupeDTO groupe) throws MetierException;
 
 	/**
 	 * Trouver un groupe
@@ -25,7 +26,7 @@ public interface GroupeService {
 	 *            le groupe à trouver
 	 * @return le groupe trouvé
 	 */
-	public GroupeDTO trouver(GroupeDTO groupe);
+	public GroupeDTO trouver(GroupeDTO groupe) throws MetierException;
 
 	/**
 	 * Modifier un groupe
