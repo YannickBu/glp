@@ -102,12 +102,12 @@
 	
 	<error-page>
 		<error-code>403</error-code>
-		<location>/connexion</location>
+		<location>/erreur</location>
 	</error-page>
 	
 		<error-page>
 		<error-code>401</error-code>
-		<location>/connexion</location>
+		<location>/erreur</location>
 	</error-page>
 	
 </web-app>

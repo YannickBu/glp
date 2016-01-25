@@ -40,7 +40,7 @@ public class AdministrationController {
 		try {
 			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateurTmp", uDTO);
 		List<UtilisateurEnAttenteDTO> list;
@@ -48,7 +48,7 @@ public class AdministrationController {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		return new ModelAndView("panelInscription");
 	}
@@ -61,7 +61,7 @@ public class AdministrationController {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		return new ModelAndView("menuInscriptionVide");
 	}
@@ -74,7 +74,7 @@ public class AdministrationController {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		return new ModelAndView("menuInscriptionVide");
 	}
@@ -91,14 +91,14 @@ public class AdministrationController {
 				utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
 			}
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		
 		List<UtilisateurEnAttenteDTO> list = null;
 		try {
 			list = utilisateurEnAttenteService.lister();
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		
 		model.addAttribute("utilisateurTmp", uDTO);
