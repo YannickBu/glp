@@ -10,6 +10,8 @@ import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
+import ipint.glp.api.exception.InformationManquanteException;
+import ipint.glp.api.exception.MetierException;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Competence;
 import ipint.glp.domain.entity.Diplome;
@@ -21,9 +23,9 @@ import ipint.glp.domain.entity.UtilisateurEnAttente;
 
 public class MappingToDTO {
 
-	public static ExperienceDTO experienceToExperienceDTO(Experience exp) {
+	public static ExperienceDTO experienceToExperienceDTO(Experience exp) throws MetierException {
 		if (exp == null) {
-			return null;
+			throw new InformationManquanteException("L'experience à mapper en DTO est null");
 		}
 
 		ExperienceDTO expDTO = new ExperienceDTO();
@@ -38,21 +40,22 @@ public class MappingToDTO {
 		return expDTO;
 	}
 	
-	public static CompetenceDTO competenceToCompetenceDTO(Competence comp) {
+	public static CompetenceDTO competenceToCompetenceDTO(Competence comp) throws MetierException {
 		if (comp == null) {
-			return null;
+			throw new InformationManquanteException("La competence à mapper en DTO est null");
 		}
 
 		CompetenceDTO compDTO = new CompetenceDTO();
 		compDTO.setIdCompetence(comp.getIdCompetence());
 		compDTO.setLibelle(comp.getLibelle());
 		compDTO.setNote(comp.getNote());
+		
 		return compDTO;
 	}
 	
-	public static DiplomeDTO diplomeToDiplomeDTO(Diplome dipl) {
+	public static DiplomeDTO diplomeToDiplomeDTO(Diplome dipl) throws MetierException {
 		if (dipl == null) {
-			return null;
+			throw new InformationManquanteException("Le diplome à mapper en DTO est null");
 		}
 
 		DiplomeDTO diplDTO = new DiplomeDTO();
@@ -64,30 +67,28 @@ public class MappingToDTO {
 		return diplDTO;
 	}
 
-	public static ProfilDTO profilToProfilDTO(Profil pro) {
+	public static ProfilDTO profilToProfilDTO(Profil pro) throws MetierException {
 		if (pro == null) {
-			return null;
+			throw new InformationManquanteException("Le profil à mapper en DTO est null");
 		}
 
 		ProfilDTO proDTO = new ProfilDTO();
 		proDTO.setIdProfil(pro.getIdProfil());
 		proDTO.setCentreInteret(pro.getCentreInteret());
-		//proDTO.setCompetence(pro.getCompetence());
+		proDTO.setTelephone(pro.getTelephone());
+		
 		proDTO.setCompetence(new ArrayList<>());
 		if (pro.getCompetence() != null && !pro.getCompetence().isEmpty()) {
 			for (Competence exp : pro.getCompetence()) {
 				proDTO.getCompetence().add(competenceToCompetenceDTO(exp));
 			}
 		}
-		//proDTO.setCursus(pro.getCursus());
-		//roDTO.setDiplomes(pro.getDiplomes());
 		proDTO.setDiplomes(new ArrayList<>());
 		if (pro.getDiplomes() != null && !pro.getDiplomes().isEmpty()) {
 			for (Diplome exp : pro.getDiplomes()) {
 				proDTO.getDiplomes().add(diplomeToDiplomeDTO(exp));
 			}
 		}
-		proDTO.setTelephone(pro.getTelephone());
 		proDTO.setExperiences(new ArrayList<>());
 		if (pro.getExperiences() != null && !pro.getExperiences().isEmpty()) {
 			for (Experience exp : pro.getExperiences()) {
@@ -98,15 +99,16 @@ public class MappingToDTO {
 		return proDTO;
 	}
 
-	public static UtilisateurDTO utilisateurToUtilisateurDTO(Utilisateur util) {
+	public static UtilisateurDTO utilisateurToUtilisateurDTO(Utilisateur util) throws MetierException {
 		if (util == null) {
-			return null;
+			throw new InformationManquanteException("L'utilisateur à mapper en DTO est null");
 		}
 
 		UtilisateurDTO utilDTO = utilisateurToUtilisateurDTOHorsRelation(util);
 		utilDTO.setProfil(profilToProfilDTO(util.getProfil()));
-		utilDTO.setArticles(new ArrayList<>());
 		utilDTO.setGroupePrincipal(groupeToGroupeDTO(util.getGroupePrincipal()));
+		
+		utilDTO.setArticles(new ArrayList<>());
 		if (util.getArticles() != null && !util.getArticles().isEmpty()) {
 			for (Article art : util.getArticles()) {
 				utilDTO.getArticles().add(articleTOArticleDTOLazy(art));
@@ -128,13 +130,14 @@ public class MappingToDTO {
 		return utilDTO;
 	}
 
-	public static GroupeDTO groupeToGroupeDTO(Groupe grp) {
+	public static GroupeDTO groupeToGroupeDTO(Groupe grp) throws MetierException {
 		if (grp == null) {
-			return null;
+			throw new InformationManquanteException("Le groupe à mapper en DTO est null");
 		}
 
 		GroupeDTO grpDTO = groupeToGroupeDTOHorsRelation(grp);
 		grpDTO.setUtilisateurResponsable(utilisateurToUtilisateurDTOLazy(grp.getUtilisateurResponsable()));
+		
 		grpDTO.setUtilisateurs(new ArrayList<>());
 		if (grp.getUtilisateurs() != null && !grp.getUtilisateurs().isEmpty()) {
 			for (Utilisateur util : grp.getUtilisateurs()) {
@@ -151,9 +154,9 @@ public class MappingToDTO {
 		return grpDTO;
 	}
 
-	public static ArticleDTO articleToArticleDTO(Article art) {
+	public static ArticleDTO articleToArticleDTO(Article art) throws MetierException {
 		if (art == null) {
-			return null;
+			throw new InformationManquanteException("L'article à mapper en DTO est null");
 		}
 
 		ArticleDTO artDTO = articleToArticleDTOHorsRelation(art);
@@ -173,9 +176,9 @@ public class MappingToDTO {
 		return artDTO;
 	}
 
-	private static UtilisateurDTO utilisateurToUtilisateurDTOLazy(Utilisateur util) {
+	private static UtilisateurDTO utilisateurToUtilisateurDTOLazy(Utilisateur util) throws MetierException {
 		if (util == null) {
-			return null;
+			throw new InformationManquanteException("L'utilisateur à mapper en DTO est null");
 		}
 
 		UtilisateurDTO utilDTO = utilisateurToUtilisateurDTOHorsRelation(util);
@@ -201,9 +204,9 @@ public class MappingToDTO {
 		return utilDTO;
 	}
 
-	private static ArticleDTO articleTOArticleDTOLazy(Article art) {
+	private static ArticleDTO articleTOArticleDTOLazy(Article art) throws MetierException {
 		if (art == null) {
-			return null;
+			throw new InformationManquanteException("L'article à mapper en DTO est null");
 		}
 
 		ArticleDTO artDTO = articleToArticleDTOHorsRelation(art);
@@ -224,9 +227,9 @@ public class MappingToDTO {
 		return artDTO;
 	}
 
-	private static GroupeDTO groupeToGroupeDTOLazy(Groupe grp) {
+	private static GroupeDTO groupeToGroupeDTOLazy(Groupe grp) throws MetierException {
 		if (grp == null) {
-			return null;
+			throw new InformationManquanteException("Le groupe à mapper en DTO est null");
 		}
 
 		GroupeDTO grpDTO = groupeToGroupeDTOHorsRelation(grp);
@@ -249,9 +252,9 @@ public class MappingToDTO {
 		return grpDTO;
 	}
 
-	private static UtilisateurDTO utilisateurToUtilisateurDTOHorsRelation(Utilisateur util) {
+	private static UtilisateurDTO utilisateurToUtilisateurDTOHorsRelation(Utilisateur util) throws MetierException {
 		if (util == null) {
-			return null;
+			throw new InformationManquanteException("L'utilisateur à mapper en DTO est null");
 		}
 
 		UtilisateurDTO utilDTO = new UtilisateurDTO();
@@ -265,9 +268,9 @@ public class MappingToDTO {
 		return utilDTO;
 	}
 
-	private static ArticleDTO articleToArticleDTOHorsRelation(Article art) {
+	private static ArticleDTO articleToArticleDTOHorsRelation(Article art) throws MetierException {
 		if (art == null) {
-			return null;
+			throw new InformationManquanteException("L'article à mapper en DTO est null");
 		}
 
 		ArticleDTO artDTO = new ArticleDTO();
@@ -278,9 +281,9 @@ public class MappingToDTO {
 		return artDTO;
 	}
 
-	private static GroupeDTO groupeToGroupeDTOHorsRelation(Groupe grp) {
+	private static GroupeDTO groupeToGroupeDTOHorsRelation(Groupe grp) throws MetierException {
 		if (grp == null) {
-			return null;
+			throw new InformationManquanteException("Le groupe à mapper en DTO est null");
 		}
 
 		GroupeDTO grpDTO = new GroupeDTO();
@@ -292,7 +295,7 @@ public class MappingToDTO {
 	}
 
 	public static UtilisateurEnAttenteDTO utilisateurEnAttenteToUtilisateurEnAttenteDTO(
-			UtilisateurEnAttente utilisateurEnAttente) {
+			UtilisateurEnAttente utilisateurEnAttente) throws MetierException {
 		UtilisateurEnAttenteDTO utilisateurEnAttenteDTO = new UtilisateurEnAttenteDTO();
 		utilisateurEnAttenteDTO.setAnneeDiplome(utilisateurEnAttente.getAnneeDiplome());
 		utilisateurEnAttenteDTO.setDiplome(utilisateurEnAttente.getDiplome());
@@ -303,7 +306,6 @@ public class MappingToDTO {
 		utilisateurEnAttenteDTO.setPrenom(utilisateurEnAttente.getPrenom());
 		utilisateurEnAttenteDTO.setDateNaissance(utilisateurEnAttente.getDateNaissance());
 		return utilisateurEnAttenteDTO;
-
 	}
 
 }

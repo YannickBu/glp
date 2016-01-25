@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ipint.glp.api.DTO.ArticleDTO;
-import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.exception.ArticleInconnuException;
 import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;

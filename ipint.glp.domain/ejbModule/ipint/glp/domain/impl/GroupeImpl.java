@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.exception.ArticleInconnuException;
 import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
@@ -43,6 +44,8 @@ public class GroupeImpl implements GroupeService {
 			throw new InformationManquanteException("L'utilisateur responsable du groupeDTO n'a ni id ni email");
 		}
 		
+		Query q = null;
+		
 		Groupe groupe = new Groupe();
 		groupe.setNomGroupe(obj.getNomGroupe());
 		groupe.setDescription(obj.getDescription());
@@ -54,7 +57,7 @@ public class GroupeImpl implements GroupeService {
 				throw new UtilisateurInconnuException(obj.getUtilisateurResponsable().toString()+" n'existe pas pour cet id");
 			}
 		} else if (obj.getUtilisateurResponsable().getEmail() != null) {
-			Query q = em.createQuery(
+			q = em.createQuery(
 					"select u from Utilisateur u where u.email = '" + obj.getUtilisateurResponsable().getEmail() + "'");
 			try{
 				utilisateur = (Utilisateur) q.getSingleResult();
@@ -70,9 +73,10 @@ public class GroupeImpl implements GroupeService {
 				Article article = null;
 				if (articleDto.getIdArticle() != null) {
 					article = em.find(Article.class, articleDto.getIdArticle());
-					if(article!=null){
-						articles.add(article);						
+					if(article==null){
+						throw new ArticleInconnuException(articleDto.toString()+" n'existe pas");
 					}
+					articles.add(article);	
 				}
 			}
 		}
@@ -84,16 +88,19 @@ public class GroupeImpl implements GroupeService {
 				Utilisateur u = null;
 				if (utilisateurDto.getIdUtilisateur() != null) {
 					u = em.find(Utilisateur.class, utilisateurDto.getIdUtilisateur());
-					if(u!=null){
-						utilisateurs.add(u);						
+					if(u==null){
+						throw new UtilisateurInconnuException(utilisateurDto.toString()+" n'existe pas pour cet id");
 					}
+					utilisateurs.add(u);
 				} else if (utilisateurDto.getEmail() != null) {
-					Query q = em.createQuery(
+					q = em.createQuery(
 							"select u from Utilisateur u where u.email = '" + utilisateurDto.getEmail() + "'");
-					if(!q.getResultList().isEmpty()){
+					try{
 						u = (Utilisateur) q.getSingleResult();	
-						utilisateurs.add(u);					
+					}catch(NoResultException e){
+						throw new UtilisateurInconnuException(utilisateurDto.toString()+" n'existe pas pour cet email");
 					}
+					utilisateurs.add(u);		
 				}
 			}
 		}
@@ -123,7 +130,7 @@ public class GroupeImpl implements GroupeService {
 		} else if (obj.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
 			try{
-				Groupe grp = (Groupe) q.getSingleResult();
+				gr = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
 				throw new GroupeInconnuException(obj.toString()+" n'existe pas pour ce nom de groupe");
 			}
@@ -161,7 +168,7 @@ public class GroupeImpl implements GroupeService {
 
 	}
 
-	public List<GroupeDTO> lister() {
+	public List<GroupeDTO> lister() throws MetierException {
 		Query q = em.createQuery("select g from Groupe g ");
 		List<Groupe> lesGroupes = q.getResultList();
 		List<GroupeDTO> lesGroupesDTO = new ArrayList<GroupeDTO>();
