@@ -52,6 +52,6 @@ public interface GroupeService {
 	 * 
 	 * @return la liste des groupes existant
 	 */
-	public List<GroupeDTO> lister();
+	public List<GroupeDTO> lister() throws MetierException;
 
 }

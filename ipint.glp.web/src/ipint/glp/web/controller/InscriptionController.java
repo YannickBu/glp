@@ -29,7 +29,11 @@ public class InscriptionController {
 
 	@RequestMapping(value="/inscription", method=RequestMethod.GET)
 	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {
-		model.addAttribute("groupes",groupeS.lister());
+		try {
+			model.addAttribute("groupes",groupeS.lister());
+		} catch (MetierException e) {
+			//TODO redirection vers une page d'erreur
+		}
 		model.addAttribute("utilisateurTmp", utilisateur);
 		return new ModelAndView("inscription");
 	}

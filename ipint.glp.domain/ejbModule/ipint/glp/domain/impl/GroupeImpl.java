@@ -168,7 +168,7 @@ public class GroupeImpl implements GroupeService {
 
 	}
 
-	public List<GroupeDTO> lister() {
+	public List<GroupeDTO> lister() throws MetierException {
 		Query q = em.createQuery("select g from Groupe g ");
 		List<Groupe> lesGroupes = q.getResultList();
 		List<GroupeDTO> lesGroupesDTO = new ArrayList<GroupeDTO>();
