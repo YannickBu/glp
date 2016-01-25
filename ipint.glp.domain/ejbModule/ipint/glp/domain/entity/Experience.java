@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import ipint.glp.api.DTO.ProfilDTO;
-
 /**
  * Entity implementation class for Entity: Experience
  *

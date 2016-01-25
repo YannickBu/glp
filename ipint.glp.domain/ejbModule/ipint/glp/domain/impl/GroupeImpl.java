@@ -123,7 +123,7 @@ public class GroupeImpl implements GroupeService {
 		} else if (obj.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
 			try{
-				Groupe grp = (Groupe) q.getSingleResult();
+				gr = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
 				throw new GroupeInconnuException(obj.toString()+" n'existe pas pour ce nom de groupe");
 			}
