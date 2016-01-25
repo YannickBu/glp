@@ -18,6 +18,7 @@ import ipint.glp.api.DTO.enumType.Statut;
 import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
+import ipint.glp.api.exception.ProfilInconnuException;
 import ipint.glp.api.exception.UtilisateurInconnuException;
 import ipint.glp.api.itf.UtilisateurService;
 import ipint.glp.domain.entity.Competence;
@@ -57,6 +58,12 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 		if(utilisateurDTO.getPassword()==null){
 			throw new InformationManquanteException("L'utilisateurDTO n'a pas de password");
+		}
+		if(utilisateurDTO.getNom()==null){
+			throw new InformationManquanteException("L'utilisateurDTO n'a pas de nom");
+		}
+		if(utilisateurDTO.getPrenom()==null){
+			throw new InformationManquanteException("L'utilisateurDTO n'a pas de prenom");
 		}
 		if(utilisateurDTO.getGroupePrincipal()==null){
 			throw new InformationManquanteException(utilisateurDTO.toString() + " n'a pas de groupe principal");
@@ -101,11 +108,17 @@ public class UtilisateurImpl implements UtilisateurService {
 				Groupe grp = null;
 				if (groupeDTO.getIdGroupe() != null) {
 					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
+					if(grp==null){
+						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour cet id");
+					}
 				} else if (groupeDTO.getNomGroupe() != null) {
 					Query q = em.createQuery(
 							"select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-					grp = (Groupe) q.getSingleResult();
-
+					try{
+						grp = (Groupe) q.getSingleResult();
+					}catch(NoResultException e){
+						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour cet nom de groupe");
+					}
 				}
 				if (grp != null) {
 					lesGroupes.add(grp);
@@ -126,11 +139,17 @@ public class UtilisateurImpl implements UtilisateurService {
 				Groupe grp = new Groupe();
 				if (groupeDTO.getIdGroupe() != null) {
 					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
+					if(grp==null){
+						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour cet id");
+					}
 				} else if (groupeDTO.getNomGroupe() != null) {
 					Query q = em.createQuery(
 							"select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-					grp = (Groupe) q.getSingleResult();
-
+					try{
+						grp = (Groupe) q.getSingleResult();
+					}catch(NoResultException e){
+						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
+					}
 				}
 				if (grp != null) {
 					lesGroupesGeres.add(grp);
@@ -295,6 +314,9 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 		if (nouvelUtilisateur.getProfil() != null) {
 			Profil profil = em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil());
+			if(profil==null){
+				throw new ProfilInconnuException(profil.toString()+" n'existe pas");
+			}
 			int idProfil = nouvelUtilisateur.getProfil().getIdProfil();
 			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
 
