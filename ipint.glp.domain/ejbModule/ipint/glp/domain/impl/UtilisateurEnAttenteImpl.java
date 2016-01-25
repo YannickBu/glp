@@ -81,13 +81,18 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
 
 	}
-
+	
 	@Override
-	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
-
+	public void refuser(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO, String optionalMessage)throws MetierException {
+		int typeDeMessage = 3;
 		String messageOptionel ="";
 		String password = "";
-
+		
+		if(!messageOptionel.equals(optionalMessage)){
+			typeDeMessage = 4;
+			messageOptionel = optionalMessage;
+		}
+		
 		if(utilisateurEnAttenteAValiderDTO==null){
 			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
 		}
@@ -99,15 +104,38 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		if(utilisateurEnAttente==null){
 			throw new UtilisateurEnAttenteInconnuException(utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
 		}
-		String messageMail = Mail.construireMail(3, messageOptionel, password);
+		String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
 		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
+		supprimer(utilisateurEnAttenteAValiderDTO);
+	}
+
+	@Override
+	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
+		
+		if(utilisateurEnAttenteAValiderDTO==null){
+			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
+		}
+		if(utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente()==null){
+			throw new InformationManquanteException("L'utilisateurEnAttenteDTO n'a pas d'id");
+		}
+		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
+		utilisateurEnAttente = em.find(UtilisateurEnAttente.class, utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente());
+		if(utilisateurEnAttente==null){
+			throw new UtilisateurEnAttenteInconnuException(utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
+		}
 		em.remove(utilisateurEnAttente);
 	}
 
 	@Override
-	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
-
+	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO,String optionalMessage) throws MetierException {
+		int typeDeMessage = 1;
 		String messageOptionel ="";
+		
+		if(!messageOptionel.equals(optionalMessage)){
+			typeDeMessage = 2;
+			messageOptionel = optionalMessage;
+		}
+		
 		if(utilisateurEnAttenteAValiderDTO==null){
 			throw new InformationManquanteException("L'utilisateurEnAttenteAValiderDTO est null");
 		}
@@ -123,7 +151,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
 		String password = generationMotDePasse.nextString();
 		utilisateurDTO.setPassword(password);
-		String messageMail = Mail.construireMail(1, messageOptionel, password);
+		String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
 		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 		UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
 		utilisateurService.creer(utilisateurDTO);

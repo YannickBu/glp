@@ -32,7 +32,7 @@
 						<label for="OptionalMessage"> Message complémentaire
 							(optionnel): </label>
 						<form:textarea path="" type="text-aera" rows="4"
-							class="form-control" id="OptionalMessage"
+							class="form-control" name="optionalMessage"
 							placeholder="Entrer un message à ajouter au mail automatique de réponse à la demande d'inscription."></form:textarea>
 					</div>
 

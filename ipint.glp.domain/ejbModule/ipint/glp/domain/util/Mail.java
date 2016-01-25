@@ -15,10 +15,10 @@ import javax.mail.internet.MimeMessage;
  */
 public class Mail {
 	private static final String MessageDefautDeDebut = "Bonjour, \n \n";
-	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n \n Voici vos informations de connexion :\n \n ";
-	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n \n Vos informations ont été supprimées de nos bases.\n \n";
-	private static final String MessageDefautComplement = "\n \n Message additionel du modérateur :  ";
-	private static final String MessageDefautDeFin = "\n \n Cordialement votre,\n \n l'équipe de modération de L1nk.";
+	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n \nVoici vos informations de connexion :\n \n ";
+	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n \nVos informations ont été supprimées de nos bases.\n";
+	private static final String MessageDefautComplement = "\nMessage additionel du modérateur :  ";
+	private static final String MessageDefautDeFin = "\n \nCordialement votre,\n \nl'équipe de modération de L1nk.";
 
 	private static String messageAcceptationSansMessageAditionnel(String motDePasse){
 		String messageRenvoyer;
