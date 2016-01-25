@@ -31,8 +31,16 @@ public interface UtilisateurEnAttenteService {
 	 * 
 	 * @param utilisateurEnAttenteDTOAValider
 	 */
-	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider) throws MetierException;
+	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider,String optionalMessage) throws MetierException;
 
+	/**
+	 * Methode de refus d'un utilisateur en attente de validation par le
+	 * modérateur.
+	 * 
+	 * @param utilisateurEnAttenteDTOAValider
+	 */
+	public void refuser(UtilisateurEnAttenteDTO utilisateurEnAttenteDTOAValider,String optionalMessage) throws MetierException;
+	
 	/**
 	 * Methode de suppression d'un utilisateur en attente de validation par le
 	 * modérateur.

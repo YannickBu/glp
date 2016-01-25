@@ -80,15 +80,15 @@ public class AdministrationController {
 	}
 
 	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.POST)
-	public ModelAndView profilPost(@RequestParam String action, @PathVariable String id,
-			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model) {
+	public ModelAndView profilPost(@RequestParam("action") String action,@RequestParam("optionalMessage") String optionalMessage, @PathVariable String id,
+			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model){
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
 		try{
 			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 			if (action.equals("Accepter")) {
-				utilisateurEnAttenteService.valider(uDTO);
+				utilisateurEnAttenteService.valider(uDTO,optionalMessage);
 			} else if (action.equals("Refuser")) {
-				utilisateurEnAttenteService.supprimer(uDTO);
+				utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
 			}
 		} catch (MetierException e) {
 			//TODO redirection vers une page d'erreur
@@ -102,7 +102,6 @@ public class AdministrationController {
 		}
 		
 		model.addAttribute("utilisateurTmp", uDTO);
-		System.out.println(list.toString());
 		
 		if(list!=null && !list.isEmpty()){
 			return new ModelAndView("redirect:/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
