@@ -207,14 +207,14 @@ public class UtilisateurImpl implements UtilisateurService {
 
 			//Assoc reseaux sociaux
 
-			if (utilisateurDTO.getProfil().getReseauxSociaux() != null
-					&& !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
-				List<String> listRes = new ArrayList<String>();
-				for (String res : utilisateurDTO.getProfil().getReseauxSociaux()) {
-					em.persist(res);
-				}
-				pro.setReseauxSociaux(listRes);
-			}
+//			if (utilisateurDTO.getProfil().getReseauxSociaux() != null
+//					&& !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
+//				List<String> listRes = new ArrayList<String>();
+//				for (String res : utilisateurDTO.getProfil().getReseauxSociaux()) {
+//					em.persist(res);
+//				}
+//				pro.setReseauxSociaux(listRes);
+//			}
 
 		}
 		em.persist(pro);

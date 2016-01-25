@@ -14,7 +14,7 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
+				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
 				<h1>${utilisateur.statut}</h1>
 				<div>
 					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Lille,France

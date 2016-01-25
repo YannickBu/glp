@@ -163,12 +163,12 @@ public class MappingToDTO {
 		if (art.getGroupe() != null) {
 			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
 		}
-		artDTO.setGroupes(new ArrayList<>());
-		if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
-			for (Groupe grp : art.getGroupes()) {
-				artDTO.getGroupes().add(groupeToGroupeDTOLazy(grp));
-			}
-		}
+//		artDTO.setGroupes(new ArrayList<>());
+//		if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
+//			for (Groupe grp : art.getGroupes()) {
+//				artDTO.getGroupes().add(groupeToGroupeDTOLazy(grp));
+//			}
+//		}
 
 		return artDTO;
 	}
@@ -214,12 +214,12 @@ public class MappingToDTO {
 			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
 		}
 		
-		artDTO.setGroupes(new ArrayList<>());
-		if (art.getGroupes() != null) {
-			for (Groupe grp : art.getGroupes()) {
-				artDTO.getGroupes().add(groupeToGroupeDTOHorsRelation(grp));
-			}
-		}
+//		artDTO.setGroupes(new ArrayList<>());
+//		if (art.getGroupes() != null) {
+//			for (Groupe grp : art.getGroupes()) {
+//				artDTO.getGroupes().add(groupeToGroupeDTOHorsRelation(grp));
+//			}
+//		}
 
 		return artDTO;
 	}
