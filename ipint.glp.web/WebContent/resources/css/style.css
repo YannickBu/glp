@@ -5,7 +5,7 @@
 	#dadbdb -> gris du logo
 	#f6921e -> orange du logo 
 */
-html, body, .container-table {
+html, body, .container-table, .container-table-erreur {
 	height: 100%;
 	background-color: #F1F2F1; 
 	overflow-x: hidden;
@@ -15,6 +15,11 @@ html, body, .container-table {
 	background: linear-gradient(180deg, #ffffff 50%, #f6921e 50%);
 	display: table;
 }
+.container-table-erreur {
+	display: table;
+	width: 100%;
+}
+
 .vertical-center-row {
 	display: table-cell;
 	vertical-align: middle;

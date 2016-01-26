@@ -131,14 +131,14 @@ public class ControllerTest {
 		try {
 			gDTO = groupeS.trouver(gDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		GroupeDTO gDTO2 = new GroupeDTO();
 		gDTO2.setNomGroupe("SIAD");
 		try {
 			gDTO2 = groupeS.trouver(gDTO2);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
 		grp.add(gDTO);
@@ -149,7 +149,7 @@ public class ControllerTest {
 		try {
 			gPrincDTO = groupeS.trouver(gPrincDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		utilDTOm.setGroupePrincipal(gPrincDTO);
 
@@ -158,7 +158,7 @@ public class ControllerTest {
 		try {
 			utilDTOm = utilS.creer(utilDTOm);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 
 		return new ModelAndView("accueil");

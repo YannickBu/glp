@@ -55,7 +55,7 @@ public class InscriptionController {
 		try {
 			utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			return "redirect:/erreur";
 		}
 		model.addAttribute("utilisateurTmp", utilisateurTmp);
 		return "redirect:/connexion";

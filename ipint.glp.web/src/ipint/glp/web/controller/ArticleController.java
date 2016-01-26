@@ -39,7 +39,7 @@ public class ArticleController {
 		try {
 			uDTO = us.trouver(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		   
 		
@@ -64,7 +64,7 @@ public class ArticleController {
 		try {
 			uDTO = us.trouver(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 
 //		System.out.println("artCont id : "+id);
@@ -80,12 +80,12 @@ public class ArticleController {
 		try{
 			articleDto = as.creer(articleDto);
 		}catch(MetierException e){
-			//TODO redirection vers une page d'erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		try {
 			GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		
 		System.out.println(articleDto.getGroupe().getNomGroupe());

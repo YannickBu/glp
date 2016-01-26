@@ -37,7 +37,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		//		
 		//		UtilisateurDTO uDTO2 = new UtilisateurDTO();
@@ -89,7 +89,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		
 		System.out.println("profil : " + uDTO.getProfil());
@@ -114,7 +114,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("modifprofil", "utilisateur",uDTO);
@@ -128,7 +128,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		Integer idTemp = uDTO.getProfil().getIdProfil();
 		uDTO.setProfil(utilisateur.getProfil());
@@ -137,7 +137,7 @@ public class ProfilController {
 		try {
 			utilisateur = utilisateurService.modifier(uDTO);
 		} catch (MetierException e) {
-			//TODO rediriger page erreur
+			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", utilisateur);
