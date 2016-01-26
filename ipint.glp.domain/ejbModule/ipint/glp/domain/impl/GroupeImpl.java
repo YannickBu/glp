@@ -82,6 +82,7 @@ public class GroupeImpl implements GroupeService {
 		}
 		groupe.setArticles(articles);
 		
+		//TODO Lutilisateur responsable fait il parti de cette liste?
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 		if (obj.getUtilisateurs()!=null && !obj.getUtilisateurs().isEmpty()) {
 			for (UtilisateurDTO utilisateurDto : obj.getUtilisateurs()) {
@@ -127,7 +128,7 @@ public class GroupeImpl implements GroupeService {
 			if(gr==null){
 				throw new GroupeInconnuException(obj.toString()+" n'existe pas pour cet id");
 			}
-		} else if (obj.getNomGroupe() != null) {
+		} else {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
 			try{
 				gr = (Groupe) q.getSingleResult();
