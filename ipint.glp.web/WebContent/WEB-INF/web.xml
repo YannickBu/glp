@@ -70,6 +70,10 @@
 			<url-pattern>/publication/*/</url-pattern>
 			<url-pattern>/publication</url-pattern>
 			<url-pattern>/publication/*</url-pattern>
+			<url-pattern>/groupe/</url-pattern>
+			<url-pattern>/groupe/*/</url-pattern>
+			<url-pattern>/groupe</url-pattern>
+			<url-pattern>/groupe/*</url-pattern>
 			<url-pattern>/deconnexion/</url-pattern>
 			<url-pattern>/deconnexion/*/</url-pattern>
 			<url-pattern>/deconnexion</url-pattern>

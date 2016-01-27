@@ -12,7 +12,7 @@
 				<a href="#"><li>Mes groupes<span
 						class="glyphicon glyphicon-heart gly-menu" aria-hidden="true"></span></a>
 				<ul>
-					<a href="#"><li>Lien Groupe 1</li></a>
+					<a href="${pageContext.servletContext.contextPath}/groupe"><li>Lien Groupe 1</li></a>
 				</ul>
 				</li>
 			</ul>

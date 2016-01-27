@@ -6,4 +6,8 @@
 <definition name="erreur" extends="logLayout">
 <put-attribute name="body" value="/WEB-INF/views/erreur/erreur.jsp"></put-attribute>
 </definition>
+
+<definition name="construction" extends="logLayout">
+<put-attribute name="body" value="/WEB-INF/views/erreur/construction.jsp"></put-attribute>
+</definition>
 </tiles-definitions>

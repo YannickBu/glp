@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript"
-	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
+	
 <div class="col-md-6 publication">
 	<div class="container">
 		<div class="row">
