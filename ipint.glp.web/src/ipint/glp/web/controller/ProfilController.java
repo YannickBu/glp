@@ -43,38 +43,35 @@ public class ProfilController {
 			logger.severe("Erreur acces profil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		//		
-		//		UtilisateurDTO uDTO2 = new UtilisateurDTO();
-		//		GroupeDTO gDTO = new GroupeDTO();
-		//		gDTO.setNomGroupe("MIAGE");
-		//		gDTO = groupeS.trouver(gDTO);
-		//		GroupeDTO gDTO2 = new GroupeDTO();
-		//		gDTO2.setNomGroupe("SIAD");
-		//		gDTO2 = groupeS.trouver(gDTO2);		
-		//		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
-		//		grp.add(gDTO);
-		//		grp.add(gDTO2);
-		//		uDTO2.setGroupes(grp);
-		//		List<String> dipl = new ArrayList<String>();
-		//		dipl.add("2015/2016 - M2MIAGE");
-		//		dipl.add("2012/2013 - L3MIAGE");
-		//		dipl.add("2010/2011 - DUT Informatique");
-		//		if(uDTO.getProfil() == null){
-		//			System.out.println("------------------------------");
-		//		}
-		//		ProfilDTO pDTO= uDTO.getProfil();
-		//		//pDTO.setDiplomes(dipl);
-		//		uDTO2.setProfil(pDTO);
-		//			
-		//		uDTO = utilisateurService.modifier(uDTO, uDTO2);
-
-
-
+		//
+		// UtilisateurDTO uDTO2 = new UtilisateurDTO();
+		// GroupeDTO gDTO = new GroupeDTO();
+		// gDTO.setNomGroupe("MIAGE");
+		// gDTO = groupeS.trouver(gDTO);
+		// GroupeDTO gDTO2 = new GroupeDTO();
+		// gDTO2.setNomGroupe("SIAD");
+		// gDTO2 = groupeS.trouver(gDTO2);
+		// List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
+		// grp.add(gDTO);
+		// grp.add(gDTO2);
+		// uDTO2.setGroupes(grp);
+		// List<String> dipl = new ArrayList<String>();
+		// dipl.add("2015/2016 - M2MIAGE");
+		// dipl.add("2012/2013 - L3MIAGE");
+		// dipl.add("2010/2011 - DUT Informatique");
+		// if(uDTO.getProfil() == null){
+		// System.out.println("------------------------------");
+		// }
+		// ProfilDTO pDTO= uDTO.getProfil();
+		// //pDTO.setDiplomes(dipl);
+		// uDTO2.setProfil(pDTO);
+		//
+		// uDTO = utilisateurService.modifier(uDTO, uDTO2);
 
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
 		System.out.println(uDTO.getNom());
-		//System.out.println(uDTO.getProfil());
+		// System.out.println(uDTO.getProfil());
 
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
@@ -85,9 +82,10 @@ public class ProfilController {
 	}
 
 	@RequestMapping(value = "/profil/{id}", method = RequestMethod.GET)
-	public ModelAndView profilIdGet(HttpServletRequest request, @PathVariable String id, @ModelAttribute UtilisateurDTO utilisateur, Model model) {
+	public ModelAndView profilIdGet(HttpServletRequest request, @PathVariable String id,
+			@ModelAttribute UtilisateurDTO utilisateur, Model model) {
 		// ModelAndView model = new ModelAndView("profil");
-		
+
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setIdUtilisateur(Integer.parseInt(id));
 		try {
@@ -96,11 +94,11 @@ public class ProfilController {
 			logger.severe("Erreur acces profil/id GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		
+
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
 		System.out.println(uDTO.getNom());
-		//System.out.println(uDTO.getProfil());
+		// System.out.println(uDTO.getProfil());
 
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
@@ -110,46 +108,52 @@ public class ProfilController {
 		request.setAttribute("id", id);
 		return new ModelAndView("profil");
 	}
-	
+
 	@RequestMapping(value = "/profil/modifprofil", method = RequestMethod.GET)
-	public ModelAndView profilModifyGet(HttpServletRequest request, @ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result,
-			Model model) {
+	public ModelAndView profilModifyGet(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
-			logger.severe("Erreur acces profil/modifProfil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
+			logger.severe(
+					"Erreur acces profil/modifProfil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateur", uDTO);
-		return new ModelAndView("modifprofil", "utilisateur",uDTO);
+		return new ModelAndView("modifprofil", "utilisateur", uDTO);
 	}
 
 	@RequestMapping(value = "/profil/modifprofil", method = RequestMethod.POST)
-	public ModelAndView profilModifyPost(HttpServletRequest request, @ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result,
-			Model model) {
+	public ModelAndView profilModifyPost(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) {
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
-			logger.severe("Erreur acces profil/modifProfil POST - UtilisateurService.trouver renvoie : " + e.getMessage());
+			logger.severe(
+					"Erreur acces profil/modifProfil POST - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		Integer idTemp = uDTO.getProfil().getIdProfil();
 		uDTO.setProfil(utilisateur.getProfil());
+		uDTO.setPassword(utilisateur.getPassword());
+		uDTO.setNom(utilisateur.getNom());
+		uDTO.setPrenom(utilisateur.getPrenom());
 		uDTO.getProfil().setIdProfil(idTemp);
 
 		try {
 			utilisateur = utilisateurService.modifier(uDTO);
 		} catch (MetierException e) {
-			logger.severe("Erreur acces profil/modifProfil POST - UtilisateurService.modifier renvoie : " + e.getMessage());
+			logger.severe(
+					"Erreur acces profil/modifProfil POST - UtilisateurService.modifier renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", utilisateur);
-		//return "redirect:/profil/{id}";
-		return new ModelAndView("redirect:/profil","utilisateur",uDTO);
+		// return "redirect:/profil/{id}";
+		return new ModelAndView("redirect:/profil", "utilisateur", uDTO);
 	}
 }

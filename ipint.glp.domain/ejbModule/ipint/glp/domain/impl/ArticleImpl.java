@@ -1,6 +1,5 @@
 package ipint.glp.domain.impl;
 
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -25,41 +24,46 @@ public class ArticleImpl implements ArticleService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
-	
 	@Override
 	public ArticleDTO creer(ArticleDTO articleDTO) throws MetierException {
-		if(articleDTO==null){
+		if (articleDTO == null) {
 			throw new InformationManquanteException("ArticleImpl.creer : L'articleDTO est null");
 		}
-		if(articleDTO.getUtilisateur().getEmail()==null && articleDTO.getUtilisateur().getIdUtilisateur()==null){
+		if (articleDTO.getUtilisateur().getEmail() == null && articleDTO.getUtilisateur().getIdUtilisateur() == null) {
 			throw new InformationManquanteException("ArticleImpl.creer : L'utilisateur dans l'articleDTO est null");
 		}
-		if(articleDTO.getGroupe()==null){
-			throw new InformationManquanteException("ArticleImpl.creer : L'articleDTO n'a pas de groupe principal associé");
+		if (articleDTO.getGroupe() == null) {
+			throw new InformationManquanteException(
+					"ArticleImpl.creer : L'articleDTO n'a pas de groupe principal associé");
 		}
-//		if(articleDTO.getGroupes()==null || articleDTO.getGroupes().isEmpty()){
-//			throw new InformationManquanteException("ArticleDTO.creer : L'articleDTO n'est associé à aucun groupe");
-//		}
+		// if(articleDTO.getGroupes()==null ||
+		// articleDTO.getGroupes().isEmpty()){
+		// throw new InformationManquanteException("ArticleDTO.creer :
+		// L'articleDTO n'est associé à aucun groupe");
+		// }
 
 		Article art = new Article();
 		art.setContenu(articleDTO.getContenu());
 		art.setDatePublication(articleDTO.getDatePublication());
-		
-		//Gestion de l'utilisateur de la publication
+
+		// Gestion de l'utilisateur de la publication
 
 		Utilisateur util = null;
 		Query q;
-		if(articleDTO.getUtilisateur().getEmail()!=null){
-			q = em.createQuery("select e from Utilisateur e where e.email = '" + articleDTO.getUtilisateur().getEmail() + "'");
-			try{
+		if (articleDTO.getUtilisateur().getEmail() != null) {
+			q = em.createQuery(
+					"select e from Utilisateur e where e.email = '" + articleDTO.getUtilisateur().getEmail() + "'");
+			try {
 				util = (Utilisateur) q.getSingleResult();
-			}catch(NoResultException e){
-				throw new UtilisateurInconnuException("ArticleImpl.creer : "+articleDTO.getUtilisateur().toString()+" n'existe pas");
+			} catch (NoResultException e) {
+				throw new UtilisateurInconnuException(
+						"ArticleImpl.creer : " + articleDTO.getUtilisateur().toString() + " n'existe pas");
 			}
-		}else{
+		} else {
 			util = em.find(Utilisateur.class, articleDTO.getUtilisateur().getIdUtilisateur());
-			if(util==null){
-				throw new UtilisateurInconnuException("ArticleImpl.creer : "+articleDTO.getUtilisateur().toString()+" n'existe pas");
+			if (util == null) {
+				throw new UtilisateurInconnuException(
+						"ArticleImpl.creer : " + articleDTO.getUtilisateur().toString() + " n'existe pas");
 			}
 		}
 		if (util == null) {
@@ -76,8 +80,9 @@ public class ArticleImpl implements ArticleService {
 		if (articleDTO.getGroupe() != null) {
 			groupe = em.find(Groupe.class, articleDTO.getGroupe().getIdGroupe());
 		}
-		if(groupe == null){
-			throw new GroupeInconnuException("ArticleImpl.creer : Le groupe ayant pour id "+articleDTO.getGroupe().getIdGroupe()+" n'existe pas");
+		if (groupe == null) {
+			throw new GroupeInconnuException("ArticleImpl.creer : Le groupe ayant pour id "
+					+ articleDTO.getGroupe().getIdGroupe() + " n'existe pas");
 		}
 		art.setGroupe(groupe);
 
@@ -106,7 +111,6 @@ public class ArticleImpl implements ArticleService {
 		// art.setGroupes(listGrp);
 		// }
 
-
 		em.persist(art);
 
 		return MappingToDTO.articleToArticleDTO(art);
@@ -114,55 +118,54 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public ArticleDTO trouver(ArticleDTO articleDTO) throws MetierException {
-		if(articleDTO==null){
+		if (articleDTO == null) {
 			throw new InformationManquanteException("ArticleImpl.trouver : L'articleDTO est null");
 		}
-		if(articleDTO.getIdArticle()==null){
+		if (articleDTO.getIdArticle() == null) {
 			throw new InformationManquanteException("ArticleImpl.trouver : L'articleDTO n'a pas d'id");
 		}
 		Article art = em.find(Article.class, articleDTO.getIdArticle());
-		if(art==null){
-			throw new ArticleInconnuException("ArticleImpl.trouver : "+articleDTO.toString()+" inconnu");
+		if (art == null) {
+			throw new ArticleInconnuException("ArticleImpl.trouver : " + articleDTO.toString() + " inconnu");
 		}
 		return MappingToDTO.articleToArticleDTO(art);
 	}
 
 	@Override
 	public ArticleDTO modifier(ArticleDTO nouvelArt) throws MetierException {
-		if(nouvelArt==null){
+		if (nouvelArt == null) {
 			throw new InformationManquanteException("ArticleImpl.modifier : L'articleDTO est null");
 		}
-		if(nouvelArt.getIdArticle()==null){
+		if (nouvelArt.getIdArticle() == null) {
 			throw new InformationManquanteException("ArticleImpl.modifier : L'articleDTO n'a pas d'id");
 		}
 
-		//		MappingToEntity mte = new MappingToEntity();
-		//		Article articleMAJ = mte.articleDTOToArticle(ancienArt);
+		// MappingToEntity mte = new MappingToEntity();
+		// Article articleMAJ = mte.articleDTOToArticle(ancienArt);
 		//
-		//		if (nouvelArt.getContenu() != null) {
+		// if (nouvelArt.getContenu() != null) {
 		//
-		//			articleMAJ.setContenu(nouvelArt.getContenu());
-		//		}
-		//		if (nouvelArt.getDatePublication() != null) {
+		// articleMAJ.setContenu(nouvelArt.getContenu());
+		// }
+		// if (nouvelArt.getDatePublication() != null) {
 		//
-		//			articleMAJ.setDatePublication(nouvelArt.getDatePublication());
-		//		}
+		// articleMAJ.setDatePublication(nouvelArt.getDatePublication());
+		// }
 		//
-		//		em.persist(articleMAJ);
-		//		MappingToDTO mtd = new MappingToDTO();
-		//		nouvelArt = mtd.articleToArticleDTO(articleMAJ);
+		// em.persist(articleMAJ);
+		// MappingToDTO mtd = new MappingToDTO();
+		// nouvelArt = mtd.articleToArticleDTO(articleMAJ);
 		//
-		//		return nouvelArt;
-
+		// return nouvelArt;
 
 		Article art = em.find(Article.class, nouvelArt.getIdArticle());
-		if(art==null){
-			throw new ArticleInconnuException("ArticleImpl.modifier : "+nouvelArt.toString()+" n'existe pas");
+		if (art == null) {
+			throw new ArticleInconnuException("ArticleImpl.modifier : " + nouvelArt.toString() + " n'existe pas");
 		}
 		art.setContenu(nouvelArt.getContenu());
 		art.setDatePublication(nouvelArt.getDatePublication());
 
-		//Recupération du groupe du nouvel article
+		// Recupération du groupe du nouvel article
 		Groupe groupeTmp = em.find(Groupe.class, nouvelArt.getGroupe().getIdGroupe());
 		art.setGroupe(groupeTmp);
 
@@ -179,16 +182,17 @@ public class ArticleImpl implements ArticleService {
 	 */
 	@Override
 	public void supprimer(ArticleDTO articleASupprimer) throws MetierException {
-		if(articleASupprimer==null){
+		if (articleASupprimer == null) {
 			throw new InformationManquanteException("ArticleImpl.supprimer : L'articleDTO est null");
 		}
-		if(articleASupprimer.getIdArticle()==null){
+		if (articleASupprimer.getIdArticle() == null) {
 			throw new InformationManquanteException("ArticleImpl.supprimer : L'articleDTO n'a pas d'id");
 		}
 
 		Article art = em.find(Article.class, articleASupprimer.getIdArticle());
-		if(art==null){
-			throw new ArticleInconnuException("ArticleImpl.supprimer : "+articleASupprimer.toString()+" n'existe pas");
+		if (art == null) {
+			throw new ArticleInconnuException(
+					"ArticleImpl.supprimer : " + articleASupprimer.toString() + " n'existe pas");
 		}
 		em.remove(art);
 	}
