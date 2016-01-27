@@ -13,6 +13,7 @@ import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.exception.ArticleInconnuException;
+import ipint.glp.api.exception.GroupeExistantException;
 import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
@@ -45,6 +46,13 @@ public class GroupeImpl implements GroupeService {
 		}
 		
 		Query q = null;
+		
+		q = em.createQuery(
+				"select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
+		if(!q.getResultList().isEmpty()){
+			throw new GroupeExistantException("GroupeImpl.creer : Un groupe avec le nom "+obj.getNomGroupe()+" existe déjà");
+		}
+		
 		
 		Groupe groupe = new Groupe();
 		groupe.setNomGroupe(obj.getNomGroupe());
