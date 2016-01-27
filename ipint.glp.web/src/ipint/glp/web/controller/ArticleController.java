@@ -2,6 +2,7 @@ package ipint.glp.web.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.ArticleDTO;
-import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.ArticleService;
@@ -24,6 +24,7 @@ import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
 public class ArticleController {
+	private Logger logger = Logger.getLogger("ArticleController");
 
 	@Inject
 	ArticleService as;
@@ -39,10 +40,11 @@ public class ArticleController {
 		try {
 			uDTO = us.trouver(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		   
-		
+		//TODO A supprimer
 		for (ArticleDTO a : uDTO.getArticles()){
 			if(a.getGroupe()!= null){
 				System.out.println("GROUUUUUUUUUUUUPE" + a.getGroupe().getNomGroupe());
@@ -64,6 +66,7 @@ public class ArticleController {
 		try {
 			uDTO = us.trouver(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces publication POST - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 
@@ -80,13 +83,15 @@ public class ArticleController {
 		try{
 			articleDto = as.creer(articleDto);
 		}catch(MetierException e){
+			logger.severe("Erreur acces publication POST - ArticleService.creer renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		try {
-			GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
-		} catch (MetierException e) {
-			return new ModelAndView("redirect:/erreur");
-		}
+//		try {
+//			GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
+//		} catch (MetierException e) {
+//			logger.severe("Erreur acces publication POST - GroupeService.creer renvoie : " + e.getMessage());
+//			return new ModelAndView("redirect:/erreur");
+//		}
 		
 		System.out.println(articleDto.getGroupe().getNomGroupe());
 		//TODO recuperer en base les articles

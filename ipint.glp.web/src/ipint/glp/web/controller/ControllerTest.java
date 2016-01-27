@@ -2,6 +2,7 @@ package ipint.glp.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -24,6 +25,7 @@ import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
 public class ControllerTest {
+	private Logger logger = Logger.getLogger("ControllerTest");
 
 	@Inject
 	ArticleService artS;
@@ -131,6 +133,7 @@ public class ControllerTest {
 		try {
 			gDTO = groupeS.trouver(gDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces test GET - GroupeService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		GroupeDTO gDTO2 = new GroupeDTO();
@@ -138,6 +141,7 @@ public class ControllerTest {
 		try {
 			gDTO2 = groupeS.trouver(gDTO2);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces test GET - GroupeService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
@@ -149,6 +153,7 @@ public class ControllerTest {
 		try {
 			gPrincDTO = groupeS.trouver(gPrincDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces test GET - GroupeService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		utilDTOm.setGroupePrincipal(gPrincDTO);
@@ -158,6 +163,7 @@ public class ControllerTest {
 		try {
 			utilDTOm = utilS.creer(utilDTOm);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces test GET - UtilisateurService.creer renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 

@@ -1,5 +1,7 @@
 package ipint.glp.web.controller;
 
+import java.util.logging.Logger;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import ipint.glp.api.itf.UtilisateurEnAttenteService;
 
 @Controller
 public class InscriptionController {
+	private Logger logger = Logger.getLogger("InscriptionController");
 
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
@@ -32,7 +35,8 @@ public class InscriptionController {
 		try {
 			model.addAttribute("groupes",groupeS.lister());
 		} catch (MetierException e) {
-			//TODO redirection vers une page d'erreur
+			logger.severe("Erreur acces inscription GET - GroupeService.lister renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateurTmp", utilisateur);
 		return new ModelAndView("inscription");
@@ -55,15 +59,11 @@ public class InscriptionController {
 		try {
 			utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces inscription POST - UtilisateurEnAttenteService.creer renvoie : " + e.getMessage());
 			return "redirect:/erreur";
 		}
 		model.addAttribute("utilisateurTmp", utilisateurTmp);
 		return "redirect:/connexion";
-	}
-
-	@RequestMapping(value="/error")
-	public ModelAndView connexionError() {
-		return new ModelAndView("connexion");
 	}
 
 }

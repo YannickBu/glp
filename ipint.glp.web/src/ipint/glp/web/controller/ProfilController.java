@@ -1,5 +1,7 @@
 package ipint.glp.web.controller;
 
+import java.util.logging.Logger;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +21,7 @@ import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
 public class ProfilController {
+	private Logger logger = Logger.getLogger("ProfilController");
 
 	@Inject
 	UtilisateurService utilisateurService;
@@ -37,6 +40,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces profil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		//		
@@ -89,6 +93,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces profil/id GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		
@@ -114,6 +119,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces profil/modifProfil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateur", uDTO);
@@ -128,6 +134,7 @@ public class ProfilController {
 		try {
 			uDTO = utilisateurService.trouver(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces profil/modifProfil POST - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		Integer idTemp = uDTO.getProfil().getIdProfil();
@@ -137,6 +144,7 @@ public class ProfilController {
 		try {
 			utilisateur = utilisateurService.modifier(uDTO);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces profil/modifProfil POST - UtilisateurService.modifier renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("articles", uDTO.getArticles());

@@ -1,6 +1,7 @@
 package ipint.glp.web.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -26,9 +27,11 @@ import ipint.glp.api.itf.UtilisateurEnAttenteService;
  */
 @Controller
 public class AdministrationController {
+	private Logger logger = Logger.getLogger("AdministrationController");
 
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
+
 
 	public AdministrationController() {
 	}
@@ -40,6 +43,7 @@ public class AdministrationController {
 		try {
 			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 		} catch (MetierException e) {
+			logger.severe("Erreur acces panelInscription/id GET - utilisateurEnAttenteService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateurTmp", uDTO);
@@ -48,6 +52,7 @@ public class AdministrationController {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces panelInscription/id GET - utilisateurEnAttenteService.lister renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		return new ModelAndView("panelInscription");
@@ -61,6 +66,7 @@ public class AdministrationController {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces panelInscription GET - utilisateurEnAttenteService.lister renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		return new ModelAndView("menuInscriptionVide");
@@ -74,6 +80,7 @@ public class AdministrationController {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
 		} catch (MetierException e) {
+			logger.severe("Erreur acces panelInscription POST - utilisateurEnAttenteService.lister renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 		return new ModelAndView("menuInscriptionVide");
@@ -83,26 +90,40 @@ public class AdministrationController {
 	public ModelAndView profilPost(@RequestParam("action") String action,@RequestParam("optionalMessage") String optionalMessage, @PathVariable String id,
 			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model){
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
+
 		try{
 			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
-			if (action.equals("Accepter")) {
-				utilisateurEnAttenteService.valider(uDTO,optionalMessage);
-			} else if (action.equals("Refuser")) {
-				utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
-			}
 		} catch (MetierException e) {
+			logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		
+		if (action.equals("Accepter")) {
+			try{
+				utilisateurEnAttenteService.valider(uDTO,optionalMessage);
+			} catch (MetierException e) {
+				logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.valider renvoie : " + e.getMessage());
+				return new ModelAndView("redirect:/erreur");
+			}
+		} else if (action.equals("Refuser")) {
+			try{
+				utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
+			} catch (MetierException e) {
+				logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.refuser renvoie : " + e.getMessage());
+				return new ModelAndView("redirect:/erreur");
+			}
+		}
+
+
 		List<UtilisateurEnAttenteDTO> list = null;
 		try {
 			list = utilisateurEnAttenteService.lister();
-		} catch (MetierException e) {
+		} catch (MetierException e) {				
+			logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.lister renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		
+
 		model.addAttribute("utilisateurTmp", uDTO);
-		
+
 		if(list!=null && !list.isEmpty()){
 			return new ModelAndView("redirect:/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
 		}
