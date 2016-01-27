@@ -43,14 +43,7 @@ public class ArticleController {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		   
-		//TODO A supprimer
-		for (ArticleDTO a : uDTO.getArticles()){
-			if(a.getGroupe()!= null){
-				System.out.println("GROUUUUUUUUUUUUPE" + a.getGroupe().getNomGroupe());
-			}
-		}
-		
+
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", uDTO.getGroupePrincipal());
@@ -58,9 +51,10 @@ public class ArticleController {
 	}
 
 	@RequestMapping(value = "/publication", method = RequestMethod.POST)
-	public ModelAndView publicationGet(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article, BindingResult result, Model model) {
-		//TODO
-		
+	public ModelAndView publicationGet(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article,
+			BindingResult result, Model model) {
+		// TODO
+
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
@@ -70,9 +64,9 @@ public class ArticleController {
 			return new ModelAndView("redirect:/erreur");
 		}
 
-//		System.out.println("artCont id : "+id);
-		System.out.println("artCont id uDTO : "+uDTO.getIdUtilisateur());
-		System.out.println("artCont id uDTO : "+uDTO.getNom());
+		// System.out.println("artCont id : "+id);
+		System.out.println("artCont id uDTO : " + uDTO.getIdUtilisateur());
+		System.out.println("artCont id uDTO : " + uDTO.getNom());
 
 		ArticleDTO articleDto = new ArticleDTO();
 		articleDto.setContenu(article.getContenu());
@@ -80,21 +74,22 @@ public class ArticleController {
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
 		articleDto.setGroupe(uDTO.getGroupePrincipal());
-		try{
+		try {
 			articleDto = as.creer(articleDto);
-		}catch(MetierException e){
+		} catch (MetierException e) {
 			logger.severe("Erreur acces publication POST - ArticleService.creer renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-//		try {
-//			GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
-//		} catch (MetierException e) {
-//			logger.severe("Erreur acces publication POST - GroupeService.creer renvoie : " + e.getMessage());
-//			return new ModelAndView("redirect:/erreur");
-//		}
-		
+		// try {
+		// GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
+		// } catch (MetierException e) {
+		// logger.severe("Erreur acces publication POST - GroupeService.creer
+		// renvoie : " + e.getMessage());
+		// return new ModelAndView("redirect:/erreur");
+		// }
+
 		System.out.println(articleDto.getGroupe().getNomGroupe());
-		//TODO recuperer en base les articles
+		// TODO recuperer en base les articles
 		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
