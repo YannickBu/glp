@@ -29,16 +29,16 @@ public class ArticleImpl implements ArticleService {
 	@Override
 	public ArticleDTO creer(ArticleDTO articleDTO) throws MetierException {
 		if(articleDTO==null){
-			throw new InformationManquanteException("L'articleDTO est null");
+			throw new InformationManquanteException("ArticleImpl.creer : L'articleDTO est null");
 		}
 		if(articleDTO.getUtilisateur().getEmail()==null && articleDTO.getUtilisateur().getIdUtilisateur()==null){
-			throw new InformationManquanteException("L'utilisateur dans l'articleDTO est null");
+			throw new InformationManquanteException("ArticleImpl.creer : L'utilisateur dans l'articleDTO est null");
 		}
 		if(articleDTO.getGroupe()==null){
-			throw new InformationManquanteException("L'articleDTO n'a pas de groupe principal associé");
+			throw new InformationManquanteException("ArticleImpl.creer : L'articleDTO n'a pas de groupe principal associé");
 		}
 //		if(articleDTO.getGroupes()==null || articleDTO.getGroupes().isEmpty()){
-//			throw new InformationManquanteException("L'articleDTO n'est associé à aucun groupe");
+//			throw new InformationManquanteException("ArticleDTO.creer : L'articleDTO n'est associé à aucun groupe");
 //		}
 
 		Article art = new Article();
@@ -54,12 +54,12 @@ public class ArticleImpl implements ArticleService {
 			try{
 				util = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
-				throw new UtilisateurInconnuException(articleDTO.getUtilisateur().toString()+" n'existe pas");
+				throw new UtilisateurInconnuException("ArticleImpl.creer : "+articleDTO.getUtilisateur().toString()+" n'existe pas");
 			}
 		}else{
 			util = em.find(Utilisateur.class, articleDTO.getUtilisateur().getIdUtilisateur());
 			if(util==null){
-				throw new UtilisateurInconnuException(articleDTO.getUtilisateur().toString()+" n'existe pas");
+				throw new UtilisateurInconnuException("ArticleImpl.creer : "+articleDTO.getUtilisateur().toString()+" n'existe pas");
 			}
 		}
 		if (util == null) {
@@ -77,7 +77,7 @@ public class ArticleImpl implements ArticleService {
 			groupe = em.find(Groupe.class, articleDTO.getGroupe().getIdGroupe());
 		}
 		if(groupe == null){
-			throw new GroupeInconnuException("Le groupe ayant pour id "+articleDTO.getGroupe().getIdGroupe()+" n'existe pas");
+			throw new GroupeInconnuException("ArticleImpl.creer : Le groupe ayant pour id "+articleDTO.getGroupe().getIdGroupe()+" n'existe pas");
 		}
 		art.setGroupe(groupe);
 
@@ -115,14 +115,14 @@ public class ArticleImpl implements ArticleService {
 	@Override
 	public ArticleDTO trouver(ArticleDTO articleDTO) throws MetierException {
 		if(articleDTO==null){
-			throw new InformationManquanteException("L'articleDTO est null");
+			throw new InformationManquanteException("ArticleImpl.trouver : L'articleDTO est null");
 		}
 		if(articleDTO.getIdArticle()==null){
-			throw new InformationManquanteException("L'articleDTO n'a pas d'id");
+			throw new InformationManquanteException("ArticleImpl.trouver : L'articleDTO n'a pas d'id");
 		}
 		Article art = em.find(Article.class, articleDTO.getIdArticle());
 		if(art==null){
-			throw new ArticleInconnuException(articleDTO.toString()+" inconnu");
+			throw new ArticleInconnuException("ArticleImpl.trouver : "+articleDTO.toString()+" inconnu");
 		}
 		return MappingToDTO.articleToArticleDTO(art);
 	}
@@ -130,10 +130,10 @@ public class ArticleImpl implements ArticleService {
 	@Override
 	public ArticleDTO modifier(ArticleDTO nouvelArt) throws MetierException {
 		if(nouvelArt==null){
-			throw new InformationManquanteException("L'articleDTO est null");
+			throw new InformationManquanteException("ArticleImpl.modifier : L'articleDTO est null");
 		}
 		if(nouvelArt.getIdArticle()==null){
-			throw new InformationManquanteException("L'articleDTO n'a pas d'id");
+			throw new InformationManquanteException("ArticleImpl.modifier : L'articleDTO n'a pas d'id");
 		}
 
 		//		MappingToEntity mte = new MappingToEntity();
@@ -157,7 +157,7 @@ public class ArticleImpl implements ArticleService {
 
 		Article art = em.find(Article.class, nouvelArt.getIdArticle());
 		if(art==null){
-			throw new ArticleInconnuException(nouvelArt.toString()+" n'existe pas");
+			throw new ArticleInconnuException("ArticleImpl.modifier : "+nouvelArt.toString()+" n'existe pas");
 		}
 		art.setContenu(nouvelArt.getContenu());
 		art.setDatePublication(nouvelArt.getDatePublication());
@@ -180,15 +180,15 @@ public class ArticleImpl implements ArticleService {
 	@Override
 	public void supprimer(ArticleDTO articleASupprimer) throws MetierException {
 		if(articleASupprimer==null){
-			throw new InformationManquanteException("L'articleDTO est null");
+			throw new InformationManquanteException("ArticleImpl.supprimer : L'articleDTO est null");
 		}
 		if(articleASupprimer.getIdArticle()==null){
-			throw new InformationManquanteException("L'articleDTO n'a pas d'id");
+			throw new InformationManquanteException("ArticleImpl.supprimer : L'articleDTO n'a pas d'id");
 		}
 
 		Article art = em.find(Article.class, articleASupprimer.getIdArticle());
 		if(art==null){
-			throw new ArticleInconnuException(articleASupprimer.toString()+" n'existe pas");
+			throw new ArticleInconnuException("ArticleImpl.supprimer : "+articleASupprimer.toString()+" n'existe pas");
 		}
 		em.remove(art);
 	}

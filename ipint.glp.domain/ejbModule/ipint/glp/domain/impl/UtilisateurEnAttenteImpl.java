@@ -42,16 +42,16 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	@Override
 	public UtilisateurEnAttenteDTO creer(UtilisateurEnAttenteDTO utilisateurEnAttenteDTO) throws MetierException {
 		if(utilisateurEnAttenteDTO==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.creer : L'utilisateurEnAttenteDTO est null");
 		}
 		if(utilisateurEnAttenteDTO.getEmail()==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO n'a pas d'email");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.creer : L'utilisateurEnAttenteDTO n'a pas d'email");
 		}
 		if(utilisateurEnAttenteDTO.getGroupePrincipal()==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO n'a pas de groupe principal");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.creer : L'utilisateurEnAttenteDTO n'a pas de groupe principal");
 		}
 		if(utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe()==null){
-			throw new InformationManquanteException("Le groupe principal de l'utilisateurEnAttenteDTO n'a pas d'id");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.creer : Le groupe principal de l'utilisateurEnAttenteDTO n'a pas d'id");
 		}
 
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
@@ -59,7 +59,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
 		Query q = em.createQuery("select g from Utilisateur g where g.email = '" + utilisateurEnAttenteDTO.getEmail() + "'");
 		if(!q.getResultList().isEmpty()){
-			throw new UtilisateurExistantException("Un utilisateur possède déjà l'email " + utilisateurEnAttenteDTO.getEmail());
+			throw new UtilisateurExistantException("UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email " + utilisateurEnAttenteDTO.getEmail());
 		}
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
@@ -69,7 +69,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		try{
 			groupe = (Groupe) q.getSingleResult();
 		}catch(NoResultException e){
-			throw new GroupeInconnuException(utilisateurEnAttenteDTO.getGroupePrincipal().toString()+" n'existe pas");
+			throw new GroupeInconnuException("UtilisateurEnAttenteImpl.creer : "+utilisateurEnAttenteDTO.getGroupePrincipal().toString()+" n'existe pas");
 		}
 		utilisateurEnAttente.setGroupePrincipal(groupe);
 		utilisateurEnAttente.setAnneeDiplome(utilisateurEnAttenteDTO.getAnneeDiplome());
@@ -94,15 +94,15 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		}
 		
 		if(utilisateurEnAttenteAValiderDTO==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.refuser : L'utilisateurEnAttenteDTO est null");
 		}
 		if(utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente()==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO n'a pas d'id");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.refuser : L'utilisateurEnAttenteDTO n'a pas d'id");
 		}
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
 		utilisateurEnAttente = em.find(UtilisateurEnAttente.class, utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente());
 		if(utilisateurEnAttente==null){
-			throw new UtilisateurEnAttenteInconnuException(utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
+			throw new UtilisateurEnAttenteInconnuException("UtilisateurEnAttenteImpl.refuser : "+utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
 		}
 		String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
 		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
@@ -113,15 +113,15 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	public void supprimer(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO) throws MetierException {
 		
 		if(utilisateurEnAttenteAValiderDTO==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO est null");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.supprimer : L'utilisateurEnAttenteDTO est null");
 		}
 		if(utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente()==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteDTO n'a pas d'id");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.supprimer : L'utilisateurEnAttenteDTO n'a pas d'id");
 		}
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
 		utilisateurEnAttente = em.find(UtilisateurEnAttente.class, utilisateurEnAttenteAValiderDTO.getIdUtilisateurEnAttente());
 		if(utilisateurEnAttente==null){
-			throw new UtilisateurEnAttenteInconnuException(utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
+			throw new UtilisateurEnAttenteInconnuException("UtilisateurEnAttenteImpl.supprimer : "+utilisateurEnAttenteAValiderDTO.toString()+" n'existe pas");
 		}
 		em.remove(utilisateurEnAttente);
 	}
@@ -137,10 +137,10 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		}
 		
 		if(utilisateurEnAttenteAValiderDTO==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteAValiderDTO est null");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.valider : L'utilisateurEnAttenteAValiderDTO est null");
 		}
 		if(utilisateurEnAttenteAValiderDTO.getEmail()==null){
-			throw new InformationManquanteException("L'utilisateurEnAttenteAValiderDTO n'a pas de mail");
+			throw new InformationManquanteException("UtilisateurEnAttenteImpl.valider : L'utilisateurEnAttenteAValiderDTO n'a pas de mail");
 		}
 		UtilisateurDTO utilisateurDTO = new UtilisateurDTO();
 		utilisateurDTO.setEmail(utilisateurEnAttenteAValiderDTO.getEmail());
@@ -174,7 +174,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	public UtilisateurEnAttenteDTO trouver(int idUtilisateurEnAttente) throws MetierException {
 		UtilisateurEnAttente utilisateurEnAttente = em.find(UtilisateurEnAttente.class, idUtilisateurEnAttente);
 		if(utilisateurEnAttente==null){
-			throw new UtilisateurEnAttenteInconnuException("L'utilisateurEnAttente ayant pour id "+idUtilisateurEnAttente+" n'existe pas");
+			throw new UtilisateurEnAttenteInconnuException("UtilisateurEnAttenteImpl.trouver : L'utilisateurEnAttente ayant pour id "+idUtilisateurEnAttente+" n'existe pas");
 		}
 		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
 	}
