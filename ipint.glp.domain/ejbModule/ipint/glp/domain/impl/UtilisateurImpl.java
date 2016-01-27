@@ -48,25 +48,25 @@ public class UtilisateurImpl implements UtilisateurService {
 	@Override
 	public UtilisateurDTO creer(UtilisateurDTO utilisateurDTO) throws MetierException {
 		if(utilisateurDTO==null){
-			throw new InformationManquanteException("L'utilisateurDTO est null");
+			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO est null");
 		}
 		if(utilisateurDTO.getEmail()==null){
-			throw new InformationManquanteException("L'utilisateurDTO n'a pas d'email");
+			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas d'email");
 		}
 		if(utilisateurDTO.getStatut()==null){
-			throw new InformationManquanteException("L'utilisateurDTO n'a pas de statut");
+			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de statut");
 		}
 		if(utilisateurDTO.getPassword()==null){
-			throw new InformationManquanteException("L'utilisateurDTO n'a pas de password");
+			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de password");
 		}
 		if(utilisateurDTO.getNom()==null){
-			throw new InformationManquanteException("L'utilisateurDTO n'a pas de nom");
+			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de nom");
 		}
 		if(utilisateurDTO.getPrenom()==null){
-			throw new InformationManquanteException("L'utilisateurDTO n'a pas de prenom");
+			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de prenom");
 		}
 		if(utilisateurDTO.getGroupePrincipal()==null){
-			throw new InformationManquanteException(utilisateurDTO.toString() + " n'a pas de groupe principal");
+			throw new InformationManquanteException("UtilisateurImpl.creer : "+utilisateurDTO.toString() + " n'a pas de groupe principal");
 		}
 
 		Utilisateur utilisateur = new Utilisateur();
@@ -81,14 +81,14 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (groupeDTOm.getIdGroupe() != null) {
 			grpm = em.find(Groupe.class, groupeDTOm.getIdGroupe());
 			if(grpm==null){
-				throw new GroupeInconnuException("Le groupe d'id=" + groupeDTOm.getIdGroupe() + " n'existe pas");
+				throw new GroupeInconnuException("UtilisateurImpl.creer : Le groupe d'id=" + groupeDTOm.getIdGroupe() + " n'existe pas");
 			}
 		} else if (groupeDTOm.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOm.getNomGroupe() + "'");
 			try{
 				grpm = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
-				throw new GroupeInconnuException("Le groupe ayant pour nom=" + grpm.getNomGroupe() + " n'existe pas");
+				throw new GroupeInconnuException("UtilisateurImpl.creer : Le groupe ayant pour nom=" + grpm.getNomGroupe() + " n'existe pas");
 			}
 		}
 
@@ -109,7 +109,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				if (groupeDTO.getIdGroupe() != null) {
 					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
 					if(grp==null){
-						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour cet id");
+						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet id");
 					}
 				} else if (groupeDTO.getNomGroupe() != null) {
 					Query q = em.createQuery(
@@ -117,7 +117,7 @@ public class UtilisateurImpl implements UtilisateurService {
 					try{
 						grp = (Groupe) q.getSingleResult();
 					}catch(NoResultException e){
-						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour cet nom de groupe");
+						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet nom de groupe");
 					}
 				}
 				if (grp != null) {
@@ -140,7 +140,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				if (groupeDTO.getIdGroupe() != null) {
 					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
 					if(grp==null){
-						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour cet id");
+						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet id");
 					}
 				} else if (groupeDTO.getNomGroupe() != null) {
 					Query q = em.createQuery(
@@ -148,7 +148,7 @@ public class UtilisateurImpl implements UtilisateurService {
 					try{
 						grp = (Groupe) q.getSingleResult();
 					}catch(NoResultException e){
-						throw new GroupeInconnuException(groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
+						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
 					}
 				}
 				if (grp != null) {
@@ -257,24 +257,24 @@ public class UtilisateurImpl implements UtilisateurService {
 	@Override
 	public UtilisateurDTO trouver(UtilisateurDTO utilisateurDTO) throws MetierException {
 		if(utilisateurDTO==null){
-			throw new InformationManquanteException("L'utilisateurDTO est null");
+			throw new InformationManquanteException("UtilisateurImpl.trouver : L'utilisateurDTO est null");
 		}
 		if(utilisateurDTO.getEmail()==null && utilisateurDTO.getIdUtilisateur()==null){
-			throw new InformationManquanteException("L'utilisateurDTO n'a ni email ni id");
+			throw new InformationManquanteException("UtilisateurImpl.trouver : L'utilisateurDTO n'a ni email ni id");
 		}
 
 		Utilisateur utilisateur = new Utilisateur();
 		if (utilisateurDTO.getIdUtilisateur() != null) {
 			utilisateur = em.find(Utilisateur.class, utilisateurDTO.getIdUtilisateur());
 			if(utilisateur==null){
-				throw new UtilisateurInconnuException(utilisateurDTO.toString()+" n'existe pas avec cet id");
+				throw new UtilisateurInconnuException("UtilisateurImpl.trouver : "+utilisateurDTO.toString()+" n'existe pas avec cet id");
 			}
 		} else {
 			Query q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTO.getEmail() + "'");
 			try{
 				utilisateur = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
-				throw new UtilisateurInconnuException(utilisateurDTO.toString()+" n'existe pas avec cet email");
+				throw new UtilisateurInconnuException("UtilisateurImpl.trouver : "+utilisateurDTO.toString()+" n'existe pas avec cet email");
 			}
 		}
 
@@ -286,15 +286,15 @@ public class UtilisateurImpl implements UtilisateurService {
 	@Override
 	public UtilisateurDTO modifier(UtilisateurDTO nouvelUtilisateur) throws MetierException {
 		if(nouvelUtilisateur==null){
-			throw new InformationManquanteException("Le nouvelUtilisateurDTO est null");
+			throw new InformationManquanteException("UtilisateurImpl.modifier : Le nouvelUtilisateurDTO est null");
 		}
 		if(nouvelUtilisateur.getIdUtilisateur()==null){
-			throw new InformationManquanteException("Le nouvelUtilisateurDTO n'a pas d'id");
+			throw new InformationManquanteException("UtilisateurImpl.modifier : Le nouvelUtilisateurDTO n'a pas d'id");
 		}
 
 		Utilisateur utilisateurMAJ = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur());
 		if(utilisateurMAJ==null){
-			throw new UtilisateurInconnuException("L'utilisateur à modifier n'existe pas (id="+nouvelUtilisateur.getIdUtilisateur()+")");
+			throw new UtilisateurInconnuException("UtilisateurImpl.modifier : L'utilisateur à modifier n'existe pas (id="+nouvelUtilisateur.getIdUtilisateur()+")");
 		}
 		
 		if (nouvelUtilisateur.getStatut() != null) {
@@ -315,7 +315,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getProfil() != null) {
 			Profil profil = em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil());
 			if(profil==null){
-				throw new ProfilInconnuException(profil.toString()+" n'existe pas");
+				throw new ProfilInconnuException("UtilisateurImpl.modifier : Le profil est null");
 			}
 			int idProfil = nouvelUtilisateur.getProfil().getIdProfil();
 			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
@@ -441,12 +441,6 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ipint.glp.api.itf.UtilisateurService#supprimer(ipint.glp.api.DTO.
-	 * UtilisateurDTO)
-	 */
 	@Override
 	public void supprimer(UtilisateurDTO obj) {
 		// TODO Auto-generated method stub
