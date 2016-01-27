@@ -61,7 +61,7 @@
 	
 	<security-constraint>
 		<web-resource-collection>
-			<web-resource-name>not usee</web-resource-name>
+			<web-resource-name>not use</web-resource-name>
 			<url-pattern>/profil/</url-pattern>
 			<url-pattern>/profil/*/</url-pattern>
 			<url-pattern>/profil</url-pattern>
