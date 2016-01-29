@@ -2,3 +2,4 @@
 <script src="${pageContext.servletContext.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/resources/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/resources/js/locales/bootstrap-datetimepicker.fr.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>

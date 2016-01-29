@@ -47,26 +47,27 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	@Override
 	public UtilisateurDTO creer(UtilisateurDTO utilisateurDTO) throws MetierException {
-		if(utilisateurDTO==null){
+		if (utilisateurDTO == null) {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO est null");
 		}
-		if(utilisateurDTO.getEmail()==null){
+		if (utilisateurDTO.getEmail() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas d'email");
 		}
-		if(utilisateurDTO.getStatut()==null){
+		if (utilisateurDTO.getStatut() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de statut");
 		}
-		if(utilisateurDTO.getPassword()==null){
+		if (utilisateurDTO.getPassword() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de password");
 		}
-		if(utilisateurDTO.getNom()==null){
+		if (utilisateurDTO.getNom() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de nom");
 		}
-		if(utilisateurDTO.getPrenom()==null){
+		if (utilisateurDTO.getPrenom() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de prenom");
 		}
-		if(utilisateurDTO.getGroupePrincipal()==null){
-			throw new InformationManquanteException("UtilisateurImpl.creer : "+utilisateurDTO.toString() + " n'a pas de groupe principal");
+		if (utilisateurDTO.getGroupePrincipal() == null) {
+			throw new InformationManquanteException(
+					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de groupe principal");
 		}
 
 		Utilisateur utilisateur = new Utilisateur();
@@ -116,15 +117,17 @@ public class UtilisateurImpl implements UtilisateurService {
 		Groupe grpm = null;
 		if (groupeDTOm.getIdGroupe() != null) {
 			grpm = em.find(Groupe.class, groupeDTOm.getIdGroupe());
-			if(grpm==null){
-				throw new GroupeInconnuException("UtilisateurImpl.creer : Le groupe d'id=" + groupeDTOm.getIdGroupe() + " n'existe pas");
+			if (grpm == null) {
+				throw new GroupeInconnuException(
+						"UtilisateurImpl.creer : Le groupe d'id=" + groupeDTOm.getIdGroupe() + " n'existe pas");
 			}
 		} else if (groupeDTOm.getNomGroupe() != null) {
 			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOm.getNomGroupe() + "'");
-			try{
+			try {
 				grpm = (Groupe) q.getSingleResult();
-			}catch(NoResultException e){
-				throw new GroupeInconnuException("UtilisateurImpl.creer : Le groupe ayant pour nom=" + grpm.getNomGroupe() + " n'existe pas");
+			} catch (NoResultException e) {
+				throw new GroupeInconnuException(
+						"UtilisateurImpl.creer : Le groupe ayant pour nom=" + grpm.getNomGroupe() + " n'existe pas");
 			}
 		}
 		if(grpm!=null){
@@ -139,8 +142,6 @@ public class UtilisateurImpl implements UtilisateurService {
 		// Profil profil = em.find(Profil.class,
 		// utilisateurDTO.getProfil().getIdProfil());
 		// utilisateur.setProfil(profil);
-
-		//TODO gerer les exceptions lorsque cette liste de groupes gérés sera utilisée
 
 		//Gestion de la liste des groupes gérés par l'utilisateur, AUCUN A LA CREATION DUN UTILISATEUR
 
@@ -206,11 +207,11 @@ public class UtilisateurImpl implements UtilisateurService {
 
 		Profil pro = new Profil();
 		if (utilisateurDTO.getProfil() != null) {
-			//Champs non assoc
+			// Champs non assoc
 			pro.setCentreInteret(utilisateurDTO.getProfil().getCentreInteret());
 			pro.setTelephone(utilisateurDTO.getProfil().getTelephone());
 
-			//Assoc competence
+			// Assoc competence
 
 			if (utilisateurDTO.getProfil().getCompetence() != null
 					&& !utilisateurDTO.getProfil().getCompetence().isEmpty()) {
@@ -226,7 +227,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				pro.setCompetence(listComp);
 			}
 
-			//Assoc diplome
+			// Assoc diplome
 
 			if (utilisateurDTO.getProfil().getDiplomes() != null
 					&& !utilisateurDTO.getProfil().getDiplomes().isEmpty()) {
@@ -244,7 +245,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				pro.setDiplomes(listDipl);
 			}
 
-			//Assoc experience
+			// Assoc experience
 
 			if (utilisateurDTO.getProfil().getExperiences() != null
 					&& !utilisateurDTO.getProfil().getExperiences().isEmpty()) {
@@ -266,28 +267,29 @@ public class UtilisateurImpl implements UtilisateurService {
 				pro.setExperiences(listExp);
 			}
 
-			//Assoc reseaux sociaux
+			// Assoc reseaux sociaux
 
-//			if (utilisateurDTO.getProfil().getReseauxSociaux() != null
-//					&& !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
-//				List<String> listRes = new ArrayList<String>();
-//				for (String res : utilisateurDTO.getProfil().getReseauxSociaux()) {
-//					em.persist(res);
-//				}
-//				pro.setReseauxSociaux(listRes);
-//			}
+			// if (utilisateurDTO.getProfil().getReseauxSociaux() != null
+			// && !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
+			// List<String> listRes = new ArrayList<String>();
+			// for (String res : utilisateurDTO.getProfil().getReseauxSociaux())
+			// {
+			// em.persist(res);
+			// }
+			// pro.setReseauxSociaux(listRes);
+			// }
 
 		}
 		em.persist(pro);
 		utilisateur.setProfil(pro);
 
-		//Gestion des droits - ajout de dans la table UTILISATEURGROUPES en fonction du statut
+		// Gestion des droits - ajout de dans la table UTILISATEURGROUPES en
+		// fonction du statut
 
 		UtilisateurGroupes utilGrp = new UtilisateurGroupes();
 		utilGrp.setEmail(utilisateur.getEmail());
 		utilGrp.setGroupe(Statut.DIPLOME.name().toLowerCase());
 		em.persist(utilGrp);
-
 
 		em.persist(utilisateur);
 
@@ -295,28 +297,29 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	}
 
-
 	@Override
 	public UtilisateurDTO trouver(UtilisateurDTO utilisateurDTO) throws MetierException {
-		if(utilisateurDTO==null){
+		if (utilisateurDTO == null) {
 			throw new InformationManquanteException("UtilisateurImpl.trouver : L'utilisateurDTO est null");
 		}
-		if(utilisateurDTO.getEmail()==null && utilisateurDTO.getIdUtilisateur()==null){
+		if (utilisateurDTO.getEmail() == null && utilisateurDTO.getIdUtilisateur() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.trouver : L'utilisateurDTO n'a ni email ni id");
 		}
 
 		Utilisateur utilisateur = new Utilisateur();
 		if (utilisateurDTO.getIdUtilisateur() != null) {
 			utilisateur = em.find(Utilisateur.class, utilisateurDTO.getIdUtilisateur());
-			if(utilisateur==null){
-				throw new UtilisateurInconnuException("UtilisateurImpl.trouver : "+utilisateurDTO.toString()+" n'existe pas avec cet id");
+			if (utilisateur == null) {
+				throw new UtilisateurInconnuException(
+						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet id");
 			}
 		} else {
 			Query q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTO.getEmail() + "'");
-			try{
+			try {
 				utilisateur = (Utilisateur) q.getSingleResult();
-			}catch(NoResultException e){
-				throw new UtilisateurInconnuException("UtilisateurImpl.trouver : "+utilisateurDTO.toString()+" n'existe pas avec cet email");
+			} catch (NoResultException e) {
+				throw new UtilisateurInconnuException(
+						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
 
@@ -324,27 +327,30 @@ public class UtilisateurImpl implements UtilisateurService {
 		return utilisateurDTO;
 	}
 
-
 	@Override
 	public UtilisateurDTO modifier(UtilisateurDTO nouvelUtilisateur) throws MetierException {
-		if(nouvelUtilisateur==null){
+		if (nouvelUtilisateur == null) {
 			throw new InformationManquanteException("UtilisateurImpl.modifier : Le nouvelUtilisateurDTO est null");
 		}
-		if(nouvelUtilisateur.getIdUtilisateur()==null){
+		if (nouvelUtilisateur.getIdUtilisateur() == null) {
 			throw new InformationManquanteException("UtilisateurImpl.modifier : Le nouvelUtilisateurDTO n'a pas d'id");
 		}
 
 		Utilisateur utilisateurMAJ = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur());
-		if(utilisateurMAJ==null){
-			throw new UtilisateurInconnuException("UtilisateurImpl.modifier : L'utilisateur à modifier n'existe pas (id="+nouvelUtilisateur.getIdUtilisateur()+")");
+		if (utilisateurMAJ == null) {
+			throw new UtilisateurInconnuException(
+					"UtilisateurImpl.modifier : L'utilisateur à modifier n'existe pas (id="
+							+ nouvelUtilisateur.getIdUtilisateur() + ")");
 		}
-		
+
 		if (nouvelUtilisateur.getStatut() != null) {
 			utilisateurMAJ.setStatut(nouvelUtilisateur.getStatut());
 		}
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " + nouvelUtilisateur.getPassword());
+
 		if (nouvelUtilisateur.getPassword() != null && !"".equals(nouvelUtilisateur.getPassword())) {
 			utilisateurMAJ.setPassword(nouvelUtilisateur.getPassword());
 		}
@@ -356,7 +362,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 		if (nouvelUtilisateur.getProfil() != null) {
 			Profil profil = em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil());
-			if(profil==null){
+			if (profil == null) {
 				throw new ProfilInconnuException("UtilisateurImpl.modifier : Le profil est null");
 			}
 			int idProfil = nouvelUtilisateur.getProfil().getIdProfil();
@@ -370,7 +376,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
 					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() != 0) {
 						Query q = em.createQuery("select c from Competence c where c.libelle = '" + compDTO.getLibelle()
-						+ "' and c.profil.idProfil = :idProfil");
+								+ "' and c.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						if (!q.getResultList().isEmpty()) {
 							comp = (Competence) q.getSingleResult();
@@ -401,7 +407,7 @@ public class UtilisateurImpl implements UtilisateurService {
 					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle())
 							&& diplDTO.getAnneeDebut() != null && diplDTO.getAnneFin() != null) {
 						Query q = em.createQuery("select d from Diplome d where d.libelle = '" + diplDTO.getLibelle()
-						+ "' and d.profil.idProfil = :idProfil");
+								+ "' and d.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						if (!q.getResultList().isEmpty()) {
 							dipl = (Diplome) q.getSingleResult();
@@ -472,6 +478,7 @@ public class UtilisateurImpl implements UtilisateurService {
 				}
 			}
 			profil.setExperiences(exps);
+			System.out.println("CENTRE INTERETS "+ nouvelUtilisateur.getProfil().getCentreInteret());
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
 			// profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
 			utilisateurMAJ.setProfil(profil);

@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript"
-	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
+	
 <div class="col-md-6 publication">
 	<div class="container">
 		<div class="row">
@@ -117,17 +116,7 @@
 
 											</ul>
 
-											<%
-												if (request.getAttribute("id") == null) {
-											%>
-											<a
-												href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
-													type="button" style="margin-top: 1%; float: right"
-													class="btn btn-default" id="btn_new_exp">Modifier
-													mon profil</button></a>
-											<%
-												}
-											%>
+										
 										</div>
 										<div class="bloc">
 											<ul>
@@ -163,6 +152,17 @@
 												</li>
 											</ul>
 										</div>
+											<%
+												if (request.getAttribute("id") == null) {
+											%>
+											<a
+												href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
+													type="button" style="margin-top: 1%; float: right"
+													class="btn btn-default" id="btn_new_exp">Modifier
+													mon profil</button></a>
+											<%
+												}
+											%>
 									</div>
 								</div>
 							</div>

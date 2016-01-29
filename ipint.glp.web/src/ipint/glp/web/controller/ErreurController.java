@@ -15,4 +15,9 @@ public class ErreurController {
 	public ModelAndView erreurGET() {
 		return new ModelAndView("erreur");
 	}
+	
+	@RequestMapping(value = "/construction")
+	public ModelAndView constructionGET() {
+		return new ModelAndView("construction");
+	}
 }
