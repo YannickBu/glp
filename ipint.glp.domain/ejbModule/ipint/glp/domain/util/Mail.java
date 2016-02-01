@@ -82,8 +82,8 @@ public class Mail {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
 		props.put("proxySet","true");
-        props.put("socksProxyHost","192.168.155.1");
-        props.put("socksProxyPort","1080");
+        props.put("socksProxyHost","cache-etu.univ-lille1.fr");
+        props.put("socksProxyPort","3128");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
@@ -101,9 +101,11 @@ public class Mail {
 			message.setSubject("L1nk - votre demande d'inscription à été traitée");
 			message.setText(messageMail);
 
+			System.out.println("Sending");
+			
 			Transport.send(message);
 
-//			System.out.println("Done");
+			System.out.println("Done");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
