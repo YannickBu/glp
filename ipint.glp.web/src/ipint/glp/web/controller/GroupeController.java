@@ -23,7 +23,7 @@ import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
 
 /**
- * 
+ *
  * @author hequet
  *
  */
@@ -36,13 +36,13 @@ public class GroupeController {
 	GroupeService groupeService;
 	@Inject
 	ArticleService articleService;
-	
+
 //	@RequestMapping(value = "/groupe")
 //	public ModelAndView groupeGET() {
 //		return new ModelAndView("groupe");
 //	}
-	
-	
+
+
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
 	public ModelAndView groupeidGET(HttpServletRequest request, @PathVariable String id, @ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
@@ -54,10 +54,10 @@ public class GroupeController {
 			logger.severe("Erreur acces groupeidProfil GET - groupeService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		List<UtilisateurDTO> animateursGroupe = gDTO.getUtilisateursPrincipals();
+		List<UtilisateurDTO> animateursGroupe = gDTO.getAnimateurs();
 		List<UtilisateurDTO> membresGroupe = gDTO.getUtilisateurs();
 		List<ArticleDTO> articlesGroupe = gDTO.getArticles();
-		
+
 		model.addAttribute("leGroupe", gDTO);
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe",membresGroupe);
