@@ -592,9 +592,17 @@ public class GroupeImpl implements GroupeService {
 			q = em.createQuery("select g from Groupe g where g.nomGroupe = '"+groupeDTO.getNomGroupe()+"'");
 		}
 		
-		Groupe gr = (Groupe) q.getSingleResult();
-		System.out.println(gr.getUtilisateurs().size());
-		utilisateurs = (gr).getUtilisateurs();
+		Groupe gr = null;
+		try{
+			gr = (Groupe) q.getSingleResult();
+		}catch(NoResultException e){
+			if(groupeDTO.getIdGroupe()!=null){
+				throw new GroupeInconnuException("Le groupe ayant pour id "+groupeDTO.getIdGroupe()+" est inconnu");
+			}else{
+				throw new GroupeInconnuException("Le groupe ayant pour nom "+groupeDTO.getNomGroupe()+" est inconnu");
+			}
+		}
+		utilisateurs = gr.getUtilisateurs();
 		
 		for(Utilisateur utilisateur : utilisateurs){
 			utilisateursDTO.add(MappingToDTO.utilisateurToUtilisateurDTO(utilisateur));
