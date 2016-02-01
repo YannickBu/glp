@@ -34,13 +34,13 @@ public class Groupe {
 	private Utilisateur utilisateurResponsable;
 	
 	@ManyToMany
-	@JoinTable(name = "GROUPE_UTILISATEUR", joinColumns = @JoinColumn(name = "idGroupe"),
-	inverseJoinColumns = @JoinColumn(name = "idUtilisateur"))
+	@JoinTable(name = "GROUPE_UTILISATEUR", joinColumns = @JoinColumn(name = "groupes_IDGROUPE"),
+	inverseJoinColumns = @JoinColumn(name = "utilisateurs_IDUTILISATEUR"))
 	private List<Utilisateur> utilisateurs;
 	
 	@ManyToMany
-	@JoinTable(name = "GROUPEANIME_ANIMATEUR", joinColumns = @JoinColumn(name = "idGroupe"),
-	inverseJoinColumns = @JoinColumn(name = "idUtilisateur"))
+	@JoinTable(name = "GROUPEANIME_ANIMATEUR", joinColumns = @JoinColumn(name = "groupes_IDGROUPE"),
+	inverseJoinColumns = @JoinColumn(name = "utilisateurs_IDUTILISATEUR"))
 	private List<Utilisateur> animateurs;
 	
 	@OneToMany(mappedBy = "groupe")

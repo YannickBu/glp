@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
 												<li class="nomBloc" style="list-style-type: none;">Personnes importantes
 													du groupe </li>
 												<li>
-													Modérateur(s) du groupe : ${leGroupe.utilisateurResponsable}
+													Modérateur(s) du groupe : ${leGroupe.utilisateurResponsable.prenom} ${leGroupe.utilisateurResponsable.nom}
 												</li>
 												<li>
 													Animateur(s) du groupe :

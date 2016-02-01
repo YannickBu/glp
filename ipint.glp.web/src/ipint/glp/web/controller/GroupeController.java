@@ -57,7 +57,7 @@ public class GroupeController {
 		List<UtilisateurDTO> animateursGroupe = gDTO.getAnimateurs();
 		List<UtilisateurDTO> membresGroupe = gDTO.getUtilisateurs();
 		List<ArticleDTO> articlesGroupe = gDTO.getArticles();
-
+		
 		model.addAttribute("leGroupe", gDTO);
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe",membresGroupe);

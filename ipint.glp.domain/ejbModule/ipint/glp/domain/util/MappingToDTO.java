@@ -151,19 +151,19 @@ public class MappingToDTO {
 				grpDTO.getUtilisateurs().add(utilisateurToUtilisateurDTOLazy(util));
 			}
 		}
-		grp.setArticles(new ArrayList<>());
+		grpDTO.setArticles(new ArrayList<>());
 		if (grp.getArticles() != null && !grp.getArticles().isEmpty()) {
 			for (Article art : grp.getArticles()) {
 				grpDTO.getArticles().add(articleTOArticleDTOLazy(art));
 			}
 		}
-		grp.setAnimateurs(new ArrayList<>());
+		grpDTO.setAnimateurs(new ArrayList<>());
 		if(grp.getAnimateurs()!=null && !grp.getAnimateurs().isEmpty()){
 			for(Utilisateur util : grp.getAnimateurs()){
 				grpDTO.getAnimateurs().add(utilisateurToUtilisateurDTOLazy(util));
 			}
 		}
-
+		
 		return grpDTO;
 	}
 
@@ -250,7 +250,7 @@ public class MappingToDTO {
 			artDTO.setUtilisateur(utilisateurToUtilisateurDTOHorsRelation(art.getUtilisateur()));
 		}
 		if (art.getGroupe() != null) {
-			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
+			artDTO.setGroupe(groupeToGroupeDTOHorsRelation(art.getGroupe()));
 		}
 		
 //		artDTO.setGroupes(new ArrayList<>());
