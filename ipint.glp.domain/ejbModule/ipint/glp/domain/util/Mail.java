@@ -103,7 +103,22 @@ public class Mail {
 
 			System.out.println("Sending");
 			
-			Transport.send(message);
+			
+			try{ 
+				long start = System.currentTimeMillis();
+				 
+				while((System.currentTimeMillis() - start) < 18000) {
+					Transport.send(message);
+				}
+				 
+				if ((System.currentTimeMillis() - start) > 18000) {
+					throw new Exception("MON TIMEOUT");
+				}
+				
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 
 			System.out.println("Done");
 
