@@ -36,6 +36,8 @@ public class MappingToDTO {
 		expDTO.setDescription(exp.getDescription());
 		expDTO.setEntreprise(exp.getEntreprise());
 		expDTO.setLieu(exp.getLieu());
+		expDTO.setPays(exp.getPays());
+		expDTO.setRegion(exp.getRegion());
 		expDTO.setPoste(exp.getPoste());
 
 		return expDTO;
