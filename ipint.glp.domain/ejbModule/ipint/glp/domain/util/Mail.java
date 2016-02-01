@@ -81,9 +81,9 @@ public class Mail {
 				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
-		props.setProperty("proxySet","true");
-        props.setProperty("socksProxyHost","cache.univ-lille1.fr");
-        props.setProperty("socksProxyPort","3821");
+		props.put("proxySet","true");
+        props.put("socksProxyHost","192.168.155.1");
+        props.put("socksProxyPort","1080");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
