@@ -56,7 +56,7 @@
 							too good. <a href="#" class="alert-link">alert link</a>
 						</div>
 						<div class="form-group">
-							<label for="InputNom"> Nom </label>
+							<label for="InputNom"> Nom * : </label>
 							<form:input path="nom" type="text" class="form-control"
 								id="InputNom" placeholder="ex: Dupont" />
 						</div>
@@ -156,6 +156,18 @@
 												value="${profil.experiences[i].poste}" type="text"
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
+<<<<<<< HEAD
+=======
+									</div>
+									<div class="row" style="margin-top: 1%">
+										<div class="col-md-12">
+											<form:textarea path="profil.experiences[${i}].description"
+												value="${profil.experiences[i].description}" type="text-area"
+												class="form-control" id="InputExpDesc"
+												placeholder="Description de votre mission" />
+										</div>
+										
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 									</div>
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12">
@@ -166,9 +178,12 @@
 										</div>
 
 									</div>
+<<<<<<< HEAD
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12"></div>
 									</div>
+=======
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 									<hr/>
 								</c:forEach>
 							</div>
