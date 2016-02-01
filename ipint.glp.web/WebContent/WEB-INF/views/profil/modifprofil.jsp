@@ -116,6 +116,16 @@
 												placeholder="Entreprise" />
 										</div>
 										<div class="col-md-2">
+											<form:input path="profil.experiences[${i}].pays"
+												value="${profil.experiences[i].pays}" type="text"
+												class="form-control" id="InputExpPays" placeholder="Pays" />
+										</div>
+										<div class="col-md-2">
+											<form:input path="profil.experiences[${i}].region"
+												value="${profil.experiences[i].region}" type="text"
+												class="form-control" id="InputExpRegion" placeholder="Région" />
+										</div>
+										<div class="col-md-2">
 											<form:input path="profil.experiences[${i}].lieu"
 												value="${profil.experiences[i].lieu}" type="text"
 												class="form-control" id="InputExpLieu" placeholder="Ville" />
@@ -125,13 +135,16 @@
 												value="${profil.experiences[i].poste}" type="text"
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
-									</div>
-									<div class="row" style="margin-top: 1%">
-										<div class="col-md-12">
+										<div class="col-md-8">
 											<form:input path="profil.experiences[${i}].description"
 												value="${profil.experiences[i].description}" type="text"
 												class="form-control" id="InputExpDesc"
 												placeholder="Description de votre mission" />
+										</div>
+										
+									</div>
+									<div class="row" style="margin-top: 1%">
+										<div class="col-md-12">
 										</div>
 									</div>
 								</c:forEach>
