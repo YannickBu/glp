@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -24,12 +26,22 @@ public class Groupe {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la description du groupe")
 	private String description;
 
-	@OneToMany(mappedBy = "groupePrincipal")
-	private List<Utilisateur> utilisateursPrincipals;
+	//Pas besoin de stocker les utilisateurs principaux de ce coté, relation unidirectionnelle
+	/*@OneToMany(mappedBy = "groupePrincipal")
+	private List<Utilisateur> utilisateursPrincipals;*/
+	
 	@ManyToOne
 	private Utilisateur utilisateurResponsable;
+	
 	@ManyToMany
+	@JoinTable(name = "GROUPE_UTILISATEUR", joinColumns = @JoinColumn(name = "idGroupe"),
+	inverseJoinColumns = @JoinColumn(name = "idUtilisateur"))
 	private List<Utilisateur> utilisateurs;
+	
+	@ManyToMany
+	@JoinTable(name = "GROUPEANIME_ANIMATEUR", joinColumns = @JoinColumn(name = "idGroupe"),
+	inverseJoinColumns = @JoinColumn(name = "idUtilisateur"))
+	private List<Utilisateur> animateurs;
 	
 	@OneToMany(mappedBy = "groupe")
 	private List<Article> articles;
@@ -46,13 +58,13 @@ public class Groupe {
 		this.utilisateurs = new ArrayList<>();
 	}
 	
-	public List<Utilisateur> getUtilisateurPrincipal() {
-		return utilisateursPrincipals;
-	}
-
-	public void setUtilisateurPrincipal(List<Utilisateur> utilisateurPrincipal) {
-		this.utilisateursPrincipals = utilisateurPrincipal;
-	}
+//	public List<Utilisateur> getUtilisateurPrincipal() {
+//		return utilisateursPrincipals;
+//	}
+//
+//	public void setUtilisateurPrincipal(List<Utilisateur> utilisateurPrincipal) {
+//		this.utilisateursPrincipals = utilisateurPrincipal;
+//	}
 
 	public Integer getIdGroupe() {
 		return idGroupe;
@@ -84,6 +96,14 @@ public class Groupe {
 
 	public void setUtilisateurResponsable(Utilisateur utilisateurResponsable) {
 		this.utilisateurResponsable = utilisateurResponsable;
+	}
+
+	public List<Utilisateur> getAnimateurs() {
+		return animateurs;
+	}
+
+	public void setAnimateurs(List<Utilisateur> animateurs) {
+		this.animateurs = animateurs;
 	}
 
 	public List<Utilisateur> getUtilisateurs() {

@@ -127,6 +127,12 @@ public class MappingToDTO {
 				utilDTO.getGroupesGeres().add(groupeToGroupeDTOLazy(grp));
 			}
 		}
+		utilDTO.setGroupesAnimes(new ArrayList<>());
+		if(util.getGroupesAnimes()!=null && !util.getGroupesAnimes().isEmpty()){
+			for(Groupe grp : util.getGroupesAnimes()){
+				utilDTO.getGroupesAnimes().add(groupeToGroupeDTOLazy(grp));
+			}
+		}
 
 		return utilDTO;
 	}
@@ -149,6 +155,12 @@ public class MappingToDTO {
 		if (grp.getArticles() != null && !grp.getArticles().isEmpty()) {
 			for (Article art : grp.getArticles()) {
 				grpDTO.getArticles().add(articleTOArticleDTOLazy(art));
+			}
+		}
+		grp.setAnimateurs(new ArrayList<>());
+		if(grp.getAnimateurs()!=null && !grp.getAnimateurs().isEmpty()){
+			for(Utilisateur util : grp.getAnimateurs()){
+				grpDTO.getAnimateurs().add(utilisateurToUtilisateurDTOLazy(util));
 			}
 		}
 
@@ -218,6 +230,12 @@ public class MappingToDTO {
 				utilDTO.getGroupesGeres().add(groupeToGroupeDTOHorsRelation(grp));
 			}
 		}
+		util.setGroupesAnimes(new ArrayList<>());
+		if (util.getGroupesAnimes() != null && !util.getGroupesAnimes().isEmpty()) {
+			for (Groupe grp : util.getGroupesAnimes()) {
+				utilDTO.getGroupesAnimes().add(groupeToGroupeDTOHorsRelation(grp));
+			}
+		}
 
 		return utilDTO;
 	}
@@ -264,6 +282,12 @@ public class MappingToDTO {
 		if (grp.getArticles() != null && !grp.getArticles().isEmpty()) {
 			for (Article art : grp.getArticles()) {
 				grpDTO.getArticles().add(articleToArticleDTOHorsRelation(art));
+			}
+		}
+		grpDTO.setAnimateurs(new ArrayList<>());
+		if(grp.getAnimateurs()!=null && !grp.getAnimateurs().isEmpty()){
+			for(Utilisateur util : grp.getAnimateurs()){
+				grpDTO.getAnimateurs().add(utilisateurToUtilisateurDTOHorsRelation(util));
 			}
 		}
 
