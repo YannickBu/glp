@@ -2,7 +2,7 @@
 --
 -- Host: 172.28.1.165    Database: l1nk_prod
 -- ------------------------------------------------------
--- Server version	5.5.46-0ubuntu0.14.04.2
+-- Server version        5.5.46-0ubuntu0.14.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -42,7 +42,10 @@ CREATE TABLE `ARTICLE` (
 
 LOCK TABLES `ARTICLE` WRITE;
 /*!40000 ALTER TABLE `ARTICLE` DISABLE KEYS */;
-INSERT INTO `ARTICLE` VALUES (154,'J\'ai eu mon diplome ! :)','2016-01-27 17:09:22',9,0),(201,'Moi j\'ai une attitude sport ! ','2016-01-27 17:15:02',6,0);
+INSERT INTO `ARTICLE` VALUES (154,'J\'ai eu mon diplome ! :)','2016-01-27 17:09:22',9,0),
+(201,'Moi j\'ai une attitude sport ! ','2016-01-27 17:15:02',6,0),
+(365,'Allons tous dans les bois.','2015-12-20 14:46:02',54,2),
+(422,'Bonjour je recherche un bon site contenant de bons tutoriaux pour la macro-economie','2015-10-08 09:36:21',58,1);
 /*!40000 ALTER TABLE `ARTICLE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +166,9 @@ CREATE TABLE `GROUPE` (
 
 LOCK TABLES `GROUPE` WRITE;
 /*!40000 ALTER TABLE `GROUPE` DISABLE KEYS */;
-INSERT INTO `GROUPE` VALUES (0,'Groupe des Sciences, Technologies, Santé','Sciences, Technologies, Santé',NULL),(1,'Groupe des Droit, Economie, Gestion','Droit, Economie, Gestion',NULL),(2,'Groupe des Sciences Humaines et Sociales','Sciences Humaines et Sociales',NULL);
+INSERT INTO `GROUPE` VALUES (0,'Groupe des Sciences, Technologies, Santé','Sciences, Technologies, Santé',NULL),
+(1,'Groupe des Droit, Economie, Gestion','Droit, Economie, Gestion',NULL),
+(2,'Groupe des Sciences Humaines et Sociales','Sciences Humaines et Sociales',NULL);
 /*!40000 ALTER TABLE `GROUPE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,6 +222,32 @@ CREATE TABLE `GROUPE_UTILISATEUR` (
 LOCK TABLES `GROUPE_UTILISATEUR` WRITE;
 /*!40000 ALTER TABLE `GROUPE_UTILISATEUR` DISABLE KEYS */;
 /*!40000 ALTER TABLE `GROUPE_UTILISATEUR` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `GROUPEANIME_ANIMATEUR`
+--
+
+DROP TABLE IF EXISTS `GROUPEANIME_ANIMATEUR`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `GROUPEANIME_ANIMATEUR` (
+  `utilisateurs_IDUTILISATEUR` int(11) NOT NULL,
+  `groupes_IDGROUPE` int(11) NOT NULL,
+  PRIMARY KEY (`utilisateurs_IDUTILISATEUR`,`groupes_IDGROUPE`),
+  KEY `FK_GROUPEANIME_ANIMATEUR_groupes_IDGROUPE` (`groupes_IDGROUPE`),
+  CONSTRAINT `FK_GROUPEANIME_ANIMATEUR_utilisateurs_IDUTILISATEUR` FOREIGN KEY (`utilisateurs_IDUTILISATEUR`) REFERENCES `UTILISATEUR` (`IDUTILISATEUR`),
+  CONSTRAINT `FK_GROUPEANIME_ANIMATEUR_groupes_IDGROUPE` FOREIGN KEY (`groupes_IDGROUPE`) REFERENCES `GROUPE` (`IDGROUPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `GROUPEANIME_ANIMATEUR`
+--
+
+LOCK TABLES `GROUPEANIME_ANIMATEUR` WRITE;
+/*!40000 ALTER TABLE `GROUPEANIME_ANIMATEUR` DISABLE KEYS */;
+/*!40000 ALTER TABLE `GROUPEANIME_ANIMATEUR` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -299,7 +330,11 @@ CREATE TABLE `UTILISATEUR` (
 
 LOCK TABLES `UTILISATEUR` WRITE;
 /*!40000 ALTER TABLE `UTILISATEUR` DISABLE KEYS */;
-INSERT INTO `UTILISATEUR` VALUES (6,'rodolphe.declerck@gmail.com','Declerck','pwd','Rodolphe',0,0,4),(9,'manon.barrois1@gmail.com','Barrois','pwd','Manon',0,0,7),(12,'mima.diagne@gmail.com','Diagne','pwd','Mame',0,0,10),(54,'yannick.buchart@gmail.com','Buchart','3catyrfh4v','Yannick',0,0,52),(58,'pl.hequet@gmail.com','Pierre-Louis','eb84x07s4w','Hequet',0,0,56);
+INSERT INTO `UTILISATEUR` VALUES (6,'rodolphe.declerck@gmail.com','Declerck','pwd','Rodolphe',0,0,4),
+(9,'manon.barrois1@gmail.com','Barrois','pwd','Manon',0,0,7),
+(12,'mima.diagne@gmail.com','Diagne','pwd','Mame',0,0,10),
+(54,'yannick.buchart@gmail.com','Buchart','3catyrfh4v','Yannick',0,0,52),
+(58,'pl.hequet@gmail.com','Pierre-Louis','eb84x07s4w','Hequet',0,0,56);
 /*!40000 ALTER TABLE `UTILISATEUR` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,6 +394,46 @@ INSERT INTO `UTILISATEURGROUPES` VALUES (5,'rodolphe.declerck@gmail.com','diplom
 /*!40000 ALTER TABLE `UTILISATEURGROUPES` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
+--
+-- @Author: HEQUET Pierre-Louis
+-- @Date : 28/01/2016
+-- Insert de données dans les groupes: responsable, animateur, membres, articles.
+--
+LOCK TABLES `GROUPE_ARTICLE` WRITE;
+INSERT INTO `GROUPE_ARTICLE` VALUES (0,154),(0,201),(2,365),(1,422);
+UNLOCK TABLES;
+
+LOCK TABLES `GROUPE_UTILISATEUR` WRITE;
+INSERT INTO `GROUPE_UTILISATEUR` VALUES (6,0),(9,0),(12,2),(54,2),(58,1);
+UNLOCK TABLES;
+
+LOCK TABLES `UTILISATEUR` WRITE;
+INSERT INTO `UTILISATEUR` VALUES
+(64,'test1@l1nk.com','Martin','b58f1dtnka','Toto',0,1,62),
+(78,'contact@l1nk.com','Dupond','rt96j4d1s2','Jean',0,2,76),
+(92,'miageglp@gmail.com','Ninja','2sdbm3q6nb','Equipe',0,0,90),
+(103,'eD@g.c','Delapierre','pfl9qwx25b','Elise',0,0,101),
+(125,'glp@g.c','Lee','abofg2d67w','John',0,0,123),
+(136,'glp@g.com','Chan','l52jsfv8mz','Bruce',0,0,134);
+UNLOCK TABLES;
+
+LOCK TABLES `PROFIL` WRITE;
+INSERT INTO `PROFIL` VALUES (62,NULL,NULL),(76,NULL,NULL),(90,NULL,NULL),(101,NULL,NULL),(123,NULL,NULL),(134,NULL,NULL);
+UNLOCK TABLES;
+
+
+LOCK TABLES `GROUPE` WRITE;
+UPDATE `GROUPE` SET `UTILISATEURRESPONSABLE_IDUTILISATEUR` = 92 WHERE idGroupe = 0;
+UPDATE `GROUPE` SET `UTILISATEURRESPONSABLE_IDUTILISATEUR` = 64 WHERE idGroupe = 1;
+UPDATE `GROUPE` SET `UTILISATEURRESPONSABLE_IDUTILISATEUR` = 78 WHERE idGroupe = 2;
+UNLOCK TABLES;
+
+LOCK TABLE `GROUPEANIME_ANIMATEUR` WRITE;
+INSERT INTO `GROUPEANIME_ANIMATEUR`VALUES (103,0),(125,1),(136,2);
+UNLOCK TABLE;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

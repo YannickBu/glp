@@ -53,12 +53,18 @@ public class Utilisateur implements Serializable {
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
+	
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Article> articles;
+	
 	@OneToMany(mappedBy = "utilisateurResponsable")
 	private List<Groupe> groupesGeres;
+	
 	@ManyToMany(mappedBy = "utilisateurs")
 	private List<Groupe> groupes;
+	
+	@ManyToMany(mappedBy = "animateurs")
+	private List<Groupe> groupesAnimes;
 
 	public Utilisateur() {
 		super();
@@ -138,6 +144,14 @@ public class Utilisateur implements Serializable {
 
 	public void setGroupesGeres(List<Groupe> groupesGeres) {
 		this.groupesGeres = groupesGeres;
+	}
+	
+	public List<Groupe> getGroupesAnimes() {
+		return groupesAnimes;
+	}
+
+	public void setGroupesAnimes(List<Groupe> groupesAnimes) {
+		this.groupesAnimes = groupesAnimes;
 	}
 
 	public List<Groupe> getGroupes() {

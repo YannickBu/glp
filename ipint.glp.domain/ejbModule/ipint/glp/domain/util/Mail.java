@@ -15,10 +15,10 @@ import javax.mail.internet.MimeMessage;
  */
 public class Mail {
 	private static final String MessageDefautDeDebut = "Bonjour, \n \n";
-	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n \nVoici vos informations de connexion :\n \n ";
-	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n \nVos informations ont été supprimées de nos bases.\n";
+	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n\nVoici vos informations de connexion :\n \n ";
+	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n\nVos informations ont été supprimées de nos bases.\n";
 	private static final String MessageDefautComplement = "\nMessage additionel du modérateur :  ";
-	private static final String MessageDefautDeFin = "\n \nCordialement votre,\n \nl'équipe de modération de L1nk.";
+	private static final String MessageDefautDeFin = "\n\nCordialement votre,\n\nL'équipe de modération de L1nk.";
 
 	private static String messageAcceptationSansMessageAditionnel(String motDePasse){
 		String messageRenvoyer;
@@ -81,6 +81,9 @@ public class Mail {
 				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
+		props.put("proxySet","true");
+        props.put("socksProxyHost","cache-etu.univ-lille1.fr");
+        props.put("socksProxyPort","3128");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
@@ -98,9 +101,26 @@ public class Mail {
 			message.setSubject("L1nk - votre demande d'inscription à été traitée");
 			message.setText(messageMail);
 
-			Transport.send(message);
+			System.out.println("Sending");
+			
+			
+			try{ 
+				long start = System.currentTimeMillis();
+				 
+				while((System.currentTimeMillis() - start) < 18000) {
+					Transport.send(message);
+				}
+				 
+				if ((System.currentTimeMillis() - start) > 18000) {
+					throw new Exception("MON TIMEOUT");
+				}
+				
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 
-//			System.out.println("Done");
+			System.out.println("Done");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

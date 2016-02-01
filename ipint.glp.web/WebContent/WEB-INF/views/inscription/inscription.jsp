@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="entete-inscrip">
 	<div class="row">
@@ -14,11 +14,15 @@
 		</center>
 	</div>
 </div>
+<div class="label col-md-9">
+	<br> <label>(*) Champs obligatoires</label>
+</div>
 <div class="form-inscrip">
 	<form:form class="form-horizontal" role="form" method="post" action=""
 		commandName="utilisateurTmp">
 		<div class="form-group">
-			<label for="inputNom" class="col-md-4 control-label">Nom :</label>
+			<label for="inputNom" class="col-md-4 control-label">Nom :	<label class="label2 taille">*</label>
+			</label> 
 			<div class="input col-md-4">
 				<form:input path="nom" type="text" class="form-control"
 					id="inputNom" placeholder=""></form:input>
@@ -26,7 +30,7 @@
 		</div>
 		<div class="form-group">
 			<label for="inputPrenom" class="col-md-4 control-label">Prenom
-				:</label>
+				: <label class="label2 taille">*</label></label>
 			<div class="input col-md-4">
 				<form:input path="prenom" type="text" class="form-control"
 					id="inputPrenom" placeholder=""></form:input>
@@ -34,7 +38,7 @@
 		</div>
 		<div class="form-group">
 			<label for="inputEmail" class="col-md-4 control-label">Email
-				:</label>
+				: <label class="label2 taille">*</label></label>
 			<div class="input col-md-4">
 				<form:input path="email" type="email" class="form-control"
 					id="inputEmail" placeholder=""></form:input>
@@ -42,7 +46,7 @@
 		</div>
 		<div class="form-group">
 			<label for="inputBirthday" class="col-md-4 control-label">Date
-				de naissance :</label>
+				de naissance : <label class="label2 taille">*</label></label>
 			<div class="input col-md-4">
 				<!-- <input type="date" class="form-control" id="inputBirthday"
 						placeholder=""> -->
@@ -64,8 +68,8 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="inputDiplome" class="col-md-4 control-label">Diplome
-				obetnu :</label>
+			<label for="inputDiplome" class="col-md-4 control-label">Dernier
+				diplome obetnu à l'université : <label class="label2 taille">*</label></label>
 			<div class="input col-md-4">
 				<form:input path="diplome" type="text" class="form-control"
 					id="inputDiplome" placeholder=""></form:input>
@@ -73,7 +77,7 @@
 		</div>
 		<div class="form-group">
 			<label for="selectAnnee" class="col-md-4 control-label">Année
-				d'obtention du diplôme :</label>
+				d'obtention du diplôme : <label class="label2 taille">*</label></label>
 			<div class="input col-md-4">
 				<form:input path="anneeDiplome" type="text" id="selectAnnee"
 					class="form-control"></form:input>
@@ -81,14 +85,14 @@
 		</div>
 		<div class="form-group">
 			<label for="selectFormation" class="col-md-4 control-label">Groupe
-				selectionné :</label>
+				selectionné : <label class="label2 taille">*</label></label>
 			<div class="input col-md-4">
-				<form:select path="groupePrincipal.idGroupe" name="groupe" id="selectFormation"
-					class="form-control">
+				<form:select path="groupePrincipal.idGroupe" name="groupe"
+					id="selectFormation" class="form-control">
 					<form:option value="NONE"> -- Choissez un groupe --</form:option>
 					<c:forEach var="groupe" items="${groupes}">
-    					<form:option value="${groupe.idGroupe}">${groupe.nomGroupe}</form:option>
-    				</c:forEach>
+						<form:option value="${groupe.idGroupe}">${groupe.nomGroupe}</form:option>
+					</c:forEach>
 				</form:select>
 			</div>
 		</div>
