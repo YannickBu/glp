@@ -25,6 +25,16 @@ html, body, .container-table, .container-table-erreur {
 	vertical-align: middle;
 }
 
+.label {
+	float: right;
+	color: #FFFFFF;	
+	font-size : 110%;
+}
+
+.label2 {
+	color: #FFFFFF;	
+}
+
 .small-link{
 	font-size: 12px;
 	color: #000000;	
@@ -105,6 +115,10 @@ h3{
 .couleurgly{
 	color : black;
 	font-size : 120%;
+}
+
+.taille{
+	font-size : 150%;
 }
 
 /*CSS menu-gauche*/
