@@ -15,10 +15,10 @@ import javax.mail.internet.MimeMessage;
  */
 public class Mail {
 	private static final String MessageDefautDeDebut = "Bonjour, \n \n";
-	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n \nVoici vos informations de connexion :\n \n ";
-	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n \nVos informations ont été supprimées de nos bases.\n";
+	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n\nVoici vos informations de connexion :\n \n ";
+	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n\nVos informations ont été supprimées de nos bases.\n";
 	private static final String MessageDefautComplement = "\nMessage additionel du modérateur :  ";
-	private static final String MessageDefautDeFin = "\n \nCordialement votre,\n \nl'équipe de modération de L1nk.";
+	private static final String MessageDefautDeFin = "\n\nCordialement votre,\n\nL'équipe de modération de L1nk.";
 
 	private static String messageAcceptationSansMessageAditionnel(String motDePasse){
 		String messageRenvoyer;
@@ -81,6 +81,9 @@ public class Mail {
 				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
+		props.setProperty("proxySet","true");
+        props.setProperty("socksProxyHost","cache-etu.univ-lille1.fr");
+        props.setProperty("socksProxyPort","3128");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
