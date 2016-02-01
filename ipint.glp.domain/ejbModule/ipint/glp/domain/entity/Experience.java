@@ -20,7 +20,7 @@ public class Experience implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idExperience;
-	//TODO penser à mettre les mois
+	// TODO penser à mettre les mois
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir l'année de début")
 	@javax.validation.constraints.DecimalMin(value = "1900", message = "Année impossible")
 	@javax.validation.constraints.DecimalMax(value = "2100", message = "Année impossible")
@@ -35,16 +35,18 @@ public class Experience implements Serializable {
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le lieu")
 	private String lieu;
 	private String description;
+	@javax.validation.constraints.NotNull(message = "Veuillez remplir la region")
 	private String region;
+	@javax.validation.constraints.NotNull(message = "Veuillez remplir le pays")
 	private String pays;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
 
 	public Experience() {
 		super();
 	}
-	
+
 	public String getRegion() {
 		return region;
 	}
@@ -116,8 +118,6 @@ public class Experience implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
 	/**
 	 * @return the profil
@@ -127,15 +127,16 @@ public class Experience implements Serializable {
 	}
 
 	/**
-	 * @param profil the profil to set
+	 * @param profil
+	 *            the profil to set
 	 */
 	public void setProfil(Profil profil) {
 		this.profil = profil;
 	}
-	
+
 	@Override
-	public String toString(){
-		return "[Experience - id="+this.idExperience+", poste="+this.poste+"]";
+	public String toString() {
+		return "[Experience - id=" + this.idExperience + ", poste=" + this.poste + "]";
 	}
 
 	@Override
