@@ -37,27 +37,27 @@
 					<form:form role="form" method="post" action=""
 						commandName="utilisateur">
 						<div class="form-group">
-							<label for="InputNom"> Nom </label>
+							<label for="InputNom"> Nom * : </label>
 							<form:input path="nom" type="text" class="form-control"
 								id="InputNom" placeholder="ex: Dupont" />
 						</div>
 						<div class="form-group">
-							<label for="InputPrenom"> Prénom </label>
+							<label for="InputPrenom"> Prénom * : </label>
 							<form:input path="prenom" type="text" class="form-control"
 								id="InputPrenom" placeholder="ex: Jean" />
 						</div>
 						<div class="form-group">
-							<label for="InputPassword"> Mot de passe </label>
+							<label for="InputPassword"> Mot de passe * :</label>
 							<form:input path="password" type="password" class="form-control"
 								id="InputPassword" />
 						</div>
 						<div class="form-group">
-							<label for="InputTel"> Téléphone </label>
+							<label for="InputTel"> Téléphone :</label>
 							<form:input path="profil.telephone" type="text"
 								class="form-control" id="InputTel" />
 						</div>
 						<div class="form-group">
-							<label for="InputCursus"> Diplômes </label>
+							<label for="InputCursus"> Diplômes : </label>
 
 							<div id="diplForm">
 								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
@@ -94,7 +94,7 @@
 
 						</div>
 						<div class="form-group">
-							<label for="InputExp"> Expériences Professionnelles </label>
+							<label for="InputExp"> Expériences Professionnelles : </label>
 							<div id="expForm">
 								<c:forEach begin="0"
 									end="${utilisateur.profil.experiences.size()}" var="i">
@@ -128,12 +128,13 @@
 									</div>
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12">
-											<form:input path="profil.experiences[${i}].description"
-												value="${profil.experiences[i].description}" type="text"
+											<form:textarea path="profil.experiences[${i}].description"
+												value="${profil.experiences[i].description}" type="text-area"
 												class="form-control" id="InputExpDesc"
 												placeholder="Description de votre mission" />
 										</div>
 									</div>
+									<hr/>
 								</c:forEach>
 							</div>
 
@@ -146,11 +147,11 @@
 
 						</div>
 						<div class="form-group">
-							<label for="InputSkills"> Compétences </label>
+							<label for="InputSkills"> Compétences :</label>
 							<div id="compForm">
 								<c:forEach begin="0"
 									end="${utilisateur.profil.competence.size()}" var="i">
-									<div class="row" id="idComp">
+									<div class="row" id="idComp${i}">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle"
 												value="${profil.competence[i].libelle}" type="text"
@@ -158,26 +159,29 @@
 												placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.competence[${i}].note"
-												value="${profil.competence[i].note}" type="text"
-												class="form-control" id="InputDipAnneFin" placeholder="Note" />
+											  <form:select class="form-control" id="selectNoteCompetence" path="profil.competence[${i}].note">
+											    <form:option value="${profil.competence[i].note}" selected="selected">Selectionner une note</form:option>
+											    <form:option value="1"></form:option>
+											    <form:option value="2"></form:option>
+											    <form:option value="3"></form:option>
+											    <form:option value="4"></form:option>
+											    <form:option value="5"></form:option>
+											  </form:select>
 										</div>
 										<div class="col-md-1">
 											<button type="button" style="margin-top: 1%;"
 												class="btn btn-default" id="btn_new_comp"
-												onClick="deleteCompetence();">-</button>
+												onClick="deleteCompetence(${i});">x</button>
 										</div>
 									</div>
-								</c:forEach>
-								<div id="nouvelle_comp"></div>
-
-								<button type="button" style="margin-top: 1%;"
-									class="btn btn-default" id="btn_new_comp"
-									onClick="newCompetence();">+</button>
+								</c:forEach>	
 							</div>
+							<button type="button" style="margin-top: 1%;"
+									class="btn btn-default" id="btn_new_comp"
+									onClick="varComp();newCompetence();">+</button>
 						</div>
 						<div class="form-group">
-							<label for="InputInterets"> Centres d'interets </label>
+							<label for="InputInterets"> Centres d'interets :</label>
 							<form:textarea path="profil.centreInteret" type="text-aera"
 								rows="3" class="form-control" id="InputInterets"
 								placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
@@ -200,17 +204,31 @@
 </div>
 
 <script type="text/javascript">
+var nbComp = ${utilisateur.profil.competence.size()-1};
+
+function varComp() {
+	nbComp++;
+}
 	function newCompetence() {
-		var comp = document.getElementById('nouvelle_comp');
+		var comp = document.getElementById('compForm');
 		comp.innerHTML = comp.innerHTML
-				+ '<div class="row">'
+				+ '<div class="row" id=idComp'+nbComp+'>'
 				+ '<div class="col-md-3">'
 				+ '<form:input path="utilisateur" type="text" class="form-control" id="InputDipDebut" placeholder="Libelle" />'
-				+ '</div><div class="col-md-1"><form:input path="utilisateur" type="text" class="form-control" id="InputDipAnneFin" placeholder="Note" /></div>'
-				+ '<div class="col-md-1"><button type="button" style="margin-top: 1%;" class="btn btn-default" id="btn_new_comp" onClick="deleteCompetence();">-</button> </div></div>';
+				+ '</div><div class="col-md-2">'
+				+'<form:select class="form-control" path="utilisateur">'
+				+'<form:option value="" selected="selected">Selectionner une note</form:option>'
+				+'<form:option value="1"></form:option>'
+				+'<form:option value="2"></form:option>'
+				+'<form:option value="3"></form:option>'
+				+'<form:option value="4"></form:option>'
+				+'<form:option value="5"></form:option>'
+				+'</form:select>'
+				+'</div>'
+				+ '<div class="col-md-1"><button type="button" style="margin-top: 1%;" class="btn btn-default" id="btn_new_comp" onClick="deleteCompetence('+nbComp+');">x</button> </div></div>';
 	};
-	function deleteCompetence() {
-		var comp = document.getElementById('nouvelle_comp');
+	function deleteCompetence(i) {
+		var comp = document.getElementById('idComp'+i);  
 		comp.innerHTML = '';
 	};
 	function newDiplome() {
