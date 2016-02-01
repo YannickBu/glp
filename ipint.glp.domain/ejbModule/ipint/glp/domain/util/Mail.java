@@ -66,7 +66,7 @@ public class Mail {
 			messageObtenu = messageRefusAvecMessageAditionnel(messageAditionnel);
 		}
 		else{
-			messageObtenu = "Va ne devrais jamais passer ici";
+			messageObtenu = "Ca ne devrais jamais passer ici";
 		}
 		
 		return messageObtenu;
@@ -81,6 +81,7 @@ public class Mail {
 				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.timeout", "1000");
 		props.put("proxySet","true");
         props.put("socksProxyHost","cache-etu.univ-lille1.fr");
         props.put("socksProxyPort","3128");
@@ -103,22 +104,7 @@ public class Mail {
 
 			System.out.println("Sending");
 			
-			
-			try{ 
-				long start = System.currentTimeMillis();
-				 
-				while((System.currentTimeMillis() - start) < 18000) {
-					Transport.send(message);
-				}
-				 
-				if ((System.currentTimeMillis() - start) > 18000) {
-					throw new Exception("MON TIMEOUT");
-				}
-				
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
+			Transport.send(message);
 
 			System.out.println("Done");
 
