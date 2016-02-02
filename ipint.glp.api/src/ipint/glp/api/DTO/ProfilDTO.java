@@ -13,22 +13,23 @@ public class ProfilDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = 1194522427659253560L;
 
 	private Integer idProfil;
-	 @Temporal(TemporalType.DATE)
-	 @javax.validation.constraints.Past(message="Date de naissance invalide")
-	 private Calendar dateNaiss;
-	 @javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
-	 private String cursus;
+	@Temporal(TemporalType.DATE)
+	@javax.validation.constraints.Past(message = "Date de naissance invalide")
+	private Calendar dateNaiss;
+	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ cursus")
+	private String cursus;
 	@OneToMany(mappedBy = "profil")
 	private List<DiplomeDTO> diplomes;
 	@OneToMany(mappedBy = "profil")
 	private List<CompetenceDTO> competence;
 	private String centreInteret;
-	 @javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#",
-	 message = "Téléphone invalide")
+	@javax.validation.constraints.Pattern(regexp = "#^0[1-9][0-9]{8}$#", message = "Téléphone invalide")
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<ExperienceDTO> experiences;
-	
+	private String diplomePrincipal;
+	private int anneeDiplome;
+
 	@OneToMany(mappedBy = "profil")
 	private List<String> reseauxSociaux;
 
@@ -91,10 +92,10 @@ public class ProfilDTO extends DTO implements Serializable {
 	public void setExperiences(List<ExperienceDTO> experiences) {
 		this.experiences = experiences;
 	}
-	
+
 	@Override
-	public String toString(){
-		return "[ProfilDTO - id="+this.idProfil+"]";
+	public String toString() {
+		return "[ProfilDTO - id=" + this.idProfil + "]";
 	}
 
 	public Calendar getDateNaiss() {
@@ -113,6 +114,36 @@ public class ProfilDTO extends DTO implements Serializable {
 		this.cursus = cursus;
 	}
 
+	/**
+	 * @return the diplomePrincipal
+	 */
+	public String getDiplomePrincipal() {
+		return diplomePrincipal;
+	}
+
+	/**
+	 * @param diplomePrincipal
+	 *            the diplomePrincipal to set
+	 */
+	public void setDiplomePrincipal(String diplomePrincipal) {
+		this.diplomePrincipal = diplomePrincipal;
+	}
+
+	/**
+	 * @return the anneeDiplome
+	 */
+	public int getAnneeDiplome() {
+		return anneeDiplome;
+	}
+
+	/**
+	 * @param anneeDiplome
+	 *            the anneeDiplome to set
+	 */
+	public void setAnneeDiplome(int anneeDiplome) {
+		this.anneeDiplome = anneeDiplome;
+	}
+
 	public List<String> getReseauxSociaux() {
 		return reseauxSociaux;
 	}
@@ -120,7 +151,5 @@ public class ProfilDTO extends DTO implements Serializable {
 	public void setReseauxSociaux(List<String> reseauxSociaux) {
 		this.reseauxSociaux = reseauxSociaux;
 	}
-
-	
 
 }

@@ -69,6 +69,7 @@ public class ProfilController {
 		// uDTO = utilisateurService.modifier(uDTO, uDTO2);
 
 		System.out.println("profil : " + uDTO.getProfil());
+		System.out.println("profil dernier diplome obtenu: " + uDTO.getProfil().getDiplomePrincipal());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
 		System.out.println(uDTO.getNom());
 		// System.out.println(uDTO.getProfil());
