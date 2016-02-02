@@ -94,7 +94,7 @@
 													<ul class="nav nav-pills">
 														<c:forEach items="${utilisateur.profil.competence}"
 															var="comp">
-															<li class="active"><a> <span
+															<li class="active" ><a> <span
 																	class="badge pull-right"> ${comp.note}</span>
 																	${comp.libelle}
 															</a></li>

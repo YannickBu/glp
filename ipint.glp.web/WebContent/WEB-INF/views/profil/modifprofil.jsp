@@ -7,7 +7,7 @@
 
 
 
-<form:form role="form" method="post" action="" commandName="utilisateur">
+<form:form role="form" method="post" action="" name="modif_form" commandName="utilisateur">
 
 	<div class="col-md-6 publication">
 		<div class="container">
@@ -109,7 +109,7 @@
 
 								<button type="button" style="margin-top: 1%;"
 									class="btn btn-default" id="btn_new_dipl"
-									onClick="newDiplome();">+</button>
+									onClick="newDiplome();">Ajouter un diplome</button>
 							</div>
 
 						</div>
@@ -151,13 +151,13 @@
 												value="${profil.experiences[i].lieu}" type="text"
 												class="form-control" id="InputExpLieu" placeholder="Ville" />
 										</div>
-										<div class="col-md-4">
+									</div>
+									<div class="row" style="margin-top: 1%">
+										<div class="col-md-12">
 											<form:input path="profil.experiences[${i}].poste"
 												value="${profil.experiences[i].poste}" type="text"
 												class="form-control" id="InputExpPoste" placeholder="Poste" />
 										</div>
-<<<<<<< HEAD
-=======
 									</div>
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12">
@@ -166,33 +166,16 @@
 												class="form-control" id="InputExpDesc"
 												placeholder="Description de votre mission" />
 										</div>
-										
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 									</div>
-									<div class="row" style="margin-top: 1%">
-										<div class="col-md-12">
-											<form:textarea path="profil.experiences[${i}].description"
-												value="${profil.experiences[i].description}" type="text-area"
-												class="form-control" id="InputExpDesc"
-												placeholder="Description de votre mission" />
-										</div>
-
-									</div>
-<<<<<<< HEAD
-									<div class="row" style="margin-top: 1%">
-										<div class="col-md-12"></div>
-									</div>
-=======
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 									<hr/>
 								</c:forEach>
 							</div>
 
 							<div class="nouvelle_exp"></div>
 
-							<button type="button" style="margin-top: 1%;"
+							<button type="button"
 								class="btn btn-default" id="btn_new_exp"
-								onClick="newExperience();">+</button>
+								onClick="newExperience();">Ajouter une expérience</button>
 							<hr>
 
 						</div>
@@ -226,9 +209,9 @@
 									</div>
 								</c:forEach>	
 							</div>
-							<button type="button" style="margin-top: 1%;"
+							<button type="button" style="margin-top:1%;"
 									class="btn btn-default" id="btn_new_comp"
-									onClick="varComp();newCompetence();">+</button>
+									onClick="varComp();newCompetence();">Ajouter une compétence</button>
 						</div>
 						<div class="form-group">
 							<label for="InputInterets"> Centres d'interets :</label>
@@ -245,7 +228,7 @@
 						<%-- 									placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
-						<button type="submit" class="btn btn-default">Modifier</button>
+						<button type="submit" class="btn btn-default" onclick="SoumettreFormulaire();">Modifier</button>
 					</div>
 				</div>
 			</div>
@@ -254,12 +237,17 @@
 </form:form>
 
 <script type="text/javascript">
+
+function SoumettreFormulaire(){  
+     document.forms["modif_form"].submit();
+ }
+  
 var nbComp = ${utilisateur.profil.competence.size()-1};
 
 function varComp() {
 	nbComp++;
 }
-	function newCompetence() {
+	function newCompetence(profil) {
 		var comp = document.getElementById('compForm');
 		comp.innerHTML = comp.innerHTML
 				+ '<div class="row" id=idComp'+nbComp+'>'
@@ -276,8 +264,28 @@ function varComp() {
 				+'</form:select>'
 				+'</div>'
 				+ '<div class="col-md-1"><button type="button" style="margin-top: 1%;" class="btn btn-default" id="btn_new_comp" onClick="deleteCompetence('+nbComp+');">x</button> </div></div>';
-// 				document.getElementById('idComp'+nbComp).style.display = "block";
 	};
+	
+	function newCompetence2() {
+		var div1, div2, input1, comp;
+		comp = document.getElementById('compForm');
+		div1 = document.createElement('div');
+		div1.setAttribute('class','row');
+		div1.setAttribute('id','idcomp'+nbComp);
+		comp.appendChild(div1);
+		
+		div2 = document.createElement('div');
+		div2.setAttribute('class','col-md-3');
+		div1.appendChild(div2);
+		
+		input1 = document.createElement('input');
+		input1.setAttribute('path','profil.competence[${i}].libelle');
+		input1.setAttribute('type','text');
+		input1.setAttribute('class','form-control');
+		input1.setAttribute('placeholder','Libelle');
+		div2.appendChild(input1);		
+	};
+	
 	function deleteCompetence(i) {
 		var comp = document.getElementById('idComp'+i);  
 		comp.innerHTML = '';

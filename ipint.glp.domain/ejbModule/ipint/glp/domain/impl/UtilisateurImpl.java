@@ -385,7 +385,22 @@ public class UtilisateurImpl implements UtilisateurService {
 			profil.setAnneeDiplome((nouvelUtilisateur.getProfil().getAnneeDiplome()));
 
 			// les competences
+//			List<Competence> newComps = new ArrayList<Competence>();
+//			List<Competence> comps1 = new ArrayList<Competence>();
+//			List<CompetenceDTO> comps2 = new ArrayList<CompetenceDTO>();
+//			comps1 = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getCompetence();
+//			comps2 = nouvelUtilisateur.getProfil().getCompetence();
+//			for(int i=0;i<comps2.size();i++){
+//				if(!comps1.get(i).equals(comps2.get(i))){
+//					em.remove(comps1.get(i));
+//				
+//				} else {
+//					newComps.add(comps1.get(i));
+//				}
+//			}
 			List<Competence> comps = new ArrayList<Competence>();
+			List<Competence> oldComps = new ArrayList<Competence>();
+			oldComps = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getCompetence();
 			if (nouvelUtilisateur.getProfil().getCompetence() != null
 					&& !nouvelUtilisateur.getProfil().getCompetence().isEmpty()) {
 				Competence comp = new Competence();
@@ -410,6 +425,11 @@ public class UtilisateurImpl implements UtilisateurService {
 							em.persist(comp);
 						}
 					}
+				}
+			}
+			for(Competence c : oldComps){
+				if(!comps.contains(c)){
+					em.remove(c);
 				}
 			}
 			profil.setCompetence(comps);
