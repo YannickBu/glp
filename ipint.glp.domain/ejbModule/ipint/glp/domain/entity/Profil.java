@@ -32,14 +32,16 @@ public class Profil {
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<Experience> experiences;
-//	@OneToMany(mappedBy = "profil")
-//	private List<String> reseauxSociaux;
+	// @OneToMany(mappedBy = "profil")
+	// private List<String> reseauxSociaux;
+	private String diplomePrincipal;
+	private int anneeDiplome;
 
 	public Profil() {
 		this.competence = new ArrayList<Competence>();
 		this.diplomes = new ArrayList<Diplome>();
 		this.experiences = new ArrayList<Experience>();
-//		this.reseauxSociaux = new ArrayList<String>();
+		// this.reseauxSociaux = new ArrayList<String>();
 	}
 
 	public Integer getIdProfil() {
@@ -98,18 +100,48 @@ public class Profil {
 		this.experiences = experiences;
 	}
 
-	@Override
-	public String toString(){
-		return "[Profil - id="+this.idProfil+"]";
+	/**
+	 * @return the diplomePrincipal
+	 */
+	public String getDiplomePrincipal() {
+		return diplomePrincipal;
 	}
 
-//	public List<String> getReseauxSociaux() {
-//		return reseauxSociaux;
-//	}
+	/**
+	 * @param diplomePrincipal
+	 *            the diplomePrincipal to set
+	 */
+	public void setDiplomePrincipal(String diplomePrincipal) {
+		this.diplomePrincipal = diplomePrincipal;
+	}
 
-//	public void setReseauxSociaux(List<String> reseauxSociaux) {
-//		this.reseauxSociaux = reseauxSociaux;
-//	}
+	/**
+	 * @return the anneeDiplome
+	 */
+	public int getAnneeDiplome() {
+		return anneeDiplome;
+	}
+
+	/**
+	 * @param anneeDiplome
+	 *            the anneeDiplome to set
+	 */
+	public void setAnneeDiplome(int anneeDiplome) {
+		this.anneeDiplome = anneeDiplome;
+	}
+
+	@Override
+	public String toString() {
+		return "[Profil - id=" + this.idProfil + "]";
+	}
+
+	// public List<String> getReseauxSociaux() {
+	// return reseauxSociaux;
+	// }
+
+	// public void setReseauxSociaux(List<String> reseauxSociaux) {
+	// this.reseauxSociaux = reseauxSociaux;
+	// }
 
 	@Override
 	public int hashCode() {
@@ -120,7 +152,8 @@ public class Profil {
 		result = prime * result + ((diplomes == null) ? 0 : diplomes.hashCode());
 		result = prime * result + ((experiences == null) ? 0 : experiences.hashCode());
 		result = prime * result + ((idProfil == null) ? 0 : idProfil.hashCode());
-//		result = prime * result + ((reseauxSociaux == null) ? 0 : reseauxSociaux.hashCode());
+		// result = prime * result + ((reseauxSociaux == null) ? 0 :
+		// reseauxSociaux.hashCode());
 		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
 		return result;
 	}
@@ -159,11 +192,11 @@ public class Profil {
 				return false;
 		} else if (!idProfil.equals(other.idProfil))
 			return false;
-//		if (reseauxSociaux == null) {
-//			if (other.reseauxSociaux != null)
-//				return false;
-//		} else if (!reseauxSociaux.equals(other.reseauxSociaux))
-//			return false;
+		// if (reseauxSociaux == null) {
+		// if (other.reseauxSociaux != null)
+		// return false;
+		// } else if (!reseauxSociaux.equals(other.reseauxSociaux))
+		// return false;
 		if (telephone == null) {
 			if (other.telephone != null)
 				return false;
@@ -171,6 +204,5 @@ public class Profil {
 			return false;
 		return true;
 	}
-	
-	
+
 }
