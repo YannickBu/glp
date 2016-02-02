@@ -15,10 +15,10 @@ import javax.mail.internet.MimeMessage;
  */
 public class Mail {
 	private static final String MessageDefautDeDebut = "Bonjour, \n \n";
-	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n \nVoici vos informations de connexion :\n \n ";
-	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n \nVos informations ont été supprimées de nos bases.\n";
+	private static final String MessageDefautAccepter = "Votre demande d'inscription a été validée.\n\nVoici vos informations de connexion :\n \n ";
+	private static final String MessageDefautRefus = "Votre demande d'inscription a été refusée.\n\nVos informations ont été supprimées de nos bases.\n";
 	private static final String MessageDefautComplement = "\nMessage additionel du modérateur :  ";
-	private static final String MessageDefautDeFin = "\n \nCordialement votre,\n \nl'équipe de modération de L1nk.";
+	private static final String MessageDefautDeFin = "\n\nCordialement votre,\n\nL'équipe de modération de L1nk.";
 
 	private static String messageAcceptationSansMessageAditionnel(String motDePasse){
 		String messageRenvoyer;
@@ -66,7 +66,7 @@ public class Mail {
 			messageObtenu = messageRefusAvecMessageAditionnel(messageAditionnel);
 		}
 		else{
-			messageObtenu = "Va ne devrais jamais passer ici";
+			messageObtenu = "Ca ne devrais jamais passer ici";
 		}
 		
 		return messageObtenu;
@@ -79,8 +79,17 @@ public class Mail {
 		props.put("mail.smtp.socketFactory.port", "465");
 		props.put("mail.smtp.socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.fallback", "false");
+		props.put("mail.debug", "true");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.timeout", "8000");
+		props.put("proxySet","true");
+        props.put("socksProxyHost","cache-etu.univ-lille1.fr");
+        props.put("socksProxyPort","3128");
+//        props.put("socksProxyHost","proxy.fil.univ-lille1.fr");
+//        props.put("socksProxyPort","1080");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
@@ -98,9 +107,11 @@ public class Mail {
 			message.setSubject("L1nk - votre demande d'inscription à été traitée");
 			message.setText(messageMail);
 
+			System.out.println("Sending");
+			
 			Transport.send(message);
 
-//			System.out.println("Done");
+			System.out.println("Done");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

@@ -28,19 +28,23 @@ public class Utilisateur implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idUtilisateur;
-//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Nom")
-//	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Nom invalide")
+	// @javax.validation.constraints.NotNull(message = "Veuillez remplir le
+	// champ Nom")
+	// @javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message =
+	// "Nom invalide")
 	private String nom;
-//	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
-//	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
+	// @javax.validation.constraints.NotNull(message = "Veuillez remplir le
+	// champ Prénom")
+	// @javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message =
+	// "Prénom invalide")
 	private String prenom;
 	private Statut statut;
 	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
 	// Identifiant")
 	// private String login;
-//	@javax.validation.constraints.NotNull(message="Veuillez remplir le champ Mot de passe")
-	 private String password;
-	
+	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
+	// Mot de passe")
+	private String password;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Email")
 	// TODO regex email
 	// @javax.validation.constraints.Pattern(regexp="\b[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}\b",message="Email
@@ -53,12 +57,18 @@ public class Utilisateur implements Serializable {
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
+
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Article> articles;
+
 	@OneToMany(mappedBy = "utilisateurResponsable")
 	private List<Groupe> groupesGeres;
+
 	@ManyToMany(mappedBy = "utilisateurs")
 	private List<Groupe> groupes;
+
+	@ManyToMany(mappedBy = "animateurs")
+	private List<Groupe> groupesAnimes;
 
 	public Utilisateur() {
 		super();
@@ -75,7 +85,6 @@ public class Utilisateur implements Serializable {
 		this.idUtilisateur = idUtilisateur;
 	}
 
-	
 	public Groupe getGroupePrincipal() {
 		return groupePrincipal;
 	}
@@ -140,6 +149,14 @@ public class Utilisateur implements Serializable {
 		this.groupesGeres = groupesGeres;
 	}
 
+	public List<Groupe> getGroupesAnimes() {
+		return groupesAnimes;
+	}
+
+	public void setGroupesAnimes(List<Groupe> groupesAnimes) {
+		this.groupesAnimes = groupesAnimes;
+	}
+
 	public List<Groupe> getGroupes() {
 		return groupes;
 	}
@@ -155,10 +172,10 @@ public class Utilisateur implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@Override
-	public String toString(){
-		return "[Utilisateur - id="+this.idUtilisateur+", email="+this.email+"]";
+	public String toString() {
+		return "[Utilisateur - id=" + this.idUtilisateur + ", email=" + this.email + "]";
 	}
 
 	@Override
@@ -191,6 +208,5 @@ public class Utilisateur implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

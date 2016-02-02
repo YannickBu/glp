@@ -14,7 +14,7 @@
 			</div>
 			<div class="col-md-10">
 				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
-				<h1>${utilisateur.statut}</h1>
+				<h1>${utilisateur.profil.diplomePrincipal} - ${utilisateur.profil.anneeDiplome}</h1>
 				<div>
 					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Lille,France
 				</div>
@@ -79,7 +79,7 @@
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
 																		data-parent="#panel-1" href="#panel-element-1">${exp.anneeDebut}/${exp.anneFin}
-																		- ${exp.poste} - ${exp.entreprise} à ${exp.lieu}</a>
+																		- ${exp.poste} - ${exp.entreprise}  à ${exp.lieu} dans la région ${exp.region} en ${exp.pays}</a>
 																</div>
 																<div id="panel-element-1"
 																	class="panel-collapse collapse">

@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 
 <div class="col-md-6 publication">
 	<div class="container">
-		<div class="row">	
+		<div class="row">
 			<div class="col-md-offset-3 col-md-8">
 				<h1 class="nomEtu">Groupe ${leGroupe.nomGroupe}   <span class="glyphicon glyphicon-education" aria-hidden="true"></span></h1>
 
@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 		</div>
 	</div>
 	<br>
-	<div class="navProfil">	
+	<div class="navProfil">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
@@ -53,10 +53,15 @@ pageEncoding="UTF-8"%>
 												<li class="nomBloc" style="list-style-type: none;">Personnes importantes
 													du groupe </li>
 												<li>
-													Modérateur(s) du groupe : ${leGroupe.utilisateurResponsable}
+													Modérateur(s) du groupe : ${leGroupe.utilisateurResponsable.prenom} ${leGroupe.utilisateurResponsable.nom}
 												</li>
 												<li>
-													Animateur(s) du groupe :  TOI !
+													Animateur(s) du groupe :
+													<c:forEach items="${animateursGroupe}" var="animateur">
+														<li>
+														Prénom / Nom : ${animateur.prenom} ${animateur.nom}
+														</li>
+													</c:forEach>
 												</li>
 											</ul>
 										</div>
@@ -92,12 +97,10 @@ pageEncoding="UTF-8"%>
 									</div>
 								</div>
 							</div>
-						</div>		
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-

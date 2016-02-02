@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 
 import ipint.glp.api.DTO.enumType.Statut;
 
-
 public class UtilisateurDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = -6174082190617483433L;
 
@@ -42,7 +41,9 @@ public class UtilisateurDTO extends DTO implements Serializable {
 	private List<GroupeDTO> groupesGeres;
 	@ManyToMany(mappedBy = "utilisateurs")
 	private List<GroupeDTO> groupes;
-	
+	@ManyToMany(mappedBy = "animateurs")
+	private List<GroupeDTO> groupesAnimes;
+
 	@ManyToOne
 	private GroupeDTO groupePrincipal;
 
@@ -52,17 +53,14 @@ public class UtilisateurDTO extends DTO implements Serializable {
 		this.groupesGeres = new ArrayList<>();
 		this.groupes = new ArrayList<>();
 	}
-	
 
 	public GroupeDTO getGroupePrincipal() {
 		return groupePrincipal;
 	}
 
-
 	public void setGroupePrincipal(GroupeDTO groupePrincipal) {
 		this.groupePrincipal = groupePrincipal;
 	}
-
 
 	public Integer getIdUtilisateur() {
 		return idUtilisateur;
@@ -128,6 +126,14 @@ public class UtilisateurDTO extends DTO implements Serializable {
 		this.groupesGeres = groupesGeres;
 	}
 
+	public List<GroupeDTO> getGroupesAnimes() {
+		return groupesAnimes;
+	}
+
+	public void setGroupesAnimes(List<GroupeDTO> groupesAnimes) {
+		this.groupesAnimes = groupesAnimes;
+	}
+
 	public List<GroupeDTO> getGroupes() {
 		return groupes;
 	}
@@ -149,10 +155,9 @@ public class UtilisateurDTO extends DTO implements Serializable {
 	}
 
 	@Override
-	public String toString(){
-		return "[UtilisateurDTO - id="+this.idUtilisateur+", email="+this.email+"]";
+	public String toString() {
+		return "[UtilisateurDTO - id=" + this.idUtilisateur + ", email=" + this.email + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -162,7 +167,6 @@ public class UtilisateurDTO extends DTO implements Serializable {
 		result = prime * result + ((idUtilisateur == null) ? 0 : idUtilisateur.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -186,5 +190,4 @@ public class UtilisateurDTO extends DTO implements Serializable {
 		return true;
 	}
 
-	
 }
