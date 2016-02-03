@@ -224,7 +224,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			pro.setDiplomePrincipal(utilisateurDTO.getProfil().getDiplomePrincipal());
 			pro.setAnneeDiplome(utilisateurDTO.getProfil().getAnneeDiplome());
 			pro.setMesAttentes(utilisateurDTO.getProfil().getMesAttentes());
-			pro.setSituation(utilisateurDTO.getProfil().getSituation());
+			pro.setSituation("Nouvel arrivant");
 
 			// Assoc competence
 
