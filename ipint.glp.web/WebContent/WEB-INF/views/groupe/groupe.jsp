@@ -8,13 +8,13 @@ pageEncoding="UTF-8"%>
 <!-- Icone animateur groupe : glyphicon glyphicon-flag  -->
 
 <div class="col-md-6 publication">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-offset-3 col-md-8">
+			<div class="col-md-12">
+			<center>
 				<h1 class="nomEtu">Groupe ${leGroupe.nomGroupe}   <span class="glyphicon glyphicon-education" aria-hidden="true"></span></h1>
-
+			</center>
 			</div>
-			<hr />
 		</div>
 	</div>
 	<br>
@@ -85,8 +85,8 @@ pageEncoding="UTF-8"%>
 										<c:forEach items="${articlesGroupe}" var="article">
 											<div class="article">
 												<ul>
-													<li class="nomEtu" style="list-style-type: none;">${article.utilisateur.prenom}
-														${article.utilisateur.nom} - <fmt:formatDate type="both"
+													<li class="nomEtu" style="list-style-type: none;">
+														<a href="${pageContext.servletContext.contextPath}/profil/${article.utilisateur.idUtilisateur}" >${article.utilisateur.prenom} ${article.utilisateur.nom}</a> - <fmt:formatDate type="both"
 														dateStyle="short" timeStyle="short"
 														value="${article.datePublication.time}" />
 													</li>
