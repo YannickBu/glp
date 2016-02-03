@@ -117,5 +117,6 @@ public interface GroupeService {
 	public List<GroupeDTO> lister() throws MetierException;
 	
 	public List<UtilisateurDTO> listerUtilisateurs(GroupeDTO groupeDTO) throws MetierException;
+	
 
 }

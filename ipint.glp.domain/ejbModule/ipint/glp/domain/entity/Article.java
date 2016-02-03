@@ -3,6 +3,7 @@ package ipint.glp.domain.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Article implements Serializable {
 	private Calendar datePublication;
 	
 	//Si on garde cet attribut, pensez a rajouter le OneToMany dans groupe et toute l'impl qui va avec
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Groupe groupe;
 	@ManyToOne
 	private Utilisateur utilisateur;

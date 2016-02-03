@@ -1,5 +1,8 @@
 package ipint.glp.domain.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -7,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.exception.ArticleInconnuException;
 import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
@@ -195,5 +199,16 @@ public class ArticleImpl implements ArticleService {
 					"ArticleImpl.supprimer : " + articleASupprimer.toString() + " n'existe pas");
 		}
 		em.remove(art);
+	}
+
+	@Override
+	public List<ArticleDTO> listerParGroupe(GroupeDTO groupe) throws MetierException {
+		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "'");
+		List<Article> articles = q.getResultList();
+		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
+		for (Article article : articles) {
+			articlesDTO.add(MappingToDTO.articleToArticleDTO(article));
+		}
+		return articlesDTO;
 	}
 }

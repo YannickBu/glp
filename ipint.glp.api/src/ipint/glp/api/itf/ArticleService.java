@@ -1,8 +1,11 @@
 package ipint.glp.api.itf;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.exception.MetierException;
 
 /**
@@ -39,5 +42,8 @@ public interface ArticleService {
 	 * @param article l'article à supprimer
 	 */
 	public void supprimer(ArticleDTO article) throws MetierException ;
+
+	public List<ArticleDTO> listerParGroupe(GroupeDTO groupe) throws MetierException;
+	
 	
 }
