@@ -8,7 +8,7 @@
 			<ul class="menu-gauche">
 				<a href="#"><li>Acceuil<span
 						class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span></li></a>
-				<a href="#"><li>Panel d'administration<span
+				<a href="#"><li>Panel de modération<span
 						class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span></li></a>
 			</ul>
 	</div>

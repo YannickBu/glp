@@ -5,20 +5,20 @@
 <tiles-definitions>
 	<definition name="panelInscription" extends="adminLayout">
 		<put-attribute name="body"
-			value="/WEB-INF/views/administration/panelInscription.jsp"></put-attribute>
+			value="/WEB-INF/views/moderation/panelInscription.jsp"></put-attribute>
 		<put-attribute name="menu-gauche"
-			value="/WEB-INF/views/administration/panelMenuGauche.jsp"></put-attribute>
+			value="/WEB-INF/views/moderation/panelMenuGauche.jsp"></put-attribute>
 		<put-attribute name="menu-droite"
-			value="/WEB-INF/views/administration/panelMenuDroite.jsp"></put-attribute>
+			value="/WEB-INF/views/moderation/panelMenuDroite.jsp"></put-attribute>
 	</definition>
 
 	<definition name="menuInscriptionVide" extends="adminLayout">
 		<put-attribute name="body"
-			value="/WEB-INF/views/administration/menuInscription.jsp"></put-attribute>
+			value="/WEB-INF/views/moderation/menuInscription.jsp"></put-attribute>
 		<put-attribute name="menu-gauche"
-			value="/WEB-INF/views/administration/panelMenuGauche.jsp"></put-attribute>
+			value="/WEB-INF/views/moderation/panelMenuGauche.jsp"></put-attribute>
 		<put-attribute name="menu-droite"
-			value="/WEB-INF/views/administration/panelMenuDroite.jsp"></put-attribute>
+			value="/WEB-INF/views/moderation/panelMenuDroite.jsp"></put-attribute>
 	</definition>
 
 </tiles-definitions>

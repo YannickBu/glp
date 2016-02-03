@@ -26,16 +26,25 @@ import ipint.glp.api.itf.UtilisateurEnAttenteService;
  *
  */
 @Controller
-public class AdministrationController {
+public class ModerationController {
 	private Logger logger = Logger.getLogger("AdministrationController");
 
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
 
 
-	public AdministrationController() {
+	public ModerationController() {
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param id
+	 * @param utilisateurTmp
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.GET)
 	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
@@ -58,6 +67,14 @@ public class AdministrationController {
 		return new ModelAndView("panelInscription");
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param utilisateurTmp
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/panelInscription", method = RequestMethod.GET)
 	public ModelAndView administrationGET(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
@@ -72,6 +89,14 @@ public class AdministrationController {
 		return new ModelAndView("menuInscriptionVide");
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param utilisateurTmp
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/panelInscription", method = RequestMethod.POST)
 	public ModelAndView administrationPOST(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
@@ -86,6 +111,17 @@ public class AdministrationController {
 		return new ModelAndView("menuInscriptionVide");
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param action
+	 * @param optionalMessage
+	 * @param id
+	 * @param utilisateurTmp
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.POST)
 	public ModelAndView profilPost(@RequestParam("action") String action,@RequestParam("optionalMessage") String optionalMessage, @PathVariable String id,
 			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model){
@@ -106,13 +142,17 @@ public class AdministrationController {
 			}
 		} else if (action.equals("Refuser")) {
 			try{
-				utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
+				if(!("".equals(optionalMessage))){
+					utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
+				}
+				else{
+					return new ModelAndView("redirect:/panelInscription/{id}");
+				}
 			} catch (MetierException e) {
 				logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.refuser renvoie : " + e.getMessage());
 				return new ModelAndView("redirect:/erreur");
 			}
 		}
-
 
 		List<UtilisateurEnAttenteDTO> list = null;
 		try {

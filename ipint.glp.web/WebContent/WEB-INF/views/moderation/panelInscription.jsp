@@ -9,7 +9,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="text-center">Panel d'administation des inscriptions
+				<h1 class="text-center">Panel de modération des inscriptions
 				</h1>
 				<br /> <label>Informations du demandeur:</label>
 				<ul>
@@ -30,7 +30,7 @@
 					commandName="utilisateurTmp">
 					<div class="form-group">
 						<label for="OptionalMessage"> Message complémentaire
-							(optionnel): </label>
+							(obligatoire en cas de refus): </label>
 						<form:textarea path="" type="text-aera" rows="4"
 							class="form-control" name="optionalMessage"
 							placeholder="Entrer un message à ajouter au mail automatique de réponse à la demande d'inscription."></form:textarea>
