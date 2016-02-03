@@ -26,7 +26,8 @@ public class MappingToDTO {
 
 	public static ExperienceDTO experienceToExperienceDTO(Experience exp) throws MetierException {
 		if (exp == null) {
-			throw new InformationManquanteException("experienceToExperienceDTO : L'experience à mapper en DTO est null");
+			throw new InformationManquanteException(
+					"experienceToExperienceDTO : L'experience à mapper en DTO est null");
 		}
 
 		ExperienceDTO expDTO = new ExperienceDTO();
@@ -42,20 +43,21 @@ public class MappingToDTO {
 
 		return expDTO;
 	}
-	
+
 	public static CompetenceDTO competenceToCompetenceDTO(Competence comp) throws MetierException {
 		if (comp == null) {
-			throw new InformationManquanteException("competenceToCompetenceDTO : La competence à mapper en DTO est null");
+			throw new InformationManquanteException(
+					"competenceToCompetenceDTO : La competence à mapper en DTO est null");
 		}
 
 		CompetenceDTO compDTO = new CompetenceDTO();
 		compDTO.setIdCompetence(comp.getIdCompetence());
 		compDTO.setLibelle(comp.getLibelle());
 		compDTO.setNote(comp.getNote());
-		
+
 		return compDTO;
 	}
-	
+
 	public static DiplomeDTO diplomeToDiplomeDTO(Diplome dipl) throws MetierException {
 		if (dipl == null) {
 			throw new InformationManquanteException("diplomeToDiplomeDTO : Le diplome à mapper en DTO est null");
@@ -79,7 +81,11 @@ public class MappingToDTO {
 		proDTO.setIdProfil(pro.getIdProfil());
 		proDTO.setCentreInteret(pro.getCentreInteret());
 		proDTO.setTelephone(pro.getTelephone());
-		
+		proDTO.setDiplomePrincipal(pro.getDiplomePrincipal());
+		System.out.println(" DIPLOME PRINCIPAL ENTITY ->>>>>>>>>>>>>>>>>>>>>>>>>><   " + pro.getDiplomePrincipal());
+
+		proDTO.setAnneeDiplome(pro.getAnneeDiplome());
+
 		proDTO.setCompetence(new ArrayList<>());
 		if (pro.getCompetence() != null && !pro.getCompetence().isEmpty()) {
 			for (Competence exp : pro.getCompetence()) {
@@ -99,18 +105,20 @@ public class MappingToDTO {
 			}
 		}
 
+		System.out.println(" DIPLOME PRINCIPAL DTO ->>>>>>>>>>>>>>>>>>>>>>>>>><   " + proDTO.getDiplomePrincipal());
 		return proDTO;
 	}
 
 	public static UtilisateurDTO utilisateurToUtilisateurDTO(Utilisateur util) throws MetierException {
 		if (util == null) {
-			throw new InformationManquanteException("utilisateurToUtilisateurDTO : L'utilisateur à mapper en DTO est null");
+			throw new InformationManquanteException(
+					"utilisateurToUtilisateurDTO : L'utilisateur à mapper en DTO est null");
 		}
 
 		UtilisateurDTO utilDTO = utilisateurToUtilisateurDTOHorsRelation(util);
 		utilDTO.setProfil(profilToProfilDTO(util.getProfil()));
 		utilDTO.setGroupePrincipal(groupeToGroupeDTO(util.getGroupePrincipal()));
-		
+
 		utilDTO.setArticles(new ArrayList<>());
 		if (util.getArticles() != null && !util.getArticles().isEmpty()) {
 			for (Article art : util.getArticles()) {
@@ -130,8 +138,8 @@ public class MappingToDTO {
 			}
 		}
 		utilDTO.setGroupesAnimes(new ArrayList<>());
-		if(util.getGroupesAnimes()!=null && !util.getGroupesAnimes().isEmpty()){
-			for(Groupe grp : util.getGroupesAnimes()){
+		if (util.getGroupesAnimes() != null && !util.getGroupesAnimes().isEmpty()) {
+			for (Groupe grp : util.getGroupesAnimes()) {
 				utilDTO.getGroupesAnimes().add(groupeToGroupeDTOLazy(grp));
 			}
 		}
@@ -146,7 +154,7 @@ public class MappingToDTO {
 
 		GroupeDTO grpDTO = groupeToGroupeDTOHorsRelation(grp);
 		grpDTO.setUtilisateurResponsable(utilisateurToUtilisateurDTOLazy(grp.getUtilisateurResponsable()));
-		
+
 		grpDTO.setUtilisateurs(new ArrayList<>());
 		if (grp.getUtilisateurs() != null && !grp.getUtilisateurs().isEmpty()) {
 			for (Utilisateur util : grp.getUtilisateurs()) {
@@ -160,12 +168,12 @@ public class MappingToDTO {
 			}
 		}
 		grpDTO.setAnimateurs(new ArrayList<>());
-		if(grp.getAnimateurs()!=null && !grp.getAnimateurs().isEmpty()){
-			for(Utilisateur util : grp.getAnimateurs()){
+		if (grp.getAnimateurs() != null && !grp.getAnimateurs().isEmpty()) {
+			for (Utilisateur util : grp.getAnimateurs()) {
 				grpDTO.getAnimateurs().add(utilisateurToUtilisateurDTOLazy(util));
 			}
 		}
-		
+
 		return grpDTO;
 	}
 
@@ -181,20 +189,21 @@ public class MappingToDTO {
 		if (art.getGroupe() != null) {
 			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
 		}
-//		artDTO.setGroupes(new ArrayList<>());
-//		if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
-//			for (Groupe grp : art.getGroupes()) {
-//				artDTO.getGroupes().add(groupeToGroupeDTOLazy(grp));
-//			}
-//		}
+		// artDTO.setGroupes(new ArrayList<>());
+		// if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {
+		// for (Groupe grp : art.getGroupes()) {
+		// artDTO.getGroupes().add(groupeToGroupeDTOLazy(grp));
+		// }
+		// }
 
 		return artDTO;
 	}
 
 	public static UtilisateurEnAttenteDTO utilisateurEnAttenteToUtilisateurEnAttenteDTO(
 			UtilisateurEnAttente utilisateurEnAttente) throws MetierException {
-		if(utilisateurEnAttente==null){
-			throw new UtilisateurEnAttenteInconnuException("utilisateurEnAttenteToUtilisateurEnAttenteDTO : L'utilisateurEnAttente à mapper en DTO est null");
+		if (utilisateurEnAttente == null) {
+			throw new UtilisateurEnAttenteInconnuException(
+					"utilisateurEnAttenteToUtilisateurEnAttenteDTO : L'utilisateurEnAttente à mapper en DTO est null");
 		}
 		UtilisateurEnAttenteDTO utilisateurEnAttenteDTO = new UtilisateurEnAttenteDTO();
 		utilisateurEnAttenteDTO.setAnneeDiplome(utilisateurEnAttente.getAnneeDiplome());
@@ -207,7 +216,7 @@ public class MappingToDTO {
 		utilisateurEnAttenteDTO.setDateNaissance(utilisateurEnAttente.getDateNaissance());
 		return utilisateurEnAttenteDTO;
 	}
-	
+
 	private static UtilisateurDTO utilisateurToUtilisateurDTOLazy(Utilisateur util) throws MetierException {
 		if (util == null) {
 			return null;
@@ -254,13 +263,13 @@ public class MappingToDTO {
 		if (art.getGroupe() != null) {
 			artDTO.setGroupe(groupeToGroupeDTOHorsRelation(art.getGroupe()));
 		}
-		
-//		artDTO.setGroupes(new ArrayList<>());
-//		if (art.getGroupes() != null) {
-//			for (Groupe grp : art.getGroupes()) {
-//				artDTO.getGroupes().add(groupeToGroupeDTOHorsRelation(grp));
-//			}
-//		}
+
+		// artDTO.setGroupes(new ArrayList<>());
+		// if (art.getGroupes() != null) {
+		// for (Groupe grp : art.getGroupes()) {
+		// artDTO.getGroupes().add(groupeToGroupeDTOHorsRelation(grp));
+		// }
+		// }
 
 		return artDTO;
 	}
@@ -287,8 +296,8 @@ public class MappingToDTO {
 			}
 		}
 		grpDTO.setAnimateurs(new ArrayList<>());
-		if(grp.getAnimateurs()!=null && !grp.getAnimateurs().isEmpty()){
-			for(Utilisateur util : grp.getAnimateurs()){
+		if (grp.getAnimateurs() != null && !grp.getAnimateurs().isEmpty()) {
+			for (Utilisateur util : grp.getAnimateurs()) {
 				grpDTO.getAnimateurs().add(utilisateurToUtilisateurDTOHorsRelation(util));
 			}
 		}

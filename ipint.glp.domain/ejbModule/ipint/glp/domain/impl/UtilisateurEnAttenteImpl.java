@@ -174,7 +174,6 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		Profil profil = new Profil();
 		profil.setDiplomePrincipal(utilisateurEnAttenteAValiderDTO.getDiplome());
 		profil.setAnneeDiplome(utilisateurEnAttenteAValiderDTO.getAnneeDiplome());
-		em.persist(profil);
 		utilisateurDTO.setProfil(MappingToDTO.profilToProfilDTO(profil));
 		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
 		String password = generationMotDePasse.nextString();
