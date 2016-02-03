@@ -155,6 +155,6 @@ public class ProfilController {
 		model.addAttribute("articles", uDTO.getArticles());
 		model.addAttribute("utilisateur", utilisateur);
 		// return "redirect:/profil/{id}";
-		return new ModelAndView("redirect:/profil", "utilisateur", uDTO);
+		return new ModelAndView("redirect:/profil", "utilisateur", utilisateur);
 	}
 }
