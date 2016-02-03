@@ -82,8 +82,8 @@ public class MappingToDTO {
 		proDTO.setCentreInteret(pro.getCentreInteret());
 		proDTO.setTelephone(pro.getTelephone());
 		proDTO.setDiplomePrincipal(pro.getDiplomePrincipal());
-		System.out.println(" DIPLOME PRINCIPAL ENTITY ->>>>>>>>>>>>>>>>>>>>>>>>>><   " + pro.getDiplomePrincipal());
-
+		proDTO.setMesAttentes(pro.getMesAttentes());
+		proDTO.setSituation(pro.getSituation());
 		proDTO.setAnneeDiplome(pro.getAnneeDiplome());
 
 		proDTO.setCompetence(new ArrayList<>());

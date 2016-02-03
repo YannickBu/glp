@@ -223,6 +223,8 @@ public class UtilisateurImpl implements UtilisateurService {
 			pro.setTelephone(utilisateurDTO.getProfil().getTelephone());
 			pro.setDiplomePrincipal(utilisateurDTO.getProfil().getDiplomePrincipal());
 			pro.setAnneeDiplome(utilisateurDTO.getProfil().getAnneeDiplome());
+			pro.setMesAttentes(utilisateurDTO.getProfil().getMesAttentes());
+			pro.setSituation(utilisateurDTO.getProfil().getSituation());
 
 			// Assoc competence
 
@@ -386,6 +388,9 @@ public class UtilisateurImpl implements UtilisateurService {
 			// Le diplome principal
 			profil.setDiplomePrincipal(nouvelUtilisateur.getProfil().getDiplomePrincipal());
 			profil.setAnneeDiplome((nouvelUtilisateur.getProfil().getAnneeDiplome()));
+
+			profil.setMesAttentes(nouvelUtilisateur.getProfil().getMesAttentes());
+			profil.setSituation(nouvelUtilisateur.getProfil().getSituation());
 
 			// les competences
 			// List<Competence> newComps = new ArrayList<Competence>();

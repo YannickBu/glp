@@ -36,6 +36,8 @@ public class Profil {
 	// private List<String> reseauxSociaux;
 	private String diplomePrincipal;
 	private int anneeDiplome;
+	private String mesAttentes;
+	private String situation;
 
 	public Profil() {
 		this.competence = new ArrayList<Competence>();
@@ -143,6 +145,21 @@ public class Profil {
 	// this.reseauxSociaux = reseauxSociaux;
 	// }
 
+	/**
+	 * @return the mesAttentes
+	 */
+	public String getMesAttentes() {
+		return mesAttentes;
+	}
+
+	/**
+	 * @param mesAttentes
+	 *            the mesAttentes to set
+	 */
+	public void setMesAttentes(String mesAttentes) {
+		this.mesAttentes = mesAttentes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -203,6 +220,21 @@ public class Profil {
 		} else if (!telephone.equals(other.telephone))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the situation
+	 */
+	public String getSituation() {
+		return situation;
+	}
+
+	/**
+	 * @param situation
+	 *            the situation to set
+	 */
+	public void setSituation(String situation) {
+		this.situation = situation;
 	}
 
 }
