@@ -121,8 +121,8 @@
 					style="width: 70%; margin-top: 9%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Diplomés de l'université de Lille ? Inscris toi-sur le
-					site pour partager ton expérience </span>
+				<span>Diplomé de l'université de Lille ? Inscris toi-sur le
+					site pour appartenir au réseau et partager ton expérience . </span>
 			</div>
 			<div class="col-md-1">
 				<img
@@ -133,7 +133,7 @@
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
 				<span>Etudiant ou personnel de l'université ? Connectes-toi
-					avec tes identifiants de l'université </span>
+					avec tes identifiants de l'université. </span>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
@@ -144,34 +144,34 @@
 			</div>
 			<div class="col-md-4"></div>
 		</div>
-		<div class="row">
+		<div class="row" style="margin-top:3%;margin-bottom:5%">
 			<div class="col-md-1"></div>
 			<div class="col-md-1">
 				<img
-					src="${pageContext.servletContext.contextPath}/resources/img/diplome.png"
+					src="${pageContext.servletContext.contextPath}/resources/img/experience.png"
 					class="img-responsive" alt="Responsive image"
-					style="width: 50%; margin-top: 20%; margin-left: 30%">
+					style="width: 70%; margin-top: 12%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Viens partager ton expérience auprès des étudiants et des autres diplomés</span>
+				<span>Viens partager ton expérience auprès des étudiants et des autres diplomés.</span>
 			</div>
 			<div class="col-md-1">
 				<img
-					src="${pageContext.servletContext.contextPath}/resources/img/diplome.png"
+					src="${pageContext.servletContext.contextPath}/resources/img/contact.png"
 					class="img-responsive" alt="Responsive image"
-					style="width: 50%; margin-top: 20%; margin-left: 30%">
+					style="width: 80%; margin-top: -3%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Un réseau pour retrouver les anciens de ta formation</span>
+				<span>Un réseau pour retrouver les anciens de ta formation.</span>
 			</div>
 			<div class="col-md-1">
 				<img
-					src="${pageContext.servletContext.contextPath}/resources/img/diplome.png"
+					src="${pageContext.servletContext.contextPath}/resources/img/groupe.png"
 					class="img-responsive" alt="Responsive image"
-					style="width: 50%; margin-top: 20%; margin-left: 30%">
+					style="width: 70%; margin-top: 12%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Abonne toi à tes groupes favoris ou crée ton propre groupe. Crée des événements pour retrouver tes contacts ou informes les via des publications </span>
+				<span>Abonne toi à tes groupes favoris ou crée tes propres groupes.</span>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

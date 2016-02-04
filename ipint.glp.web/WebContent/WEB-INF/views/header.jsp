@@ -23,7 +23,7 @@
 							</form>
 						</ul>
 						<ul style="margin-top: 0.5%" class="nav navbar-nav navbar-right">
-							<li class="nom-etudiant">${utilisateur.prenom} ${utilisateur.nom}</li>
+							<li class="nom-etudiant">${utilisateur.nom}</li>
 							<li><a href="${pageContext.servletContext.contextPath}/profil"><span
 									class="glyphicon glyphicon-user couleurgly" aria-hidden="true"></span></a></li>
 							<li><a href="#"><span
