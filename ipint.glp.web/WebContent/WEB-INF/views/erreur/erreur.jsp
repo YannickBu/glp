@@ -14,7 +14,7 @@
 			</div>
 			<div class="row container-bas">
 				<div class="col-md-6 col-md-offset-4">
-					<h1 class="name-logo">Attention ! Un ninja a volé la page !</h1>
+					<h1 class="name-logo">Désolé ! Une erreur est survenue !</h1>
 				</div>
 			</div>
 		</div>

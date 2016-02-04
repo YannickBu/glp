@@ -77,22 +77,24 @@
 													professionnelles</li>
 												<br>
 												<li>Expériences Professionnelles :
-													<div class="panel-group" id="panel-1">
-														<c:forEach items="${utilisateur.profil.experiences}"
+													<c:set var="count" value="0" scope="page" />
+													<c:forEach items="${utilisateur.profil.experiences}"
 															var="exp">
+														<div class="panel-group" id="panel-${count}">
 															<div class="panel panel-default">
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
-																		data-parent="#panel-1" href="#panel-element-1">${exp.anneeDebut}/${exp.anneFin}
+																		data-parent="#panel-${count}" href="#panel-element-${count}">${exp.anneeDebut}/${exp.anneFin}
 																		- ${exp.poste} - ${exp.entreprise} à ${exp.lieu} dans
 																		la région ${exp.region} en ${exp.pays}</a>
 																</div>
 																<div id="panel-element-1"
 																	class="panel-collapse collapse">
-																	<div class="panel-body">${exp.description}</div>
-																</div>
+																<div class="panel-body">${exp.description}</div>
 															</div>
+															<c:set var="count" value="${count + 1}" scope="page"/>
 														</c:forEach>
+														</div>
 													</div>
 												</li>
 												<br>
@@ -137,24 +139,17 @@
 														</c:forEach>
 													</ul>
 												</li>
-												<li>Mes réseaux sociaux :
-													<ul>
-														<!-- 														<ul> -->
-														<%-- 															<c:forEach items="${utilisateur.reseauxSociaux}" var="res"> --%>
-														<%-- 																<li><a href="#">${res.nomReseau}</a></li> --%>
-														<%-- 															</c:forEach> --%>
-														<!-- 														</ul> -->
-														<li><img
-															src="${pageContext.servletContext.contextPath}/resources/img/facebookicon.png"
-															class="img-responsive2" alt="Responsive image"></li>
-														<li><img
-															src="${pageContext.servletContext.contextPath}/resources/img/Twitter-icon.png"
-															class="img-responsive2" alt="Responsive image"></li>
-														<li><img
-															src="${pageContext.servletContext.contextPath}/resources/img/Viadeo.png"
-															class="img-responsive2" alt="Responsive image"></li>
-													</ul>
-												</li>
+												<li><img
+													src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
+													class="img-responsive2" alt="Responsive image" /> <img
+													src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
+													class="img-responsive2" alt="Responsive image" /> <img
+													src="${pageContext.servletContext.contextPath}/resources/img/google.png"
+													class="img-responsive2" alt="Responsive image" /> <img
+													src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
+													class="img-responsive2" alt="Responsive image" /> <img
+													src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
+													class="img-responsive2" alt="Responsive image" />
 											</ul>
 										</div>
 										<%
