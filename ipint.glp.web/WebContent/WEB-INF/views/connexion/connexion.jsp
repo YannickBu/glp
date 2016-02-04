@@ -80,7 +80,7 @@
 						<div class="col-md-4"></div>
 						<div class="col-md-4"
 							style="margin-top: 1%; padding-left: 4%; color: white">
-							<a href="#"
+							<a href="${pageContext.servletContext.contextPath}/inscription"
 								style="color: white; font-size: 13px; font-weight: bold; text-decoration: underline;">
 								Pour vous inscrire sur le site, cliquez ici. </a>
 						</div>
