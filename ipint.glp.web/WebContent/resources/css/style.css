@@ -12,11 +12,16 @@ html, body, .container-table, .container-table-erreur {
 	overflow-y: auto;
 }
 
-body { padding-top: 70px; }
+body { padding-top: 80px; }
+
 
 .affix{
 	width: inherit;
     margin-left: -40px;
+}
+
+.body_without_menu{
+	padding-top: 0;
 }
 
 

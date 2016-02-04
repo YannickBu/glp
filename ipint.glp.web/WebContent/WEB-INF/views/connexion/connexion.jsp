@@ -1,5 +1,5 @@
 
-<body>
+<body class="body_without_menu">
 	<div class="row" style="background-color: #f6921e">
 		<div class="row">
 			<div class="col-md-5"></div>
