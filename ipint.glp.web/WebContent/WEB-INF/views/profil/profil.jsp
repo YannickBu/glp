@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	
+
 <div class="col-md-6 publication">
 	<div class="container">
 		<div class="row">
@@ -14,7 +14,9 @@
 			</div>
 			<div class="col-md-10">
 				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
-				<h1>${utilisateur.statut}</h1>
+				<h1>${utilisateur.profil.situation}</h1>
+				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
+					${utilisateur.profil.anneeDiplome}</div>
 				<div>
 					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Lille,France
 				</div>
@@ -23,7 +25,7 @@
 		</div>
 	</div>
 	<br>
-	<div class="navProfil">	
+	<div class="navProfil">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
@@ -44,8 +46,8 @@
 											<div class="article">
 												<ul>
 													<li class="nomEtu" style="list-style-type: none;">${utilisateur.prenom}
-														${utilisateur.nom} via ${art.groupe.nomGroupe}- <fmt:formatDate type="both"
-															dateStyle="short" timeStyle="short"
+														${utilisateur.nom} via ${art.groupe.nomGroupe}- <fmt:formatDate
+															type="both" dateStyle="short" timeStyle="short"
 															value="${art.datePublication.time}" />
 													</li>
 													<li style="list-style-type: none;">${art.contenu}</li>
@@ -64,13 +66,16 @@
 													personnelles</li>
 												<li>E-mail : ${utilisateur.email}</li>
 												<li>Téléphone : ${utilisateur.profil.telephone}</li>
+												<li>Mes attentes du réseau L1nk.fr :
+													${utilisateur.profil.mesAttentes}</li>
 											</ul>
 										</div>
+
 										<div class="bloc">
 											<ul>
 												<li class="nomBloc" style="list-style-type: none;">Informations
 													professionnelles</li>
-													<br>
+												<br>
 												<li>Expériences Professionnelles :
 													<div class="panel-group" id="panel-1">
 														<c:forEach items="${utilisateur.profil.experiences}"
@@ -79,7 +84,8 @@
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
 																		data-parent="#panel-1" href="#panel-element-1">${exp.anneeDebut}/${exp.anneFin}
-																		- ${exp.poste} - ${exp.entreprise}  à ${exp.lieu} dans la région ${exp.region} en ${exp.pays}</a>
+																		- ${exp.poste} - ${exp.entreprise} à ${exp.lieu} dans
+																		la région ${exp.region} en ${exp.pays}</a>
 																</div>
 																<div id="panel-element-1"
 																	class="panel-collapse collapse">
@@ -107,8 +113,7 @@
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
 															<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																${diplome.libelle}-
-																${diplome.libelle}</li>
+																${diplome.libelle}- ${diplome.libelle}</li>
 														</c:forEach>
 													</ul>
 												</li>
@@ -116,7 +121,7 @@
 
 											</ul>
 
-										
+
 										</div>
 										<div class="bloc">
 											<ul>
@@ -134,14 +139,14 @@
 												</li>
 												<li>Mes réseaux sociaux :
 													<ul>
-<!-- 														<ul> -->
-<%-- 															<c:forEach items="${utilisateur.reseauxSociaux}" var="res"> --%>
-<%-- 																<li><a href="#">${res.nomReseau}</a></li> --%>
-<%-- 															</c:forEach> --%>
-<!-- 														</ul> -->
+														<!-- 														<ul> -->
+														<%-- 															<c:forEach items="${utilisateur.reseauxSociaux}" var="res"> --%>
+														<%-- 																<li><a href="#">${res.nomReseau}</a></li> --%>
+														<%-- 															</c:forEach> --%>
+														<!-- 														</ul> -->
 														<li><img
 															src="${pageContext.servletContext.contextPath}/resources/img/facebookicon.png"
-															class="img-responsive2" alt="Responsive image"></li> 
+															class="img-responsive2" alt="Responsive image"></li>
 														<li><img
 															src="${pageContext.servletContext.contextPath}/resources/img/Twitter-icon.png"
 															class="img-responsive2" alt="Responsive image"></li>
@@ -152,17 +157,17 @@
 												</li>
 											</ul>
 										</div>
-											<%
-												if (request.getAttribute("id") == null) {
-											%>
-											<a
-												href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
-													type="button" style="margin-top: 1%; float: right"
-													class="btn btn-default" id="btn_new_exp">Modifier
-													mon profil</button></a>
-											<%
-												}
-											%>
+										<%
+											if (request.getAttribute("id") == null) {
+										%>
+										<a
+											href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
+												type="button" style="margin-top: 1%; float: right"
+												class="btn btn-default" id="btn_new_exp">Modifier
+												mon profil</button></a>
+										<%
+											}
+										%>
 									</div>
 								</div>
 							</div>

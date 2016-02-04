@@ -1,7 +1,9 @@
 package ipint.glp.domain.entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +13,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Article {
+public class Article implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idArticle;
@@ -25,7 +31,7 @@ public class Article {
 	private Calendar datePublication;
 	
 	//Si on garde cet attribut, pensez a rajouter le OneToMany dans groupe et toute l'impl qui va avec
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Groupe groupe;
 	@ManyToOne
 	private Utilisateur utilisateur;

@@ -77,42 +77,42 @@ public class UtilisateurImpl implements UtilisateurService {
 		utilisateur.setPassword(utilisateurDTO.getPassword());
 		utilisateur.setStatut(utilisateurDTO.getStatut());
 
-		
-		
-		//Gestion liste des groupes, AUCUN A LA CREATION DUN UTILISATEUR (on ajoute apres le groupe principal dans cette liste)
+		// Gestion liste des groupes, AUCUN A LA CREATION DUN UTILISATEUR (on
+		// ajoute apres le groupe principal dans cette liste)
 
 		List<Groupe> lesGroupes = new ArrayList<Groupe>();
-//		if (utilisateurDTO.getGroupes() != null && !utilisateurDTO.getGroupes().isEmpty()) {
-//			for (GroupeDTO groupeDTO : utilisateurDTO.getGroupes()) {
-//				Groupe grp = null;
-//				if (groupeDTO.getIdGroupe() != null) {
-//					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
-//					if(grp==null){
-//						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet id");
-//					}
-//				} else if (groupeDTO.getNomGroupe() != null) {
-//					Query q = em.createQuery(
-//							"select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-//					try{
-//						grp = (Groupe) q.getSingleResult();
-//					}catch(NoResultException e){
-//						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet nom de groupe");
-//					}
-//				}
-//				if (grp != null) {
-//					lesGroupes.add(grp);
-//					grp.getUtilisateurs().add(utilisateur);
-//					em.persist(grp);
-//				}
-//			}
-//		}
+		// if (utilisateurDTO.getGroupes() != null &&
+		// !utilisateurDTO.getGroupes().isEmpty()) {
+		// for (GroupeDTO groupeDTO : utilisateurDTO.getGroupes()) {
+		// Groupe grp = null;
+		// if (groupeDTO.getIdGroupe() != null) {
+		// grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
+		// if(grp==null){
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :
+		// "+groupeDTO.toString()+" n'existe pas pour cet id");
+		// }
+		// } else if (groupeDTO.getNomGroupe() != null) {
+		// Query q = em.createQuery(
+		// "select g from Groupe g where g.nomGroupe = '" +
+		// groupeDTO.getNomGroupe() + "'");
+		// try{
+		// grp = (Groupe) q.getSingleResult();
+		// }catch(NoResultException e){
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :
+		// "+groupeDTO.toString()+" n'existe pas pour cet nom de groupe");
+		// }
+		// }
+		// if (grp != null) {
+		// lesGroupes.add(grp);
+		// grp.getUtilisateurs().add(utilisateur);
+		// em.persist(grp);
+		// }
+		// }
+		// }
 		utilisateur.setGroupes(lesGroupes);
-		
-		
-		
-		
-		//Groupe principal
-		
+
+		// Groupe principal
+
 		GroupeDTO groupeDTOm = utilisateurDTO.getGroupePrincipal();
 		Groupe grpm = null;
 		if (groupeDTOm.getIdGroupe() != null) {
@@ -130,86 +130,101 @@ public class UtilisateurImpl implements UtilisateurService {
 						"UtilisateurImpl.creer : Le groupe ayant pour nom=" + grpm.getNomGroupe() + " n'existe pas");
 			}
 		}
-		if(grpm!=null){
-			if(!grpm.getUtilisateurs().contains(utilisateur)){
+		if (grpm != null) {
+			if (!grpm.getUtilisateurs().contains(utilisateur)) {
 				grpm.getUtilisateurs().add(utilisateur);
 				em.persist(grpm);
 			}
 		}
 		utilisateur.setGroupePrincipal(grpm);
 		utilisateur.getGroupes().add(grpm);
-		
+
 		// Profil profil = em.find(Profil.class,
 		// utilisateurDTO.getProfil().getIdProfil());
 		// utilisateur.setProfil(profil);
 
-		//Gestion de la liste des groupes gérés par l'utilisateur, AUCUN A LA CREATION DUN UTILISATEUR
+		// Gestion de la liste des groupes gérés par l'utilisateur, AUCUN A LA
+		// CREATION DUN UTILISATEUR
 
 		List<Groupe> lesGroupesGeres = new ArrayList<Groupe>();
-//		if (utilisateurDTO.getGroupesGeres() != null && !utilisateurDTO.getGroupesGeres().isEmpty()) {
-//			for (GroupeDTO groupeDTO : utilisateurDTO.getGroupesGeres()) {
-//				Groupe grp = new Groupe();
-//				if (groupeDTO.getIdGroupe() != null) {
-//					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
-//					if(grp==null){
-//						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet id");
-//					}
-//				} else if (groupeDTO.getNomGroupe() != null) {
-//					Query q = em.createQuery(
-//							"select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-//					try{
-//						grp = (Groupe) q.getSingleResult();
-//					}catch(NoResultException e){
-//						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
-//					}
-//				}
-//				if (grp != null) {
-//					lesGroupesGeres.add(grp);
-//					grp.setUtilisateurResponsable(utilisateur);
-//					em.persist(grp);
-//				}
-//			}
-//		}
+		// if (utilisateurDTO.getGroupesGeres() != null &&
+		// !utilisateurDTO.getGroupesGeres().isEmpty()) {
+		// for (GroupeDTO groupeDTO : utilisateurDTO.getGroupesGeres()) {
+		// Groupe grp = new Groupe();
+		// if (groupeDTO.getIdGroupe() != null) {
+		// grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
+		// if(grp==null){
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :
+		// "+groupeDTO.toString()+" n'existe pas pour cet id");
+		// }
+		// } else if (groupeDTO.getNomGroupe() != null) {
+		// Query q = em.createQuery(
+		// "select g from Groupe g where g.nomGroupe = '" +
+		// groupeDTO.getNomGroupe() + "'");
+		// try{
+		// grp = (Groupe) q.getSingleResult();
+		// }catch(NoResultException e){
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :
+		// "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
+		// }
+		// }
+		// if (grp != null) {
+		// lesGroupesGeres.add(grp);
+		// grp.setUtilisateurResponsable(utilisateur);
+		// em.persist(grp);
+		// }
+		// }
+		// }
 		utilisateur.setGroupesGeres(lesGroupesGeres);
 
-		//Gestion de la liste groupes animés, AUCUN A LA CREATION DUN UTILISATEUR
+		// Gestion de la liste groupes animés, AUCUN A LA CREATION DUN
+		// UTILISATEUR
 
 		List<Groupe> lesGroupesAnimes = new ArrayList<>();
-//		if(utilisateurDTO.getGroupesAnimes()!=null && !utilisateurDTO.getGroupesGeres().isEmpty()){
-//			for(GroupeDTO groupeDTO : utilisateurDTO.getGroupesAnimes()){
-//				Groupe grp = new Groupe();
-//				if (groupeDTO.getIdGroupe() != null) {
-//					grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
-//					if(grp==null){
-//						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour cet id");
-//					}
-//				} else if (groupeDTO.getNomGroupe() != null) {
-//					Query q = em.createQuery(
-//							"select g from Groupe g where g.nomGroupe = '" + groupeDTO.getNomGroupe() + "'");
-//					try{
-//						grp = (Groupe) q.getSingleResult();
-//					}catch(NoResultException e){
-//						throw new GroupeInconnuException("UtilisateurImpl.creer : "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
-//					}
-//				}
-//				if (grp != null) {
-//					lesGroupesAnimes.add(grp);
-//					if(!grp.getAnimateurs().contains(utilisateur)){
-//						grp.getAnimateurs().add(utilisateur);
-//						em.persist(grp);
-//					}
-//				}
-//			}
-//		}
+		// if(utilisateurDTO.getGroupesAnimes()!=null &&
+		// !utilisateurDTO.getGroupesGeres().isEmpty()){
+		// for(GroupeDTO groupeDTO : utilisateurDTO.getGroupesAnimes()){
+		// Groupe grp = new Groupe();
+		// if (groupeDTO.getIdGroupe() != null) {
+		// grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
+		// if(grp==null){
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :
+		// "+groupeDTO.toString()+" n'existe pas pour cet id");
+		// }
+		// } else if (groupeDTO.getNomGroupe() != null) {
+		// Query q = em.createQuery(
+		// "select g from Groupe g where g.nomGroupe = '" +
+		// groupeDTO.getNomGroupe() + "'");
+		// try{
+		// grp = (Groupe) q.getSingleResult();
+		// }catch(NoResultException e){
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :
+		// "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
+		// }
+		// }
+		// if (grp != null) {
+		// lesGroupesAnimes.add(grp);
+		// if(!grp.getAnimateurs().contains(utilisateur)){
+		// grp.getAnimateurs().add(utilisateur);
+		// em.persist(grp);
+		// }
+		// }
+		// }
+		// }
 		utilisateur.setGroupesAnimes(lesGroupesAnimes);
-		
+
 		// Gestion profil
 
 		Profil pro = new Profil();
 		if (utilisateurDTO.getProfil() != null) {
+
 			// Champs non assoc
 			pro.setCentreInteret(utilisateurDTO.getProfil().getCentreInteret());
 			pro.setTelephone(utilisateurDTO.getProfil().getTelephone());
+			pro.setDiplomePrincipal(utilisateurDTO.getProfil().getDiplomePrincipal());
+			pro.setAnneeDiplome(utilisateurDTO.getProfil().getAnneeDiplome());
+			pro.setMesAttentes(utilisateurDTO.getProfil().getMesAttentes());
+			pro.setSituation("Nouvel arrivant");
 
 			// Assoc competence
 
@@ -324,6 +339,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+		System.out.println("Diplome de l'utilisateur :  " + utilisateurDTO.getProfil().getDiplomePrincipal());
 		return utilisateurDTO;
 	}
 
@@ -349,7 +365,8 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " + nouvelUtilisateur.getPassword());
+		System.out.println(
+				"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " + nouvelUtilisateur.getPassword());
 
 		if (nouvelUtilisateur.getPassword() != null && !"".equals(nouvelUtilisateur.getPassword())) {
 			utilisateurMAJ.setPassword(nouvelUtilisateur.getPassword());
@@ -368,8 +385,31 @@ public class UtilisateurImpl implements UtilisateurService {
 			int idProfil = nouvelUtilisateur.getProfil().getIdProfil();
 			profil.setTelephone(nouvelUtilisateur.getProfil().getTelephone());
 
+			// Le diplome principal
+			profil.setDiplomePrincipal(nouvelUtilisateur.getProfil().getDiplomePrincipal());
+			profil.setAnneeDiplome((nouvelUtilisateur.getProfil().getAnneeDiplome()));
+
+			profil.setMesAttentes(nouvelUtilisateur.getProfil().getMesAttentes());
+			profil.setSituation(nouvelUtilisateur.getProfil().getSituation());
+
 			// les competences
+			// List<Competence> newComps = new ArrayList<Competence>();
+			// List<Competence> comps1 = new ArrayList<Competence>();
+			// List<CompetenceDTO> comps2 = new ArrayList<CompetenceDTO>();
+			// comps1 = em.find(Utilisateur.class,
+			// nouvelUtilisateur.getIdUtilisateur()).getProfil().getCompetence();
+			// comps2 = nouvelUtilisateur.getProfil().getCompetence();
+			// for(int i=0;i<comps2.size();i++){
+			// if(!comps1.get(i).equals(comps2.get(i))){
+			// em.remove(comps1.get(i));
+			//
+			// } else {
+			// newComps.add(comps1.get(i));
+			// }
+			// }
 			List<Competence> comps = new ArrayList<Competence>();
+			List<Competence> oldComps = new ArrayList<Competence>();
+			oldComps = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getCompetence();
 			if (nouvelUtilisateur.getProfil().getCompetence() != null
 					&& !nouvelUtilisateur.getProfil().getCompetence().isEmpty()) {
 				Competence comp = new Competence();
@@ -394,6 +434,11 @@ public class UtilisateurImpl implements UtilisateurService {
 							em.persist(comp);
 						}
 					}
+				}
+			}
+			for (Competence c : oldComps) {
+				if (!comps.contains(c)) {
+					em.remove(c);
 				}
 			}
 			profil.setCompetence(comps);
@@ -478,7 +523,8 @@ public class UtilisateurImpl implements UtilisateurService {
 				}
 			}
 			profil.setExperiences(exps);
-			System.out.println("CENTRE INTERETS "+ nouvelUtilisateur.getProfil().getCentreInteret());
+
+			System.out.println("CENTRE INTERETS " + nouvelUtilisateur.getProfil().getCentreInteret());
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
 			// profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
 			utilisateurMAJ.setProfil(profil);

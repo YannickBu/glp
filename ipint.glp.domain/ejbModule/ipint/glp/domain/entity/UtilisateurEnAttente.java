@@ -1,5 +1,6 @@
 package ipint.glp.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,7 +17,12 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-public class UtilisateurEnAttente {
+public class UtilisateurEnAttente implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Identifiant de l'utilisateur en attente de validation.

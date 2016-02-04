@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="header">
 		<div class="row">
 			<div class="col-md-12">
@@ -23,7 +23,7 @@
 							</form>
 						</ul>
 						<ul style="margin-top: 0.5%" class="nav navbar-nav navbar-right">
-							<li class="nom-etudiant">${utilisateur.nom}</li>
+							<li class="nom-etudiant">${utilisateur.prenom} ${utilisateur.nom}</li>
 							<li><a href="${pageContext.servletContext.contextPath}/profil"><span
 									class="glyphicon glyphicon-user couleurgly" aria-hidden="true"></span></a></li>
 							<li><a href="#"><span
