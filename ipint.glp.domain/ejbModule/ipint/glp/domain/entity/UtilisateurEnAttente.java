@@ -43,7 +43,7 @@ public class UtilisateurEnAttente {
 	/**
 	 * Annee du diplome obtenu de l'utilisateur en attente de validation.
 	 */
-	private int anneeDiplome;
+	private Integer anneeDiplome;
 
 	/**
 	 * Groupe de l'utilisateur en attente de validation.
@@ -124,7 +124,7 @@ public class UtilisateurEnAttente {
 	/**
 	 * @return the anneeDiplome
 	 */
-	public int getAnneeDiplome() {
+	public Integer getAnneeDiplome() {
 		return anneeDiplome;
 	}
 
@@ -132,7 +132,7 @@ public class UtilisateurEnAttente {
 	 * @param anneeDiplome
 	 *            the anneeDiplome to set
 	 */
-	public void setAnneeDiplome(int anneeDiplome) {
+	public void setAnneeDiplome(Integer anneeDiplome) {
 		this.anneeDiplome = anneeDiplome;
 	}
 
