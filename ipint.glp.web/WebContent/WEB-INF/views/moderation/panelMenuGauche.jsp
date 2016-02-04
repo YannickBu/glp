@@ -6,7 +6,7 @@
 	<div class="col-md-2 gauche">
 			<p class="suggestion-titre"><label>Menu</label></p>
 			<ul class="menu-gauche">
-				<a href="#"><li>Acceuil<span
+				<a href="#"><li>Accueil<span
 						class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span></li></a>
 				<a href="#"><li>Panel de modération<span
 						class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span></li></a>
