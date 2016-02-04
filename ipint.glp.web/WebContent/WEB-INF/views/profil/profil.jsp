@@ -77,7 +77,7 @@
 																					professionnelles</li>
 																					<br>
 																						<li>Expériences Professionnelles :
-																							<c:set var="count"value="0" scope="page" />
+																							<c:set var="count"value="1" scope="page" />
 																							<c:forEach items="${utilisateur.profil.experiences}" var="exp">
 																								<div class="panel-group" id="panel-${count}">
 																									<div class="panel panel-default">
@@ -88,7 +88,7 @@
 																												- ${exp.poste} - ${exp.entreprise} à ${exp.lieu} dans
 																												la région ${exp.region} en ${exp.pays}</a>
 																											</div>
-																											<div id="panel-element-1"
+																											<div id="panel-element-${count}"
 																												class="panel-collapse collapse">
 																												<div class="panel-body">${exp.description}</div>
 																											</div>
