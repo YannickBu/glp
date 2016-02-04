@@ -393,20 +393,6 @@ public class UtilisateurImpl implements UtilisateurService {
 			profil.setSituation(nouvelUtilisateur.getProfil().getSituation());
 
 			// les competences
-			// List<Competence> newComps = new ArrayList<Competence>();
-			// List<Competence> comps1 = new ArrayList<Competence>();
-			// List<CompetenceDTO> comps2 = new ArrayList<CompetenceDTO>();
-			// comps1 = em.find(Utilisateur.class,
-			// nouvelUtilisateur.getIdUtilisateur()).getProfil().getCompetence();
-			// comps2 = nouvelUtilisateur.getProfil().getCompetence();
-			// for(int i=0;i<comps2.size();i++){
-			// if(!comps1.get(i).equals(comps2.get(i))){
-			// em.remove(comps1.get(i));
-			//
-			// } else {
-			// newComps.add(comps1.get(i));
-			// }
-			// }
 			List<Competence> comps = new ArrayList<Competence>();
 			List<Competence> oldComps = new ArrayList<Competence>();
 			oldComps = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getCompetence();
@@ -445,6 +431,7 @@ public class UtilisateurImpl implements UtilisateurService {
 
 			// les diplomes
 			List<Diplome> dipls = new ArrayList<Diplome>();
+			List<Diplome> oldDipls = new ArrayList<Diplome>();
 			if (nouvelUtilisateur.getProfil().getDiplomes() != null
 					&& !nouvelUtilisateur.getProfil().getDiplomes().isEmpty()) {
 				Diplome dipl = new Diplome();
@@ -476,10 +463,16 @@ public class UtilisateurImpl implements UtilisateurService {
 					}
 				}
 			}
+			for (Diplome d : oldDipls) {
+				if (!dipls.contains(d)) {
+					em.remove(d);
+				}
+			}
 			profil.setDiplomes(dipls);
 
 			// les experiences
 			List<Experience> exps = new ArrayList<Experience>();
+			List<Experience> oldExps = new ArrayList<Experience>();
 			if (nouvelUtilisateur.getProfil().getExperiences() != null
 					&& !nouvelUtilisateur.getProfil().getExperiences().isEmpty()) {
 				Experience exp = new Experience();
@@ -520,6 +513,11 @@ public class UtilisateurImpl implements UtilisateurService {
 							em.persist(exp);
 						}
 					}
+				}
+			}
+			for (Experience e : oldExps) {
+				if (!exps.contains(e)) {
+					em.remove(e);
 				}
 			}
 			profil.setExperiences(exps);
