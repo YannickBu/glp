@@ -115,6 +115,16 @@ h3{
 
 }
 
+.diplomePrincipal{
+	font-weight : bold;
+
+}
+
+.situation{
+	margin-bottom : 15px;
+
+}
+
 
 #barre-recherche{
 	margin-left : 7.9%;

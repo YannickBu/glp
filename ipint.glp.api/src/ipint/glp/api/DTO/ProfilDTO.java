@@ -29,6 +29,8 @@ public class ProfilDTO extends DTO implements Serializable {
 	private List<ExperienceDTO> experiences;
 	private String diplomePrincipal;
 	private int anneeDiplome;
+	private String mesAttentes;
+	private String situation;
 
 	@OneToMany(mappedBy = "profil")
 	private List<String> reseauxSociaux;
@@ -150,6 +152,36 @@ public class ProfilDTO extends DTO implements Serializable {
 
 	public void setReseauxSociaux(List<String> reseauxSociaux) {
 		this.reseauxSociaux = reseauxSociaux;
+	}
+
+	/**
+	 * @return the mesAttentes
+	 */
+	public String getMesAttentes() {
+		return mesAttentes;
+	}
+
+	/**
+	 * @param mesAttentes
+	 *            the mesAttentes to set
+	 */
+	public void setMesAttentes(String mesAttentes) {
+		this.mesAttentes = mesAttentes;
+	}
+
+	/**
+	 * @return the situation
+	 */
+	public String getSituation() {
+		return situation;
+	}
+
+	/**
+	 * @param situation
+	 *            the situation to set
+	 */
+	public void setSituation(String situation) {
+		this.situation = situation;
 	}
 
 }

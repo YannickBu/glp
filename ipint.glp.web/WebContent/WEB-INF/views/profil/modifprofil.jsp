@@ -7,10 +7,11 @@
 
 
 
-<form:form role="form" method="post" action="" name="modif_form" commandName="utilisateur">
+<form:form role="form" method="post" action="" name="modif_form"
+	commandName="utilisateur">
 
 	<div class="col-md-6 publication">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-2">
 					<img
@@ -18,23 +19,32 @@
 						class="img-responsive" alt="Responsive image">
 				</div>
 				<div class="col-md-10">
-					<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
-					<div class="col-md-5">
+					<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
+					<div class="col-md-12 situation form-group ">
+						<label for="InputDiplomePrincipal"> Situation : </label>
+
+						<form:input path="profil.situation" type="text"
+							class="form-control" id="InputSituation"
+							placeholder="Chef de projet à CGI France" />
+
+
+					</div>
+					<div class="col-md-6 situation form-group">
 						<label for="InputDiplomePrincipal"> Diplôme principal </label>
 
 						<form:input path="profil.diplomePrincipal" type="text"
 							class="form-control" id="InputDiplomePrincipal"
-							placeholder="ex: Jean" />
+							placeholder="ex: Master MIAGE" />
 
 
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-6">
 
 						<label for="InputAnneeDiplomel"> Année d'obtention du
 							diplôme </label>
 
 						<form:input path="profil.anneeDiplome" type="text"
-							class="form-control" id="InputAnneDiplome" placeholder="ex: Jean" />
+							class="form-control" id="InputAnneDiplome" placeholder="ex: 2016" />
 
 
 					</div>
@@ -74,6 +84,12 @@
 							<label for="InputTel"> Téléphone :</label>
 							<form:input path="profil.telephone" type="text"
 								class="form-control" id="InputTel" />
+						</div>
+						<div class="form-group">
+							<label for="InputMesAttentes"> Mes attentes du réseau
+								L1nk.fr </label>
+							<form:input path="profil.mesAttentes" type="text"
+								class="form-control" id="InputMesAttentes" />
 						</div>
 						<div class="form-group">
 							<label for="InputCursus"> Diplômes : </label>
@@ -162,19 +178,18 @@
 									<div class="row" style="margin-top: 1%">
 										<div class="col-md-12">
 											<form:textarea path="profil.experiences[${i}].description"
-												value="${profil.experiences[i].description}" type="text-area"
-												class="form-control" id="InputExpDesc"
+												value="${profil.experiences[i].description}"
+												type="text-area" class="form-control" id="InputExpDesc"
 												placeholder="Description de votre mission" />
 										</div>
 									</div>
-									<hr/>
+									<hr />
 								</c:forEach>
 							</div>
 
 							<div class="nouvelle_exp"></div>
 
-							<button type="button"
-								class="btn btn-default" id="btn_new_exp"
+							<button type="button" class="btn btn-default" id="btn_new_exp"
 								onClick="newExperience();">Ajouter une expérience</button>
 							<hr>
 
@@ -192,14 +207,16 @@
 												placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
-											  <form:select class="form-control" id="selectNoteCompetence" path="profil.competence[${i}].note">
-											    <form:option value="${profil.competence[i].note}" selected="selected">Selectionner une note</form:option>
-											    <form:option value="1"></form:option>
-											    <form:option value="2"></form:option>
-											    <form:option value="3"></form:option>
-											    <form:option value="4"></form:option>
-											    <form:option value="5"></form:option>
-											  </form:select>
+											<form:select class="form-control" id="selectNoteCompetence"
+												path="profil.competence[${i}].note">
+												<form:option value="${profil.competence[i].note}"
+													selected="selected">Selectionner une note</form:option>
+												<form:option value="1"></form:option>
+												<form:option value="2"></form:option>
+												<form:option value="3"></form:option>
+												<form:option value="4"></form:option>
+												<form:option value="5"></form:option>
+											</form:select>
 										</div>
 										<div class="col-md-1">
 											<button type="button" style="margin-top: 1%;"
@@ -207,11 +224,12 @@
 												onClick="deleteCompetence(${i});">x</button>
 										</div>
 									</div>
-								</c:forEach>	
+								</c:forEach>
 							</div>
-							<button type="button" style="margin-top:1%;"
-									class="btn btn-default" id="btn_new_comp"
-									onClick="varComp();newCompetence();">Ajouter une compétence</button>
+							<button type="button" style="margin-top: 1%;"
+								class="btn btn-default" id="btn_new_comp"
+								onClick="varComp();newCompetence();">Ajouter une
+								compétence</button>
 						</div>
 						<div class="form-group">
 							<label for="InputInterets"> Centres d'interets :</label>
@@ -228,7 +246,8 @@
 						<%-- 									placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
-						<button type="submit" class="btn btn-default" onclick="SoumettreFormulaire();">Modifier</button>
+						<button type="submit" class="btn btn-default"
+							onclick="SoumettreFormulaire();">Modifier</button>
 					</div>
 				</div>
 			</div>
