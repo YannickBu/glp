@@ -3,6 +3,7 @@ package ipint.glp.web.controller;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +27,14 @@ public class InscriptionController {
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
 	@Inject
 	GroupeService groupeS;
-
+	
 	public InscriptionController() {
 	}
 
 	@RequestMapping(value="/inscription", method=RequestMethod.GET)
-	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {
+	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur,
+			@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {
+		
 		try {
 			model.addAttribute("groupes",groupeS.lister());
 		} catch (MetierException e) {
@@ -44,8 +47,21 @@ public class InscriptionController {
 
 
 	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
-	public String InscriptionPost(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result,
-			Model model) {
+	public String InscriptionPost(@Valid @ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,
+			BindingResult result, @ModelAttribute("groupes") GroupeDTO groupe, Model model) {
+		
+
+		
+		if(result.hasErrors()){
+			try {
+				model.addAttribute("groupes",groupeS.lister());
+			} catch (MetierException e) {
+				logger.severe("Erreur acces inscription POST - GroupeService.lister renvoie : " + e.getMessage());
+				return "redirect:/erreur";
+			}
+			return "inscription";
+		}
+		
 		UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
 		GroupeDTO groupeDTO = new GroupeDTO();
 		groupeDTO.setIdGroupe(utilisateurTmp.getGroupePrincipal().getIdGroupe());
