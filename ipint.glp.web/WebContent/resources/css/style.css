@@ -11,6 +11,15 @@ html, body, .container-table, .container-table-erreur {
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+
+body { padding-top: 70px; }
+
+.affix{
+	width: inherit;
+    margin-left: -40px;
+}
+
+
 .container-table {
 	background: linear-gradient(180deg, #ffffff 50%, #f6921e 50%);
 	display: table;
@@ -140,8 +149,8 @@ h3{
 
 .menu-gauche{
 	border : 1px solid #dadbdb;
-	margin-left : 10%;
-	width : 85%;	
+	/* margin-left : 10%;
+	width : 85%;	 */
 	background-color :#ffffff;
 }
 
@@ -172,6 +181,11 @@ h3{
 	margin-left : 6%; 
 	margin-bottom : 4%;
 }
+
+.menu-droite{
+	margin-left: 40px;
+}
+
 
 .menu-droite-1{
 	margin-bottom : 20%;

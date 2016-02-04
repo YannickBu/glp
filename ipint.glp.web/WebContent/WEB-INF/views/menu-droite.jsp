@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <div class="col-md-2 droite">
-	<div class="menu-droite">
+	<div data-spy="affix" class="menu-droite">
 		<p class="suggestion-titre">Suggestions de profils</p>
 		<ul class="menu-droite-1">
 			<a href="#"><li>Profil 1<span
