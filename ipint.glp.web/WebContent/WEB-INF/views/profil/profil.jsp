@@ -13,7 +13,7 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">${utilisateur.prenom} ${utilisateur.nom}</h1>
+				<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
 				<h1>${utilisateur.profil.situation}</h1>
 				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 					${utilisateur.profil.anneeDiplome}</div>
@@ -76,14 +76,15 @@
 												<li class="nomBloc" style="list-style-type: none;">Informations
 													professionnelles</li>
 												<br>
-												<li>Expériences Professionnelles :
-													<div class="panel-group" id="panel-1">
-														<c:forEach items="${utilisateur.profil.experiences}"
-															var="exp">
+												<li>Expériences Professionnelles : <c:set var="count"
+														value="0" scope="page" /> <c:forEach
+														items="${utilisateur.profil.experiences}" var="exp">
+														<div class="panel-group" id="panel-${count}">
 															<div class="panel panel-default">
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
-																		data-parent="#panel-1" href="#panel-element-1">${exp.anneeDebut}/${exp.anneFin}
+																		data-parent="#panel-${count}"
+																		href="#panel-element-${count}">${exp.anneeDebut}/${exp.anneFin}
 																		- ${exp.poste} - ${exp.entreprise} à ${exp.lieu} dans
 																		la région ${exp.region} en ${exp.pays}</a>
 																</div>
@@ -92,84 +93,76 @@
 																	<div class="panel-body">${exp.description}</div>
 																</div>
 															</div>
-														</c:forEach>
-													</div>
-												</li>
-												<br>
-												<li>Compétences :
-													<ul class="nav nav-pills">
-														<c:forEach items="${utilisateur.profil.competence}"
-															var="comp">
-															<li class="active"><a> <span
-																	class="badge pull-right"> ${comp.note}</span>
-																	${comp.libelle}
-															</a></li>
-														</c:forEach>
-													</ul>
-												</li>
-												<br>
-												<li>Cursus :
-													<ul>
-														<c:forEach items="${utilisateur.profil.diplomes}"
-															var="diplome">
-															<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																${diplome.libelle}- ${diplome.libelle}</li>
-														</c:forEach>
-													</ul>
-												</li>
-
-
-											</ul>
-
-
+														</div>
+														<c:set var="count" value="${count + 1}" scope="page" />
+													</c:forEach>
 										</div>
-										<div class="bloc">
+									</div>
+									</li> <br>
+									<li>Compétences :
+										<ul class="nav nav-pills">
+											<c:forEach items="${utilisateur.profil.competence}"
+												var="comp">
+												<li class="active"><a> <span
+														class="badge pull-right"> ${comp.note}</span>
+														${comp.libelle}
+												</a></li>
+											</c:forEach>
+										</ul>
+									</li> <br>
+									<li>Cursus :
+										<ul>
+											<c:forEach items="${utilisateur.profil.diplomes}"
+												var="diplome">
+												<li>${diplome.anneeDebut}/${diplome.anneFin}-
+													${diplome.libelle}- ${diplome.libelle}</li>
+											</c:forEach>
+										</ul>
+									</li>
+
+
+									</ul>
+
+
+								</div>
+								<div class="bloc">
+									<ul>
+										<li class="nomBloc" style="list-style-type: none;">Informations
+											sociales</li>
+										<li>Centres d'interêt :
+											${utilisateur.profil.centreInteret}</li>
+										<li>Groupe principal : <a href="#">${utilisateur.groupePrincipal.nomGroupe}</a></li>
+										<li>Mes groupes :
 											<ul>
-												<li class="nomBloc" style="list-style-type: none;">Informations
-													sociales</li>
-												<li>Centres d'interêt :
-													${utilisateur.profil.centreInteret}</li>
-												<li>Groupe principal : <a href="#">${utilisateur.groupePrincipal.nomGroupe}</a></li>
-												<li>Mes groupes :
-													<ul>
-														<c:forEach items="${utilisateur.groupes}" var="grp">
-															<li><a href="#">${grp.nomGroupe}</a></li>
-														</c:forEach>
-													</ul>
-												</li>
-												<li>Mes réseaux sociaux :
-													<ul>
-														<!-- 														<ul> -->
-														<%-- 															<c:forEach items="${utilisateur.reseauxSociaux}" var="res"> --%>
-														<%-- 																<li><a href="#">${res.nomReseau}</a></li> --%>
-														<%-- 															</c:forEach> --%>
-														<!-- 														</ul> -->
-														<li><img
-															src="${pageContext.servletContext.contextPath}/resources/img/facebookicon.png"
-															class="img-responsive2" alt="Responsive image"></li>
-														<li><img
-															src="${pageContext.servletContext.contextPath}/resources/img/Twitter-icon.png"
-															class="img-responsive2" alt="Responsive image"></li>
-														<li><img
-															src="${pageContext.servletContext.contextPath}/resources/img/Viadeo.png"
-															class="img-responsive2" alt="Responsive image"></li>
-													</ul>
-												</li>
+												<c:forEach items="${utilisateur.groupes}" var="grp">
+													<li><a href="#">${grp.nomGroupe}</a></li>
+												</c:forEach>
 											</ul>
-										</div>
-										<%
+										</li>
+										<li><img
+											src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
+											class="img-responsive2" alt="Responsive image" /> <img
+											src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
+											class="img-responsive2" alt="Responsive image" /> <img
+											src="${pageContext.servletContext.contextPath}/resources/img/google.png"
+											class="img-responsive2" alt="Responsive image" /> <img
+											src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
+											class="img-responsive2" alt="Responsive image" /> <img
+											src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
+											class="img-responsive2" alt="Responsive image" />
+									</ul>
+								</div>
+								<%
 											if (request.getAttribute("id") == null) {
 										%>
-										<a
-											href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
-												type="button" style="margin-top: 1%; float: right"
-												class="btn btn-default" id="btn_new_exp">Modifier
-												mon profil</button></a>
-										<%
+								<a
+									href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
+										type="button" style="margin-top: 1%; float: right"
+										class="btn btn-default" id="btn_new_exp">Modifier mon
+										profil</button></a>
+								<%
 											}
 										%>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -177,4 +170,6 @@
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 </div>

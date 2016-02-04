@@ -105,6 +105,11 @@
 	</security-role>
 	
 	<error-page>
+		<error-code>500</error-code>
+		<location>/erreur</location>
+	</error-page>
+	
+	<error-page>
 		<error-code>403</error-code>
 		<location>/erreur</location>
 	</error-page>

@@ -1,5 +1,5 @@
 
-<body>
+<body class="body_without_menu">
 	<div class="row" style="background-color: #f6921e">
 		<div class="row">
 			<div class="col-md-5"></div>
@@ -80,7 +80,7 @@
 						<div class="col-md-4"></div>
 						<div class="col-md-4"
 							style="margin-top: 1%; padding-left: 4%; color: white">
-							<a href="#"
+							<a href="${pageContext.servletContext.contextPath}/inscription"
 								style="color: white; font-size: 13px; font-weight: bold; text-decoration: underline;">
 								Pour vous inscrire sur le site, cliquez ici. </a>
 						</div>
@@ -178,8 +178,4 @@
 
 
 	</div>
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 </body>
