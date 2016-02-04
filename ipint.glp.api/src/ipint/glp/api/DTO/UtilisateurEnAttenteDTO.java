@@ -22,6 +22,8 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	/**
 	 * Prenom de l'utilisateur en attente de validation.
 	 */
+//	@javax.validation.constraints.Size(min=1,message="prenom non rempli")
+//	@javax.validation.constraints.Pattern(regexp="a",message="regex fail")
 	private String prenom;
 
 	/**
@@ -32,7 +34,10 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	/**
 	 * Annee du diplome obtenu de l'utilisateur en attente de validation.
 	 */
-	private int anneeDiplome;
+//	@javax.validation.constraints.Digits(integer=4,fraction=0,message="fail digit")
+	@javax.validation.constraints.Min(value=1900,message="Année impossible")
+//	@org.hibernate.validator.constraints.NotNull(message="VIDE")
+	private Integer anneeDiplome;
 
 	/**
 	 * Groupe de l'utilisateur en attente de validation.
@@ -113,7 +118,7 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	/**
 	 * @return the anneeDiplome
 	 */
-	public int getAnneeDiplome() {
+	public Integer getAnneeDiplome() {
 		return anneeDiplome;
 	}
 
@@ -121,7 +126,7 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	 * @param anneeDiplome
 	 *            the anneeDiplome to set
 	 */
-	public void setAnneeDiplome(int anneeDiplome) {
+	public void setAnneeDiplome(Integer anneeDiplome) {
 		this.anneeDiplome = anneeDiplome;
 	}
 

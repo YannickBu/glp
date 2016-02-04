@@ -1,5 +1,6 @@
 package ipint.glp.web.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.ArticleDTO;
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.ArticleService;
@@ -35,16 +37,25 @@ public class ArticleController {
 
 	@RequestMapping(value = "/publication", method = RequestMethod.GET)
 	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
+		List<ArticleDTO> articles=new ArrayList<ArticleDTO>();
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
 			uDTO = us.trouver(uDTO);
+			List<GroupeDTO> groupes = uDTO.getGroupes();
+			GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
+			groupes.add(groupePrincipal);
+			for(GroupeDTO groupe : groupes){
+				for(ArticleDTO articleDTO : as.listerParGroupe(groupe)){
+					articles.add(articleDTO);
+				}
+			}
 		} catch (MetierException e) {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
 
-		model.addAttribute("articles", uDTO.getArticles());
+		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", uDTO.getGroupePrincipal());
 		return new ModelAndView("accueil", "article", new ArticleDTO());
@@ -52,8 +63,7 @@ public class ArticleController {
 
 	@RequestMapping(value = "/publication", method = RequestMethod.POST)
 	public ModelAndView publicationGet(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article,
-			BindingResult result, Model model) {
-		// TODO
+			BindingResult result, Model model) throws MetierException {
 
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
@@ -63,10 +73,6 @@ public class ArticleController {
 			logger.severe("Erreur acces publication POST - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-
-		// System.out.println("artCont id : "+id);
-		System.out.println("artCont id uDTO : " + uDTO.getIdUtilisateur());
-		System.out.println("artCont id uDTO : " + uDTO.getNom());
 
 		ArticleDTO articleDto = new ArticleDTO();
 		articleDto.setContenu(article.getContenu());
@@ -80,17 +86,15 @@ public class ArticleController {
 			logger.severe("Erreur acces publication POST - ArticleService.creer renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		// try {
-		// GroupeDTO grp = gs.trouver(uDTO.getGroupePrincipal());
-		// } catch (MetierException e) {
-		// logger.severe("Erreur acces publication POST - GroupeService.creer
-		// renvoie : " + e.getMessage());
-		// return new ModelAndView("redirect:/erreur");
-		// }
-
-		System.out.println(articleDto.getGroupe().getNomGroupe());
-		// TODO recuperer en base les articles
-		List<ArticleDTO> articles = articleDto.getUtilisateur().getArticles();
+		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
+		List<GroupeDTO> groupes = uDTO.getGroupes();
+		GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
+		groupes.add(groupePrincipal);
+		for(GroupeDTO groupe : groupes){
+			for(ArticleDTO articleDTO : as.listerParGroupe(groupe)){
+				articles.add(articleDTO);
+			}
+		}
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
