@@ -60,13 +60,13 @@
 						<form:input path="dateNaissance" class="form-control"
 							id="inputBirthday" placeholder="Ex: 1990/10/28" readonly="true"></form:input>
 						<span class="add-on"><i class="icon-th"></i></span>
-						
+
 						<spring:bind path="dateNaissance">
 							<c:forEach items="${status.errorMessages}" var="error">
 						    La date de naissance est invalide
 						</c:forEach>
 						</spring:bind>
-						
+
 					</div>
 				</div>
 			</div>
@@ -106,7 +106,9 @@
 				</div>
 			</div>
 			<div class="row ">
-				<label for="" class="col-md-5 control-label"></label>
+				<label for="" class="col-md-4 control-label"></label> <a
+					href="${pageContext.servletContext.contextPath}/profil/"><button
+						type="button" class="btn btn-default col-md-2" style="margin-top: 1%;">Retour</button></a>
 				<button type="submit" class="btn btn-default col-md-2"
 					style="margin-top: 1%;">S'inscrire</button>
 			</div>

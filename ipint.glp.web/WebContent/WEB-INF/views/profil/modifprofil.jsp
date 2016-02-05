@@ -19,13 +19,13 @@
 						class="img-responsive" alt="Responsive image">
 				</div>
 				<div class="col-md-10">
-					<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
+					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 					<div class="col-md-12 situation form-group ">
 						<label for="InputDiplomePrincipal"> Situation : </label>
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
-							placeholder="Chef de projet à CGI France" />
+							placeholder="ex: Chef de projet à CGI France" />
 
 
 					</div>
@@ -116,7 +116,7 @@
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].lieu"
 												value="${profil.diplomes[i].lieu}" type="text"
-												class="form-control" id="InputDipDesc" placeholder="Lieu" />
+												class="form-control" id="InputDipLieu" placeholder="Lieu" />
 										</div>
 										<div class="col-md-1">
 											<button type="button" style="margin-top: 1%;"
@@ -141,65 +141,68 @@
 									end="${utilisateur.profil.experiences.size()}" var="i">
 									<div class="row" id="idExp${i}">
 										<div class="col-md-12">
-										<div class="row">
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].anneeDebut"
-													value="${profil.experiences[i].anneeDebut}" type="text"
-													class="form-control" id="InputExpDebut" placeholder="Début" />
+											<div class="row">
+												<div class="col-md-2">
+													<form:input path="profil.experiences[${i}].anneeDebut"
+														value="${profil.experiences[i].anneeDebut}" type="text"
+														class="form-control" id="InputExpDebut"
+														placeholder="Début" />
+												</div>
+												<div class="col-md-2">
+													<form:input path="profil.experiences[${i}].anneFin"
+														value="${profil.experiences[i].anneFin}" type="text"
+														class="form-control" id="InputExpAnneFin"
+														placeholder="Fin" />
+												</div>
+												<div class="col-md-2">
+													<form:input path="profil.experiences[${i}].entreprise"
+														value="${profil.experiences[i].entreprise}" type="text"
+														class="form-control" id="InputExpEnt"
+														placeholder="Entreprise" />
+												</div>
+												<div class="col-md-2">
+													<form:input path="profil.experiences[${i}].lieu"
+														value="${profil.experiences[i].lieu}" type="text"
+														class="form-control" id="InputExpLieu" placeholder="Ville" />
+												</div>
+												<div class="col-md-2">
+													<form:input path="profil.experiences[${i}].region"
+														value="${profil.experiences[i].region}" type="text"
+														class="form-control" id="InputExpRegion"
+														placeholder="Région" />
+												</div>
+												<div class="col-md-2">
+													<form:input path="profil.experiences[${i}].pays"
+														value="${profil.experiences[i].pays}" type="text"
+														class="form-control" id="InputExpPays" placeholder="Pays" />
+												</div>
 											</div>
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].anneFin"
-													value="${profil.experiences[i].anneFin}" type="text"
-													class="form-control" id="InputExpAnneFin" placeholder="Fin" />
+											<div class="row" style="margin-top: 1%">
+												<div class="col-md-12">
+													<form:input path="profil.experiences[${i}].poste"
+														value="${profil.experiences[i].poste}" type="text"
+														class="form-control" id="InputExpPoste"
+														placeholder="Poste" />
+												</div>
 											</div>
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].entreprise"
-													value="${profil.experiences[i].entreprise}" type="text"
-													class="form-control" id="InputExpEnt"
-													placeholder="Entreprise" />
+											<div class="row" style="margin-top: 1%">
+												<div class="col-md-12">
+													<form:textarea path="profil.experiences[${i}].description"
+														value="${profil.experiences[i].description}"
+														type="text-area" class="form-control" id="InputExpDesc"
+														placeholder="Description de votre mission" />
+												</div>
 											</div>
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].pays"
-													value="${profil.experiences[i].pays}" type="text"
-													class="form-control" id="InputExpPays" placeholder="Pays" />
+											<div class="row">
+												<div class="col-md-11"></div>
+												<div class="col-md-1"
+													style="margin-top: 1%; text-align: right">
+													<button type="button" class="btn btn-default"
+														id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
+												</div>
 											</div>
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].region"
-													value="${profil.experiences[i].region}" type="text"
-													class="form-control" id="InputExpRegion"
-													placeholder="Région" />
-											</div>
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].lieu"
-													value="${profil.experiences[i].lieu}" type="text"
-													class="form-control" id="InputExpLieu" placeholder="Ville" />
-											</div>
+											<hr>
 										</div>
-										<div class="row" style="margin-top: 1%">
-											<div class="col-md-12">
-												<form:input path="profil.experiences[${i}].poste"
-													value="${profil.experiences[i].poste}" type="text"
-													class="form-control" id="InputExpPoste" placeholder="Poste" />
-											</div>
-										</div>
-										<div class="row" style="margin-top: 1%">
-											<div class="col-md-12">
-												<form:textarea path="profil.experiences[${i}].description"
-													value="${profil.experiences[i].description}"
-													type="text-area" class="form-control" id="InputExpDesc"
-													placeholder="Description de votre mission" />
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-11"></div>
-											<div class="col-md-1"
-												style="margin-top: 1%; text-align: right">
-												<button type="button" class="btn btn-default"
-													id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
-											</div>
-										</div>
-										<hr>
-									</div>
 									</div>
 								</c:forEach>
 							</div>
@@ -262,8 +265,10 @@
 						<%-- 									placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
+						<a href="${pageContext.servletContext.contextPath}/profil/"><button
+								type="button" class="btn btn-default">Annuler</button></a>
 						<button type="submit" class="btn btn-default"
-							onclick="SoumettreFormulaire();">Modifier</button>
+							onclick="SoumettreFormulaire();">Enregistrer</button>
 					</div>
 				</div>
 			</div>

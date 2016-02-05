@@ -13,7 +13,7 @@
 						class="img-responsive" alt="Responsive image">
 					</div>
 					<div class="col-md-10">
-						<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
+						<h1 class="nomEtu">${utilisateur.prenom}&nbsp;${utilisateur.nom}</h1>
 						<h1>${utilisateur.profil.situation}</h1>
 						<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 							${utilisateur.profil.anneeDiplome}</div>
@@ -113,7 +113,7 @@
 																									<c:forEach items="${utilisateur.profil.diplomes}"
 																										var="diplome">
 																										<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																											${diplome.libelle}- ${diplome.libelle}</li>
+																											${diplome.libelle}- ${diplome.lieu}</li>
 																										</c:forEach>
 																									</ul>
 																								</li>
@@ -125,11 +125,11 @@
 																									sociales</li>
 																									<li>Centres d'interêt :
 																										${utilisateur.profil.centreInteret}</li>
-																										<li>Groupe principal : <a href="#">${utilisateur.groupePrincipal.nomGroupe}</a></li>
+																										<li>Groupe principal : <a href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 																										<li>Mes groupes :
 																											<ul>
 																												<c:forEach items="${utilisateur.groupes}" var="grp">
-																													<li><a href="#">${grp.nomGroupe}</a></li>
+																													<li><a href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.grp.idGroupe}">${grp.nomGroupe}</a></li>
 																												</c:forEach>
 																											</ul>
 																										</li>
