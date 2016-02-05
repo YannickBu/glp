@@ -1,5 +1,74 @@
 
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.jasig.cas.client.authentication.AttributePrincipal" %>
+
 <body class="body_without_menu">
+
+
+
+
+
+
+<%
+//     if (request.getUserPrincipal() != null) {
+//       AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();
+      
+//       /*
+//       final String password = principal.getPassword();
+//       if (password != null) {
+//         out.println("<p><b>User Credentials:</b> " + password + "</p>");
+//       }
+//       */
+      
+//       final Map attributes = principal.getAttributes();
+      
+//       if (attributes != null) {
+//         Iterator attributeNames = attributes.keySet().iterator();
+//         out.println("<b>Attributes:</b>");
+        
+//         if (attributeNames.hasNext()) {
+//           out.println("<hr><table border='3pt' width='100%'>");
+//           out.println("<th colspan='2'>Attributes</th>");
+//           out.println("<tr><td><b>Key</b></td><td><b>Value</b></td></tr>");
+//           for (; attributeNames.hasNext();) {
+//             out.println("<tr><td>");
+//             String attributeName = (String) attributeNames.next();
+//             out.println(attributeName);
+//             out.println("</td><td>");
+//             final Object attributeValue = attributes.get(attributeName);
+//             if (attributeValue instanceof List) {
+//               final List values = (List) attributeValue;
+//               out.println("<strong>Multi-valued attribute: " + values.size() + "</strong>");
+//               out.println("<ul>");
+//               for (Object value: values) {
+//                 out.println("<li>" + value + "</li>");
+//               }
+//               out.println("</ul>");
+//             } else {
+//               out.println(attributeValue);
+//             }
+//             out.println("</td></tr>");
+//           }
+//           out.println("</table>");
+//         } else {
+//           out.print("No attributes are supplied by the CAS server.</p>");
+//         }
+//       } else {
+//         out.println("<pre>The attribute map is empty. Review your CAS filter configurations.</pre>");
+//       }
+//     } else {
+//         out.println("<pre>The user principal is empty from the request object. Review the wrapper filter configuration.</pre>");
+//     }
+%>
+
+
+
+
+
 	<div class="row" style="background-color: #f6921e">
 		<div class="row">
 			<div class="col-md-5"></div>
@@ -18,7 +87,7 @@
 			<div class="col-md-4">
 				<center>
 					<h1 style="color: white; font-size: 40px; margin-right: 5%"
-						class="name-logo">L1nk - Le rÈseau d'anciens de l'universitÈ
+						class="name-logo">L1nk - Le r√©seau d'anciens de l'universit√©
 						de Lille</h1>
 				</center>
 			</div>
@@ -29,7 +98,7 @@
 		<!-- 			<div class="col-md-4"></div> -->
 		<!-- 			<div class="col-md-4"> -->
 		<!-- 				<center> -->
-		<!-- 					<h3 style="color: white">Le rÈseau d'anciens de Lille</h3> -->
+		<!-- 					<h3 style="color: white">Le r√©seau d'anciens de Lille</h3> -->
 		<!-- 				</center> -->
 		<!-- 			</div> -->
 		<!-- 			<div class="col-md-4"></div> -->
@@ -70,7 +139,7 @@
 						%>
 						<p class="col-md-9"
 							style="color: red; text-align: center; font-size: 14px">
-							Combinaison adresse Èlectronique/mot de passe incorrecte</p>
+							Combinaison adresse √©lectronique/mot de passe incorrecte</p>
 						<%
 							}
 						%>
@@ -95,7 +164,7 @@
 				<div class="row">
 					<a
 						style="text-align: right; margin-top: 1%; margin-left: 1.5%; color: white; text-decoration: underline;"
-						class="col-md-11 " href="#">Mot de passÈ oubliÈ ?</a>
+						class="col-md-11 " href="#">Mot de pass√© oubli√© ?</a>
 					<div class="col-md-1"></div>
 				</div>
 				<div class="row">
@@ -121,8 +190,8 @@
 					style="width: 70%; margin-top: 9%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>DiplomÈ de l'universitÈ de Lille ? Inscris toi-sur le
-					site pour appartenir au rÈseau et partager ton expÈrience . </span>
+				<span>Diplom√© de l'universit√© de Lille ? Inscris toi-sur le
+					site pour appartenir au r√©seau et partager ton exp√©rience . </span>
 			</div>
 			<div class="col-md-1">
 				<img
@@ -132,8 +201,8 @@
 
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Etudiant ou personnel de l'universitÈ ? Connectes-toi
-					avec tes identifiants de l'universitÈ. </span>
+				<span>Etudiant ou personnel de l'universit√© ? Connectes-toi
+					avec tes identifiants de l'universit√©. </span>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
@@ -153,7 +222,7 @@
 					style="width: 70%; margin-top: 12%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Viens partager ton expÈrience auprËs des Ètudiants et des autres diplomÈs.</span>
+				<span>Viens partager ton exp√©rience aupr√®s des √©tudiants et des autres diplom√©s.</span>
 			</div>
 			<div class="col-md-1">
 				<img
@@ -162,7 +231,7 @@
 					style="width: 80%; margin-top: -3%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Un rÈseau pour retrouver les anciens de ta formation.</span>
+				<span>Un r√©seau pour retrouver les anciens de ta formation.</span>
 			</div>
 			<div class="col-md-1">
 				<img
@@ -171,7 +240,7 @@
 					style="width: 70%; margin-top: 12%; margin-left: 30%">
 			</div>
 			<div class="col-md-2" style="margin-top: 2%">
-				<span>Abonne toi ‡ tes groupes favoris ou crÈe tes propres groupes.</span>
+				<span>Abonne toi √† tes groupes favoris ou cr√©e tes propres groupes.</span>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

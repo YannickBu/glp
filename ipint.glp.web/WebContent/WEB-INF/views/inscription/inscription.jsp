@@ -85,7 +85,7 @@
 					d'obtention du diplôme : <label class="label2 taille">*</label>
 				</label>
 				<div class="input col-md-4">
-					<form:input path="anneeDiplome" type="text" id="selectAnnee"
+					<form:input path="anneeDiplome" type="number" id="selectAnnee"
 						class="form-control" placeholder="Ex: 2012"></form:input>
 					<form:errors path="anneeDiplome" />
 				</div>
