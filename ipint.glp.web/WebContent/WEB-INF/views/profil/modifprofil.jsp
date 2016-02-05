@@ -265,8 +265,10 @@
 						<%-- 									placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
+						<a href="${pageContext.servletContext.contextPath}/profil/"><button
+								type="button" class="btn btn-default">Annuler</button></a>
 						<button type="submit" class="btn btn-default"
-							onclick="SoumettreFormulaire();">Modifier</button>
+							onclick="SoumettreFormulaire();">Enregistrer</button>
 					</div>
 				</div>
 			</div>
