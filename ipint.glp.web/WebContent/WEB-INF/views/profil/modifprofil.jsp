@@ -25,7 +25,7 @@
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
-							placeholder="Chef de projet à CGI France" />
+							placeholder="ex: Chef de projet à CGI France" />
 
 
 					</div>
