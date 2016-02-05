@@ -113,7 +113,7 @@
 																									<c:forEach items="${utilisateur.profil.diplomes}"
 																										var="diplome">
 																										<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																											${diplome.libelle}- ${diplome.libelle}</li>
+																											${diplome.libelle}- ${diplome.lieu}</li>
 																										</c:forEach>
 																									</ul>
 																								</li>

@@ -116,7 +116,7 @@
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].lieu"
 												value="${profil.diplomes[i].lieu}" type="text"
-												class="form-control" id="InputDipDesc" placeholder="Lieu" />
+												class="form-control" id="InputDipLieu" placeholder="Lieu" />
 										</div>
 										<div class="col-md-1">
 											<button type="button" style="margin-top: 1%;"
@@ -158,10 +158,10 @@
 													class="form-control" id="InputExpEnt"
 													placeholder="Entreprise" />
 											</div>
-											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].pays"
-													value="${profil.experiences[i].pays}" type="text"
-													class="form-control" id="InputExpPays" placeholder="Pays" />
+												<div class="col-md-2">
+												<form:input path="profil.experiences[${i}].lieu"
+													value="${profil.experiences[i].lieu}" type="text"
+													class="form-control" id="InputExpLieu" placeholder="Ville" />
 											</div>
 											<div class="col-md-2">
 												<form:input path="profil.experiences[${i}].region"
@@ -170,9 +170,9 @@
 													placeholder="Région" />
 											</div>
 											<div class="col-md-2">
-												<form:input path="profil.experiences[${i}].lieu"
-													value="${profil.experiences[i].lieu}" type="text"
-													class="form-control" id="InputExpLieu" placeholder="Ville" />
+												<form:input path="profil.experiences[${i}].pays"
+													value="${profil.experiences[i].pays}" type="text"
+													class="form-control" id="InputExpPays" placeholder="Pays" />
 											</div>
 										</div>
 										<div class="row" style="margin-top: 1%">
