@@ -13,7 +13,7 @@
 						class="img-responsive" alt="Responsive image">
 					</div>
 					<div class="col-md-10">
-						<h1 class="nomEtu">${utilisateur.prenom}${utilisateur.nom}</h1>
+						<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 						<h1>${utilisateur.profil.situation}</h1>
 						<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 							${utilisateur.profil.anneeDiplome}</div>
