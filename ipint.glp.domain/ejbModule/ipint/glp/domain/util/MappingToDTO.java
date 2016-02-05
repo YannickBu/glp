@@ -68,6 +68,7 @@ public class MappingToDTO {
 		diplDTO.setAnneeDebut(dipl.getAnneeDebut());
 		diplDTO.setAnneFin(dipl.getAnneFin());
 		diplDTO.setLibelle(dipl.getLibelle());
+		diplDTO.setLieu(dipl.getLieu());
 
 		return diplDTO;
 	}
