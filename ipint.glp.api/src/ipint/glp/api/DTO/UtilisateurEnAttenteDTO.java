@@ -7,8 +7,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @SuppressWarnings("serial")
@@ -22,33 +20,32 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	/**
 	 * Nom de l'utilisateur en attente de validation.
 	 */
-	@Pattern(regexp="[A-Za-z]+",message="Le nom saisi est invalide")
+	//@Pattern(regexp="[a-zA-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ[:blank:]-]+",message="Le nom saisi est invalide")
+	@Size(min=1,message="Le nom saisi est invalide")
 	private String nom;
 
 	/**
 	 * Prenom de l'utilisateur en attente de validation.
 	 */
-	@Pattern(regexp="[A-Za-z]+",message="Le prénom saisi est invalide")
+	//@Pattern(regexp="[A-Za-z]+",message="Le prénom saisi est invalide")
+	@Size(min=1,message="Le prénom saisi est invalide")
 	private String prenom;
 
 	/**
 	 * Diplome obtenu de l'utilisateur en attente de validation.
 	 */
-	@NotNull(message="Le dernier diplôme obtenu doit être saisi")
 	@Size(min=1,message="Le dernier diplôme obtenu doit être saisi")
 	private String diplome;
 
 	/**
 	 * Annee du diplome obtenu de l'utilisateur en attente de validation.
 	 */
-	@NotNull(message="L''année du diplôme doit être saisie")
 	@Min(value=1950,message="L''année du diplôme est invalide")
 	private Integer anneeDiplome;
 
 	/**
 	 * Email de l'utilisateur en attente de validation.
 	 */
-	@NotNull(message="L''email doit être saisi")
 	@Size(min=1,message="L''email doit être saisi")
 	private String email;
 
@@ -56,7 +53,7 @@ public class UtilisateurEnAttenteDTO extends DTO implements Serializable {
 	 * Date de naissance de l'utilisateur en attente de validation.
 	 */
 	@NotNull(message="La date de naissance doit être saisie")
-	@Past(message="La date de naissance est invalide")
+	//@Past(message="La date de naissance est invalide")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateNaissance;
 
