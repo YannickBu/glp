@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.GregorianCalendar"%>
+<%@ page import="ipint.glp.api.DTO.ProfilDTO"%>
+<%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
 <script type="text/javascript"
 	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 
@@ -41,12 +46,20 @@
 					<div class="col-md-6">
 
 						<label for="InputAnneeDiplomel"> Année d'obtention du
-							diplôme </label>
-
-						<form:input path="profil.anneeDiplome" type="text"
-							class="form-control" id="InputAnneDiplome" placeholder="ex: 2016" />
-
-
+							diplôme </label> 
+							<c:set var="TEST" value="${profil.anneeDiplome}" scope="request"/> 
+							<form:select path="profil.anneeDiplome" class="form-control" id="InputAnneDiplome">
+							<% //(Integer) request.getAttribute("yannick")).intValue()
+							Calendar calendar =new GregorianCalendar();
+							calendar.setTime(new Date());
+							int annee =calendar.get(Calendar.YEAR);
+							for(int i =annee;i>1950;i--){
+								out.println("<option value='"+i+"' "+
+								((((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil().getAnneeDiplome()==i)?"selected='true'":"")
+								+">"+i+"</option>");
+							}
+							%>
+						</form:select>
 					</div>
 
 
