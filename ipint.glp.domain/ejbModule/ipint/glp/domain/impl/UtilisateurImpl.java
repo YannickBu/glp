@@ -338,7 +338,13 @@ public class UtilisateurImpl implements UtilisateurService {
 			}
 		}
 
+		for (Competence competence : utilisateur.getProfil().getCompetence()) {
+			System.out.println("Compretence ENTITY ------------->" + competence.getLibelle());
+		}
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+		for (CompetenceDTO competence : utilisateurDTO.getProfil().getCompetence()) {
+			System.out.println("Compretence DTO ------------->" + competence.getLibelle());
+		}
 		System.out.println("Diplome de l'utilisateur :  " + utilisateurDTO.getProfil().getDiplomePrincipal());
 		return utilisateurDTO;
 	}
@@ -408,7 +414,9 @@ public class UtilisateurImpl implements UtilisateurService {
 							comp = (Competence) q.getSingleResult();
 							if (comp != null) {
 								comp.setNote(compDTO.getNote());
-								comps.add(comp);
+								if(!comps.contains(comp)){
+									comps.add(comp);
+								}
 								em.merge(comp);
 							}
 						} else {
@@ -416,6 +424,9 @@ public class UtilisateurImpl implements UtilisateurService {
 							comp.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
 							comp.setLibelle(compDTO.getLibelle());
 							comp.setNote(compDTO.getNote());
+							if (comps.contains(comp)) {
+								comps.remove(comp);
+							}
 							comps.add(comp);
 							em.persist(comp);
 						}

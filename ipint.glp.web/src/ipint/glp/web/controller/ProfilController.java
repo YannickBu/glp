@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ipint.glp.api.DTO.CompetenceDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.GroupeService;
@@ -68,6 +69,9 @@ public class ProfilController {
 		//
 		// uDTO = utilisateurService.modifier(uDTO, uDTO2);
 
+		for (CompetenceDTO competence : uDTO.getProfil().getCompetence()) {
+			System.out.println("Competence --------------------------->  " + competence.getLibelle());
+		}
 		System.out.println("profil : " + uDTO.getProfil());
 		System.out.println("profil dernier diplome obtenu: " + uDTO.getProfil().getDiplomePrincipal());
 		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
@@ -101,8 +105,12 @@ public class ProfilController {
 		System.out.println(uDTO.getNom());
 		// System.out.println(uDTO.getProfil());
 
+		for (CompetenceDTO competence : uDTO.getProfil().getCompetence()) {
+			System.out.println("Competence --------------------------->  " + competence.getLibelle());
+		}
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
+
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);
@@ -138,6 +146,7 @@ public class ProfilController {
 					"Erreur acces profil/modifProfil POST - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
+
 		Integer idTemp = uDTO.getProfil().getIdProfil();
 		uDTO.setProfil(utilisateur.getProfil());
 		uDTO.setPassword(utilisateur.getPassword());
