@@ -20,7 +20,7 @@ import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
 
 @Controller
-public class InscriptionController {
+public class InscriptionController extends GeneralController {
 	private Logger logger = Logger.getLogger("InscriptionController");
 
 	@Inject
@@ -31,6 +31,8 @@ public class InscriptionController {
 	public InscriptionController() {
 	}
 
+
+	
 	@RequestMapping(value="/inscription", method=RequestMethod.GET)
 	public ModelAndView inscriptionGet(@ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateur,
 			@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {

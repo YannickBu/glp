@@ -22,7 +22,7 @@
         
                 <div class="article">
                         <ul>
-                        <li class="nomEtu">${art.utilisateur.prenom} ${art.utilisateur.nom} via ${groupePrincipal.nomGroupe} - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
+                        <li class="nomEtu"><a href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}" >${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a> via <a href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}" > ${groupePrincipal.nomGroupe} </a> - <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${art.datePublication.time}"/></li>
                         <li>${art.contenu}</li>
                         </ul>
                 </div>

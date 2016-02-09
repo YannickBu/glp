@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -15,23 +14,17 @@ public class UtilisateurDTO extends DTO implements Serializable {
 	private static final long serialVersionUID = -6174082190617483433L;
 
 	private Integer idUtilisateur;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Nom")
-	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
+	@javax.validation.constraints.Size(min=1,message = "Le nom doit être saisi")
 	private String nom;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Prénom")
-	@javax.validation.constraints.Pattern(regexp = "[A-Za-z]+", message = "Prénom invalide")
+	@javax.validation.constraints.Size(min=1,message = "Le prénom doit être saisi")
 	private String prenom;
 	private Statut statut;
 	// @javax.validation.constraints.NotNull(message="Veuillez remplir le champ
 	// Identifiant")
 	// private String login;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Mot de passe")
+	@javax.validation.constraints.Size(min=1,message = "Le mot de passe doit être saisi")
 	private String password;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le champ Email")
-	// TODO regex email
-	// @javax.validation.constraints.Pattern(regexp="\b[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}\b",message="Email
-	// invalide")
-	@Column(unique = true)
+	@javax.validation.constraints.Size(min=1,message = "L''email doit être saisi")
 	private String email;
 
 	private ProfilDTO profil;

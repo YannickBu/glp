@@ -1,287 +1,280 @@
-/*
-	--- Code couleur --- 
 
-	#231f20 -> noir du logo
-	#dadbdb -> gris du logo
-	#f6921e -> orange du logo 
-*/
-html, body, .container-table, .container-table-erreur {
+/**********************************************************************/
+/* 																	  */
+/* 		  Conseil de lecture et écriture sur le fichier css	: 		  */
+/* 																	  */
+/* 	  Se fichier est rangé par type puis par ordre alphabétique.	  */
+/* Ne dupliquer pas du code et ne bouleverser pas l'ordre deja établi.*/
+/* 																	  */
+/*			      Merci beaucoup, Pierre-Louis ;) 					  */
+/* 																	  */
+/**********************************************************************/
+
+@font-face {
+	font-family: 'Huruf Miranti';
+	src: url(../fonts/Huruf_Miranti.ttf) format(truetype);
+}
+
+/********/
+/* TAGS */
+/********/
+
+body {
+	padding-top: 80px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+html,
+body,
+.container-table,
+.container-table-erreur {
 	height: 100%;
-	background-color: #F1F2F1; 
 	overflow-x: hidden;
 	overflow-y: auto;
+	background-color: #F1F2F1;
 }
 
-body { padding-top: 80px; }
-
-
-.affix{
+textarea {
 	width: inherit;
-    margin-left: -40px;
 }
 
-.body_without_menu{
+/*******/
+/* IDS */
+/*******/
+
+#barre-recherche {
+	margin-top: .4%;
+	margin-left: 7.9%;
+}
+
+#panel-2 > div>div>ul>li {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+/***********/
+/* CLASSES */
+/***********/
+
+.accueilBody li {
+	list-style-type: none;
+}
+
+.affix {
+	width: inherit;
+	margin-left: -50px;
+}
+
+.article,
+.bloc {
+	margin-top: 1%;
+	padding-top: 1%;
+	border: 1px solid #dadbdb;
+	background-color: #ffffff;
+}
+
+.body_without_menu {
 	padding-top: 0;
 }
 
+.container-bas,
+h3 {
+	padding-bottom: 5%;
+}
 
 .container-table {
-	background: linear-gradient(180deg, #ffffff 50%, #f6921e 50%);
 	display: table;
+	background: linear-gradient(180deg,#ffffff50%,#f6921e50%);
 }
+
 .container-table-erreur {
 	display: table;
 	width: 100%;
 }
 
-.vertical-center-row {
-	display: table-cell;
-	vertical-align: middle;
+.couleurgly {
+	font-size: 120%;
+	color: black;
+}
+
+.diplomePrincipal,
+.publierArt {
+	font-weight: bold;
+}
+
+.entete-inscrip {
+	width: 100%;
+	background-color: #F1F2F1;
+}
+
+.form-inscrip {
+	padding-top: 2.5%;
+	padding-bottom: 5%;
+	background-color: #f6921e;
+}
+
+.formPubli {
+	padding-right: 4%;
+}
+
+.gly-menu {
+	float: right;
+	font-size: 120%;
+	color: black;
+}
+
+.glyphicon-map-marker {
+	font-size: 2em;
+}
+
+.header {
+	background-color: #f6921e;
+}
+
+.img-logo {
+	width: 15%;
+	height: 15%;
+	padding-top: 4%;
+	padding-bottom: 4%;
+}
+
+.img-responsive2 {
+	width: 25px;
+	height: 25px;
+}
+
+.inputForm {
+	width: 100%;
+	margin-top: .5%;
+	margin-bottom: 1%;
+}
+
+.jumbotron {
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .label {
 	float: right;
-	color: #FFFFFF;	
-	font-size : 110%;
+	font-size: 110%;
+	color: #FFFFFF;
 }
 
 .label2 {
-	color: #FFFFFF;	
+	color: #FFFFFF;
 }
 
-.small-link{
-	font-size: 12px;
-	color: #000000;	
+.menu-droite {
+	margin-left: 0;
 }
 
-.container-bas {a
-	padding-bottom: 5%;
+.menu-droite-1 {
+	margin-bottom: 20%;
 }
 
-@font-face {
-	font-family: 'Huruf Miranti'; 
-    src: url('../fonts/Huruf_Miranti.ttf') format('truetype'); 
-
-}
-    
-.nav-pills>.active>a>.badge {
-	color : #231F20;
-}
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-	background-color: #F6921E;
-}
-.nav-tabs>li>a{
-	color: #F6921E;
-	text-align: center;
+.menu-droite-1,
+.menu-droite-2 {
+	width: 85%;
+	margin-left: 6%;
+	border: 1px solid #dadbdb;
+	background-color: #ffffff;
 }
 
-#panel-2>div>div>ul>li{
-	padding-top: 1%;
-	padding-bottom: 1%;
+.menu-gauche {
+	border: 1px solid #dadbdb;
+	background-color: #ffffff;
+}
+
+.menu-gauche a,
+.menu-droite-1 a,
+.menu-droite-2 a,
+.header a {
+	color: black;
+	font-color: black;
+}
+
+.menu-gauche a:link,
+.menu-droite-1 a:link,
+.menu-droite-2 a:link,
+.header a:link {
+	text-decoration: none;
+}
+
+.menu-gauche li,
+.menu-droite-1 li,
+.menu-droite-2 li {
+	padding-top: 4%;
+	padding-right: 10%;
+	padding-bottom: 4%;
+	list-style-type: none;
 }
 
 .name-logo {
-	font-family: 'Huruf Miranti'; 
+	font-family: 'Huruf Miranti';
+	font-size: 240%;
+}
+
+.nav-pills > .active>a>.badge {
+	color: #231F20;
+}
+
+.nav-pills > li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+	background-color: #F6921E;
+}
+
+.nav-tabs > li>a {
+	text-align: center;
+	color: #F6921E;
+}
+
+.nom-etudiant {
+	margin-top: 6.5%;
+}
+
+.nomEtu,
+.nomBloc {
+	font-weight: bold;
+	color: #f6921e;
+}
+
+.publication {
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border: 1px solid #dadbdb;
+	background-color: #ffffff;
 }
 
 .row-logo {
-	margin-top: -5%;	
+	margin-top: -5%;
 }
 
-.jumbotron {
-	padding-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 0; 
-}
-h3{
-	padding-bottom : 5%;
-}
-	
-/* CSS Header */
-.header {
-	background-color : #f6921e	;
-
+.situation {
+	margin-bottom: 15px;
 }
 
-.name-logo {	
-	font-family : 'Huruf Miranti'; 
-	font-size : 240%;
+.small-link {
+	font-size: 12px;
+	color: #000000;
 }
 
-.img-logo{
-	width : 15%;
-	height : 15%; 
-	padding-bottom : 4%;
-	padding-top : 4%;
+.suggestion-titre {
+	margin-bottom: 4%;
+	margin-left: 6%;
 }
 
-.nom-etudiant{
-	margin-top : 6.5%;
-
+.taille {
+	font-size: 150%;
 }
 
-.diplomePrincipal{
-	font-weight : bold;
-
-}
-
-.situation{
-	margin-bottom : 15px;
-
-}
-
-
-#barre-recherche{
-	margin-left : 7.9%;
-	margin-top : 0.4%;
-}
-
-.couleurgly{
-	color : black;
-	font-size : 120%;
-}
-
-.taille{
-	font-size : 150%;
-}
-
-/*CSS menu-gauche*/
-.gly-menu{
-	color : black;
-	font-size : 120%;
-	float : right;
-}
-
-.menu-gauche{
-	border : 1px solid #dadbdb;
-	/* margin-left : 10%;
-	width : 85%;	 */
-	background-color :#ffffff;
-}
-
-.menu-gauche li, .menu-droite-1 li, .menu-droite-2 li{
-	padding-right : 10%;
-	padding-top : 4%;
-	padding-bottom : 4%;
-	list-style-type: none;
-}
-/*
-.menu-gauche li:hover{
-	background-color : #A2B5BF;
-}
-*/
-
-.menu-gauche a:link, .menu-droite-1 a:link, .menu-droite-2 a:link, .header a:link{
-	text-decoration:none; 
-}
-
-.menu-gauche a, .menu-droite-1 a, .menu-droite-2 a, .header a {	
-	font-color : black;
-	color : black;
-}
-
-/*CSS menu-droite*/
-
-.suggestion-titre{
-	margin-left : 6%; 
-	margin-bottom : 4%;
-}
-
-.menu-droite{
-	margin-left: 40px;
-}
-
-
-.menu-droite-1{
-	margin-bottom : 20%;
-}
-
-.menu-droite-1, .menu-droite-2{
-	border : 1px solid #dadbdb;
-	margin-left : 6%;
-	width : 85%;	
-	background-color : #ffffff;
-}
-/*CSS Footer*/
-footer{
-	width : 100%;
-	position:absolute;
-	bottom:0;	
-}
-/*CSS accueilBody*/
-
-.article{
-	background-color : #ffffff;
-	border : 1px solid #dadbdb;
-	margin-top : 1%;
-	padding-top: 1%;
-}
-
-.bloc{
-	background-color : #ffffff;
-	border : 1px solid #dadbdb;
-	margin-top : 1%;
-	padding-top: 1%;
-}
-
-.publication{
-	padding-top: 1%;
-	padding-bottom: 1%;
-	background-color : #ffffff;
-	border : 1px solid #dadbdb;
-}
-
-.img-responsive2{
-	width: 25px;
-    height: 25px;
-}
-
-.glyphicon-map-marker{
-    font-size: 2em;
-}
-.accueilBody li{
-	list-style-type: none;
-}
-.nomEtu{
-	color : #f6921e;	
-    font-weight: bold;
-}
-
-.nomBloc{
-	color : #f6921e;	
-    font-weight: bold;
-}
-
-.publierArt{
-    font-weight: bold;
-}
-.inputForm{
-	width : 100%;
-	margin-bottom:1%;
-	margin-top:0.5%;
-}
-
-.inputBtn{
-	
-}
-.formPubli{
-	padding-right : 4%;
-}
-/*CSS Inscription*/
-
-.entete-inscrip{
-background-color : #F1F2F1; 
-width : 100%;
-
-}
-
-.form-inscrip{
-background-color : #f6921e;
-padding-top : 2.5%;
-padding-bottom : 5%;
-}
-
-/*CSS Panel Administration Inscription*/
-textarea{
-	width: inherit;
+.vertical-center-row {
+	display: table-cell;
+	vertical-align: middle;
 }

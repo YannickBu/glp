@@ -3,6 +3,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.GregorianCalendar" %>
 <body class="body_without_menu">
 	<div class="entete-inscrip">
 		<div class="row">
@@ -85,8 +88,17 @@
 					d'obtention du diplôme : <label class="label2 taille">*</label>
 				</label>
 				<div class="input col-md-4">
-					<form:input path="anneeDiplome" type="text" id="selectAnnee"
-						class="form-control" placeholder="Ex: 2012"></form:input>
+					<form:select path="anneeDiplome" id="selectAnnee"
+						class="form-control">
+						<%
+						Calendar calendar =new GregorianCalendar();
+						calendar.setTime(new Date());
+						int annee =calendar.get(Calendar.YEAR);
+						for(int i =annee;i>1950;i--){
+							out.println("<option value='"+i+"'>"+i+"</option>");
+						}
+						%>
+						</form:select>
 					<form:errors path="anneeDiplome" />
 				</div>
 			</div>
