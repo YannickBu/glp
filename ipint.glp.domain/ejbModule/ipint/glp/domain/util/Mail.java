@@ -79,8 +79,9 @@ public class Mail {
 		props.put("mail.smtp.socketFactory.port", "587");
 		props.put("mail.smtp.socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.socketFactory.fallback", "false");
-		props.put("mail.debug", "true");
+		//Sur le serveur de prod mettre a false.
+		props.put("mail.smtp.socketFactory.fallback", "true");
+		//props.put("mail.debug", "true");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
 		props.put("mail.transport.protocol", "smtp");
@@ -104,11 +105,9 @@ public class Mail {
 			message.setSubject("L1nk - votre demande d'inscription à été traitée");
 			message.setText(messageMail);
 
-			System.out.println("Sending");
 			
 			Transport.send(message);
 
-			System.out.println("Done");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
