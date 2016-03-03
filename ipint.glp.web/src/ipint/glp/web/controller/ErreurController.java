@@ -20,4 +20,9 @@ public class ErreurController {
 	public ModelAndView constructionGET() {
 		return new ModelAndView("construction");
 	}
+	
+	@RequestMapping(value = "/forbidden")
+	public ModelAndView forbiddenGet() {
+		return new ModelAndView("redirect:/publication");
+	}
 }

@@ -320,7 +320,7 @@ public class UtilisateurImpl implements UtilisateurService {
 
 		UtilisateurGroupes utilGrp = new UtilisateurGroupes();
 		utilGrp.setEmail(utilisateur.getEmail());
-		utilGrp.setGroupe(Statut.DIPLOME.name().toLowerCase());
+		utilGrp.setGroupe(utilisateur.getStatut().name().toLowerCase());
 		em.persist(utilGrp);
 
 		em.persist(utilisateur);
