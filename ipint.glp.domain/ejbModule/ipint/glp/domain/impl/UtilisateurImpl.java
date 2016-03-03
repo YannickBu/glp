@@ -19,6 +19,7 @@ import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.exception.ProfilInconnuException;
+import ipint.glp.api.exception.UtilisateurExistantException;
 import ipint.glp.api.exception.UtilisateurInconnuException;
 import ipint.glp.api.itf.UtilisateurService;
 import ipint.glp.domain.entity.Competence;
@@ -28,6 +29,7 @@ import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurGroupes;
+import ipint.glp.domain.util.GenererMotDePasse;
 import ipint.glp.domain.util.MappingToDTO;
 
 @Stateless
@@ -51,25 +53,40 @@ public class UtilisateurImpl implements UtilisateurService {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO est null");
 		}
 		if (utilisateurDTO.getEmail() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas d'email");
+			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas d'email");
 		}
 		if (utilisateurDTO.getStatut() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de statut");
+			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de statut");
 		}
 		if (utilisateurDTO.getPassword() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de password");
+			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de password");
 		}
 		if (utilisateurDTO.getNom() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de nom");
+			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de nom");
 		}
 		if (utilisateurDTO.getPrenom() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO n'a pas de prenom");
+			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de prenom");
 		}
 		if (utilisateurDTO.getGroupePrincipal() == null) {
 			throw new InformationManquanteException(
 					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de groupe principal");
 		}
 
+		//Gestion utilisateur existant
+		try{
+			if(trouver(utilisateurDTO)!=null){
+				throw new UtilisateurExistantException("UtilisateurImpl.creer : "+ utilisateurDTO.toString() + " existe déjà");
+			}
+		}catch(UtilisateurInconnuException e){
+			
+		}
+		
+		//Lorsque lutilisateur vient du CAS, il faut lui generer un mdp
+		if("".equals(utilisateurDTO.getPassword())){
+			GenererMotDePasse passFacto = new GenererMotDePasse(10);
+			utilisateurDTO.setPassword(passFacto.nextString());
+		}
+		
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setEmail(utilisateurDTO.getEmail());
 		utilisateur.setNom(utilisateurDTO.getNom());

@@ -2,7 +2,8 @@ package ipint.glp.api.DTO.enumType;
 
 public enum Statut {
 
-	DIPLOME("diplome");
+	DIPLOME("diplome"), ETUDIANT("etudiant"), PERSONNEL("personnel");
+	
 
 	private String name = "";
 
