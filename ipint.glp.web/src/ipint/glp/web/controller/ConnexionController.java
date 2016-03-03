@@ -1,10 +1,12 @@
 package ipint.glp.web.controller;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.jasig.cas.client.validation.Assertion;
 import org.springframework.stereotype.Controller;
@@ -113,9 +115,15 @@ public class ConnexionController {
 	//	}
 
 	@RequestMapping(value="/deconnexion")
-	public ModelAndView deconnexion(HttpServletRequest request) throws ServletException {
+	public String deconnexion(HttpServletRequest request) throws ServletException {
+		Assertion assertion = (Assertion) request.getSession().getAttribute("_const_cas_assertion_");
 		request.logout();
-		return new ModelAndView("redirect:/publication");
+		if(assertion != null){
+			request.getSession().setAttribute("_const_cas_assertion_", null);
+			return "redirect:https://sso-cas.univ-lille1.fr/logout?service=http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/";
+		}
+		System.out.println("pass3");
+		return "redirect:/publication";
 
 	}
 }
