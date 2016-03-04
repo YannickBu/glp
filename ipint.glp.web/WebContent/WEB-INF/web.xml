@@ -62,9 +62,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>not use</web-resource-name>
-			<url-pattern>/profil/</url-pattern>
 			<url-pattern>/profil/*/</url-pattern>
-			<url-pattern>/profil</url-pattern>
 			<url-pattern>/profil/*</url-pattern>
 			<url-pattern>/publication/</url-pattern>
 			<url-pattern>/publication/*/</url-pattern>
@@ -78,6 +76,28 @@
 			<url-pattern>/deconnexion/*/</url-pattern>
 			<url-pattern>/deconnexion</url-pattern>
 			<url-pattern>/deconnexion/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		
+		<auth-constraint>
+			<role-name>diplome</role-name>
+			<role-name>personnel</role-name>
+			<role-name>etudiant</role-name>
+		</auth-constraint>
+		
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>not use</web-resource-name>
+			<url-pattern>/profil/</url-pattern>
+			<url-pattern>/profil</url-pattern>
+			<url-pattern>/profil/modifprofil/</url-pattern>
+			<url-pattern>/profil/modifprofil</url-pattern>
 			<http-method>POST</http-method>
 			<http-method>GET</http-method>
 		</web-resource-collection>
@@ -104,14 +124,22 @@
 		<role-name>diplome</role-name>
 	</security-role>
 	
-<!-- 	<error-page> -->
-<!-- 		<error-code>500</error-code> -->
-<!-- 		<location>/erreur</location> -->
-<!-- 	</error-page> -->
+	<security-role>
+		<role-name>personnel</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>etudiant</role-name>
+	</security-role>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/erreur</location>
+	</error-page>
 	
 	<error-page>
 		<error-code>403</error-code>
-		<location>/erreur</location>
+		<location>/forbidden</location>
 	</error-page>
 	
 	<error-page>
@@ -127,60 +155,72 @@
 	
 	<!-- SSO CAS -->
 		
+	<filter>   
+        <filter-name>CAS Single Sign Out Filter</filter-name>   
+        <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+    </filter>
+    <filter-mapping>   
+        <filter-name>CAS Single Sign Out Filter</filter-name>   
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <listener>    
+        <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+    </listener>
+		
 	
-<!--     <filter> -->
-<!--         <filter-name>CAS Authentication Filter</filter-name> -->
-<!--         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class> -->
-<!--         <init-param> -->
-<!--             <param-name>casServerLoginUrl</param-name> -->
-<!--             <param-value>https://sso-cas.univ-lille1.fr/login</param-value> -->
-<!--         </init-param> -->
-<!--         <init-param> -->
-<!--             <param-name>serverName</param-name> -->
-<!--             <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value> -->
-<!--         </init-param> -->
-<!--     </filter> -->
+    <filter>
+        <filter-name>CAS Authentication Filter</filter-name>
+        <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>casServerLoginUrl</param-name>
+            <param-value>https://sso-cas.univ-lille1.fr/login</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value>
+        </init-param>
+    </filter>
 
-<!--     <filter> -->
-<!--         <filter-name>CAS Validation Filter</filter-name> -->
-<!--         <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class> -->
-<!--         <init-param> -->
-<!--             <param-name>casServerUrlPrefix</param-name> -->
-<!--             <param-value>https://sso-cas.univ-lille1.fr</param-value> -->
-<!--         </init-param> -->
-<!--         <init-param> -->
-<!--             <param-name>serverName</param-name> -->
-<!--             <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value> -->
-<!--         </init-param> -->
-<!--         <init-param> -->
-<!--             <param-name>redirectAfterValidation</param-name> -->
-<!--             <param-value>true</param-value> -->
-<!--         </init-param> -->
-<!--         <init-param> -->
-<!--             <param-name>tolerance</param-name> -->
-<!--             <param-value>5000</param-value> -->
-<!--         </init-param> -->
-<!--     </filter> -->
+    <filter>
+        <filter-name>CAS Validation Filter</filter-name>
+        <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+        <init-param>
+            <param-name>casServerUrlPrefix</param-name>
+            <param-value>https://sso-cas.univ-lille1.fr</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>redirectAfterValidation</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>tolerance</param-name>
+            <param-value>5000</param-value>
+        </init-param>
+    </filter>
 
-<!--     <filter> -->
-<!--         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name> -->
-<!--         <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class> -->
-<!--     </filter> -->
+    <filter>
+        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+        <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+    </filter>
 
-<!--     <filter-mapping> -->
-<!--         <filter-name>CAS Validation Filter</filter-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </filter-mapping> -->
+    <filter-mapping>
+        <filter-name>CAS Validation Filter</filter-name>
+        <url-pattern>/cas</url-pattern>
+    </filter-mapping>
 
-<!--     <filter-mapping> -->
-<!--         <filter-name>CAS Authentication Filter</filter-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </filter-mapping> -->
+    <filter-mapping>
+        <filter-name>CAS Authentication Filter</filter-name>
+        <url-pattern>/cas</url-pattern>
+    </filter-mapping>
 
-<!--     <filter-mapping> -->
-<!--         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </filter-mapping> -->
+    <filter-mapping>
+        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+        <url-pattern>/cas</url-pattern>
+    </filter-mapping>
 	
 	
 	
