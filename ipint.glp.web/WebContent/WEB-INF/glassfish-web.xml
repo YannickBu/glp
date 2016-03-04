@@ -7,4 +7,12 @@
     	<role-name>diplome</role-name>
     	<group-name>diplome</group-name>
     </security-role-mapping>
+    <security-role-mapping>
+    	<role-name>personnel</role-name>
+    	<group-name>personnel</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+    	<role-name>etudiant</role-name>
+    	<group-name>etudiant</group-name>
+    </security-role-mapping>
 </glassfish-web-app>
