@@ -1,12 +1,10 @@
 package ipint.glp.web.controller;
 
-import java.io.IOException;
 import java.util.Iterator;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.jasig.cas.client.validation.Assertion;
 import org.springframework.stereotype.Controller;
@@ -25,6 +23,10 @@ import ipint.glp.api.itf.UtilisateurService;
 @Controller
 public class ConnexionController {
 
+	public static final String ATTR_CAS = "_const_cas_assertion_";
+	public static final String URL_CAS_LOGOUT = "https://sso-cas.univ-lille1.fr/logout?service=";
+	public static final String URL_SITE = "http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/";
+	
 	@Inject
 	private UtilisateurService utilServ;
 	@Inject
@@ -32,7 +34,7 @@ public class ConnexionController {
 	
 	@RequestMapping(value="/cas", method=RequestMethod.GET)
 	public ModelAndView connexionCAS(HttpServletRequest request) {
-		Assertion assertion = (Assertion) request.getSession().getAttribute("_const_cas_assertion_"); 
+		Assertion assertion = (Assertion) request.getSession().getAttribute(ATTR_CAS); 
 		
 		//Gestion CAS
 		if(assertion != null){
@@ -64,12 +66,7 @@ public class ConnexionController {
 				gdto.setIdGroupe(0);
 				try {
 					gdto = groupeServ.trouver(gdto);
-				} catch (MetierException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				utilSeConnectant.setGroupePrincipal(gdto);
-				try {
+					utilSeConnectant.setGroupePrincipal(gdto);
 					utilSeConnectant = utilServ.creer(utilSeConnectant);
 				} catch (MetierException me) {
 					return new ModelAndView("redirect:/erreur");
@@ -116,13 +113,12 @@ public class ConnexionController {
 
 	@RequestMapping(value="/deconnexion")
 	public String deconnexion(HttpServletRequest request) throws ServletException {
-		Assertion assertion = (Assertion) request.getSession().getAttribute("_const_cas_assertion_");
+		Assertion assertion = (Assertion) request.getSession().getAttribute(ATTR_CAS);
 		request.logout();
 		if(assertion != null){
-			request.getSession().setAttribute("_const_cas_assertion_", null);
-			return "redirect:https://sso-cas.univ-lille1.fr/logout?service=http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/";
+			request.getSession().setAttribute(ATTR_CAS, null);
+			return "redirect:" + URL_CAS_LOGOUT + URL_SITE;
 		}
-		System.out.println("pass3");
 		return "redirect:/publication";
 
 	}
