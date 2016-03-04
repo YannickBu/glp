@@ -3,12 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-
+         
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>urlCasLogout</param-name>
+		<param-value>https://sso-cas.univ-lille1.fr/logout?service=</param-value>
+	</context-param>
+	<context-param>
+		<param-name>urlSite</param-name>
+		<param-value>http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -58,6 +66,7 @@
 		<url-pattern>/connexion</url-pattern>
 	</servlet-mapping> -->
 	
+	<!-- Droits généraux -->
 	
 	<security-constraint>
 		<web-resource-collection>
@@ -91,6 +100,8 @@
 		</user-data-constraint>
 	</security-constraint>
 	
+	<!-- Droits profil et modif profil -->
+	
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>not use</web-resource-name>
@@ -104,6 +115,26 @@
 		
 		<auth-constraint>
 			<role-name>diplome</role-name>
+		</auth-constraint>
+		
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<!-- Droits moderation -->
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>not use</web-resource-name>
+			<url-pattern>/moderation/</url-pattern>
+			<url-pattern>/moderation</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		
+		<auth-constraint>
+			<role-name>moderateur</role-name>
 		</auth-constraint>
 		
 		<user-data-constraint>
@@ -130,6 +161,10 @@
 	
 	<security-role>
 		<role-name>etudiant</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>moderateur</role-name>
 	</security-role>
 	
 	<error-page>
