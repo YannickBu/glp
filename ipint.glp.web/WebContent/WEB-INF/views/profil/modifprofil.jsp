@@ -387,7 +387,7 @@ function varExp() {
 				<div class="col-md-10">
 					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 					<div class="col-md-12 situation form-group ">
-						<label for="InputDiplomePrincipal"> Situation : </label>
+						<label for="InputDiplomePrincipal"> Situation professionnelle actuelle </label>
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
