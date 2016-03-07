@@ -146,7 +146,7 @@ public class ModerationController {
 					utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
 				}
 				else{
-					return new ModelAndView("redirect:/panelInscription/{id}");
+					return new ModelAndView("redirect:/moderation/panelInscription/{id}");
 				}
 			} catch (MetierException e) {
 				logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.refuser renvoie : " + e.getMessage());
@@ -165,10 +165,10 @@ public class ModerationController {
 		model.addAttribute("utilisateurTmp", uDTO);
 
 		if(list!=null && !list.isEmpty()){
-			return new ModelAndView("redirect:/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
+			return new ModelAndView("redirect:/moderation/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
 		}
 		else {
-			return new ModelAndView("redirect:/panelInscription");
+			return new ModelAndView("redirect:/moderation/panelInscription/");
 		}
 	}
 }

@@ -37,7 +37,7 @@
 				<h4 class="modal-title">Echec</h4>
 			</div>
 			<div class="modal-body">
-				<p>Le groupe n'a pas été créé suite à un erreur.</p>
+				<p>Le groupe n'a pas été créé suite à une erreur.</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="Close" class="btn btn-default"
@@ -57,12 +57,17 @@
 		</div>
 	</div>
 </div>
+<span id="hiddenUrl" style="display : none">${pageContext.servletContext.contextPath}</span>
 <script>
 var response = document.getElementById("hiddenResponse").innerHTML;
+var url = document.getElementById("hiddenUrl").innerHTML;
+url = url + "/administration";
 if(response=="SUCCESS"){
-	$('#myModal1').modal('toggle')
+	$('#myModal1').modal('toggle');
+	window.history.replaceState('administration','L1NK',url);
 }
 if(response=="FAIL"){
-	$('#myModal2').modal('toggle')
+	$('#myModal2').modal('toggle');
+	window.history.replaceState('administration','L1NK',url);
 }
 </script>
