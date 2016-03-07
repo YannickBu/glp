@@ -189,12 +189,6 @@
 				<div class="row">
 					<a class="col-md-11"
 						style="text-align: right; margin-left: 1.5%; color: white; text-decoration: underline; margin-bottom: 5%"
-						href="panelInscription/">Panel d'administration</a>
-					<div class="col-md-1"></div>
-				</div>
-				<div class="row">
-					<a class="col-md-11"
-						style="text-align: right; margin-left: 1.5%; color: white; text-decoration: underline; margin-bottom: 5%"
 						href="${pageContext.servletContext.contextPath}/cas">Connexion
 						CAS (bouton temporaire)</a>
 					<div class="col-md-1"></div>
