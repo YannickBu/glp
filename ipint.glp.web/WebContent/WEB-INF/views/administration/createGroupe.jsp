@@ -33,27 +33,25 @@
 					<div class="form-group">
 						<label for="inputModerateur" class="control-label">Modérateur * : </label>
 						<div class="">
-							<form:select path="utilisateurResponsable" class="form-control">
+							<form:select path="utilisateurResponsable.idUtilisateur" class="form-control">
 							  <option disabled selected>Choissiez un modérateur</option>
-							  <option>2</option>
-							  <option>3</option>
-							  <option>4</option>
-							  <option>5</option>
+							 <c:forEach var="utilisateurResponsable" items="${utilisateurResponsables}">
+							 	<option value="${utilisateurResponsable.idUtilisateur}">${utilisateurResponsable.prenom}&nbsp;${utilisateurResponsable.nom}</option>
+							 </c:forEach>
 							</form:select>
-							<form:errors path="utilisateurResponsable" />
+							<form:errors path="utilisateurResponsable.idUtilisateur" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputModerateur" class="control-label">Animateurs * : </label>
+						<label for="inputAnimateur" class="control-label">Animateurs * : </label>
 						<div class="">
-							<form:select multiple="true" path="utilisateurResponsable" class="form-control">
+							<form:select multiple="true" path="animateurs." class="form-control">
 							  <option disabled>Choissiez un ou des animateurs</option>
-							  <option>2</option>
-							  <option>3</option>
-							  <option>4</option>
-							  <option>5</option>
+							 <c:forEach var="animateur" items="${animateurs}">
+							 	<option value="${animateur.idUtilisateur}">${animateur.prenom}&nbsp;${animateur.nom}</option>
+							 </c:forEach>
 							</form:select>
-							<form:errors path="utilisateurResponsable" />
+							<form:errors path="animateurs" />
 						</div>
 					</div>
 					<button type="submit" class="btn btn-default ">Creer le groupe</button>
