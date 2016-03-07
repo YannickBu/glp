@@ -16,7 +16,8 @@
 	</context-param>
 	<context-param>
 		<param-name>urlSite</param-name>
-		<param-value>http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/</param-value>
+		<param-value>http://172.28.1.165:8080/ipint.glp.web/</param-value>
+<!-- 		<param-value>http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/</param-value> -->
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -90,9 +91,7 @@
 		</web-resource-collection>
 		
 		<auth-constraint>
-			<role-name>diplome</role-name>
-			<role-name>personnel</role-name>
-			<role-name>etudiant</role-name>
+			<role-name>*</role-name>
 		</auth-constraint>
 		
 		<user-data-constraint>
@@ -127,8 +126,9 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>not use</web-resource-name>
-			<url-pattern>/moderation/</url-pattern>
 			<url-pattern>/moderation</url-pattern>
+			<url-pattern>/moderation/</url-pattern>
+			<url-pattern>/moderation/*</url-pattern>
 			<http-method>POST</http-method>
 			<http-method>GET</http-method>
 		</web-resource-collection>
@@ -142,11 +142,52 @@
 		</user-data-constraint>
 	</security-constraint>
 	
+	<!-- Droits administration -->
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>not use</web-resource-name>
+			<url-pattern>/administration</url-pattern>
+			<url-pattern>/administration/</url-pattern>
+			<url-pattern>/administration/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		
+		<auth-constraint>
+			<role-name>administrateur</role-name>
+		</auth-constraint>
+		
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<!-- Droits animation -->
+	
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>not use</web-resource-name> -->
+<!-- 			<url-pattern>/panelAdministration/</url-pattern> -->
+<!-- 			<url-pattern>/panelAdministration</url-pattern> -->
+<!-- 			<http-method>POST</http-method> -->
+<!-- 			<http-method>GET</http-method> -->
+<!-- 		</web-resource-collection> -->
+		
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>animateur</role-name> -->
+<!-- 		</auth-constraint> -->
+		
+<!-- 		<user-data-constraint> -->
+<!-- 			<transport-guarantee>NONE</transport-guarantee> -->
+<!-- 		</user-data-constraint> -->
+<!-- 	</security-constraint> -->
+	
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>l1nk_realm</realm-name>
 		<form-login-config>
-			<form-login-page>/connexion</form-login-page>
+			<form-login-page>/toConnexion</form-login-page>
 			<form-error-page>/errorConnexion</form-error-page>
 		</form-login-config>
 	</login-config>
@@ -165,6 +206,14 @@
 	
 	<security-role>
 		<role-name>moderateur</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>administrateur</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>animateur</role-name>
 	</security-role>
 	
 	<error-page>
@@ -212,7 +261,8 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value>
+            <param-value>172.28.1.165:8080/</param-value>
+<!--             <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value> -->
         </init-param>
     </filter>
 
@@ -225,7 +275,8 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value>
+            <param-value>172.28.1.165:8080/</param-value>
+<!--             <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value> -->
         </init-param>
         <init-param>
             <param-name>redirectAfterValidation</param-name>
