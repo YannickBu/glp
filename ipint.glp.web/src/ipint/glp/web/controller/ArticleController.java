@@ -76,10 +76,16 @@ public class ArticleController {
 
 		ArticleDTO articleDto = new ArticleDTO();
 		articleDto.setContenu(article.getContenu());
+		articleDto.setTitre(article.getTitre());
 		Calendar cal = Calendar.getInstance();
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
-		articleDto.setGroupe(uDTO.getGroupePrincipal());
+		System.out.println("///////////// Id :" + article.getGroupe().getIdGroupe());
+		GroupeDTO grp = new GroupeDTO();
+		grp.setIdGroupe(article.getGroupe().getIdGroupe());
+		grp = gs.trouver(grp);
+		articleDto.setGroupe(grp);
+		System.out.println("***************Groupe="+grp.getNomGroupe());
 		try {
 			articleDto = as.creer(articleDto);
 		} catch (MetierException e) {
