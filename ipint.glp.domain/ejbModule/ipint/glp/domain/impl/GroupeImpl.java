@@ -129,37 +129,37 @@ public class GroupeImpl implements GroupeService {
 		//		}
 		groupe.setUtilisateurs(utilisateurs);
 
-		//Animateurs du groupe AUCUN A LA CREATION
+		//Animateurs du groupe
 
 		List<Utilisateur> animateurs = new ArrayList<>();
-		//		for(UtilisateurDTO utilisateurDto : obj.getAnimateurs()){
-		//			Utilisateur u = null;
-		//			if (utilisateurDto.getIdUtilisateur() != null) {
-		//				u = em.find(Utilisateur.class, utilisateurDto.getIdUtilisateur());
-		//				if(u==null){
-		//					throw new UtilisateurInconnuException("GroupeImpl.creer : "+utilisateurDto.toString()+" n'existe pas pour cet id");
-		//				}
-		//				animateurs.add(u);
-		//			} else if (utilisateurDto.getEmail() != null) {
-		//				q = em.createQuery(
-		//						"select u from Utilisateur u where u.email = '" + utilisateurDto.getEmail() + "'");
-		//				try{
-		//					u = (Utilisateur) q.getSingleResult();	
-		//				}catch(NoResultException e){
-		//					throw new UtilisateurInconnuException("GroupeImpl.creer : "+utilisateurDto.toString()+" n'existe pas pour cet email");
-		//				}
-		//				animateurs.add(u);
-		//			}
-		//			if(u!=null){
-		//				if(u.getGroupesAnimes()==null){
-		//					u.setGroupesAnimes(new ArrayList<>());
-		//				}
-		//				if(!u.getGroupesAnimes().contains(groupe)){
-		//					u.getGroupesAnimes().add(groupe);
-		//					em.persist(u);
-		//				}
-		//			}
-		//		}
+				for(UtilisateurDTO utilisateurDto : obj.getAnimateurs()){
+					Utilisateur u = null;
+					if (utilisateurDto.getIdUtilisateur() != null) {
+						u = em.find(Utilisateur.class, utilisateurDto.getIdUtilisateur());
+						if(u==null){
+							throw new UtilisateurInconnuException("GroupeImpl.creer : "+utilisateurDto.toString()+" n'existe pas pour cet id");
+						}
+						animateurs.add(u);
+					} else if (utilisateurDto.getEmail() != null) {
+						q = em.createQuery(
+								"select u from Utilisateur u where u.email = '" + utilisateurDto.getEmail() + "'");
+						try{
+							u = (Utilisateur) q.getSingleResult();	
+						}catch(NoResultException e){
+							throw new UtilisateurInconnuException("GroupeImpl.creer : "+utilisateurDto.toString()+" n'existe pas pour cet email");
+						}
+						animateurs.add(u);
+					}
+					if(u!=null){
+						if(u.getGroupesAnimes()==null){
+							u.setGroupesAnimes(new ArrayList<>());
+						}
+						if(!u.getGroupesAnimes().contains(groupe)){
+							u.getGroupesAnimes().add(groupe);
+							em.persist(u);
+						}
+					}
+				}
 		groupe.setAnimateurs(animateurs);
 
 		em.persist(groupe);

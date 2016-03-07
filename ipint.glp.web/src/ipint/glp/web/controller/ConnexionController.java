@@ -24,8 +24,6 @@ import ipint.glp.api.itf.UtilisateurService;
 public class ConnexionController {
 
 	public static final String ATTR_CAS = "_const_cas_assertion_";
-	public static final String URL_CAS_LOGOUT = "https://sso-cas.univ-lille1.fr/logout?service=";
-	public static final String URL_SITE = "http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/";
 	
 	@Inject
 	private UtilisateurService utilServ;
@@ -81,16 +79,30 @@ public class ConnexionController {
 				return new ModelAndView("redirect:/erreur");
 			}
 		}
-		return new ModelAndView("redirect:/publication");
+		return new ModelAndView("redirect:/connexion");
 	}
 
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
 	public ModelAndView loginGet(HttpServletRequest request) {
+		if(request.getUserPrincipal() != null){
+			if(request.isUserInRole("administrateur")){
+				return new ModelAndView("redirect:/administration");
+			}else if(request.isUserInRole("moderateur")){
+				return new ModelAndView("redirect:/moderation");
+			}else{
+				return new ModelAndView("redirect:/publication");
+			}
+		}
 		return new ModelAndView("connexion");
 	}
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
 	public ModelAndView connexionPost(HttpServletRequest request) {
 		return new ModelAndView("profil");
+	}
+	
+	@RequestMapping(value="/toConnexion", method=RequestMethod.GET)
+	public ModelAndView toConnexion(HttpServletRequest request) {
+		return new ModelAndView("redirect:/connexion");
 	}
 
 	@RequestMapping(value="/errorConnexion", method=RequestMethod.POST)
@@ -117,7 +129,8 @@ public class ConnexionController {
 		request.logout();
 		if(assertion != null){
 			request.getSession().setAttribute(ATTR_CAS, null);
-			return "redirect:" + URL_CAS_LOGOUT + URL_SITE;
+			return "redirect:" + request.getServletContext().getInitParameter("urlCasLogout")
+					+ request.getServletContext().getInitParameter("urlSite");
 		}
 		return "redirect:/publication";
 

@@ -45,7 +45,7 @@ public class ModerationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/moderation/panelInscription/{id}", method = RequestMethod.GET)
 	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
@@ -75,7 +75,7 @@ public class ModerationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/panelInscription", method = RequestMethod.GET)
+	@RequestMapping(value = {"/moderation/panelInscription","/moderation"}, method = RequestMethod.GET)
 	public ModelAndView administrationGET(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		List<UtilisateurEnAttenteDTO> list;
@@ -97,7 +97,7 @@ public class ModerationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/panelInscription", method = RequestMethod.POST)
+	@RequestMapping(value = {"/moderation/panelInscription","/moderation"}, method = RequestMethod.POST)
 	public ModelAndView administrationPOST(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		List<UtilisateurEnAttenteDTO> list;
@@ -122,7 +122,7 @@ public class ModerationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/panelInscription/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/moderation/panelInscription/{id}", method = RequestMethod.POST)
 	public ModelAndView profilPost(@RequestParam("action") String action,@RequestParam("optionalMessage") String optionalMessage, @PathVariable String id,
 			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model){
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
@@ -146,7 +146,7 @@ public class ModerationController {
 					utilisateurEnAttenteService.refuser(uDTO,optionalMessage);
 				}
 				else{
-					return new ModelAndView("redirect:/panelInscription/{id}");
+					return new ModelAndView("redirect:/moderation/panelInscription/{id}");
 				}
 			} catch (MetierException e) {
 				logger.severe("Erreur acces panelInscription/id POST - utilisateurEnAttenteService.refuser renvoie : " + e.getMessage());
@@ -165,10 +165,10 @@ public class ModerationController {
 		model.addAttribute("utilisateurTmp", uDTO);
 
 		if(list!=null && !list.isEmpty()){
-			return new ModelAndView("redirect:/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
+			return new ModelAndView("redirect:/moderation/panelInscription/" + list.get(0).getIdUtilisateurEnAttente());
 		}
 		else {
-			return new ModelAndView("redirect:/panelInscription");
+			return new ModelAndView("redirect:/moderation/panelInscription/");
 		}
 	}
 }

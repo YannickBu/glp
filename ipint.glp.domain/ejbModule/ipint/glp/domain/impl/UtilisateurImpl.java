@@ -567,4 +567,22 @@ public class UtilisateurImpl implements UtilisateurService {
 		// TODO Auto-generated method stub
 
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UtilisateurDTO> listerPersonnel() throws MetierException {
+		Query q;
+		List<Utilisateur> utilisateurs;
+		List<UtilisateurDTO> utilisateursDTO = new ArrayList<>();
+		Statut statut = Statut.PERSONNEL;
+		//SELECT *  FROM l1nk_plh.UTILISATEUR WHERE email IN (SELECT email from l1nk_plh.UTILISATEURGROUPES where groupe = 'personnel');
+		q = em.createQuery("select u from Utilisateur u where u.email in (select s.email from UtilisateurGroupes s where s.groupe = '"+ statut +"')");
+		utilisateurs = q.getResultList();
+		
+		for(Utilisateur utilisateur : utilisateurs){
+			utilisateursDTO.add(MappingToDTO.utilisateurToUtilisateurDTO(utilisateur));
+		}
+		
+		return utilisateursDTO;
+	}
 }

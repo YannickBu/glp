@@ -361,6 +361,27 @@ function varExp() {
 		var exp = document.getElementById('idExp'+i);  
 		exp.innerHTML = '';
 	};
+	
+	function chargeRegions(){
+		var pays = document.getElementById('selectPays');
+		var selectedPays = pays.options[pays.selectedIndex].innerHTML;
+		var res = document.getElementById('selectPays').getAttribute('data-CommandArgument').replace('[','');
+		var regions = res.replace(']','');
+		var element = document.getElementById('selectRegion');
+		if(selectedPays == 'France-F'){
+			element.disabled=false;
+			for (i = 0; i < regions.length; i++) {
+				var newOp = document.createElement("option");
+				var regionText = regions.split(',')[i];
+				newOp.text = regionText.replace(' F','');
+				newOp.value = regionText.replace(' F','');
+			    element.options.add(newOp);
+			}
+			
+		}else {
+			element.disabled=true;
+		}
+	}
 
 	$(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip(); 
@@ -387,7 +408,7 @@ function varExp() {
 				<div class="col-md-10">
 					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 					<div class="col-md-12 situation form-group ">
-						<label for="InputDiplomePrincipal"> Situation : </label>
+						<label for="InputDiplomePrincipal"> Situation professionnelle actuelle </label>
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
@@ -407,18 +428,22 @@ function varExp() {
 					<div class="col-md-6">
 
 						<label for="InputAnneeDiplomel"> Année d'obtention du
-							diplôme </label> 
-							<c:set var="TEST" value="${profil.anneeDiplome}" scope="request"/> 
-							<form:select path="profil.anneeDiplome" class="form-control" id="InputAnneDiplome">
-							<% //(Integer) request.getAttribute("yannick")).intValue()
-							Calendar calendar =new GregorianCalendar();
-							calendar.setTime(new Date());
-							int annee =calendar.get(Calendar.YEAR);
-							for(int i =annee;i>1950;i--){
-								out.println("<option value='"+i+"' "+
-								((((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil().getAnneeDiplome()==i)?"selected='true'":"")
-								+">"+i+"</option>");
-							}
+							diplôme </label>
+						<c:set var="TEST" value="${profil.anneeDiplome}" scope="request" />
+						<form:select path="profil.anneeDiplome" class="form-control"
+							id="InputAnneDiplome">
+							<%
+								//(Integer) request.getAttribute("yannick")).intValue()
+										Calendar calendar = new GregorianCalendar();
+										calendar.setTime(new Date());
+										int annee = calendar.get(Calendar.YEAR);
+										for (int i = annee; i > 1950; i--) {
+											out.println(
+													"<option value='" + i + "' "
+															+ ((((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
+																	.getAnneeDiplome() == i) ? "selected='true'" : "")
+															+ ">" + i + "</option>");
+										}
 							%>
 						</form:select>
 					</div>
@@ -474,22 +499,26 @@ function varExp() {
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneeDebut"
-												data-toggle="tooltip" title="Année de début" value="${profil.diplomes[i].anneeDebut}" type="text"
+												data-toggle="tooltip" title="Année de début"
+												value="${profil.diplomes[i].anneeDebut}" type="text"
 												class="form-control" id="InputDipDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneFin"
-												data-toggle="tooltip" title="Année de fin" value="${profil.diplomes[i].anneFin}" type="text"
+												data-toggle="tooltip" title="Année de fin"
+												value="${profil.diplomes[i].anneFin}" type="text"
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-5">
 											<form:input path="profil.diplomes[${i}].libelle"
-												data-toggle="tooltip" title="Libelle du diplome" value="${profil.diplomes[i].libelle}" type="text"
+												data-toggle="tooltip" title="Libelle du diplome"
+												value="${profil.diplomes[i].libelle}" type="text"
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
 										</div>
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].lieu"
-												data-toggle="tooltip" title="Lieu" value="${profil.diplomes[i].lieu}" type="text"
+												data-toggle="tooltip" title="Lieu"
+												value="${profil.diplomes[i].lieu}" type="text"
 												class="form-control" id="InputDipLieu" placeholder="Lieu" />
 										</div>
 										<div class="col-md-1">
@@ -520,35 +549,53 @@ function varExp() {
 													<form:input path="profil.experiences[${i}].anneeDebut"
 														value="${profil.experiences[i].anneeDebut}" type="text"
 														class="form-control" id="InputExpDebut"
-														placeholder="Début" data-toggle="tooltip" title="Année de début" />
+														placeholder="Début" data-toggle="tooltip"
+														title="Année de début" />
 												</div>
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].anneFin"
 														value="${profil.experiences[i].anneFin}" type="text"
 														class="form-control" id="InputExpAnneFin"
-														placeholder="Fin" data-toggle="tooltip" title="Année de fin"/>
+														placeholder="Fin" data-toggle="tooltip"
+														title="Année de fin" />
 												</div>
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].entreprise"
 														value="${profil.experiences[i].entreprise}" type="text"
 														class="form-control" id="InputExpEnt"
-														placeholder="Entreprise" data-toggle="tooltip" title="Entreprise" />
+														placeholder="Entreprise" data-toggle="tooltip"
+														title="Entreprise" />
+												</div>
+												<div class="col-md-2">
+													<%-- 													<form:input path="profil.experiences[${i}].pays" --%>
+													<%-- 														value="${profil.experiences[i].pays}" type="text" --%>
+													<%-- 														class="form-control" id="InputExpPays" placeholder="Pays" data-toggle="tooltip" title="Pays" /> --%>
+													<form:select path="profil.experiences[${i}].pays"
+														name="pays" id="selectPays" class="form-control"
+														onchange="chargeRegions();"
+														data-CommandArgument="${regions}" selected="selected">
+														<form:option value=""> -- Choissez le pays --</form:option>
+														<c:forEach var="paysI" items="${pays}">
+															<form:option value="">${paysI.nom}-${paysI.code}</form:option>
+														</c:forEach>
+													</form:select>
+												</div>
+												<div class="col-md-2">
+													<%-- 													<form:input path="profil.experiences[${i}].region" --%>
+													<%-- 														value="${profil.experiences[i].region}" type="text" --%>
+													<%-- 														class="form-control" id="InputExpRegion" --%>
+													<%-- 														placeholder="Région" data-toggle="tooltip" title="Région" /> --%>
+													<form:select path="profil.experiences[${i}].region"
+														name="region" class="form-control" id="selectRegion">
+														<form:option value="NONE"> -- Choissez la region --</form:option>
+														<%-- 														<form:option id="region" value=""></form:option> --%>
+													</form:select>
 												</div>
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].lieu"
 														value="${profil.experiences[i].lieu}" type="text"
-														class="form-control" id="InputExpLieu" placeholder="Ville" data-toggle="tooltip" title="Ville"/>
-												</div>
-												<div class="col-md-2">
-													<form:input path="profil.experiences[${i}].region"
-														value="${profil.experiences[i].region}" type="text"
-														class="form-control" id="InputExpRegion"
-														placeholder="Région" data-toggle="tooltip" title="Région" />
-												</div>
-												<div class="col-md-2">
-													<form:input path="profil.experiences[${i}].pays"
-														value="${profil.experiences[i].pays}" type="text"
-														class="form-control" id="InputExpPays" placeholder="Pays" data-toggle="tooltip" title="Pays" />
+														class="form-control" id="InputExpLieu" placeholder="Ville"
+														data-toggle="tooltip" title="Ville" />
 												</div>
 											</div>
 											<div class="row" style="margin-top: 1%">
@@ -556,7 +603,8 @@ function varExp() {
 													<form:input path="profil.experiences[${i}].poste"
 														value="${profil.experiences[i].poste}" type="text"
 														class="form-control" id="InputExpPoste"
-														placeholder="Poste" data-toggle="tooltip" title="Poste occupé" />
+														placeholder="Poste" data-toggle="tooltip"
+														title="Poste occupé" />
 												</div>
 											</div>
 											<div class="row" style="margin-top: 1%">
@@ -564,7 +612,8 @@ function varExp() {
 													<form:textarea path="profil.experiences[${i}].description"
 														value="${profil.experiences[i].description}"
 														type="text-area" class="form-control" id="InputExpDesc"
-														placeholder="Description de votre mission" data-toggle="tooltip" title="Description de votre mission" />
+														placeholder="Description de votre mission"
+														data-toggle="tooltip" title="Description de votre mission" />
 												</div>
 											</div>
 											<div class="row">
@@ -597,7 +646,7 @@ function varExp() {
 											<form:input path="profil.competence[${i}].libelle"
 												value="${profil.competence[i].libelle}" type="text"
 												class="form-control" id="InputDipDebut"
-												placeholder="Libelle" data-toggle="tooltip" title="Libelle"/>
+												placeholder="Libelle" data-toggle="tooltip" title="Libelle" />
 										</div>
 										<div class="col-md-2">
 											<form:select class="form-control" id="selectNoteCompetence"

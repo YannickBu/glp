@@ -1,5 +1,7 @@
 package ipint.glp.api.itf;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import ipint.glp.api.DTO.UtilisateurDTO;
@@ -47,6 +49,12 @@ public interface UtilisateurService {
 	 */
 	public void supprimer(UtilisateurDTO utilisateur) throws MetierException;
 
-	// public List<UtilisateurDTO> listerUtilisateur();
+	/**
+	 * 
+	 * Liste l'ensemble des utilisateurs ayant le statut personnel
+	 * 
+	 * @return liste du personnel
+	 */
+	public List<UtilisateurDTO> listerPersonnel() throws MetierException;
 
 }

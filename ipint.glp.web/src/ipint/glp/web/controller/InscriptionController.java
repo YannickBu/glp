@@ -49,7 +49,7 @@ public class InscriptionController extends GeneralController {
 
 
 	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
-	public String InscriptionPost(@Valid @ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,
+	public ModelAndView InscriptionPost(@Valid @ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,
 			BindingResult result, @ModelAttribute("groupes") GroupeDTO groupe, Model model) {
 		
 
@@ -59,9 +59,9 @@ public class InscriptionController extends GeneralController {
 				model.addAttribute("groupes",groupeS.lister());
 			} catch (MetierException e) {
 				logger.severe("Erreur acces inscription POST - GroupeService.lister renvoie : " + e.getMessage());
-				return "redirect:/erreur";
+				return new ModelAndView("redirect:/erreur");
 			}
-			return "inscription";
+			return new ModelAndView("inscription");
 		}
 		
 		UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
@@ -78,10 +78,10 @@ public class InscriptionController extends GeneralController {
 			utilisateurTmp = utilisateurEnAttenteService.creer(ueaDTO);
 		} catch (MetierException e) {
 			logger.severe("Erreur acces inscription POST - UtilisateurEnAttenteService.creer renvoie : " + e.getMessage());
-			return "redirect:/erreur";
+			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("utilisateurTmp", utilisateurTmp);
-		return "redirect:/connexion";
+		return new ModelAndView("connexion","createdInscription","SUCCESS");
 	}
 
 }
