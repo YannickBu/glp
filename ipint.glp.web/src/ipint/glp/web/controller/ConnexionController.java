@@ -24,8 +24,6 @@ import ipint.glp.api.itf.UtilisateurService;
 public class ConnexionController {
 
 	public static final String ATTR_CAS = "_const_cas_assertion_";
-	public static final String URL_CAS_LOGOUT = "https://sso-cas.univ-lille1.fr/logout?service=";
-	public static final String URL_SITE = "http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/";
 	
 	@Inject
 	private UtilisateurService utilServ;
@@ -117,7 +115,8 @@ public class ConnexionController {
 		request.logout();
 		if(assertion != null){
 			request.getSession().setAttribute(ATTR_CAS, null);
-			return "redirect:" + URL_CAS_LOGOUT + URL_SITE;
+			return "redirect:" + request.getServletContext().getInitParameter("urlCasLogout")
+					+ request.getServletContext().getInitParameter("urlSite");
 		}
 		return "redirect:/publication";
 
