@@ -79,16 +79,30 @@ public class ConnexionController {
 				return new ModelAndView("redirect:/erreur");
 			}
 		}
-		return new ModelAndView("redirect:/publication");
+		return new ModelAndView("redirect:/connexion");
 	}
 
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
 	public ModelAndView loginGet(HttpServletRequest request) {
+		if(request.getUserPrincipal() != null){
+			if(request.isUserInRole("administrateur")){
+				return new ModelAndView("redirect:/administration");
+			}else if(request.isUserInRole("moderateur")){
+				return new ModelAndView("redirect:/moderation");
+			}else{
+				return new ModelAndView("redirect:/publication");
+			}
+		}
 		return new ModelAndView("connexion");
 	}
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
 	public ModelAndView connexionPost(HttpServletRequest request) {
 		return new ModelAndView("profil");
+	}
+	
+	@RequestMapping(value="/toConnexion", method=RequestMethod.GET)
+	public ModelAndView toConnexion(HttpServletRequest request) {
+		return new ModelAndView("redirect:/connexion");
 	}
 
 	@RequestMapping(value="/errorConnexion", method=RequestMethod.POST)
