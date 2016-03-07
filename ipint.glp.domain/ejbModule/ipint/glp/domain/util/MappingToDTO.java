@@ -7,9 +7,12 @@ import ipint.glp.api.DTO.CompetenceDTO;
 import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
+import ipint.glp.api.DTO.PaysDTO;
 import ipint.glp.api.DTO.ProfilDTO;
+import ipint.glp.api.DTO.RegionDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
+import ipint.glp.api.DTO.VilleDTO;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.exception.UtilisateurEnAttenteInconnuException;
@@ -18,9 +21,12 @@ import ipint.glp.domain.entity.Competence;
 import ipint.glp.domain.entity.Diplome;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
+import ipint.glp.domain.entity.Pays;
 import ipint.glp.domain.entity.Profil;
+import ipint.glp.domain.entity.Region;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurEnAttente;
+import ipint.glp.domain.entity.Ville;
 
 public class MappingToDTO {
 
@@ -304,6 +310,43 @@ public class MappingToDTO {
 		}
 
 		return grpDTO;
+	}
+	
+	public static PaysDTO paysToPaysDTO(Pays pays) throws MetierException {
+		if (pays == null) {
+			return null;
+		}
+
+		PaysDTO paysDto = new PaysDTO();
+		paysDto.setCode(pays.getCode());
+		paysDto.setNom(pays.getNom());
+
+		return paysDto;
+	}
+
+	public static RegionDTO regionToRegionDTO(Region r) {
+		if (r == null) {
+			return null;
+		}
+
+		RegionDTO regionDto = new RegionDTO();
+		regionDto.setNom(r.getNom());
+		regionDto.setPays(r.getPays());
+
+		return regionDto;
+	}
+
+	public static VilleDTO villeToVilleDTO(Ville v) {
+		if (v == null) {
+			return null;
+		}
+
+		VilleDTO villeDto = new VilleDTO();
+		villeDto.setNom(v.getNom());
+		villeDto.setRegion(v.getRegion());
+		villeDto.setPays(v.getPays());
+
+		return villeDto;
 	}
 
 	private static UtilisateurDTO utilisateurToUtilisateurDTOHorsRelation(Utilisateur util) throws MetierException {
