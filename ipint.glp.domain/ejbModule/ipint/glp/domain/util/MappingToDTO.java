@@ -330,6 +330,7 @@ public class MappingToDTO {
 		ArticleDTO artDTO = new ArticleDTO();
 		artDTO.setIdArticle(art.getIdArticle());
 		artDTO.setContenu(art.getContenu());
+		artDTO.setTitre(art.getTitre());
 		artDTO.setDatePublication(art.getDatePublication());
 
 		return artDTO;

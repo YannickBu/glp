@@ -30,6 +30,8 @@ public class Article implements Serializable {
 	@javax.validation.constraints.Past(message = "Date de publication invalide")*/
 	private Calendar datePublication;
 	
+	private String titre;
+	
 	//Si on garde cet attribut, pensez a rajouter le OneToMany dans groupe et toute l'impl qui va avec
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Groupe groupe;
@@ -39,6 +41,14 @@ public class Article implements Serializable {
 	public Article() {
 	}
 	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
 	public Groupe getGroupe() {
 		return groupe;
 	}

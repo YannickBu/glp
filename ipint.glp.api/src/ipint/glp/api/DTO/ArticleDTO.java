@@ -45,10 +45,22 @@ public class ArticleDTO extends DTO implements Serializable {
 	@ManyToOne
 	private UtilisateurDTO utilisateur;
 
-
+	/**
+	 * 
+	 */
+	private String titre;
+	
 	public ArticleDTO() {
 	}
 	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
 	public GroupeDTO getGroupe() {
 		return groupe;
 	}
