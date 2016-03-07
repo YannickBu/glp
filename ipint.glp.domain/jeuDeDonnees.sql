@@ -360,7 +360,7 @@ CREATE TABLE `UTILISATEURGROUPES` (
 
 LOCK TABLES `UTILISATEURGROUPES` WRITE;
 /*!40000 ALTER TABLE `UTILISATEURGROUPES` DISABLE KEYS */;
-INSERT INTO `UTILISATEURGROUPES` VALUES (3,'rodolphe.declerck@gmail.com','diplome'),(53,'pl.hequet@gmail.com','diplome'),(105,'jean-kevin.mouloude@gmail.com','diplome'),(109,'jean.jean@gmail.com','diplome'),(114,'paul.bismute@gmail.com','diplome'),(119,'john.doe@gmail.com','diplome'),(130,'manon.barrois1@gmail.com','diplome'),(133,'mima.diagne@gmail.com','diplome'),(136,'yannick.buchart@gmail.com','diplome');
+INSERT INTO `UTILISATEURGROUPES` VALUES (3,'rodolphe.declerck@gmail.com','diplome'),(4,'rodolphe.declerck@gmail.com','administrateur'),(5,'rodolphe.declerck@gmail.com','moderateur'),(53,'pl.hequet@gmail.com','diplome'),(105,'jean-kevin.mouloude@gmail.com','diplome'),(109,'jean.jean@gmail.com','diplome'),(114,'paul.bismute@gmail.com','diplome'),(119,'john.doe@gmail.com','diplome'),(130,'manon.barrois1@gmail.com','diplome'),(133,'mima.diagne@gmail.com','diplome'),(136,'yannick.buchart@gmail.com','diplome');
 /*!40000 ALTER TABLE `UTILISATEURGROUPES` ENABLE KEYS */;
 UNLOCK TABLES;
 
