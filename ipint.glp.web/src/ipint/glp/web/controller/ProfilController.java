@@ -1,5 +1,6 @@
 package ipint.glp.web.controller;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.CompetenceDTO;
+import ipint.glp.api.DTO.RegionDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
+import ipint.glp.api.DTO.VilleDTO;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
+import ipint.glp.api.itf.UtilsService;
 
 @Controller
 public class ProfilController {
@@ -28,6 +32,8 @@ public class ProfilController {
 	UtilisateurService utilisateurService;
 	@Inject
 	GroupeService groupeS;
+	@Inject
+	UtilsService utilsS;
 
 	public ProfilController() {
 	}
@@ -120,7 +126,13 @@ public class ProfilController {
 
 	@RequestMapping(value = "/profil/modifprofil", method = RequestMethod.GET)
 	public ModelAndView profilModifyGet(HttpServletRequest request,
-			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) {
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) throws MetierException {
+		
+		model.addAttribute("pays",utilsS.listerPaysDuMonde());
+		List<RegionDTO> regions = utilsS.listerRegions();
+		model.addAttribute("regions",regions);
+		List<VilleDTO> villes = utilsS.listerVilles();
+		model.addAttribute("villes",villes);
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
