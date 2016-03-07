@@ -42,6 +42,15 @@ public class AdministrationController {
 	public AdministrationController() {
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param groupeTmp
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/administration/creergroupe", method = RequestMethod.GET)
 	public ModelAndView createGroupeGet(@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
@@ -58,7 +67,17 @@ public class AdministrationController {
 		return new ModelAndView("createGroupe");
 	}
 
-
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param request
+	 * @param utilisateurTmp
+	 * @param groupeTmp
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/administration/creergroupe", method = RequestMethod.POST)
 	public ModelAndView createGroupePost(HttpServletRequest request, @ModelAttribute("utilisateurTmp") UtilisateurDTO utilisateurTmp, @ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
@@ -86,25 +105,44 @@ public class AdministrationController {
 			groupeTmp = groupeS.creer(gDTO);
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
+			return new ModelAndView("panelAdministration","createdGroupe", "FAIL");
 		}
 		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
 		try {
 			listPersonnel = utilisateurS.listerPersonnel();
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
+			return new ModelAndView("panelAdministration","createdGroupe", "FAIL");
 		}
 		model.addAttribute("animateurs", listPersonnel);
 		model.addAttribute("utilisateurResponsables", listPersonnel);
-		return new ModelAndView("createGroupe");
+		return new ModelAndView("panelAdministration","createdGroupe", "SUCCESS");
 	}
-	
+		
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param groupeTmp
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.GET)
 	public ModelAndView panelAdministrationGet(@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
 		return new ModelAndView("panelAdministration");
 	}
 
-
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param groupeTmp
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.POST)
 	public ModelAndView panelAdministrationPost(@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
