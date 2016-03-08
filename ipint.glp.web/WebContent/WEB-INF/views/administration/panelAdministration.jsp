@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
@@ -57,24 +58,37 @@
 				<h1 class="text-center">Panel d'administration</h1>
 				<hr />
 				<c:set var="count" value="1" scope="page" />
-				<c:forEach items="" var="exp">
+				<c:forEach items="${groupesOfficiel}" var="groupe">
 					<div class="panel-group" id="panel1-${count}">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<a class="panel-title" data-toggle="collapse"
-									data-parent="#panel1-${count}" href="#panel-element1-${count}"></a>
+									data-parent="#panel1-${count}" href="#panel-element1-${count}">${groupe.nomGroupe}</a>
 							</div>
 							<div id="panel-element1-${count}" class="panel-collapse collapse">
-								<div class="panel-body"></div>
+								<div class="panel-body">
+									<ul>
+										<li> Description : ${groupe.description}</li>
+										<li> Modérateur : ${groupe.utilisateurResponsable.prenom}&nbsp;${groupe.utilisateurResponsable.nom}
+										<li> Animateurs :
+										<ul>
+											<c:forEach items="${groupe.animateurs}" var="animateur">
+												<li>${animateur.prenom}&nbsp;${animateur.nom}</li>
+											</c:forEach>
+										</ul>
+										</li>
+							
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 					<c:set var="count" value="${count + 1}" scope="page" />
 				</c:forEach>
-				<a href="${pageContext.servletContext.contextPath}/administration/creergroupe">
-					<button	type="button" style="float: right" class="btn btn-default"id="btn_new_exp">
-					Créer un nouveau groupe
-					</button>
+				<a
+					href="${pageContext.servletContext.contextPath}/administration/creergroupe">
+					<button type="button" style="float: right" class="btn btn-default"
+						id="btn_new_exp">Créer un nouveau groupe</button>
 				</a>
 			</div>
 		</div>

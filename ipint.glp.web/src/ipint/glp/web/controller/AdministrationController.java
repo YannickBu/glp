@@ -131,6 +131,12 @@ public class AdministrationController {
 	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.GET)
 	public ModelAndView panelAdministrationGet(@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
+		
+		
+		
+		List<GroupeDTO> groupesOfficiel = null;
+		groupeS.listerParType(true);
+		model.addAttribute("groupesOfficiel", groupesOfficiel);
 		return new ModelAndView("panelAdministration");
 	}
 
