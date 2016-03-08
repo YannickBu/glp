@@ -64,20 +64,25 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
 
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
-		Query q = em.createQuery("select g from Utilisateur g where g.email = :email");
+
+		Query q = em.createQuery(
+				"select g from Utilisateur g where g.email = :email");
 		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
-		/*
-		 * if (!q.getResultList().isEmpty() && ) { throw new
-		 * UtilisateurExistantException(
-		 * "UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
-		 * + utilisateurEnAttenteDTO.getEmail()); } q = em.createQuery(
-		 * "select g from UtilisateurEnAttente g where g.email = '" +
-		 * utilisateurEnAttenteDTO.getEmail() + "'"); if
-		 * (!q.getResultList().isEmpty()) { throw new
-		 * UtilisateurExistantException(
-		 * "UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
-		 * + utilisateurEnAttenteDTO.getEmail()); }
-		 */
+	
+	/*	if (!q.getResultList().isEmpty()) {
+			throw new UtilisateurExistantException(
+					"UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
+							+ utilisateurEnAttenteDTO.getEmail());
+		}
+		q = em.createQuery(
+				"select g from UtilisateurEnAttente g where g.email = :email");
+		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
+		if (!q.getResultList().isEmpty()) {
+			throw new UtilisateurExistantException(
+					"UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
+							+ utilisateurEnAttenteDTO.getEmail());
+		} */
+
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
 		Groupe groupe = null;

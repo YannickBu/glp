@@ -70,6 +70,12 @@ textarea {
 	margin-left: -50px;
 }
 
+.alert-white {
+	background-color: #ffffff;
+	border-top: 0;
+	border-bottom: 0;
+}
+
 .article,
 .bloc {
 	margin-top: 1%;
@@ -104,9 +110,13 @@ h3 {
 
 .diplomePrincipal,
 .publierArt {
+	padding-top:0.5%;
 	font-weight: bold;
 }
 
+.titreArt{
+	font-weight: bold;
+}
 .entete-inscrip {
 	width: 100%;
 	background-color: #F1F2F1;

@@ -139,7 +139,8 @@ public class UtilisateurImpl implements UtilisateurService {
 						"UtilisateurImpl.creer : Le groupe d'id=" + groupeDTOm.getIdGroupe() + " n'existe pas");
 			}
 		} else if (groupeDTOm.getNomGroupe() != null) {
-			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOm.getNomGroupe() + "'");
+			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = :nomgroupe");
+			q.setParameter("nomgroupe", groupeDTOm.getNomGroupe());
 			try {
 				grpm = (Groupe) q.getSingleResult();
 			} catch (NoResultException e) {
@@ -346,7 +347,8 @@ public class UtilisateurImpl implements UtilisateurService {
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet id");
 			}
 		} else {
-			Query q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTO.getEmail() + "'");
+			Query q = em.createQuery("select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", utilisateurDTO.getEmail());
 			try {
 				utilisateur = (Utilisateur) q.getSingleResult();
 			} catch (NoResultException e) {
@@ -424,9 +426,9 @@ public class UtilisateurImpl implements UtilisateurService {
 				Competence comp = new Competence();
 				for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
 					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() != 0) {
-						Query q = em.createQuery("select c from Competence c where c.libelle = '" + compDTO.getLibelle()
-								+ "' and c.profil.idProfil = :idProfil");
+						Query q = em.createQuery("select c from Competence c where c.libelle = :libelle and c.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
+						q.setParameter("libelle", compDTO.getLibelle());
 						if (!q.getResultList().isEmpty()) {
 							comp = (Competence) q.getSingleResult();
 							if (comp != null) {
@@ -466,9 +468,9 @@ public class UtilisateurImpl implements UtilisateurService {
 				for (DiplomeDTO diplDTO : nouvelUtilisateur.getProfil().getDiplomes()) {
 					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle())
 							&& diplDTO.getAnneeDebut() != null && diplDTO.getAnneFin() != null) {
-						Query q = em.createQuery("select d from Diplome d where d.libelle = '" + diplDTO.getLibelle()
-								+ "' and d.profil.idProfil = :idProfil");
+						Query q = em.createQuery("select d from Diplome d where d.libelle = :libelle and d.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
+						q.setParameter("libelle", diplDTO.getLibelle());
 						if (!q.getResultList().isEmpty()) {
 							dipl = (Diplome) q.getSingleResult();
 							if (dipl != null) {
@@ -509,9 +511,9 @@ public class UtilisateurImpl implements UtilisateurService {
 							&& expDTO.getDescription() != null && !"".equals(expDTO.getDescription())
 							&& expDTO.getLieu() != null && !"".equals(expDTO.getLieu()) && expDTO.getPoste() != null
 							&& !"".equals(expDTO.getPoste())) {
-						Query q = em.createQuery("select e from Experience e where e.entreprise = '"
-								+ expDTO.getEntreprise() + "' and e.profil.idProfil = :idProfil");
+						Query q = em.createQuery("select e from Experience e where e.entreprise = :entreprise and e.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
+						q.setParameter("entreprise", expDTO.getEntreprise());
 						if (!q.getResultList().isEmpty()) {
 							exp = (Experience) q.getSingleResult();
 							if (exp != null) {
@@ -570,11 +572,11 @@ public class UtilisateurImpl implements UtilisateurService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UtilisateurDTO> listerPersonnel() throws MetierException {
+	public List<UtilisateurDTO> listerParType(String type) throws MetierException {
 		Query q;
 		List<Utilisateur> utilisateurs;
 		List<UtilisateurDTO> utilisateursDTO = new ArrayList<>();
-		Statut statut = Statut.PERSONNEL;
+		Statut statut = Statut.valueOf(type);
 		//SELECT *  FROM l1nk_plh.UTILISATEUR WHERE email IN (SELECT email from l1nk_plh.UTILISATEURGROUPES where groupe = 'personnel');
 		q = em.createQuery("select u from Utilisateur u where u.email in (select s.email from UtilisateurGroupes s where s.groupe = '"+ statut +"')");
 		utilisateurs = q.getResultList();

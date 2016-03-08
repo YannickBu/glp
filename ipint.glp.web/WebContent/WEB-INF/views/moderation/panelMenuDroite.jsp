@@ -9,7 +9,7 @@
 		</p>
 		<ul class="menu-droite-1">
 			<c:forEach var="listUtilisateurEnAttente" items="${list}">
-				<a href="${listUtilisateurEnAttente.idUtilisateurEnAttente}"><li><c:out
+				<a href="${pageContext.servletContext.contextPath}/moderation/panelInscription/${listUtilisateurEnAttente.idUtilisateurEnAttente}"><li><c:out
 							value="${listUtilisateurEnAttente.nom}" /> <c:out
 							value="${listUtilisateurEnAttente.prenom}" /><span
 						class="glyphicon glyphicon-chevron-right gly-menu"

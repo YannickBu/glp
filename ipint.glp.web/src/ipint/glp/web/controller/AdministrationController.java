@@ -57,7 +57,7 @@ public class AdministrationController {
 		GroupeDTO gDTO = new GroupeDTO();
 		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
 		try {
-			listPersonnel = utilisateurS.listerPersonnel();
+			listPersonnel = utilisateurS.listerParType("PERSONNEL");
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
 		}
@@ -109,7 +109,7 @@ public class AdministrationController {
 		}
 		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
 		try {
-			listPersonnel = utilisateurS.listerPersonnel();
+			listPersonnel = utilisateurS.listerParType("PERSONNEL");
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
 			return new ModelAndView("panelAdministration","createdGroupe", "FAIL");
@@ -131,6 +131,15 @@ public class AdministrationController {
 	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.GET)
 	public ModelAndView panelAdministrationGet(@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
+		
+		
+		
+		try {
+			model.addAttribute("groupesOfficiel",  groupeS.listerParType(false));
+		} catch (MetierException e) {
+			e.printStackTrace();
+		}
+		
 		return new ModelAndView("panelAdministration");
 	}
 

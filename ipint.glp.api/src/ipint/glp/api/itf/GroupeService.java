@@ -110,11 +110,12 @@ public interface GroupeService {
 	public void supprimer(GroupeDTO groupe);
 
 	/**
-	 * Lister les groupes existant
+	 * Lister les groupes existant en fonction de leur type
 	 * 
+	 * @param isGroupeOfficiel
 	 * @return la liste des groupes existant
 	 */
-	public List<GroupeDTO> lister() throws MetierException;
+	public List<GroupeDTO> listerParType(boolean isGroupeOfficiel) throws MetierException;
 	
 	public List<UtilisateurDTO> listerUtilisateurs(GroupeDTO groupeDTO) throws MetierException;
 	
