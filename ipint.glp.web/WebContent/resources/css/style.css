@@ -110,9 +110,13 @@ h3 {
 
 .diplomePrincipal,
 .publierArt {
+	padding-top:0.5%;
 	font-weight: bold;
 }
 
+.titreArt{
+	font-weight: bold;
+}
 .entete-inscrip {
 	width: 100%;
 	background-color: #F1F2F1;

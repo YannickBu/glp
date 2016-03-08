@@ -16,7 +16,8 @@
 	</context-param>
 	<context-param>
 		<param-name>urlSite</param-name>
-		<param-value>http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/</param-value>
+		<param-value>http://172.28.1.165:8080/ipint.glp.web/</param-value>
+<!-- 		<param-value>http://b12p11.fil.univ-lille1.fr:8080/ipint.glp.web/</param-value> -->
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -260,7 +261,8 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value>
+            <param-value>172.28.1.165:8080/</param-value>
+<!--             <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value> -->
         </init-param>
     </filter>
 
@@ -273,7 +275,8 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value>
+            <param-value>172.28.1.165:8080/</param-value>
+<!--             <param-value>b12p11.fil.univ-lille1.fr:8080/</param-value> -->
         </init-param>
         <init-param>
             <param-name>redirectAfterValidation</param-name>
