@@ -7,9 +7,11 @@
 <%@ page import="java.util.GregorianCalendar"%>
 <%@ page import="ipint.glp.api.DTO.ProfilDTO"%>
 <%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
+
 <script type="text/javascript"
 	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 <script type="text/javascript">
+
 
 function SoumettreFormulaire(){  
      document.forms["modif_form"].submit();
@@ -415,12 +417,13 @@ function varExp() {
 	function chargeRegions(i){
 		var pays = document.getElementById('selectPays'+i);
 		var selectedPays = pays.options[pays.selectedIndex].innerHTML;
-		var element = document.getElementById('selectRegion'+i);
-		if(selectedPays != 'France'){
-			element.selectedIndex=0;
-			element.disabled=true;
-		}else{
-			element.disabled=false;
+		var region = document.getElementById('selectRegion'+i);
+		var ville = document.getElementById('selectVille');
+		region.selectedIndex=0;
+		region.disabled=true;
+		ville.value='';
+		if(selectedPays == 'France'){
+			region.disabled=false;
 		}		
 	}
 	
@@ -454,7 +457,8 @@ function varExp() {
 				<div class="col-md-10">
 					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 					<div class="col-md-12 situation form-group ">
-						<label for="InputDiplomePrincipal"> Situation professionnelle actuelle </label>
+						<label for="InputDiplomePrincipal"> Situation
+							professionnelle actuelle </label>
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
@@ -540,7 +544,7 @@ function varExp() {
 							<label for="InputCursus"> Diplômes : </label>
 
 							<div id="diplForm">
-								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()-1}"
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
@@ -579,7 +583,7 @@ function varExp() {
 
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_dipl"
+								class="btn btn-default btnModifProfif" id="btn_new_dipl"
 								onClick="varDipl();newDiplome();">Ajouter un diplome</button>
 
 						</div>
@@ -587,7 +591,7 @@ function varExp() {
 							<label for="InputExp"> Expériences Professionnelles : </label>
 							<div id="expForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.experiences.size()}" var="i">
+									end="${utilisateur.profil.experiences.size()-1}" var="i">
 									<div class="row" id="idExp${i}">
 										<div class="col-md-12">
 											<div class="row">
@@ -634,7 +638,8 @@ function varExp() {
 													<%-- 														class="form-control" id="InputExpRegion" --%>
 													<%-- 														placeholder="Région" data-toggle="tooltip" title="Région" /> --%>
 													<form:select path="profil.experiences[${i}].region"
-														name="region" class="form-control" id="selectRegion${i}">
+														name="region" class="form-control" disabled="true"
+														id="selectRegion${i}">
 														<form:option value=""> -- Choissez la region --</form:option>
 														<c:forEach var="regionI" items="${regions}">
 															<form:option value="${regionI.nom}">${regionI.nom}</form:option>
@@ -680,15 +685,18 @@ function varExp() {
 									</div>
 								</c:forEach>
 							</div>
-						</div>
-						<button type="button" class="btn btn-default" id="btn_new_exp"
+							
+							<button type="button" class="btn btn-default btnModifProfif" id="btn_new_exp"
 								onClick="varExp();newExperience();">Ajouter une
 								expérience</button>
+
+
+						</div>
 						<div class="form-group">
 							<label for="InputSkills"> Compétences :</label>
 							<div id="compForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.competence.size()}" var="i">
+									end="${utilisateur.profil.competence.size()-1}" var="i">
 									<div class="row" id="idComp${i}">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle"
@@ -717,7 +725,7 @@ function varExp() {
 								</c:forEach>
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_comp"
+								class="btn btn-default btnModifProfif" id="btn_new_comp"
 								onClick="varComp();newCompetence();">Ajouter une
 								compétence</button>
 						</div>
@@ -737,12 +745,12 @@ function varExp() {
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
 						<a href="${pageContext.servletContext.contextPath}/profil/"><button
-								type="button" class="btn btn-default">Annuler</button></a>
-						<button type="submit" class="btn btn-default"
+								type="button" class="btn btn-default btnModifProfif">Annuler</button></a>
+						<button type="submit" class="btn btn-default btnModifProfif"
 							onclick="SoumettreFormulaire();">Enregistrer</button>
 					</div>
-					<span id="regionsCaches" style="display : none">${regions}</span>
-					<span id="paysCaches" style="display : none">${pays}</span>
+					<span id="regionsCaches" style="display: none">${regions}</span> <span
+						id="paysCaches" style="display: none">${pays}</span>
 				</div>
 			</div>
 		</div>
