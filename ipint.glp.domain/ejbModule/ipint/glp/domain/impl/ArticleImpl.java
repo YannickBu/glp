@@ -57,7 +57,8 @@ public class ArticleImpl implements ArticleService {
 		Query q;
 		if (articleDTO.getUtilisateur().getEmail() != null) {
 			q = em.createQuery(
-					"select e from Utilisateur e where e.email = '" + articleDTO.getUtilisateur().getEmail() + "'");
+					"select e from Utilisateur e where e.email = :email");
+			q.setParameter("email", articleDTO.getUtilisateur().getEmail());
 			try {
 				util = (Utilisateur) q.getSingleResult();
 			} catch (NoResultException e) {
@@ -216,7 +217,8 @@ public class ArticleImpl implements ArticleService {
 	
 	@Override
 	public List<ArticleDTO> listerParDate(GroupeDTO groupe) throws MetierException {
-		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe in (select ar.idarticle,ar.groupe.idgroupe from Article ar where ar.groupe.idGroupe = '" + groupe.getIdGroupe() + "' order by ar.idarticle desc)"); 
+		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe in (select ar.idarticle,ar.groupe.idgroupe from Article ar where ar.groupe.idGroupe = :idgroupe order by ar.idarticle desc)"); 
+		q.setParameter("idgroupe", groupe.getIdGroupe());
 		List<Article> articles = q.getResultList(); 
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
