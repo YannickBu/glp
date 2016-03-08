@@ -69,17 +69,17 @@
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header alert-white">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">Succès</h4>
+					<h4 class="modal-title">Succès !</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body alert-white">
 					<p>Votre demande d'inscription a bien été envoyée.</p>
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer alert-white">
 					<button type="button" id="Close" class="btn btn-default"
 						data-dismiss="modal">Fermer</button>
 				</div>
@@ -180,17 +180,17 @@
 						<div class="col-md-1"></div>
 					</div>
 				</form>
-				<div class="row">
+				<!-- <div class="row">
 					<a
 						style="text-align: right; margin-top: 1%; margin-left: 1.5%; color: white; text-decoration: underline;"
 						class="col-md-11 " href="#">Mot de passé oublié ?</a>
 					<div class="col-md-1"></div>
-				</div>
+				</div> -->
 				<div class="row">
 					<a class="col-md-11"
-						style="text-align: right; margin-left: 1.5%; color: white; text-decoration: underline; margin-bottom: 5%"
+						style="text-align: right; margin-top: 1%; margin-left: 1.5%; color: white; text-decoration: underline; margin-bottom: 5%"
 						href="${pageContext.servletContext.contextPath}/cas">Connexion
-						CAS (bouton temporaire)</a>
+						CAS</a>
 					<div class="col-md-1"></div>
 				</div>
 

@@ -90,6 +90,7 @@ pageEncoding="UTF-8"%>
 														dateStyle="short" timeStyle="short"
 														value="${article.datePublication.time}" />
 													</li>
+													<li style="list-style-type: none;" class="titreArt">${article.titre}</li>
 													<li style="list-style-type: none;">${article.contenu}</li>
 												</ul>
 											</div>
