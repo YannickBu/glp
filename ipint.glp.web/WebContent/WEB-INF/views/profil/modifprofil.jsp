@@ -494,7 +494,7 @@ function varExp() {
 							<label for="InputCursus"> Diplômes : </label>
 
 							<div id="diplForm">
-								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()-1}"
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
@@ -541,7 +541,7 @@ function varExp() {
 							<label for="InputExp"> Expériences Professionnelles : </label>
 							<div id="expForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.experiences.size()}" var="i">
+									end="${utilisateur.profil.experiences.size()-1}" var="i">
 									<div class="row" id="idExp${i}">
 										<div class="col-md-12">
 											<div class="row">
@@ -640,7 +640,7 @@ function varExp() {
 							<label for="InputSkills"> Compétences :</label>
 							<div id="compForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.competence.size()}" var="i">
+									end="${utilisateur.profil.competence.size()-1}" var="i">
 									<div class="row" id="idComp${i}">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle"
