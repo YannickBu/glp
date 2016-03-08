@@ -55,6 +55,6 @@ public interface UtilisateurService {
 	 * 
 	 * @return liste du personnel
 	 */
-	public List<UtilisateurDTO> listerPersonnel() throws MetierException;
+	public List<UtilisateurDTO> listerParType(String type) throws MetierException;
 
 }

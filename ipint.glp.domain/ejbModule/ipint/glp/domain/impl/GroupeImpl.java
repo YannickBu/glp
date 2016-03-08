@@ -46,7 +46,8 @@ public class GroupeImpl implements GroupeService {
 		Query q = null;
 
 		q = em.createQuery(
-				"select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
+				"select g from Groupe g where g.nomGroupe = :nom");
+		q.setParameter("nom", obj.getNomGroupe());
 		if(!q.getResultList().isEmpty()){
 			throw new GroupeExistantException("GroupeImpl.creer : Un groupe avec le nom "+obj.getNomGroupe()+" existe déjà");
 		}
@@ -66,7 +67,8 @@ public class GroupeImpl implements GroupeService {
 			}
 		} else if (obj.getUtilisateurResponsable().getEmail() != null) {
 			q = em.createQuery(
-					"select u from Utilisateur u where u.email = '" + obj.getUtilisateurResponsable().getEmail() + "'");
+					"select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", obj.getUtilisateurResponsable().getEmail());
 			try{
 				utilisateur = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
@@ -142,7 +144,8 @@ public class GroupeImpl implements GroupeService {
 						animateurs.add(u);
 					} else if (utilisateurDto.getEmail() != null) {
 						q = em.createQuery(
-								"select u from Utilisateur u where u.email = '" + utilisateurDto.getEmail() + "'");
+								"select u from Utilisateur u where u.email = :email");
+						q.setParameter("email", utilisateurDto.getEmail());
 						try{
 							u = (Utilisateur) q.getSingleResult();	
 						}catch(NoResultException e){
@@ -184,7 +187,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.trouver : "+obj.toString()+" n'existe pas pour cet id");
 			}
 		} else {
-			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + obj.getNomGroupe() + "'");
+			Query q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", obj.getNomGroupe());
 			try{
 				gr = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -218,7 +222,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.modifier : "+ancienObj.toString()+" est inconnu pour cet id");
 			}
 		}else{
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + ancienObj.getNomGroupe() + "'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", ancienObj.getNomGroupe());
 			try{
 				groupeMAJ = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -301,7 +306,8 @@ public class GroupeImpl implements GroupeService {
 				throw new UtilisateurInconnuException("GroupeImpl.ajouterUtilisateur : "+utilisateurDTOAAjouter.toString()+" n'existe pas pour cet id");
 			}
 		} else if (utilisateurDTOAAjouter.getEmail() != null) {
-			q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTOAAjouter.getEmail() + "'");
+			q = em.createQuery("select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", utilisateurDTOAAjouter.getEmail());
 			try{
 				utilisateurAAjouter = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
@@ -316,7 +322,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.ajouterUtilisateur : "+groupeDTOAModifier.toString()+" n'existe pas pour cet id");
 			}
 		} else {
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOAModifier.getNomGroupe() + "'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", groupeDTOAModifier.getNomGroupe());
 			try{
 				groupeAModifier = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -360,7 +367,8 @@ public class GroupeImpl implements GroupeService {
 				throw new UtilisateurInconnuException("GroupeImpl.supprimerUtilisateur : "+utilisateurDTOASuppimer.toString()+" n'existe pas pour cet id");
 			}
 		} else if (utilisateurDTOASuppimer.getEmail() != null) {
-			q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTOASuppimer.getEmail() + "'");
+			q = em.createQuery("select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", utilisateurDTOASuppimer.getEmail());
 			try{
 				utilisateurASupprimer = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
@@ -375,7 +383,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.supprimerUtilisateur : "+groupeDTOAModifier.toString()+" n'existe pas pour cet id");
 			}
 		} else {
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOAModifier.getNomGroupe() + "'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", groupeDTOAModifier.getNomGroupe());
 			try{
 				groupeAModifier = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -416,7 +425,8 @@ public class GroupeImpl implements GroupeService {
 				throw new UtilisateurInconnuException("GroupeImpl.ajouterAnimateur : "+animateurDTOAAjouter.toString()+" n'existe pas pour cet id");
 			}
 		} else if (animateurDTOAAjouter.getEmail() != null) {
-			q = em.createQuery("select u from Utilisateur u where u.email = '" + animateurDTOAAjouter.getEmail() + "'");
+			q = em.createQuery("select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", animateurDTOAAjouter.getEmail());
 			try{
 				animateurAAjouter = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
@@ -431,7 +441,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.ajouterAnimateur : "+groupeDTOAModifier.toString()+" n'existe pas pour cet id");
 			}
 		} else {
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOAModifier.getNomGroupe() + "'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", groupeDTOAModifier.getNomGroupe());
 			try{
 				groupeAModifier = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -481,7 +492,8 @@ public class GroupeImpl implements GroupeService {
 				throw new UtilisateurInconnuException("GroupeImpl.supprimerAnimateur : "+animateurDTOASupprimer.toString()+" n'existe pas pour cet id");
 			}
 		} else if (animateurDTOASupprimer.getEmail() != null) {
-			q = em.createQuery("select u from Utilisateur u where u.email = '" + animateurDTOASupprimer.getEmail() + "'");
+			q = em.createQuery("select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", animateurDTOASupprimer.getEmail());
 			try{
 				animateurASupprimer = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
@@ -496,7 +508,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.supprimerAnimateur : "+groupeDTOAModifier.toString()+" n'existe pas pour cet id");
 			}
 		} else {
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOAModifier.getNomGroupe() + "'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", groupeDTOAModifier.getNomGroupe());
 			try{
 				groupeAModifier = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -537,7 +550,8 @@ public class GroupeImpl implements GroupeService {
 				throw new UtilisateurInconnuException("GroupeImpl.modifierResponsable : "+nouveauResponsableDTO.toString()+" n'existe pas pour cet id");
 			}
 		} else if (nouveauResponsableDTO.getEmail() != null) {
-			q = em.createQuery("select u from Utilisateur u where u.email = '" + nouveauResponsableDTO.getEmail() + "'");
+			q = em.createQuery("select u from Utilisateur u where u.email = :email");
+			q.setParameter("email", nouveauResponsableDTO.getEmail());
 			try{
 				nouveauResponsable = (Utilisateur) q.getSingleResult();
 			}catch(NoResultException e){
@@ -552,7 +566,8 @@ public class GroupeImpl implements GroupeService {
 				throw new GroupeInconnuException("GroupeImpl.modifierResponsable : "+groupeDTOAModifier.toString()+" n'existe pas pour cet id");
 			}
 		} else {
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '" + groupeDTOAModifier.getNomGroupe() + "'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", groupeDTOAModifier.getNomGroupe());
 			try{
 				groupeAModifier = (Groupe) q.getSingleResult();
 			}catch(NoResultException e){
@@ -587,9 +602,11 @@ public class GroupeImpl implements GroupeService {
 		List<UtilisateurDTO> utilisateursDTO = new ArrayList<>();
 		
 		if (groupeDTO.getIdGroupe() != null) {
-			q = em.createQuery("select g from Groupe g where g.idGroupe = '"+groupeDTO.getIdGroupe()+"'");
+			q = em.createQuery("select g from Groupe g where g.idGroupe = :idgroupe");
+			q.setParameter("idgroupe", groupeDTO.getIdGroupe());
 		}else{
-			q = em.createQuery("select g from Groupe g where g.nomGroupe = '"+groupeDTO.getNomGroupe()+"'");
+			q = em.createQuery("select g from Groupe g where g.nomGroupe = :nom");
+			q.setParameter("nom", groupeDTO.getNomGroupe());
 		}
 		
 		Groupe gr = null;
@@ -618,8 +635,9 @@ public class GroupeImpl implements GroupeService {
 	}
 
 	@Override
-	public List<GroupeDTO> lister() throws MetierException {
-		Query q = em.createQuery("select g from Groupe g ");
+	public List<GroupeDTO> listerParType(boolean isGroupeOfficiel) throws MetierException {
+		Query q = em.createQuery("select g from Groupe g where g.isGroupeOfficiel = :isGroupeOfficiel");
+		q.setParameter("isGroupeOfficiel", isGroupeOfficiel);
 		List<Groupe> lesGroupes = q.getResultList();
 		List<GroupeDTO> lesGroupesDTO = new ArrayList<GroupeDTO>();
 		for (Groupe groupe : lesGroupes) {

@@ -38,6 +38,6 @@ public class AccueilController {
 			System.out.println(u.getEmail());
 		}
 		
-		return new ModelAndView("redirect:/publication");
+		return new ModelAndView("redirect:/connexion");
 	}
 }

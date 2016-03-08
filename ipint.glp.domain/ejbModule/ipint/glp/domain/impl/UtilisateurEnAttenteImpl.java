@@ -64,14 +64,16 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
 		Query q = em.createQuery(
-				"select g from Utilisateur g where g.email = '" + utilisateurEnAttenteDTO.getEmail() + "'");
+				"select g from Utilisateur g where g.email = :email");
+		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
 		if (!q.getResultList().isEmpty()) {
 			throw new UtilisateurExistantException(
 					"UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
 							+ utilisateurEnAttenteDTO.getEmail());
 		}
 		q = em.createQuery(
-				"select g from UtilisateurEnAttente g where g.email = '" + utilisateurEnAttenteDTO.getEmail() + "'");
+				"select g from UtilisateurEnAttente g where g.email = :email");
+		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
 		if (!q.getResultList().isEmpty()) {
 			throw new UtilisateurExistantException(
 					"UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
@@ -80,8 +82,8 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
 		Groupe groupe = null;
-		q = em.createQuery("select g from Groupe g where g.idGroupe = '"
-				+ utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe() + "'");
+		q = em.createQuery("select g from Groupe g where g.idGroupe = :idgroupe");
+		q.setParameter("idgroupe", utilisateurEnAttenteDTO.getGroupePrincipal().getIdGroupe());
 		try {
 			groupe = (Groupe) q.getSingleResult();
 		} catch (NoResultException e) {

@@ -19,4 +19,12 @@
     	<role-name>moderateur</role-name>
     	<group-name>moderateur</group-name>
     </security-role-mapping>
+    <security-role-mapping>
+    	<role-name>administrateur</role-name>
+    	<group-name>administrateur</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+    	<role-name>animateur</role-name>
+    	<group-name>animateur</group-name>
+    </security-role-mapping>
 </glassfish-web-app>
