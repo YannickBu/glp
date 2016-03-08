@@ -38,7 +38,7 @@ public class InscriptionController extends GeneralController {
 			@ModelAttribute("groupes") GroupeDTO groupe, BindingResult result, Model model) {
 		
 		try {
-			model.addAttribute("groupes",groupeS.lister());
+			model.addAttribute("groupes",groupeS.listerParType(true));
 		} catch (MetierException e) {
 			logger.severe("Erreur acces inscription GET - GroupeService.lister renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
@@ -56,7 +56,7 @@ public class InscriptionController extends GeneralController {
 		
 		if(result.hasErrors()){
 			try {
-				model.addAttribute("groupes",groupeS.lister());
+				model.addAttribute("groupes",groupeS.listerParType(true));
 			} catch (MetierException e) {
 				logger.severe("Erreur acces inscription POST - GroupeService.lister renvoie : " + e.getMessage());
 				return new ModelAndView("redirect:/erreur");
