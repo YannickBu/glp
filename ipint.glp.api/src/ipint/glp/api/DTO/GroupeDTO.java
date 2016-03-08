@@ -20,6 +20,7 @@ public class GroupeDTO extends DTO implements Serializable  {
 	private String nomGroupe;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la description du groupe")
 	private String description;
+	private boolean isGroupeOfficiel = false;
 
 	@ManyToOne
 	private UtilisateurDTO utilisateurResponsable;
@@ -68,6 +69,14 @@ public class GroupeDTO extends DTO implements Serializable  {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isGroupeOfficiel() {
+		return isGroupeOfficiel;
+	}
+
+	public void setGroupeOfficiel(boolean isGroupeOfficiel) {
+		this.isGroupeOfficiel = isGroupeOfficiel;
 	}
 
 	public UtilisateurDTO getUtilisateurResponsable() {
