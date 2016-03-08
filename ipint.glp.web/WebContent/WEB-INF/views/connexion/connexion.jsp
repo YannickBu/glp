@@ -180,17 +180,17 @@
 						<div class="col-md-1"></div>
 					</div>
 				</form>
-				<div class="row">
+				<!-- <div class="row">
 					<a
 						style="text-align: right; margin-top: 1%; margin-left: 1.5%; color: white; text-decoration: underline;"
 						class="col-md-11 " href="#">Mot de passé oublié ?</a>
 					<div class="col-md-1"></div>
-				</div>
+				</div> -->
 				<div class="row">
 					<a class="col-md-11"
-						style="text-align: right; margin-left: 1.5%; color: white; text-decoration: underline; margin-bottom: 5%"
+						style="text-align: right; margin-top: 1%; margin-left: 1.5%; color: white; text-decoration: underline; margin-bottom: 5%"
 						href="${pageContext.servletContext.contextPath}/cas">Connexion
-						CAS (bouton temporaire)</a>
+						CAS</a>
 					<div class="col-md-1"></div>
 				</div>
 
