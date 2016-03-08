@@ -43,7 +43,7 @@
 				<button type="button" id="Close" class="btn btn-default"
 					data-dismiss="modal">Fermer</button>
 			</div>
-		</div>	
+		</div>
 	</div>
 </div>
 
@@ -53,21 +53,44 @@
 <div class="col-md-6 publication">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12"></div>
+			<div class="col-md-12">
+				<h1 class="text-center">Panel d'administration</h1>
+				<hr />
+				<c:set var="count" value="1" scope="page" />
+				<c:forEach items="" var="exp">
+					<div class="panel-group" id="panel1-${count}">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<a class="panel-title" data-toggle="collapse"
+									data-parent="#panel1-${count}" href="#panel-element1-${count}"></a>
+							</div>
+							<div id="panel-element1-${count}" class="panel-collapse collapse">
+								<div class="panel-body"></div>
+							</div>
+						</div>
+					</div>
+					<c:set var="count" value="${count + 1}" scope="page" />
+				</c:forEach>
+				<a href="${pageContext.servletContext.contextPath}/administration/creergroupe">
+					<button	type="button" style="float: right" class="btn btn-default"id="btn_new_exp">
+					Créer un nouveau groupe
+					</button>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
-<span id="hiddenUrl" style="display : none">${pageContext.servletContext.contextPath}</span>
+<span id="hiddenUrl" style="display: none">${pageContext.servletContext.contextPath}</span>
 <script>
-var response = document.getElementById("hiddenResponse").innerHTML;
-var url = document.getElementById("hiddenUrl").innerHTML;
-url = url + "/administration";
-if(response=="SUCCESS"){
-	$('#myModal1').modal('toggle');
-	window.history.replaceState('administration','L1NK',url);
-}
-if(response=="FAIL"){
-	$('#myModal2').modal('toggle');
-	window.history.replaceState('administration','L1NK',url);
-}
+	var response = document.getElementById("hiddenResponse").innerHTML;
+	var url = document.getElementById("hiddenUrl").innerHTML;
+	url = url + "/administration";
+	if (response == "SUCCESS") {
+		$('#myModal1').modal('toggle');
+		window.history.replaceState('administration', 'L1NK', url);
+	}
+	if (response == "FAIL") {
+		$('#myModal2').modal('toggle');
+		window.history.replaceState('administration', 'L1NK', url);
+	}
 </script>

@@ -57,7 +57,7 @@ public class AdministrationController {
 		GroupeDTO gDTO = new GroupeDTO();
 		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
 		try {
-			listPersonnel = utilisateurS.listerPersonnel();
+			listPersonnel = utilisateurS.listerParType("PERSONNEL");
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
 		}
@@ -109,7 +109,7 @@ public class AdministrationController {
 		}
 		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
 		try {
-			listPersonnel = utilisateurS.listerPersonnel();
+			listPersonnel = utilisateurS.listerParType("PERSONNEL");
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
 			return new ModelAndView("panelAdministration","createdGroupe", "FAIL");
