@@ -685,7 +685,11 @@ function varExp() {
 									</div>
 								</c:forEach>
 							</div>
+<<<<<<< HEAD
 							
+=======
+
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 							<button type="button" class="btn btn-default btnModifProfif" id="btn_new_exp"
 								onClick="varExp();newExperience();">Ajouter une
 								expérience</button>

@@ -56,7 +56,7 @@ public class GroupeImpl implements GroupeService {
 		Groupe groupe = new Groupe();
 		groupe.setNomGroupe(obj.getNomGroupe());
 		groupe.setDescription(obj.getDescription());
-
+		groupe.setGroupeOfficiel(obj.isGroupeOfficiel());
 		//Utilisateur responsable
 
 		Utilisateur utilisateur = null;
