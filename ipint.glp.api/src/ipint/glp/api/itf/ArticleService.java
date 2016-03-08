@@ -45,7 +45,7 @@ public interface ArticleService {
 
 	public List<ArticleDTO> listerParGroupe(GroupeDTO groupe) throws MetierException;
 
-	List<ArticleDTO> listerParDate(GroupeDTO groupe) throws MetierException;
+	public List<ArticleDTO> listerParDate(List<GroupeDTO> groupes) throws MetierException;
 	
 	
 }

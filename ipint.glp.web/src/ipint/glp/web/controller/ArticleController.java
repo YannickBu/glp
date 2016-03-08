@@ -45,11 +45,11 @@ public class ArticleController {
 			List<GroupeDTO> groupes = uDTO.getGroupes();
 			GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
 			groupes.add(groupePrincipal);
-			for(GroupeDTO groupe : groupes){
-				for(ArticleDTO articleDTO : as.listerParGroupe(groupe)){
+			//for(GroupeDTO groupe : groupes){
+				for(ArticleDTO articleDTO : as.listerParDate(groupes)){
 					articles.add(articleDTO);
 				}
-			}
+			//}
 		} catch (MetierException e) {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
@@ -96,11 +96,11 @@ public class ArticleController {
 		List<GroupeDTO> groupes = uDTO.getGroupes();
 		GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
 		groupes.add(groupePrincipal);
-		for(GroupeDTO groupe : groupes){
-			for(ArticleDTO articleDTO : as.listerParGroupe(groupe)){
+		//for(GroupeDTO groupe : groupes){
+			for(ArticleDTO articleDTO : as.listerParDate(groupes)){
 				articles.add(articleDTO);
 			}
-		}
+	//	}
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
