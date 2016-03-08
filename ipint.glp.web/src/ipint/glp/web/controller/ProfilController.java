@@ -5,10 +5,12 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -148,7 +150,20 @@ public class ProfilController {
 
 	@RequestMapping(value = "/profil/modifprofil", method = RequestMethod.POST)
 	public ModelAndView profilModifyPost(HttpServletRequest request,
-			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) {
+			@Valid @ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) {
+		
+		for(ObjectError err : result.getAllErrors()){
+			System.out.println(err.getCode()+" "+err.getObjectName()+" "+err.getDefaultMessage());
+		}
+		
+		if(utilisateur.getProfil().getTelephone()==null || "".equals(utilisateur.getProfil().getTelephone()))
+			result.rejectValue("profil.telephone", "Size","Le téléphone est invalide");
+		
+
+		if(result.hasErrors()){
+			return new ModelAndView("modifprofil");
+		}
+		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {

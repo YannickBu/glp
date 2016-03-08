@@ -483,6 +483,7 @@ function varExp() {
 							<label for="InputTel"> Téléphone :</label>
 							<form:input path="profil.telephone" type="text"
 								class="form-control" id="InputTel" />
+								<form:errors path="profil.telephone"/>
 						</div>
 						<div class="form-group">
 							<label for="InputMesAttentes"> Mes attentes du réseau
