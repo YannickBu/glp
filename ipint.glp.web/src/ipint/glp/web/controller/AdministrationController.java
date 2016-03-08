@@ -134,9 +134,12 @@ public class AdministrationController {
 		
 		
 		
-		List<GroupeDTO> groupesOfficiel = null;
-		groupeS.listerParType(true);
-		model.addAttribute("groupesOfficiel", groupesOfficiel);
+		try {
+			model.addAttribute("groupesOfficiel",  groupeS.listerParType(false));
+		} catch (MetierException e) {
+			e.printStackTrace();
+		}
+		
 		return new ModelAndView("panelAdministration");
 	}
 
