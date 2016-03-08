@@ -25,6 +25,7 @@ public class Groupe {
 	private String nomGroupe;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir la description du groupe")
 	private String description;
+	private boolean isGroupeOfficiel = false;
 
 	//Pas besoin de stocker les utilisateurs principaux de ce coté, relation unidirectionnelle
 	/*@OneToMany(mappedBy = "groupePrincipal")
@@ -88,6 +89,14 @@ public class Groupe {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isGroupeOfficiel() {
+		return isGroupeOfficiel;
+	}
+
+	public void setGroupeOfficiel(boolean isGroupeOfficiel) {
+		this.isGroupeOfficiel = isGroupeOfficiel;
 	}
 
 	public Utilisateur getUtilisateurResponsable() {
