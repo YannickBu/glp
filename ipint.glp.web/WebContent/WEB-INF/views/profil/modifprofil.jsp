@@ -533,7 +533,7 @@ function varExp() {
 
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_dipl"
+								class="btn btn-default btnModifProfif" id="btn_new_dipl"
 								onClick="varDipl();newDiplome();">Ajouter un diplome</button>
 
 						</div>
@@ -630,7 +630,7 @@ function varExp() {
 								</c:forEach>
 							</div>
 
-							<button type="button" class="btn btn-default" id="btn_new_exp"
+							<button type="button" class="btn btn-default btnModifProfif" id="btn_new_exp"
 								onClick="varExp();newExperience();">Ajouter une
 								expérience</button>
 
@@ -669,7 +669,7 @@ function varExp() {
 								</c:forEach>
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_comp"
+								class="btn btn-default btnModifProfif" id="btn_new_comp"
 								onClick="varComp();newCompetence();">Ajouter une
 								compétence</button>
 						</div>
@@ -689,8 +689,8 @@ function varExp() {
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
 						<a href="${pageContext.servletContext.contextPath}/profil/"><button
-								type="button" class="btn btn-default">Annuler</button></a>
-						<button type="submit" class="btn btn-default"
+								type="button" class="btn btn-default btnModifProfif">Annuler</button></a>
+						<button type="submit" class="btn btn-default btnModifProfif"
 							onclick="SoumettreFormulaire();">Enregistrer</button>
 					</div>
 				</div>

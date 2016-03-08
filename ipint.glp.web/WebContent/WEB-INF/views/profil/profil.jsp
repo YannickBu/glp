@@ -148,7 +148,7 @@ pageEncoding="UTF-8"%>
 														<a
 														href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
 														type="button" style="margin-top: 1%; float: right"
-														class="btn btn-default" id="btn_new_exp">Modifier mon
+														class="btn btn-default btnModifProfif" id="btn_new_exp">Modifier mon
 														profil</button></a>
 														<%
 													}
