@@ -7,11 +7,9 @@
 <%@ page import="java.util.GregorianCalendar"%>
 <%@ page import="ipint.glp.api.DTO.ProfilDTO"%>
 <%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
-
 <script type="text/javascript"
 	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 <script type="text/javascript">
-
 
 function SoumettreFormulaire(){  
      document.forms["modif_form"].submit();
@@ -190,212 +188,162 @@ function varExp() {
 		
 	};
 	function newExperience() {
-		var nbExp = parseInt(nbComp3);
-		alert(nbExp);
-		var div = document.getElementById('idExp'+nbExp);
-	    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
-		clone.id = 'idExp'+(nbExp+1);
-		global = document.getElementById('expForm');
-		global.appendChild(clone);
-		alert(document.getElementById('idExp'+(nbExp+1)).children.length);
-	    for(var i=0; i < document.getElementById('idExp'+(nbExp+1)).children.length;i++){
-	    	children[i].id=(children[i].id)+(nbExp+1);
-	    }
+		var hr, comp, divP, divP2, div1, div2, div3, div4, div5, div6, div7, div8, div9, div10, div11, div12, div13, div14, input1, input2, input3, input4, input5, input6, input7, input8, button;
+		comp = document.getElementById('expForm');
 		
-// 		var hr, comp, divP, divP2, div1, div2, div3, div4, div5, div6, div7, div8, div9, div10, div11, div12, div13, div14, input1, input2, input3, input4, input5, input6, input7, input8, button;
-// 		comp = document.getElementById('expForm');
+		divP2 = document.createElement('div');
+		divP2.setAttribute('class','row');
+		divP2.setAttribute('id','idExp'+nbComp3);
+		comp.appendChild(divP2);		
 		
-// 		divP2 = document.createElement('div');
-// 		divP2.setAttribute('class','row');
-// 		divP2.setAttribute('id','idExp'+nbComp3);
-// 		comp.appendChild(divP2);		
+		divP = document.createElement('div');
+		divP.setAttribute('class','col-md-12');
+		divP2.appendChild(divP);		
 		
-// 		divP = document.createElement('div');
-// 		divP.setAttribute('class','col-md-12');
-// 		divP2.appendChild(divP);		
-		
-// 		div1 = document.createElement('div');
-// 		div1.setAttribute('class','row');
-// 		divP.appendChild(div1);		
+		div1 = document.createElement('div');
+		div1.setAttribute('class','row');
+		divP.appendChild(div1);		
 
-// 		div2 = document.createElement('div');
-// 		div2.setAttribute('class','col-md-2');
-// 		div1.appendChild(div2);
+		div2 = document.createElement('div');
+		div2.setAttribute('class','col-md-2');
+		div1.appendChild(div2);
 		
-// 		input1 = document.createElement('input');
-// 		input1.setAttribute('name','profil.experiences['+nbComp3+'].anneeDebut');
-// 		input1.setAttribute('type','text');
-// 		input1.setAttribute('class','form-control');
-// 		input1.setAttribute('placeholder','Début');
-// 		input1.setAttribute('data-toggle','tooltip');
-// 		input1.setAttribute('title','Année de début');
-// 		div2.appendChild(input1);	
+		input1 = document.createElement('input');
+		input1.setAttribute('name','profil.experiences['+nbComp3+'].anneeDebut');
+		input1.setAttribute('type','text');
+		input1.setAttribute('class','form-control');
+		input1.setAttribute('placeholder','Début');
+		input1.setAttribute('data-toggle','tooltip');
+		input1.setAttribute('title','Année de début');
+		div2.appendChild(input1);	
 		
-// 		div3 = document.createElement('div');
-// 		div3.setAttribute('class','col-md-2');
-// 		div1.appendChild(div3);
+		div3 = document.createElement('div');
+		div3.setAttribute('class','col-md-2');
+		div1.appendChild(div3);
 		
-// 		input2 = document.createElement('input');
-// 		input2.setAttribute('name','profil.experiences['+nbComp3+'].anneFin');
-// 		input2.setAttribute('type','text');
-// 		input2.setAttribute('class','form-control');
-// 		input2.setAttribute('placeholder','Fin');
-// 		input2.setAttribute('data-toggle','tooltip');
-// 		input2.setAttribute('title','Année de fin');
-// 		div3.appendChild(input2);
+		input2 = document.createElement('input');
+		input2.setAttribute('name','profil.experiences['+nbComp3+'].anneFin');
+		input2.setAttribute('type','text');
+		input2.setAttribute('class','form-control');
+		input2.setAttribute('placeholder','Fin');
+		input2.setAttribute('data-toggle','tooltip');
+		input2.setAttribute('title','Année de fin');
+		div3.appendChild(input2);
 		
-// 		div4 = document.createElement('div');
-// 		div4.setAttribute('class','col-md-2');
-// 		div1.appendChild(div4);
+		div4 = document.createElement('div');
+		div4.setAttribute('class','col-md-2');
+		div1.appendChild(div4);
 		
-// 		input3 = document.createElement('input');
-// 		input3.setAttribute('name','profil.experiences['+nbComp3+'].entreprise');
-// 		input3.setAttribute('type','text');
-// 		input3.setAttribute('class','form-control');
-// 		input3.setAttribute('placeholder','Entreprise');
-// 		input3.setAttribute('data-toggle','tooltip');
-// 		input3.setAttribute('title','Entreprise');
-// 		div4.appendChild(input3);
+		input3 = document.createElement('input');
+		input3.setAttribute('name','profil.experiences['+nbComp3+'].entreprise');
+		input3.setAttribute('type','text');
+		input3.setAttribute('class','form-control');
+		input3.setAttribute('placeholder','Entreprise');
+		input3.setAttribute('data-toggle','tooltip');
+		input3.setAttribute('title','Entreprise');
+		div4.appendChild(input3);
 		
-// 		div5 = document.createElement('div');
-// 		div5.setAttribute('class','col-md-2');
-// 		div1.appendChild(div5);
+		div5 = document.createElement('div');
+		div5.setAttribute('class','col-md-2');
+		div1.appendChild(div5);
 
-// 		div6 = document.createElement('div');
-// 		div6.setAttribute('class','col-md-2');
-// 		div1.appendChild(div6);
+		input4 = document.createElement('input');
+		input4.setAttribute('name','profil.experiences['+nbComp3+'].lieu');
+		input4.setAttribute('type','text');
+		input4.setAttribute('class','form-control');
+		input4.setAttribute('placeholder','Ville');
+		input4.setAttribute('data-toggle','tooltip');
+		input4.setAttribute('title','Ville');
+		div5.appendChild(input4);
+		
+		div6 = document.createElement('div');
+		div6.setAttribute('class','col-md-2');
+		div1.appendChild(div6);
 
-// 		div7 = document.createElement('div');
-// 		div7.setAttribute('class','col-md-2');
-// 		div1.appendChild(div7);
+		input5 = document.createElement('input');
+		input5.setAttribute('name','profil.experiences['+nbComp3+'].region');
+		input5.setAttribute('type','text');
+		input5.setAttribute('class','form-control');
+		input5.setAttribute('placeholder','Region');
+		input5.setAttribute('data-toggle','tooltip');
+		input5.setAttribute('title','Region');
+		div6.appendChild(input5);
 		
-// 		div0 = document.createElement('div');
-// 		div0.setAttribute('class','row');
-// 		div0.setAttribute('style','margin-top: 1%;');
-// 		divP.appendChild(div0);
+		div7 = document.createElement('div');
+		div7.setAttribute('class','col-md-2');
+		div1.appendChild(div7);
+
+		input6 = document.createElement('input');
+		input6.setAttribute('name','profil.experiences['+nbComp3+'].pays');
+		input6.setAttribute('type','text');
+		input6.setAttribute('class','form-control');
+		input6.setAttribute('placeholder','Pays');
+		input6.setAttribute('data-toggle','tooltip');
+		input6.setAttribute('title','Pays');
+		div7.appendChild(input6);
 		
-// 		diva = document.createElement('div');
-// 		diva.setAttribute('class','col-md-3');
-// 		div0.appendChild(diva);
-		
-// 		input6 = document.createElement('select');
-// 		input6.setAttribute('name','pays');
-// 		input6.setAttribute('id','selectPays');
-// 		input6.setAttribute('class','form-control');
-// 		input6.setAttribute('onchange',chargeRegions(),enableVille());
-// 		//input6.setAttribute('data-CommandArgument','${regions}');
-// 		input6.setAttribute('selected','selected');
-// 		input6.setAttribute('data-toggle','tooltip');
-// 		input61 = document.createElement('option');
-// 		input61.innerHTML=' -- Choissez le pays --';
-// 		input6.appendChild(input61);
-// 		pays = document.getElementById('paysCaches').innerHTML;
-// 		alert(pays.split(',')[0]);
-// 		for (var i = 0; i < pays.length; i++) {
-// 			input = document.createElement('option');
-// 			input.text = pays[i];
-// 			input.value = pays[i];
-// 			input6.options.add(input);
-// 		}
-		
-// 		diva.appendChild(input6);
-		
-		
-		
-// 		divb = document.createElement('div');
-// 		divb.setAttribute('class','col-md-3');
-// 		div0.appendChild(divb);
-		
-// 		input5 = document.createElement('select');
-// 		input5.setAttribute('name','regions');
-// 		input5.setAttribute('id','selectPays');
-// 		input5.setAttribute('class','form-control');
-// 		//input5.setAttribute('onchange','chargeRegions(),enableVille();')
-// 		//input5.setAttribute('data-CommandArgument','${regions}');
-// 		input5.setAttribute('selected','selected');
-// 		input5.setAttribute('data-toggle','tooltip');
-// 		input51 = document.createElement('option');
-// 		input51.innerHTML=' -- Choissez la région --';
-// 		input5.appendChild(input51);
-// 		divb.appendChild(input5);
-		
-		
-// 		divc = document.createElement('div');
-// 		divc.setAttribute('class','col-md-3');
-// 		div0.appendChild(divc);
-		
-// 		input4 = document.createElement('input');
-// 		input4.setAttribute('name','profil.experiences['+nbComp3+'].lieu');
-// 		input4.setAttribute('type','text');
-// 		input4.setAttribute('class','form-control');
-// 		input4.setAttribute('placeholder','Ville');
-// 		input4.setAttribute('data-toggle','tooltip');
-// 		input4.setAttribute('title','Ville');
-// 		divc.appendChild(input4);
-		
-		
-// 		div8 = document.createElement('div');
-// 		div8.setAttribute('class','row');
-// 		div8.setAttribute('style','margin-top: 1%;');
-// 		divP.appendChild(div8);
+		div8 = document.createElement('div');
+		div8.setAttribute('class','row');
+		div8.setAttribute('style','margin-top: 1%;');
+		divP.appendChild(div8);
 	
-// 		div9 = document.createElement('div');
-// 		div9.setAttribute('class','col-md-12');
-// 		div8.appendChild(div9);
+		div9 = document.createElement('div');
+		div9.setAttribute('class','col-md-12');
+		div8.appendChild(div9);
 		
-// 		input7 = document.createElement('input');
-// 		input7.setAttribute('name','profil.experiences['+nbComp3+'].poste');
-// 		input7.setAttribute('type','text');
-// 		input7.setAttribute('class','form-control');
-// 		input7.setAttribute('placeholder','Intitulé de poste');
-// 		input7.setAttribute('data-toggle','tooltip');
-// 		input7.setAttribute('title','Poste occupé');
-// 		div9.appendChild(input7);
+		input7 = document.createElement('input');
+		input7.setAttribute('name','profil.experiences['+nbComp3+'].poste');
+		input7.setAttribute('type','text');
+		input7.setAttribute('class','form-control');
+		input7.setAttribute('placeholder','Poste');
+		input7.setAttribute('data-toggle','tooltip');
+		input7.setAttribute('title','Poste occupé');
+		div9.appendChild(input7);
 		
-// 		div10 = document.createElement('div');
-// 		div10.setAttribute('class','row');
-// 		div10.setAttribute('style','margin-top: 1%;');
-// 		divP.appendChild(div10);
+		div10 = document.createElement('div');
+		div10.setAttribute('class','row');
+		div10.setAttribute('style','margin-top: 1%;');
+		divP.appendChild(div10);
 	
-// 		div11 = document.createElement('div');
-// 		div11.setAttribute('class','col-md-12');
-// 		div10.appendChild(div11);
+		div11 = document.createElement('div');
+		div11.setAttribute('class','col-md-12');
+		div10.appendChild(div11);
 		
-// 		input8 = document.createElement('textarea');
-// 		input8.setAttribute('name','profil.experiences['+nbComp3+'].description');
-// 		input8.setAttribute('type','text-area');
-// 		input8.setAttribute('class','form-control');
-// 		input8.setAttribute('placeholder','Description de votre mission');
-// 		input8.setAttribute('data-toggle','tooltip');
-// 		input8.setAttribute('title','Description de votre mission');
-// 		div11.appendChild(input8);
+		input8 = document.createElement('textarea');
+		input8.setAttribute('name','profil.experiences['+nbComp3+'].description');
+		input8.setAttribute('type','text-area');
+		input8.setAttribute('class','form-control');
+		input8.setAttribute('placeholder','Description de votre mission');
+		input8.setAttribute('data-toggle','tooltip');
+		input8.setAttribute('title','Description de votre mission');
+		div11.appendChild(input8);
 		
 		
-// 		div12 = document.createElement('div');
-// 		div12.setAttribute('class','row');
-// 		divP.appendChild(div12);
+		div12 = document.createElement('div');
+		div12.setAttribute('class','row');
+		divP.appendChild(div12);
 		
-// 		div13 = document.createElement('div');
-// 		div13.setAttribute('class','col-md-11');
-// 		div12.appendChild(div13);
+		div13 = document.createElement('div');
+		div13.setAttribute('class','col-md-11');
+		div12.appendChild(div13);
 		
-// 		div14 = document.createElement('div');
-// 		div14.setAttribute('class','col-md-1');
-// 		div14.setAttribute('style','margin-top:1%;text-align:right');
-// 		div12.appendChild(div14);
+		div14 = document.createElement('div');
+		div14.setAttribute('class','col-md-1');
+		div14.setAttribute('style','margin-top:1%;text-align:right');
+		div12.appendChild(div14);
 		
-// 		button = document.createElement(button);
-// 		button.setAttribute('type','button');
-// 		button.setAttribute('style','margin-top: 1%;text-align:right');
-// 		button.setAttribute('class','btn btn-default');
-// 		button.setAttribute('id','btn_new_comp');
-// 		button.setAttribute('onclick','deleteExperience('+nbComp3+');');
-// 		button.innerHTML='x';
+		button = document.createElement(button);
+		button.setAttribute('type','button');
+		button.setAttribute('style','margin-top: 1%;text-align:right');
+		button.setAttribute('class','btn btn-default');
+		button.setAttribute('id','btn_new_comp');
+		button.setAttribute('onclick','deleteExperience('+nbComp3+');');
+		button.innerHTML='x';
 
-// 		div14.appendChild(button);
+		div14.appendChild(button);
 		
-// 		hr = document.createElement('hr');
-// 		divP.appendChild(hr);
+		hr = document.createElement('hr');
+		divP.appendChild(hr);
 		
 	};
 	
@@ -414,24 +362,27 @@ function varExp() {
 		exp.innerHTML = '';
 	};
 	
-	function chargeRegions(i){
-		var pays = document.getElementById('selectPays'+i);
+	function chargeRegions(){
+		var pays = document.getElementById('selectPays');
 		var selectedPays = pays.options[pays.selectedIndex].innerHTML;
-		var region = document.getElementById('selectRegion'+i);
-		var ville = document.getElementById('selectVille');
-		region.selectedIndex=0;
-		region.disabled=true;
-		ville.value='';
-		if(selectedPays == 'France'){
-			region.disabled=false;
-		}		
+		var res = document.getElementById('selectPays').getAttribute('data-CommandArgument').replace('[','');
+		var regions = res.replace(']','');
+		var element = document.getElementById('selectRegion');
+		if(selectedPays == 'France-F'){
+			element.disabled=false;
+			for (i = 0; i < regions.length; i++) {
+				var newOp = document.createElement("option");
+				var regionText = regions.split(',')[i];
+				newOp.text = regionText.replace(' F','');
+				newOp.value = regionText.replace(' F','');
+			    element.options.add(newOp);
+			}
+			
+		}else {
+			element.disabled=true;
+		}
 	}
-	
-	function enableRegion(i){
-		var element = document.getElementById('selectRegion'+i);
-		element.disabled=false;
-	}
-	
+
 	$(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip(); 
 	});
@@ -457,8 +408,7 @@ function varExp() {
 				<div class="col-md-10">
 					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 					<div class="col-md-12 situation form-group ">
-						<label for="InputDiplomePrincipal"> Situation
-							professionnelle actuelle </label>
+						<label for="InputDiplomePrincipal"> Situation professionnelle actuelle </label>
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
@@ -506,7 +456,7 @@ function varExp() {
 		<div class="navProfil">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12" id="global">
+					<div class="col-md-12">
 						<div class="alert alert-success alert-dismissable" hidden>
 							<button type="button" class="close" data-dismiss="alert"
 								aria-hidden="true">×</button>
@@ -545,7 +495,7 @@ function varExp() {
 							<label for="InputCursus"> Diplômes : </label>
 
 							<div id="diplForm">
-								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()-1}"
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
@@ -588,15 +538,15 @@ function varExp() {
 
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default btnModifProfif" id="btn_new_dipl"
+								class="btn btn-default" id="btn_new_dipl"
 								onClick="varDipl();newDiplome();">Ajouter un diplome</button>
 
 						</div>
-						<div class="form-group" id="divExpForm">
+						<div class="form-group">
 							<label for="InputExp"> Expériences Professionnelles : </label>
 							<div id="expForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.experiences.size()-1}" var="i">
+									end="${utilisateur.profil.experiences.size()}" var="i">
 									<div class="row" id="idExp${i}">
 										<div class="col-md-12">
 											<div class="row">
@@ -621,41 +571,35 @@ function varExp() {
 														placeholder="Entreprise" data-toggle="tooltip"
 														title="Entreprise" />
 												</div>
-											</div>
-											<div class="row" style="margin-top: 1%">
-												<div class="col-md-3">
+												<div class="col-md-2">
 													<%-- 													<form:input path="profil.experiences[${i}].pays" --%>
 													<%-- 														value="${profil.experiences[i].pays}" type="text" --%>
 													<%-- 														class="form-control" id="InputExpPays" placeholder="Pays" data-toggle="tooltip" title="Pays" /> --%>
 													<form:select path="profil.experiences[${i}].pays"
-														name="pays" id="selectPays${i}" class="form-control"
-														onchange="chargeRegions(${i});"
+														name="pays" id="selectPays" class="form-control"
+														onchange="chargeRegions();"
 														data-CommandArgument="${regions}" selected="selected">
 														<form:option value=""> -- Choissez le pays --</form:option>
 														<c:forEach var="paysI" items="${pays}">
-															<form:option value="${paysI.nom}">${paysI.nom}</form:option>
+															<form:option value="">${paysI.nom}-${paysI.code}</form:option>
 														</c:forEach>
 													</form:select>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-2">
 													<%-- 													<form:input path="profil.experiences[${i}].region" --%>
 													<%-- 														value="${profil.experiences[i].region}" type="text" --%>
 													<%-- 														class="form-control" id="InputExpRegion" --%>
 													<%-- 														placeholder="Région" data-toggle="tooltip" title="Région" /> --%>
 													<form:select path="profil.experiences[${i}].region"
-														name="region" class="form-control" disabled="true"
-														id="selectRegion${i}">
-														<form:option value=""> -- Choissez la region --</form:option>
-														<c:forEach var="regionI" items="${regions}">
-															<form:option value="${regionI.nom}">${regionI.nom}</form:option>
-														</c:forEach>
+														name="region" class="form-control" id="selectRegion">
+														<form:option value="NONE"> -- Choissez la region --</form:option>
 														<%-- 														<form:option id="region" value=""></form:option> --%>
 													</form:select>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].lieu"
 														value="${profil.experiences[i].lieu}" type="text"
-														class="form-control" id="selectVille" placeholder="Ville"
+														class="form-control" id="InputExpLieu" placeholder="Ville"
 														data-toggle="tooltip" title="Ville" />
 												</div>
 											</div>
@@ -664,7 +608,7 @@ function varExp() {
 													<form:input path="profil.experiences[${i}].poste"
 														value="${profil.experiences[i].poste}" type="text"
 														class="form-control" id="InputExpPoste"
-														placeholder="Intitulé de poste" data-toggle="tooltip"
+														placeholder="Poste" data-toggle="tooltip"
 														title="Poste occupé" />
 												</div>
 											</div>
@@ -690,12 +634,8 @@ function varExp() {
 									</div>
 								</c:forEach>
 							</div>
-<<<<<<< HEAD
-							
-=======
 
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
-							<button type="button" class="btn btn-default btnModifProfif" id="btn_new_exp"
+							<button type="button" class="btn btn-default" id="btn_new_exp"
 								onClick="varExp();newExperience();">Ajouter une
 								expérience</button>
 
@@ -705,7 +645,7 @@ function varExp() {
 							<label for="InputSkills"> Compétences :</label>
 							<div id="compForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.competence.size()-1}" var="i">
+									end="${utilisateur.profil.competence.size()}" var="i">
 									<div class="row" id="idComp${i}">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle"
@@ -734,7 +674,7 @@ function varExp() {
 								</c:forEach>
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default btnModifProfif" id="btn_new_comp"
+								class="btn btn-default" id="btn_new_comp"
 								onClick="varComp();newCompetence();">Ajouter une
 								compétence</button>
 						</div>
@@ -754,12 +694,10 @@ function varExp() {
 						<%-- 							</c:forEach> --%>
 						<!-- 						</div> -->
 						<a href="${pageContext.servletContext.contextPath}/profil/"><button
-								type="button" class="btn btn-default btnModifProfif">Annuler</button></a>
-						<button type="submit" class="btn btn-default btnModifProfif"
+								type="button" class="btn btn-default">Annuler</button></a>
+						<button type="submit" class="btn btn-default"
 							onclick="SoumettreFormulaire();">Enregistrer</button>
 					</div>
-					<span id="regionsCaches" style="display: none">${regions}</span> <span
-						id="paysCaches" style="display: none">${pays}</span>
 				</div>
 			</div>
 		</div>
