@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -152,12 +153,32 @@ public class ProfilController {
 	public ModelAndView profilModifyPost(HttpServletRequest request,
 			@Valid @ModelAttribute("utilisateur") UtilisateurDTO utilisateur, BindingResult result, Model model) {
 		
-		for(ObjectError err : result.getAllErrors()){
-			System.out.println(err.getCode()+" "+err.getObjectName()+" "+err.getDefaultMessage());
-		}
 		
+//		for(ObjectError err : result.getAllErrors()){
+//			System.out.println(err.getCode()+" "+err.getObjectName()+" "+err.getDefaultMessage());
+//		}
+		
+		//Gestion des erreurs
+		
+//		for(FieldError fError : result.getFieldErrors()){
+//			if(fError.getField().contains("diplome")){
+//				result.rejectValue(fError.getField()+".err", fError.getCode(), "L'année de début est invalide");
+//				fError.getDefaultMessage()
+//				result.rejectValue(fError.getField(), "typeMismatch", "L'année de début est invalide");
+//			}
+//		}
+		
+		//Erreur telephone
 		if(utilisateur.getProfil().getTelephone()==null || "".equals(utilisateur.getProfil().getTelephone()))
 			result.rejectValue("profil.telephone", "Size","Le téléphone est invalide");
+		else if(!utilisateur.getProfil().getTelephone().matches("[0-9]{10}"))
+			result.rejectValue("profil.telephone", "Pattern","Le téléphone est invalide");
+//		
+		
+		
+//		for(DiplomeDTO dipl : utilisateur.getProfil().getDiplomes()){
+//			if(dipl.getAnneeDebut())
+//		}
 		
 
 		if(result.hasErrors()){

@@ -501,13 +501,13 @@ function varExp() {
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneeDebut"
 												data-toggle="tooltip" title="Année de début"
-												value="${profil.diplomes[i].anneeDebut}" type="text"
+												value="${profil.diplomes[i].anneeDebut}" type="number"
 												class="form-control" id="InputDipDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneFin"
 												data-toggle="tooltip" title="Année de fin"
-												value="${profil.diplomes[i].anneFin}" type="text"
+												value="${profil.diplomes[i].anneFin}" type="number"
 												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
 										</div>
 										<div class="col-md-5">
@@ -529,6 +529,10 @@ function varExp() {
 										</div>
 
 									</div>
+									<form:errors path="profil.diplomes[${i}].anneeDebut"/>
+									<form:errors path="profil.diplomes[${i}].anneFin"/>
+									<form:errors path="profil.diplomes[${i}].libelle"/>
+									<form:errors path="profil.diplomes[${i}].lieu"/>
 								</c:forEach>
 
 
@@ -548,14 +552,14 @@ function varExp() {
 											<div class="row">
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].anneeDebut"
-														value="${profil.experiences[i].anneeDebut}" type="text"
+														value="${profil.experiences[i].anneeDebut}" type="number"
 														class="form-control" id="InputExpDebut"
 														placeholder="Début" data-toggle="tooltip"
 														title="Année de début" />
 												</div>
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].anneFin"
-														value="${profil.experiences[i].anneFin}" type="text"
+														value="${profil.experiences[i].anneFin}" type="number"
 														class="form-control" id="InputExpAnneFin"
 														placeholder="Fin" data-toggle="tooltip"
 														title="Année de fin" />
