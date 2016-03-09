@@ -44,7 +44,7 @@ $(document).ready(function viderForm(){
 						placeholder="Tapez votre publication..." id="contenuPubli"/>
 					
 					<input
-					class="inputBtn btn btn-default" type="submit" value="Publier l'article" />
+					class="inputBtn btn btn-default btnModifProfif" type="submit" value="Publier l'article" />
 				</li>
 			</form:form>
 		</ul>

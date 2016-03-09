@@ -216,13 +216,16 @@ public class ArticleImpl implements ArticleService {
 	}
 	
 	@Override
-	public List<ArticleDTO> listerParDate(GroupeDTO groupe) throws MetierException {
-		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe in (select ar.idarticle,ar.groupe.idgroupe from Article ar where ar.groupe.idGroupe = :idgroupe order by ar.idarticle desc)"); 
-		q.setParameter("idgroupe", groupe.getIdGroupe());
+	public List<ArticleDTO> listerParDate(List<GroupeDTO> groupes) throws MetierException {
+		Query q = em.createQuery("select a from Article a order by a.idArticle desc");
 		List<Article> articles = q.getResultList(); 
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
-			articlesDTO.add(MappingToDTO.articleToArticleDTO(article));   
+			for(GroupeDTO groupe : groupes){
+				if(groupe.getIdGroupe()==article.getGroupe().getIdGroupe()){
+				articlesDTO.add(MappingToDTO.articleToArticleDTO(article));   
+				}
+			}
 		}
 		return articlesDTO;
 	} 
