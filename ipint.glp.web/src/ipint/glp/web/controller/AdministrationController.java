@@ -93,7 +93,7 @@ public class AdministrationController {
 			try {
 				luDTO.add(utilisateurS.trouver(animTmp));
 			} catch (MetierException e) {
-				
+				logger.severe("Erreur createGroupePOST - utilisateurS.trouver renvoie : " + e.getMessage());
 			}
 		}
 		uDTO.setIdUtilisateur(idModerateur);
@@ -120,7 +120,7 @@ public class AdministrationController {
 		try {
 			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
 		} catch (MetierException e) {
-			e.printStackTrace();
+			logger.severe("Erreur createGroupePOST - groupeS.listerParType renvoie : " + e.getMessage());
 		}
 		return new ModelAndView("panelAdministration","createdGroupe", "SUCCESS");
 	}
