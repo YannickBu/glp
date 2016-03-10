@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -499,10 +500,10 @@ function varExp() {
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
-											<form:input path="profil.diplomes[${i}].anneeDebut"
-												data-toggle="tooltip" title="Année de début"
-												value="${profil.diplomes[i].anneeDebut}" type="number"
-												class="form-control" id="InputDipDebut" placeholder="Début" />
+										<form:input path="profil.diplomes[${i}].anneeDebut"
+											data-toggle="tooltip" title="Année de début"
+											value="${profil.diplomes[i].anneeDebut}" type="number"
+											class="form-control" id="InputDipDebut" placeholder="Début"/>
 										</div>
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneFin"
@@ -527,10 +528,8 @@ function varExp() {
 												class="btn btn-default" id="btn_delete_comp"
 												onClick="deleteDiplome(${i});">x</button>
 										</div>
-									<form:errors path="profil.diplomes[${i}].anneeDebut"/>
+									<form:errors path="profil.diplomes[${i}].anneeDebut"/><br/>
 									<form:errors path="profil.diplomes[${i}].anneFin"/>
-									<form:errors path="profil.diplomes[${i}].libelle"/>
-									<form:errors path="profil.diplomes[${i}].lieu"/>
 									</div>
 								</c:forEach>
 
@@ -628,6 +627,8 @@ function varExp() {
 														id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
 												</div>
 											</div>
+									<form:errors path="profil.experiences[${i}].anneeDebut"/><br/>
+									<form:errors path="profil.experiences[${i}].anneFin"/>
 											<hr>
 										</div>
 									</div>

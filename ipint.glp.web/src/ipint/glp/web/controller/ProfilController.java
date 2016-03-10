@@ -1,6 +1,5 @@
 package ipint.glp.web.controller;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.CompetenceDTO;
 import ipint.glp.api.DTO.DiplomeDTO;
+import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.RegionDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.VilleDTO;
@@ -176,17 +176,43 @@ public class ProfilController {
 		else if(!utilisateur.getProfil().getTelephone().matches("[0-9]{10}"))
 			result.rejectValue("profil.telephone", "Pattern","Le téléphone est invalide");
 		
-		//Erreur annees
+		//Erreur annees diplomes
 		DiplomeDTO dipl;
 		for(int indDipl = 0; indDipl<utilisateur.getProfil().getDiplomes().size();indDipl++){
 			GregorianCalendar cal = new GregorianCalendar();
 			cal.setTime(new Date());
 			dipl = utilisateur.getProfil().getDiplomes().get(indDipl);
-			if(dipl.getAnneeDebut()<1950 || dipl.getAnneeDebut()>cal.get(GregorianCalendar.YEAR)){
-				result.rejectValue("profil.diplomes["+indDipl+"].anneeDebut", "Pattern","L'année de début est invalide");
+			if(dipl!=null){
+				if(dipl.getAnneeDebut()!=null){
+					if(dipl.getAnneeDebut()<1950 || dipl.getAnneeDebut()>cal.get(GregorianCalendar.YEAR)){
+						result.rejectValue("profil.diplomes["+indDipl+"].anneeDebut", "Pattern","L'année de début est invalide");
+					}
+				}
+				if(dipl.getAnneFin()!=null){
+					if(dipl.getAnneFin()==null || dipl.getAnneFin()<1950 || dipl.getAnneFin()>cal.get(GregorianCalendar.YEAR)){
+						result.rejectValue("profil.diplomes["+indDipl+"].anneFin", "Pattern","L'année de fin est invalide");
+					}
+				}
 			}
-			if(dipl.getAnneFin()<1950 || dipl.getAnneFin()>cal.get(GregorianCalendar.YEAR)){
-				result.rejectValue("profil.diplomes["+indDipl+"].anneFin", "Pattern","L'année de fin est invalide");
+		}
+		
+		//Erreur annees experiences
+		ExperienceDTO exp;
+		for(int indExp = 0; indExp<utilisateur.getProfil().getExperiences().size();indExp++){
+			GregorianCalendar cal = new GregorianCalendar();
+			cal.setTime(new Date());
+			exp = utilisateur.getProfil().getExperiences().get(indExp);
+			if(exp!=null){
+				if(exp.getAnneeDebut()!=null){
+					if(exp.getAnneeDebut()<1950 || exp.getAnneeDebut()>cal.get(GregorianCalendar.YEAR)){
+						result.rejectValue("profil.experiences["+indExp+"].anneeDebut", "Pattern","L'année de début est invalide");
+					}
+				}
+				if(exp.getAnneFin()!=null){
+					if(exp.getAnneFin()<1950 || exp.getAnneFin()>cal.get(GregorianCalendar.YEAR)){
+						result.rejectValue("profil.experiences["+indExp+"].anneFin", "Pattern","L'année de fin est invalide");
+					}
+				}
 			}
 		}
 		
