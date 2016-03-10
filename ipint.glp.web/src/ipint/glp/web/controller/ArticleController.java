@@ -36,7 +36,7 @@ public class ArticleController {
 	GroupeService gs;
 
 	@RequestMapping(value = "/publication", method = RequestMethod.GET)
-	public ModelAndView welcomeGet(HttpServletRequest request, Model model, @ModelAttribute UtilisateurDTO utilisateur) {
+	public ModelAndView welcomeGet(HttpServletRequest request, Model model, @ModelAttribute UtilisateurDTO utilisateur) throws MetierException {
 		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
@@ -58,6 +58,17 @@ public class ArticleController {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		} 
+		
+		List<GroupeDTO> tousLesGroupes = gs.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		model.addAttribute("tousLesGroupes", tousLesGroupes);
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("accueil", "article", new ArticleDTO());

@@ -30,11 +30,11 @@
 			<ul>
 				<a
 					href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
-					<li>${utilisateur.groupePrincipal.nomGroupe}</li>
+					<li class="nomGroupe">${utilisateur.groupePrincipal.nomGroupe}</li>
 				</a>
 				<c:forEach items="${utilisateur.groupes}" var="grp">
 
-					<li><a
+					<li class="nomGroupe"><a
 						href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 				</c:forEach>
 			</ul>
