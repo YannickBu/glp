@@ -360,6 +360,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		for (Competence competence : utilisateur.getProfil().getCompetence()) {
 			System.out.println("Compretence ENTITY ------------->" + competence.getLibelle());
 		}
+		em.refresh(utilisateur);
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
 		for (CompetenceDTO competence : utilisateurDTO.getProfil().getCompetence()) {
 			System.out.println("Compretence DTO ------------->" + competence.getLibelle());
@@ -462,6 +463,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			// les diplomes
 			List<Diplome> dipls = new ArrayList<Diplome>();
 			List<Diplome> oldDipls = new ArrayList<Diplome>();
+			oldDipls = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getDiplomes();
 			if (nouvelUtilisateur.getProfil().getDiplomes() != null
 					&& !nouvelUtilisateur.getProfil().getDiplomes().isEmpty()) {
 				Diplome dipl = new Diplome();
@@ -487,6 +489,7 @@ public class UtilisateurImpl implements UtilisateurService {
 							dipl.setLibelle(diplDTO.getLibelle());
 							dipl.setAnneeDebut(diplDTO.getAnneeDebut());
 							dipl.setAnneFin(diplDTO.getAnneFin());
+							dipl.setLieu(diplDTO.getLieu());
 							dipls.add(dipl);
 							em.persist(dipl);
 						}
@@ -503,6 +506,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			// les experiences
 			List<Experience> exps = new ArrayList<Experience>();
 			List<Experience> oldExps = new ArrayList<Experience>();
+			oldExps = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getExperiences();
 			if (nouvelUtilisateur.getProfil().getExperiences() != null
 					&& !nouvelUtilisateur.getProfil().getExperiences().isEmpty()) {
 				Experience exp = new Experience();

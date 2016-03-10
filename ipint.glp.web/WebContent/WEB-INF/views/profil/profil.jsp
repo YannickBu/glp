@@ -81,7 +81,7 @@
 												<li>Expériences Professionnelles : <c:set var="count"
 														value="1" scope="page" /> <c:forEach
 														items="${utilisateur.profil.experiences}" var="exp">
-														<div class="panel-group" id="panel-${count}">
+														<div style="margin-top: 2%" class="panel-group" id="panel-${count}">
 															<div class="panel panel-default">
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
@@ -117,7 +117,7 @@
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
 															<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																${diplome.libelle}- ${diplome.lieu}</li>
+																${diplome.libelle}-${diplome.lieu}</li>
 														</c:forEach>
 													</ul>
 												</li>
