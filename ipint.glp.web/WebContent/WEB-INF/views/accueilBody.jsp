@@ -26,7 +26,7 @@
 								<%-- 								<c:forEach items="${utilisateur.groupes}" var="grp"> --%>
 								<%-- 									<form:option value="Selectionner un groupe de publication" --%>
 								<%--  										selected="selected"></form:option>  --%>
-								<form:option value="${utilisateur.groupePrincipal.nomGroupe}"></form:option>
+<%-- 								<form:option value="${utilisateur.groupePrincipal.nomGroupe}"></form:option> --%>
 								<form:options items="${utilisateur.groupes}"
 									itemValue="idGroupe" itemLabel="nomGroupe"></form:options>
 								<%-- 								</c:forEach> --%>

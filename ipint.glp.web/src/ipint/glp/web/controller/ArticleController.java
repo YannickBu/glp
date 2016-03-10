@@ -43,22 +43,17 @@ public class ArticleController {
 		try {
 			uDTO = us.trouver(uDTO);
 			List<GroupeDTO> groupes = uDTO.getGroupes();
-			List<GroupeDTO> groupes2 = new ArrayList<>();
-			groupes2.addAll(groupes);
+//			List<GroupeDTO> groupes2 = new ArrayList<>();
+//			groupes2.addAll(groupes);
 			GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
-<<<<<<< HEAD
 			System.out.println("ArticleController " + "welcomeGet" + groupes);
-			groupes2.add(groupePrincipal);
-			for (GroupeDTO groupe : groupes2) {
-				for (ArticleDTO articleDTO : as.listerParGroupe(groupe)) {
-=======
 			groupes.add(groupePrincipal);
-			//for(GroupeDTO groupe : groupes){
-				for(ArticleDTO articleDTO : as.listerParDate(groupes)){
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
+			for (GroupeDTO groupe : groupes) {
+				for (ArticleDTO articleDTO : as.listerParGroupe(groupe)) {
+
 					articles.add(articleDTO);
 				}
-			//}
+			}
 		} catch (MetierException e) {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
@@ -104,18 +99,12 @@ public class ArticleController {
 		List<GroupeDTO> groupes = uDTO.getGroupes();
 		GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
 		groupes.add(groupePrincipal);
-		//for(GroupeDTO groupe : groupes){
-<<<<<<< HEAD
-		for(ArticleDTO articleDTO : as.listerParDate(groupes)){
+		// for(GroupeDTO groupe : groupes){
+
+		for (ArticleDTO articleDTO : as.listerParDate(groupes)) {
 			articles.add(articleDTO);
 		}
-//	}
-=======
-			for(ArticleDTO articleDTO : as.listerParDate(groupes)){
-				articles.add(articleDTO);
-			}
-	//	}
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
+		// }
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());

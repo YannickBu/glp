@@ -94,16 +94,33 @@
 								</div>
 							</div>
 						</div>
-						<a
-							href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/desinscriptionGroupe"><button
-								type="button" style="margin-top: 1%; float: right"
-								class="btn btn-default" id="btn_new_exp">Se désinscrire</button></a>
-						<a
-							href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/inscriptionGroupe"><button
-								type="button" style="margin-top: 1%; float: right"
-								class="btn btn-default" id="btn_new_exp">S'inscrire à
-								ce groupe</button></a>
+						<c:if test="${inscription == 1}">
+							<a
+								href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/desinscriptionGroupe"><button
+									type="button" style="margin-top: 1%; float: right"
+									class="btn btn-default" id="btn_new_exp">Se
+									désinscrire</button></a>
+
+						</c:if>
+						<c:if test="${inscription == 0}">
+
+							<a
+								href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/inscriptionGroupe"><button
+									type="button" style="margin-top: 1%; float: right"
+									class="btn btn-default" id="btn_new_exp">S'inscrire à
+									ce groupe</button></a>
+						</c:if>
+						<c:if test="${inscription == 2}">
+							<button
+									type="button" style="margin-top: 1%; float: right"
+									class="btn btn-default" id="btn_new_exp" disabled="true">En attente de validation d'inscription</button>
+						</c:if>
+
 					</div>
+					<ul>
+
+
+					</ul>
 				</div>
 			</div>
 		</div>

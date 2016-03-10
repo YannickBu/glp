@@ -368,17 +368,12 @@ public class UtilisateurImpl implements UtilisateurService {
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
-<<<<<<< HEAD
-		System.out.println("################################## = "+utilisateur.getGroupes());
-		System.out.println("##################################4444 = "+utilisateurDTO.getGroupes());
-=======
-				
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
-		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
-<<<<<<< HEAD
-=======
 		
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
+		em.refresh(utilisateur);
+
+		System.out.println("UTILISATEURIMPL " + "trouver " + "Avant mapping" + utilisateur.getGroupes());
+		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+		System.out.println("UTILISATEURIMPL " + "trouver " + "Après mapping" + utilisateur.getGroupes());
 		return utilisateurDTO;
 	}
 
@@ -404,13 +399,6 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
-		// System.out.println(
-		// "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " +
-		// nouvelUtilisateur.getPassword());
 
 		if (nouvelUtilisateur.getPassword() != null && !"".equals(nouvelUtilisateur.getPassword())) {
 			utilisateurMAJ.setPassword(nouvelUtilisateur.getPassword());
@@ -456,7 +444,7 @@ public class UtilisateurImpl implements UtilisateurService {
 								if (!comps.contains(comp)) {
 									comps.add(comp);
 								}
-								em.merge(comp);
+								em.persist(comp);
 							}
 						} else {
 							comp = new Competence();

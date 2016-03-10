@@ -38,7 +38,7 @@ public class Groupe {
 	@ManyToOne
 	private Utilisateur utilisateurResponsable;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Utilisateur> utilisateurs;
 
 	@ManyToMany

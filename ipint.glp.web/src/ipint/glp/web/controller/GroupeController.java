@@ -1,5 +1,6 @@
 package ipint.glp.web.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -82,9 +83,10 @@ public class GroupeController {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
+
 		model.addAttribute("leGroupe", gDTO);
 
-		return new ModelAndView("groupe");
+		return new ModelAndView("redirect:/groupe/{id}");
 	}
 
 	@RequestMapping(value = "/groupe/{id}/desinscriptionGroupe", method = RequestMethod.GET)
@@ -122,7 +124,7 @@ public class GroupeController {
 
 		model.addAttribute("leGroupe", gDTO);
 
-		return new ModelAndView("groupe");
+		return new ModelAndView("redirect:/groupe/{id}");
 	}
 
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
@@ -130,6 +132,7 @@ public class GroupeController {
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
 		gDTO.setIdGroupe(Integer.parseInt(id));
+
 		try {
 			gDTO = groupeService.trouver(gDTO);
 		} catch (MetierException e) {
@@ -139,11 +142,44 @@ public class GroupeController {
 		List<UtilisateurDTO> animateursGroupe = gDTO.getAnimateurs();
 		List<UtilisateurDTO> membresGroupe = gDTO.getUtilisateurs();
 		List<ArticleDTO> articlesGroupe = gDTO.getArticles();
+		UtilisateurDTO uDTO = new UtilisateurDTO();
+		uDTO.setEmail(request.getUserPrincipal().getName());
+		try {
+			uDTO = utilisateurService.trouver(uDTO);
+		} catch (MetierException e) {
+			logger.severe("Erreur acces profil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
+		}
+		int inscription = 0;
+
+		for (GroupeDTO groupeDTO : uDTO.getGroupes()) {
+			if (groupeDTO.getIdGroupe() == gDTO.getIdGroupe()) {
+				inscription = 1;
+			}
+		}
+		if (uDTO.getGroupePrincipal().getIdGroupe() == gDTO.getIdGroupe()) {
+			inscription = 3;
+		}
+
+		try {
+			List<UtilisateurEnAttenteDTO> lesUeaDTO = utilisateurEnAttenteService.lister();
+			for (UtilisateurEnAttenteDTO ueaDTO : lesUeaDTO) {
+				System.out.println("GroupeController " + "groupeidGET " + ueaDTO.getNom());
+				if (ueaDTO.getEmail().equals(uDTO.getEmail())) {
+					if (gDTO.getIdGroupe() == ueaDTO.getGroupePrincipal().getIdGroupe()) {
+						inscription = 2;
+					}
+				}
+			}
+		} catch (MetierException e) {
+
+		}
 
 		model.addAttribute("leGroupe", gDTO);
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe", membresGroupe);
 		model.addAttribute("articlesGroupe", articlesGroupe);
+		model.addAttribute("inscription", inscription);
 		return new ModelAndView("groupe");
 	}
 }
