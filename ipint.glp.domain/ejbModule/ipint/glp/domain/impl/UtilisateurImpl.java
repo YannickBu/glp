@@ -371,14 +371,6 @@ public class UtilisateurImpl implements UtilisateurService {
 		
 		em.refresh(utilisateur);
 
-<<<<<<< HEAD
-		for (Competence competence : utilisateur.getProfil().getCompetence()) {
-			System.out.println("Compretence ENTITY ------------->" + competence.getLibelle());
-		}
-		em.refresh(utilisateur);
-=======
-		System.out.println("UTILISATEURIMPL " + "trouver " + "Avant mapping" + utilisateur.getGroupes());
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
 		System.out.println("UTILISATEURIMPL " + "trouver " + "Après mapping" + utilisateur.getGroupes());
 		return utilisateurDTO;
