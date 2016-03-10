@@ -7,7 +7,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/moderation/panelInscription.jsp"></put-attribute>
 		<put-attribute name="menu-gauche"
-			value="/WEB-INF/views/moderation/panelMenuGauche.jsp"></put-attribute>
+			value="/WEB-INF/views/menu-gauche.jsp"></put-attribute>
 		<put-attribute name="menu-droite"
 			value="/WEB-INF/views/moderation/panelMenuDroite.jsp"></put-attribute>
 	</definition>
@@ -16,7 +16,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/moderation/menuInscription.jsp"></put-attribute>
 		<put-attribute name="menu-gauche"
-			value="/WEB-INF/views/moderation/panelMenuGauche.jsp"></put-attribute>
+			value="/WEB-INF/views/menu-gauche.jsp"></put-attribute>
 		<put-attribute name="menu-droite"
 			value="/WEB-INF/views/moderation/panelMenuDroite.jsp"></put-attribute>
 	</definition>
