@@ -65,23 +65,21 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
 
-		Query q = em.createQuery(
-				"select g from Utilisateur g where g.email = :email");
+		Query q = em.createQuery("select g from Utilisateur g where g.email = :email");
 		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
-	
-	/*	if (!q.getResultList().isEmpty()) {
-			throw new UtilisateurExistantException(
-					"UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
-							+ utilisateurEnAttenteDTO.getEmail());
-		}
-		q = em.createQuery(
-				"select g from UtilisateurEnAttente g where g.email = :email");
-		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
-		if (!q.getResultList().isEmpty()) {
-			throw new UtilisateurExistantException(
-					"UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
-							+ utilisateurEnAttenteDTO.getEmail());
-		} */
+
+		/*
+		 * if (!q.getResultList().isEmpty()) { throw new
+		 * UtilisateurExistantException(
+		 * "UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
+		 * + utilisateurEnAttenteDTO.getEmail()); } q = em.createQuery(
+		 * "select g from UtilisateurEnAttente g where g.email = :email");
+		 * q.setParameter("email", utilisateurEnAttenteDTO.getEmail()); if
+		 * (!q.getResultList().isEmpty()) { throw new
+		 * UtilisateurExistantException(
+		 * "UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
+		 * + utilisateurEnAttenteDTO.getEmail()); }
+		 */
 
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
@@ -175,16 +173,25 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 			groupe = em.find(Groupe.class, groupe.getIdGroupe());
 			List<Groupe> lesGroupes = utilisateur.getGroupes();
 			System.out.println("GROUPE : " + groupe);
-			for (Groupe lesGroupesUtil : lesGroupes) {
-				System.out.println(lesGroupesUtil);
-			}
+			/*
+			 * for (Groupe lesGroupesUtil : lesGroupes) { System.out.println(
+			 * "++++++++++++++++++++++++++++++++++++++++++++++++++++++++" +
+			 * lesGroupesUtil); }
+			 */
 			lesGroupes.add(groupe);
 			utilisateur.setGroupes(lesGroupes);
 			groupe.getUtilisateurs().add(utilisateur);
-			em.persist(groupe);
-			em.persist(utilisateur);
-		} catch (NoResultException e) {
+			// System.out.println(("----------------------- GROUPE : " +
+			// utilisateur.getGroupes()));
+			// em.persist(groupe);
+			em.merge(utilisateur);
+			int typeDeMessage = 5;
+			String messageOptionel = "";
+			String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, groupe.getNomGroupe());
+			Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 
+		} catch (NoResultException e) {
+			System.out.println();
 			int typeDeMessage = 1;
 			String messageOptionel = "";
 

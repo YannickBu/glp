@@ -27,23 +27,23 @@ public class Groupe {
 	private String description;
 	private boolean isGroupeOfficiel = false;
 
-	//Pas besoin de stocker les utilisateurs principaux de ce coté, relation unidirectionnelle
-	/*@OneToMany(mappedBy = "groupePrincipal")
-	private List<Utilisateur> utilisateursPrincipals;*/
-	
+	// Pas besoin de stocker les utilisateurs principaux de ce coté, relation
+	// unidirectionnelle
+	/*
+	 * @OneToMany(mappedBy = "groupePrincipal") private List<Utilisateur>
+	 * utilisateursPrincipals;
+	 */
+
 	@ManyToOne
 	private Utilisateur utilisateurResponsable;
-	
+
 	@ManyToMany
-	@JoinTable(name = "GROUPE_UTILISATEUR", joinColumns = @JoinColumn(name = "groupes_IDGROUPE"),
-	inverseJoinColumns = @JoinColumn(name = "utilisateurs_IDUTILISATEUR"))
 	private List<Utilisateur> utilisateurs;
-	
+
 	@ManyToMany
-	@JoinTable(name = "GROUPEANIME_ANIMATEUR", joinColumns = @JoinColumn(name = "groupes_IDGROUPE"),
-	inverseJoinColumns = @JoinColumn(name = "utilisateurs_IDUTILISATEUR"))
+	@JoinTable(name = "GROUPEANIME_ANIMATEUR", joinColumns = @JoinColumn(name = "groupes_IDGROUPE") , inverseJoinColumns = @JoinColumn(name = "utilisateurs_IDUTILISATEUR") )
 	private List<Utilisateur> animateurs;
-	
+
 	@OneToMany(mappedBy = "groupe")
 	private List<Article> articles;
 
@@ -58,14 +58,15 @@ public class Groupe {
 	public Groupe() {
 		this.utilisateurs = new ArrayList<>();
 	}
-	
-//	public List<Utilisateur> getUtilisateurPrincipal() {
-//		return utilisateursPrincipals;
-//	}
-//
-//	public void setUtilisateurPrincipal(List<Utilisateur> utilisateurPrincipal) {
-//		this.utilisateursPrincipals = utilisateurPrincipal;
-//	}
+
+	// public List<Utilisateur> getUtilisateurPrincipal() {
+	// return utilisateursPrincipals;
+	// }
+	//
+	// public void setUtilisateurPrincipal(List<Utilisateur>
+	// utilisateurPrincipal) {
+	// this.utilisateursPrincipals = utilisateurPrincipal;
+	// }
 
 	public Integer getIdGroupe() {
 		return idGroupe;
@@ -116,6 +117,7 @@ public class Groupe {
 	}
 
 	public List<Utilisateur> getUtilisateurs() {
+		System.out.println("Utilisateurs DATABASE : " + utilisateurs);
 		return utilisateurs;
 	}
 
@@ -123,14 +125,10 @@ public class Groupe {
 		this.utilisateurs = utilisateurs;
 	}
 
-
 	@Override
-	public String toString(){
-		return "[Groupe - id="+this.idGroupe+", nomGroupe="+this.nomGroupe+"]";
+	public String toString() {
+		return "[Groupe - id=" + this.idGroupe + ", nomGroupe=" + this.nomGroupe + "]";
 	}
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -140,9 +138,6 @@ public class Groupe {
 		result = prime * result + ((nomGroupe == null) ? 0 : nomGroupe.hashCode());
 		return result;
 	}
-
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -165,7 +160,5 @@ public class Groupe {
 			return false;
 		return true;
 	}
-	
-	
 
 }

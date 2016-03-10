@@ -36,28 +36,29 @@ public class ArticleController {
 	GroupeService gs;
 
 	@RequestMapping(value = "/publication", method = RequestMethod.GET)
-	public ModelAndView welcomeGet(HttpServletRequest request, Model model) {
-		List<ArticleDTO> articles=new ArrayList<ArticleDTO>();
+	public ModelAndView welcomeGet(HttpServletRequest request, Model model, @ModelAttribute UtilisateurDTO utilisateur) {
+		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
 			uDTO = us.trouver(uDTO);
 			List<GroupeDTO> groupes = uDTO.getGroupes();
+			List<GroupeDTO> groupes2 = new ArrayList<>();
+			groupes2.addAll(groupes);
 			GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
-			groupes.add(groupePrincipal);
-			for(GroupeDTO groupe : groupes){
-				for(ArticleDTO articleDTO : as.listerParGroupe(groupe)){
+			System.out.println("ArticleController " + "welcomeGet" + groupes);
+			groupes2.add(groupePrincipal);
+			for (GroupeDTO groupe : groupes2) {
+				for (ArticleDTO articleDTO : as.listerParGroupe(groupe)) {
 					articles.add(articleDTO);
 				}
 			}
 		} catch (MetierException e) {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
-		}
-
+		} 
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
-		model.addAttribute("groupePrincipal", uDTO.getGroupePrincipal());
 		return new ModelAndView("accueil", "article", new ArticleDTO());
 	}
 
@@ -80,12 +81,13 @@ public class ArticleController {
 		Calendar cal = Calendar.getInstance();
 		articleDto.setDatePublication(cal);
 		articleDto.setUtilisateur(uDTO);
-		System.out.println("///////////// Id :" + article.getGroupe().getIdGroupe());
+		System.out.println(" ArticleController - publicationGet - article.getGroupe().getIdGroupe() = "
+				+ article.getGroupe().getIdGroupe());
 		GroupeDTO grp = new GroupeDTO();
 		grp.setIdGroupe(article.getGroupe().getIdGroupe());
 		grp = gs.trouver(grp);
 		articleDto.setGroupe(grp);
-		System.out.println("***************Groupe="+grp.getNomGroupe());
+		System.out.println(" ArticleController - publicationGet - grp.getNomGroupe() = " + grp.getNomGroupe());
 		try {
 			articleDto = as.creer(articleDto);
 		} catch (MetierException e) {
@@ -96,8 +98,8 @@ public class ArticleController {
 		List<GroupeDTO> groupes = uDTO.getGroupes();
 		GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
 		groupes.add(groupePrincipal);
-		for(GroupeDTO groupe : groupes){
-			for(ArticleDTO articleDTO : as.listerParGroupe(groupe)){
+		for (GroupeDTO groupe : groupes) {
+			for (ArticleDTO articleDTO : as.listerParGroupe(groupe)) {
 				articles.add(articleDTO);
 			}
 		}

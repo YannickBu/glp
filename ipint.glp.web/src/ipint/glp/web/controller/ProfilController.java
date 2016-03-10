@@ -74,16 +74,6 @@ public class ProfilController {
 		// uDTO2.setProfil(pDTO);
 		//
 		// uDTO = utilisateurService.modifier(uDTO, uDTO2);
-
-		for (CompetenceDTO competence : uDTO.getProfil().getCompetence()) {
-			System.out.println("Competence --------------------------->  " + competence.getLibelle());
-		}
-		System.out.println("profil : " + uDTO.getProfil());
-		System.out.println("profil dernier diplome obtenu: " + uDTO.getProfil().getDiplomePrincipal());
-		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
-		System.out.println(uDTO.getNom());
-		// System.out.println(uDTO.getProfil());
-
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());

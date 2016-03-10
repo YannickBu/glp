@@ -158,6 +158,7 @@ public class Utilisateur implements Serializable {
 	}
 
 	public List<Groupe> getGroupes() {
+		System.out.println("GROUPE DATABASE : " + groupes);
 		return groupes;
 	}
 

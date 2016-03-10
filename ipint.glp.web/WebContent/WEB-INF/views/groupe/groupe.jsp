@@ -78,22 +78,14 @@
 										<c:forEach items="${articlesGroupe}" var="article">
 											<div class="article">
 												<ul>
-<<<<<<< HEAD
+
 													<li class="nomEtu" style="list-style-type: none;"><a
 														href="${pageContext.servletContext.contextPath}/profil/${article.utilisateur.idUtilisateur}">${article.utilisateur.prenom}
 															${article.utilisateur.nom}</a> - <fmt:formatDate type="both"
 															dateStyle="short" timeStyle="short"
 															value="${article.datePublication.time}" /></li>
 													<li style="list-style-type: none;" class="titreArt">${article.titre}</li>
-													
-=======
-													<li class="nomEtu" style="list-style-type: none;">
-														<a href="${pageContext.servletContext.contextPath}/profil/${article.utilisateur.idUtilisateur}" >${article.utilisateur.prenom} ${article.utilisateur.nom}</a> - <fmt:formatDate type="both"
-														dateStyle="short" timeStyle="short"
-														value="${article.datePublication.time}" />
-													</li>
-													<li style="list-style-type: none;" class="titreArt">${article.titre}</li>
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
+
 													<li style="list-style-type: none;">${article.contenu}</li>
 												</ul>
 											</div>
@@ -102,6 +94,10 @@
 								</div>
 							</div>
 						</div>
+						<a
+							href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/desinscriptionGroupe"><button
+								type="button" style="margin-top: 1%; float: right"
+								class="btn btn-default" id="btn_new_exp">Se désinscrire</button></a>
 						<a
 							href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/inscriptionGroupe"><button
 								type="button" style="margin-top: 1%; float: right"

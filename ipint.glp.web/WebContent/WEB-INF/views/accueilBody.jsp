@@ -5,11 +5,10 @@
 	pageEncoding="UTF-8"%>
 
 <script>
-$(document).ready(function viderForm(){
-	document.getElementById("titrePubli").value = "";
-	document.getElementById("contenuPubli").value = "";
-});
-
+	$(document).ready(function viderForm() {
+		document.getElementById("titrePubli").value = "";
+		document.getElementById("contenuPubli").value = "";
+	});
 </script>
 
 <div class="col-md-6 accueilBody">
@@ -21,31 +20,30 @@ $(document).ready(function viderForm(){
 				<li>
 					<div class="row">
 						<div class="col-md-4 publierArt">Publier un article via</div>
-						<div class="col-md-8" style="padding-right:5.5%">
+						<div class="col-md-8" style="padding-right: 5.5%">
 							<form:select class="form-control" id="selectGroupePublication"
-								path="groupe.idGroupe"> 
-<%-- 								<c:forEach items="${utilisateur.groupes}" var="grp"> --%>
-<%-- 									<form:option value="Selectionner un groupe de publication" --%>
-<%--  										selected="selected"></form:option>  --%>
-									<form:options items="${utilisateur.groupes}" itemValue="idGroupe" itemLabel="nomGroupe"></form:options>
-<%-- 								</c:forEach> --%>
+								path="groupe.idGroupe">
+								<%-- 								<c:forEach items="${utilisateur.groupes}" var="grp"> --%>
+								<%-- 									<form:option value="Selectionner un groupe de publication" --%>
+								<%--  										selected="selected"></form:option>  --%>
+								<form:option value="${utilisateur.groupePrincipal.nomGroupe}"></form:option>
+								<form:options items="${utilisateur.groupes}"
+									itemValue="idGroupe" itemLabel="nomGroupe"></form:options>
+								<%-- 								</c:forEach> --%>
 							</form:select>
 						</div>
 					</div>
 				</li>
 
-				<li class="formPubli">
+				<li class="formPubli"><form:input
+						class="inputForm form-control" path="titre"
+						placeholder="Titre de la publication" id="titrePubli" value="" />
 
-					<form:input class="inputForm form-control"
-						path="titre" placeholder="Titre de la publication" id="titrePubli" value=""/> 
-
-					<form:textarea
-						type="text-area" rows="3" class="inputForm form-control" path="contenu"
-						placeholder="Tapez votre publication..." id="contenuPubli"/>
-					
-					<input
-					class="inputBtn btn btn-default" type="submit" value="Publier l'article" />
-				</li>
+					<form:textarea type="text-area" rows="3"
+						class="inputForm form-control" path="contenu"
+						placeholder="Tapez votre publication..." id="contenuPubli" /> <input
+					class="inputBtn btn btn-default" type="submit"
+					value="Publier l'article" /></li>
 			</form:form>
 		</ul>
 	</div>

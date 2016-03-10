@@ -41,6 +41,12 @@ public class Mail {
 		messageRenvoyer = MessageDefautDeDebut + MessageDefautRefus + MessageDefautComplement + messageAditionnel + MessageDefautDeFin;
 		return messageRenvoyer;	
 	}
+	
+	private static String messageAcceptationDemandeGroupe(String groupe){
+		String messageRenvoyer;
+		messageRenvoyer = MessageDefautDeDebut + MessageDefautAccepter + "Vous êtes dorénavant inscrit au groupe  : "+ groupe  + MessageDefautDeFin; 
+		return messageRenvoyer;	
+	}
 
 	/**
 	 * Fonction qui appelle une des 4 fonctions qui fabrique le message du mail
@@ -64,6 +70,9 @@ public class Mail {
 		}
 		else if(type==4){
 			messageObtenu = messageRefusAvecMessageAditionnel(messageAditionnel);
+		}
+		else if(type==5){
+			messageObtenu = messageAcceptationDemandeGroupe(motDePasse);
 		}
 		else{
 			messageObtenu = "Ca ne devrais jamais passer ici";

@@ -53,40 +53,46 @@ public class UtilisateurImpl implements UtilisateurService {
 			throw new InformationManquanteException("UtilisateurImpl.creer : L'utilisateurDTO est null");
 		}
 		if (utilisateurDTO.getEmail() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas d'email");
+			throw new InformationManquanteException(
+					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas d'email");
 		}
 		if (utilisateurDTO.getStatut() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de statut");
+			throw new InformationManquanteException(
+					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de statut");
 		}
 		if (utilisateurDTO.getPassword() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de password");
+			throw new InformationManquanteException(
+					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de password");
 		}
 		if (utilisateurDTO.getNom() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de nom");
+			throw new InformationManquanteException(
+					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de nom");
 		}
 		if (utilisateurDTO.getPrenom() == null) {
-			throw new InformationManquanteException("UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de prenom");
+			throw new InformationManquanteException(
+					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de prenom");
 		}
 		if (utilisateurDTO.getGroupePrincipal() == null) {
 			throw new InformationManquanteException(
 					"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " n'a pas de groupe principal");
 		}
 
-		//Gestion utilisateur existant
-		try{
-			if(trouver(utilisateurDTO)!=null){
-				throw new UtilisateurExistantException("UtilisateurImpl.creer : "+ utilisateurDTO.toString() + " existe déjà");
+		// Gestion utilisateur existant
+		try {
+			if (trouver(utilisateurDTO) != null) {
+				throw new UtilisateurExistantException(
+						"UtilisateurImpl.creer : " + utilisateurDTO.toString() + " existe déjà");
 			}
-		}catch(UtilisateurInconnuException e){
-			
+		} catch (UtilisateurInconnuException e) {
+
 		}
-		
-		//Lorsque lutilisateur vient du CAS, il faut lui generer un mdp
-		if("".equals(utilisateurDTO.getPassword())){
+
+		// Lorsque lutilisateur vient du CAS, il faut lui generer un mdp
+		if ("".equals(utilisateurDTO.getPassword())) {
 			GenererMotDePasse passFacto = new GenererMotDePasse(10);
 			utilisateurDTO.setPassword(passFacto.nextString());
 		}
-		
+
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setEmail(utilisateurDTO.getEmail());
 		utilisateur.setNom(utilisateurDTO.getNom());
@@ -351,20 +357,16 @@ public class UtilisateurImpl implements UtilisateurService {
 			q.setParameter("email", utilisateurDTO.getEmail());
 			try {
 				utilisateur = (Utilisateur) q.getSingleResult();
+				utilisateurDTO.setIdUtilisateur(utilisateur.getIdUtilisateur());
+				utilisateur = em.find(Utilisateur.class, utilisateurDTO.getIdUtilisateur());
 			} catch (NoResultException e) {
 				throw new UtilisateurInconnuException(
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
-
-		for (Competence competence : utilisateur.getProfil().getCompetence()) {
-			System.out.println("Compretence ENTITY ------------->" + competence.getLibelle());
-		}
+		System.out.println("################################## = "+utilisateur.getGroupes());
+		System.out.println("##################################4444 = "+utilisateurDTO.getGroupes());
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
-		for (CompetenceDTO competence : utilisateurDTO.getProfil().getCompetence()) {
-			System.out.println("Compretence DTO ------------->" + competence.getLibelle());
-		}
-		System.out.println("Diplome de l'utilisateur :  " + utilisateurDTO.getProfil().getDiplomePrincipal());
 		return utilisateurDTO;
 	}
 
@@ -390,6 +392,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
+
 		System.out.println(
 				"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " + nouvelUtilisateur.getPassword());
 
@@ -426,14 +429,15 @@ public class UtilisateurImpl implements UtilisateurService {
 				Competence comp = new Competence();
 				for (CompetenceDTO compDTO : nouvelUtilisateur.getProfil().getCompetence()) {
 					if (compDTO.getLibelle() != null && !"".equals(compDTO.getLibelle()) && compDTO.getNote() != 0) {
-						Query q = em.createQuery("select c from Competence c where c.libelle = :libelle and c.profil.idProfil = :idProfil");
+						Query q = em.createQuery(
+								"select c from Competence c where c.libelle = :libelle and c.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						q.setParameter("libelle", compDTO.getLibelle());
 						if (!q.getResultList().isEmpty()) {
 							comp = (Competence) q.getSingleResult();
 							if (comp != null) {
 								comp.setNote(compDTO.getNote());
-								if(!comps.contains(comp)){
+								if (!comps.contains(comp)) {
 									comps.add(comp);
 								}
 								em.merge(comp);
@@ -468,7 +472,8 @@ public class UtilisateurImpl implements UtilisateurService {
 				for (DiplomeDTO diplDTO : nouvelUtilisateur.getProfil().getDiplomes()) {
 					if (diplDTO.getLibelle() != null && !"".equals(diplDTO.getLibelle())
 							&& diplDTO.getAnneeDebut() != null && diplDTO.getAnneFin() != null) {
-						Query q = em.createQuery("select d from Diplome d where d.libelle = :libelle and d.profil.idProfil = :idProfil");
+						Query q = em.createQuery(
+								"select d from Diplome d where d.libelle = :libelle and d.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						q.setParameter("libelle", diplDTO.getLibelle());
 						if (!q.getResultList().isEmpty()) {
@@ -511,7 +516,8 @@ public class UtilisateurImpl implements UtilisateurService {
 							&& expDTO.getDescription() != null && !"".equals(expDTO.getDescription())
 							&& expDTO.getLieu() != null && !"".equals(expDTO.getLieu()) && expDTO.getPoste() != null
 							&& !"".equals(expDTO.getPoste())) {
-						Query q = em.createQuery("select e from Experience e where e.entreprise = :entreprise and e.profil.idProfil = :idProfil");
+						Query q = em.createQuery(
+								"select e from Experience e where e.entreprise = :entreprise and e.profil.idProfil = :idProfil");
 						q.setParameter("idProfil", idProfil);
 						q.setParameter("entreprise", expDTO.getEntreprise());
 						if (!q.getResultList().isEmpty()) {
@@ -577,14 +583,17 @@ public class UtilisateurImpl implements UtilisateurService {
 		List<Utilisateur> utilisateurs;
 		List<UtilisateurDTO> utilisateursDTO = new ArrayList<>();
 		Statut statut = Statut.valueOf(type);
-		//SELECT *  FROM l1nk_plh.UTILISATEUR WHERE email IN (SELECT email from l1nk_plh.UTILISATEURGROUPES where groupe = 'personnel');
-		q = em.createQuery("select u from Utilisateur u where u.email in (select s.email from UtilisateurGroupes s where s.groupe = '"+ statut +"')");
+		// SELECT * FROM l1nk_plh.UTILISATEUR WHERE email IN (SELECT email from
+		// l1nk_plh.UTILISATEURGROUPES where groupe = 'personnel');
+		q = em.createQuery(
+				"select u from Utilisateur u where u.email in (select s.email from UtilisateurGroupes s where s.groupe = '"
+						+ statut + "')");
 		utilisateurs = q.getResultList();
-		
-		for(Utilisateur utilisateur : utilisateurs){
+
+		for (Utilisateur utilisateur : utilisateurs) {
 			utilisateursDTO.add(MappingToDTO.utilisateurToUtilisateurDTO(utilisateur));
 		}
-		
+
 		return utilisateursDTO;
 	}
 }
