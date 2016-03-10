@@ -133,9 +133,11 @@
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 												<li>Mes groupes :
 													<ul>
+
 														<c:forEach items="${utilisateur.groupes}" var="grp">
+
 															<li><a
-																href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.grp.idGroupe}">${grp.nomGroupe}</a></li>
+																href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 														</c:forEach>
 													</ul>
 												</li>

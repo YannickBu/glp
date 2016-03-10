@@ -79,16 +79,6 @@ public class ProfilController {
 		// uDTO2.setProfil(pDTO);
 		//
 		// uDTO = utilisateurService.modifier(uDTO, uDTO2);
-
-		for (CompetenceDTO competence : uDTO.getProfil().getCompetence()) {
-			System.out.println("Competence --------------------------->  " + competence.getLibelle());
-		}
-		System.out.println("profil : " + uDTO.getProfil());
-		System.out.println("profil dernier diplome obtenu: " + uDTO.getProfil().getDiplomePrincipal());
-		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
-		System.out.println(uDTO.getNom());
-		// System.out.println(uDTO.getProfil());
-
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
@@ -185,12 +175,12 @@ public class ProfilController {
 			if(dipl!=null){
 				if(dipl.getAnneeDebut()!=null){
 					if(dipl.getAnneeDebut()<1950 || dipl.getAnneeDebut()>cal.get(GregorianCalendar.YEAR)){
-						result.rejectValue("profil.diplomes["+indDipl+"].anneeDebut", "Pattern","L'année de début est invalide");
+						result.rejectValue("profil.diplomes["+indDipl+"].anneeDebut", "Min","L'année de début est invalide");
 					}
 				}
 				if(dipl.getAnneFin()!=null){
 					if(dipl.getAnneFin()==null || dipl.getAnneFin()<1950 || dipl.getAnneFin()>cal.get(GregorianCalendar.YEAR)){
-						result.rejectValue("profil.diplomes["+indDipl+"].anneFin", "Pattern","L'année de fin est invalide");
+						result.rejectValue("profil.diplomes["+indDipl+"].anneFin", "Max","L'année de fin est invalide");
 					}
 				}
 			}
@@ -205,12 +195,12 @@ public class ProfilController {
 			if(exp!=null){
 				if(exp.getAnneeDebut()!=null){
 					if(exp.getAnneeDebut()<1950 || exp.getAnneeDebut()>cal.get(GregorianCalendar.YEAR)){
-						result.rejectValue("profil.experiences["+indExp+"].anneeDebut", "Pattern","L'année de début est invalide");
+						result.rejectValue("profil.experiences["+indExp+"].anneeDebut", "Min","L'année de début est invalide");
 					}
 				}
 				if(exp.getAnneFin()!=null){
 					if(exp.getAnneFin()<1950 || exp.getAnneFin()>cal.get(GregorianCalendar.YEAR)){
-						result.rejectValue("profil.experiences["+indExp+"].anneFin", "Pattern","L'année de fin est invalide");
+						result.rejectValue("profil.experiences["+indExp+"].anneFin", "Max","L'année de fin est invalide");
 					}
 				}
 			}

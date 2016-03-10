@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
@@ -17,10 +18,10 @@ import ipint.glp.api.exception.GroupeInconnuException;
 import ipint.glp.api.exception.InformationManquanteException;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.exception.UtilisateurEnAttenteInconnuException;
-import ipint.glp.api.exception.UtilisateurExistantException;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
+import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurEnAttente;
 import ipint.glp.domain.util.GenererMotDePasse;
 import ipint.glp.domain.util.Mail;
@@ -63,22 +64,23 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		UtilisateurEnAttente utilisateurEnAttente = new UtilisateurEnAttente();
 
 		utilisateurEnAttente.setDiplome(utilisateurEnAttenteDTO.getDiplome());
-		Query q = em.createQuery(
-				"select g from Utilisateur g where g.email = :email");
+
+		Query q = em.createQuery("select g from Utilisateur g where g.email = :email");
 		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
-		if (!q.getResultList().isEmpty()) {
-			throw new UtilisateurExistantException(
-					"UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
-							+ utilisateurEnAttenteDTO.getEmail());
-		}
-		q = em.createQuery(
-				"select g from UtilisateurEnAttente g where g.email = :email");
-		q.setParameter("email", utilisateurEnAttenteDTO.getEmail());
-		if (!q.getResultList().isEmpty()) {
-			throw new UtilisateurExistantException(
-					"UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
-							+ utilisateurEnAttenteDTO.getEmail());
-		}
+
+		/*
+		 * if (!q.getResultList().isEmpty()) { throw new
+		 * UtilisateurExistantException(
+		 * "UtilisateurEnAttenteImpl.creer : Un utilisateur possède déjà l'email "
+		 * + utilisateurEnAttenteDTO.getEmail()); } q = em.createQuery(
+		 * "select g from UtilisateurEnAttente g where g.email = :email");
+		 * q.setParameter("email", utilisateurEnAttenteDTO.getEmail()); if
+		 * (!q.getResultList().isEmpty()) { throw new
+		 * UtilisateurExistantException(
+		 * "UtilisateurEnAttenteImpl.creer : Un utilisateur en attente de validation possède déjà l'email "
+		 * + utilisateurEnAttenteDTO.getEmail()); }
+		 */
+
 		utilisateurEnAttente.setEmail(utilisateurEnAttenteDTO.getEmail());
 		utilisateurEnAttente.setDateNaissance(utilisateurEnAttenteDTO.getDateNaissance());
 		Groupe groupe = null;
@@ -158,40 +160,74 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 	@Override
 	public void valider(UtilisateurEnAttenteDTO utilisateurEnAttenteAValiderDTO, String optionalMessage)
 			throws MetierException {
-		int typeDeMessage = 1;
-		String messageOptionel = "";
-
-		if (!messageOptionel.equals(optionalMessage)) {
-			typeDeMessage = 2;
-			messageOptionel = optionalMessage;
-		}
-
-		if (utilisateurEnAttenteAValiderDTO == null) {
-			throw new InformationManquanteException(
-					"UtilisateurEnAttenteImpl.valider : L'utilisateurEnAttenteAValiderDTO est null");
-		}
-		if (utilisateurEnAttenteAValiderDTO.getEmail() == null) {
-			throw new InformationManquanteException(
-					"UtilisateurEnAttenteImpl.valider : L'utilisateurEnAttenteAValiderDTO n'a pas de mail");
-		}
 		UtilisateurDTO utilisateurDTO = new UtilisateurDTO();
 		utilisateurDTO.setEmail(utilisateurEnAttenteAValiderDTO.getEmail());
-		utilisateurDTO.setNom(utilisateurEnAttenteAValiderDTO.getNom());
-		utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
-		utilisateurDTO.setStatut(Statut.DIPLOME);
-		utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
-		Profil profil = new Profil();
-		profil.setDiplomePrincipal(utilisateurEnAttenteAValiderDTO.getDiplome());
-		profil.setAnneeDiplome(utilisateurEnAttenteAValiderDTO.getAnneeDiplome());
-		utilisateurDTO.setProfil(MappingToDTO.profilToProfilDTO(profil));
-		GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
-		String password = generationMotDePasse.nextString();
-		utilisateurDTO.setPassword(password);
-		String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
-		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
-		UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
+		Utilisateur utilisateur = new Utilisateur();
 
-		utilisateurService.creer(utilisateurDTO);
+		Query q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTO.getEmail() + "'");
+		try {
+			utilisateur = (Utilisateur) q.getSingleResult();
+			Groupe groupe = new Groupe();
+			GroupeDTO groupeDTO = utilisateurEnAttenteAValiderDTO.getGroupePrincipal();
+			groupe.setIdGroupe(groupeDTO.getIdGroupe());
+			groupe = em.find(Groupe.class, groupe.getIdGroupe());
+			List<Groupe> lesGroupes = utilisateur.getGroupes();
+			System.out.println("GROUPE : " + groupe);
+			/*
+			 * for (Groupe lesGroupesUtil : lesGroupes) { System.out.println(
+			 * "++++++++++++++++++++++++++++++++++++++++++++++++++++++++" +
+			 * lesGroupesUtil); }
+			 */
+			lesGroupes.add(groupe);
+			utilisateur.setGroupes(lesGroupes);
+			groupe.getUtilisateurs().add(utilisateur);
+			// System.out.println(("----------------------- GROUPE : " +
+			// utilisateur.getGroupes()));
+			// em.persist(groupe);
+			em.merge(utilisateur);
+			int typeDeMessage = 5;
+			String messageOptionel = "";
+			String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, groupe.getNomGroupe());
+			Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
+
+		} catch (NoResultException e) {
+			System.out.println();
+			int typeDeMessage = 1;
+			String messageOptionel = "";
+
+			if (!messageOptionel.equals(optionalMessage)) {
+				typeDeMessage = 2;
+				messageOptionel = optionalMessage;
+			}
+
+			if (utilisateurEnAttenteAValiderDTO == null) {
+				throw new InformationManquanteException(
+						"UtilisateurEnAttenteImpl.valider : L'utilisateurEnAttenteAValiderDTO est null");
+			}
+			if (utilisateurEnAttenteAValiderDTO.getEmail() == null) {
+				throw new InformationManquanteException(
+						"UtilisateurEnAttenteImpl.valider : L'utilisateurEnAttenteAValiderDTO n'a pas de mail");
+			}
+			utilisateurDTO.setNom(utilisateurEnAttenteAValiderDTO.getNom());
+			utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
+			utilisateurDTO.setStatut(Statut.DIPLOME);
+			utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
+			Profil profil = new Profil();
+			profil.setDiplomePrincipal(utilisateurEnAttenteAValiderDTO.getDiplome());
+			profil.setAnneeDiplome(utilisateurEnAttenteAValiderDTO.getAnneeDiplome());
+			utilisateurDTO.setProfil(MappingToDTO.profilToProfilDTO(profil));
+			GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
+			String password = generationMotDePasse.nextString();
+			utilisateurDTO.setPassword(password);
+			String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
+			Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
+			UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
+
+			utilisateurService.creer(utilisateurDTO);
+		}
+		for (Groupe lesGroupesUtil : utilisateur.getGroupes()) {
+			System.out.println(lesGroupesUtil);
+		}
 		supprimer(utilisateurEnAttenteAValiderDTO);
 	}
 

@@ -34,7 +34,15 @@
 									class="glyphicon glyphicon-cog couleurgly" aria-hidden="true"></span><span
 									class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href='${pageContext.servletContext.contextPath}/profil/modifprofil'>Modifier profil</a></li>
+									<% if(!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")){ %>
+										<li><a href='${pageContext.servletContext.contextPath}/profil/modifprofil'>Modifier profil</a></li>
+									<% } %>
+									<% if(request.isUserInRole("moderateur")){ %>
+										<li><a href="${pageContext.servletContext.contextPath}/moderation">Moderation</a></li>
+									<% } %>
+									<% if(request.isUserInRole("administrateur")){ %>
+										<li><a href="${pageContext.servletContext.contextPath}/administration">Administration</a></li>
+									<% } %>
 									<li><a href="${pageContext.servletContext.contextPath}/deconnexion">Déconnexion</a></li>
 								</ul></li>
 						</ul>

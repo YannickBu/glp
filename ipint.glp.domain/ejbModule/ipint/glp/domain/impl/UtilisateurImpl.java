@@ -361,14 +361,23 @@ public class UtilisateurImpl implements UtilisateurService {
 			q.setParameter("email", utilisateurDTO.getEmail());
 			try {
 				utilisateur = (Utilisateur) q.getSingleResult();
+				utilisateurDTO.setIdUtilisateur(utilisateur.getIdUtilisateur());
+				utilisateur = em.find(Utilisateur.class, utilisateurDTO.getIdUtilisateur());
 			} catch (NoResultException e) {
 				throw new UtilisateurInconnuException(
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
+
 		em.refresh(utilisateur);		
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+
 		
+		em.refresh(utilisateur);
+
+		System.out.println("UTILISATEURIMPL " + "trouver " + "Avant mapping" + utilisateur.getGroupes());
+		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+		System.out.println("UTILISATEURIMPL " + "trouver " + "Après mapping" + utilisateur.getGroupes());
 		return utilisateurDTO;
 	}
 
@@ -394,9 +403,6 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
-		// System.out.println(
-		// "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " +
-		// nouvelUtilisateur.getPassword());
 
 		if (nouvelUtilisateur.getPassword() != null && !"".equals(nouvelUtilisateur.getPassword())) {
 			utilisateurMAJ.setPassword(nouvelUtilisateur.getPassword());
@@ -442,7 +448,7 @@ public class UtilisateurImpl implements UtilisateurService {
 								if (!comps.contains(comp)) {
 									comps.add(comp);
 								}
-								em.merge(comp);
+								em.persist(comp);
 							}
 						} else {
 							comp = new Competence();
