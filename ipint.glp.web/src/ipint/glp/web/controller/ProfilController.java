@@ -1,5 +1,8 @@
 package ipint.glp.web.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -10,8 +13,6 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ipint.glp.api.DTO.CompetenceDTO;
+import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.RegionDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.VilleDTO;
@@ -173,7 +175,20 @@ public class ProfilController {
 			result.rejectValue("profil.telephone", "Size","Le téléphone est invalide");
 		else if(!utilisateur.getProfil().getTelephone().matches("[0-9]{10}"))
 			result.rejectValue("profil.telephone", "Pattern","Le téléphone est invalide");
-//		
+		
+		//Erreur annees
+		DiplomeDTO dipl;
+		for(int indDipl = 0; indDipl<utilisateur.getProfil().getDiplomes().size();indDipl++){
+			GregorianCalendar cal = new GregorianCalendar();
+			cal.setTime(new Date());
+			dipl = utilisateur.getProfil().getDiplomes().get(indDipl);
+			if(dipl.getAnneeDebut()<1950 || dipl.getAnneeDebut()>cal.get(GregorianCalendar.YEAR)){
+				result.rejectValue("profil.diplomes["+indDipl+"].anneeDebut", "Pattern","L'année de début est invalide");
+			}
+			if(dipl.getAnneFin()<1950 || dipl.getAnneFin()>cal.get(GregorianCalendar.YEAR)){
+				result.rejectValue("profil.diplomes["+indDipl+"].anneFin", "Pattern","L'année de fin est invalide");
+			}
+		}
 		
 		
 //		for(DiplomeDTO dipl : utilisateur.getProfil().getDiplomes()){

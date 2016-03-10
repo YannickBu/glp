@@ -527,12 +527,11 @@ function varExp() {
 												class="btn btn-default" id="btn_delete_comp"
 												onClick="deleteDiplome(${i});">x</button>
 										</div>
-
-									</div>
 									<form:errors path="profil.diplomes[${i}].anneeDebut"/>
 									<form:errors path="profil.diplomes[${i}].anneFin"/>
 									<form:errors path="profil.diplomes[${i}].libelle"/>
 									<form:errors path="profil.diplomes[${i}].lieu"/>
+									</div>
 								</c:forEach>
 
 
