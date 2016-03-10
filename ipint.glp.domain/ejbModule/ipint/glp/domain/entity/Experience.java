@@ -32,10 +32,10 @@ public class Experience implements Serializable {
 	private String entreprise;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le poste")
 	private String poste;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le lieu")
+	//@javax.validation.constraints.NotNull(message = "Veuillez remplir le lieu")
 	private String lieu;
 	private String description;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir la region")
+	//@javax.validation.constraints.NotNull(message = "Veuillez remplir la region")
 	private String region;
 	@javax.validation.constraints.NotNull(message = "Veuillez remplir le pays")
 	private String pays;

@@ -93,12 +93,13 @@ public class AdministrationController {
 			try {
 				luDTO.add(utilisateurS.trouver(animTmp));
 			} catch (MetierException e) {
-				
+				logger.severe("Erreur createGroupePOST - utilisateurS.trouver renvoie : " + e.getMessage());
 			}
 		}
 		uDTO.setIdUtilisateur(idModerateur);
 		gDTO.setNomGroupe(groupeTmp.getNomGroupe());
 		gDTO.setDescription(groupeTmp.getDescription());
+		gDTO.setGroupeOfficiel(true);
 		gDTO.setAnimateurs(luDTO);
 		gDTO.setUtilisateurResponsable(uDTO);
 		try {
@@ -116,6 +117,11 @@ public class AdministrationController {
 		}
 		model.addAttribute("animateurs", listPersonnel);
 		model.addAttribute("utilisateurResponsables", listPersonnel);
+		try {
+			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
+		} catch (MetierException e) {
+			logger.severe("Erreur createGroupePOST - groupeS.listerParType renvoie : " + e.getMessage());
+		}
 		return new ModelAndView("panelAdministration","createdGroupe", "SUCCESS");
 	}
 		
@@ -135,7 +141,7 @@ public class AdministrationController {
 		
 		
 		try {
-			model.addAttribute("groupesOfficiel",  groupeS.listerParType(false));
+			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
 		} catch (MetierException e) {
 			e.printStackTrace();
 		}
@@ -155,6 +161,13 @@ public class AdministrationController {
 	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.POST)
 	public ModelAndView panelAdministrationPost(@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
+		
+
+		try {
+			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
+		} catch (MetierException e) {
+			e.printStackTrace();
+		}
 		return new ModelAndView("panelAdministration");
 	}
 	

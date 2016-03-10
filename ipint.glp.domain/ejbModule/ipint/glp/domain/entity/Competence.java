@@ -22,7 +22,7 @@ public class Competence implements Serializable{
 	private String libelle;
 	@javax.validation.constraints.DecimalMin(value = "1", message = "Minimum 1")
 	@javax.validation.constraints.DecimalMax(value = "5", message = "Maximum 5")
-	private int note;
+	private Integer note;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Profil profil;
 	
@@ -61,14 +61,14 @@ public class Competence implements Serializable{
 	/**
 	 * @return the note
 	 */
-	public int getNote() {
+	public Integer getNote() {
 		return note;
 	}
 
 	/**
 	 * @param note the note to set
 	 */
-	public void setNote(int note) {
+	public void setNote(Integer note) {
 		this.note = note;
 	}
 

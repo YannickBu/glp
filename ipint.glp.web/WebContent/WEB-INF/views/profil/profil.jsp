@@ -133,7 +133,11 @@
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 												<li>Mes groupes :
 													<ul>
+<<<<<<< HEAD
 													<c:forEach items="${utilisateur.groupes}" var="grp">
+=======
+														<c:forEach items="${utilisateur.groupes}" var="grp">
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 															<li><a
 																href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.grp.idGroupe}">${grp.nomGroupe}</a></li>
 														</c:forEach>

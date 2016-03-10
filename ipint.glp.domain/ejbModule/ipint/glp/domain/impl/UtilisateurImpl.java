@@ -177,19 +177,21 @@ public class UtilisateurImpl implements UtilisateurService {
 		// Groupe grp = new Groupe();
 		// if (groupeDTO.getIdGroupe() != null) {
 		// grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
-		// if(grp==null){
-		// throw new GroupeInconnuException("UtilisateurImpl.creer :
-		// "+groupeDTO.toString()+" n'existe pas pour cet id");
+		// if (grp == null) {
+		// throw new GroupeInconnuException(
+		// "UtilisateurImpl.creer :" + groupeDTO.toString() + " n'existe pas
+		// pour cet id");
 		// }
 		// } else if (groupeDTO.getNomGroupe() != null) {
 		// Query q = em.createQuery(
 		// "select g from Groupe g where g.nomGroupe = '" +
 		// groupeDTO.getNomGroupe() + "'");
-		// try{
+		// try {
 		// grp = (Groupe) q.getSingleResult();
-		// }catch(NoResultException e){
-		// throw new GroupeInconnuException("UtilisateurImpl.creer :
-		// "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
+		// } catch (NoResultException e) {
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :" +
+		// groupeDTO.toString()
+		// + " n'existe pas pour ce nom de groupe");
 		// }
 		// }
 		// if (grp != null) {
@@ -205,30 +207,32 @@ public class UtilisateurImpl implements UtilisateurService {
 		// UTILISATEUR
 
 		List<Groupe> lesGroupesAnimes = new ArrayList<>();
-		// if(utilisateurDTO.getGroupesAnimes()!=null &&
-		// !utilisateurDTO.getGroupesGeres().isEmpty()){
-		// for(GroupeDTO groupeDTO : utilisateurDTO.getGroupesAnimes()){
+		// if (utilisateurDTO.getGroupesAnimes() != null &&
+		// !utilisateurDTO.getGroupesGeres().isEmpty()) {
+		// for (GroupeDTO groupeDTO : utilisateurDTO.getGroupesAnimes()) {
 		// Groupe grp = new Groupe();
 		// if (groupeDTO.getIdGroupe() != null) {
 		// grp = em.find(Groupe.class, groupeDTO.getIdGroupe());
-		// if(grp==null){
-		// throw new GroupeInconnuException("UtilisateurImpl.creer :
-		// "+groupeDTO.toString()+" n'existe pas pour cet id");
+		// if (grp == null) {
+		// throw new GroupeInconnuException(
+		// "UtilisateurImpl.creer :" + groupeDTO.toString() + " n'existe pas
+		// pour cet id");
 		// }
 		// } else if (groupeDTO.getNomGroupe() != null) {
 		// Query q = em.createQuery(
 		// "select g from Groupe g where g.nomGroupe = '" +
 		// groupeDTO.getNomGroupe() + "'");
-		// try{
+		// try {
 		// grp = (Groupe) q.getSingleResult();
-		// }catch(NoResultException e){
-		// throw new GroupeInconnuException("UtilisateurImpl.creer :
-		// "+groupeDTO.toString()+" n'existe pas pour ce nom de groupe");
+		// } catch (NoResultException e) {
+		// throw new GroupeInconnuException("UtilisateurImpl.creer :" +
+		// groupeDTO.toString()
+		// + " n'existe pas pour ce nom de groupe");
 		// }
 		// }
 		// if (grp != null) {
 		// lesGroupesAnimes.add(grp);
-		// if(!grp.getAnimateurs().contains(utilisateur)){
+		// if (!grp.getAnimateurs().contains(utilisateur)) {
 		// grp.getAnimateurs().add(utilisateur);
 		// em.persist(grp);
 		// }
@@ -364,9 +368,17 @@ public class UtilisateurImpl implements UtilisateurService {
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
+<<<<<<< HEAD
 		System.out.println("################################## = "+utilisateur.getGroupes());
 		System.out.println("##################################4444 = "+utilisateurDTO.getGroupes());
+=======
+				
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 		return utilisateurDTO;
 	}
 
@@ -392,7 +404,10 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 		// System.out.println(
 		// "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " +
 		// nouvelUtilisateur.getPassword());
