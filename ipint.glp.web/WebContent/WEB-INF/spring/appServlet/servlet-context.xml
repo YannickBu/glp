@@ -1,64 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:mvc="http://www.springframework.org/schema/mvc" 
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:jee="http://www.springframework.org/schema/jee"
-    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
- 
-    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-     
-     <context:component-scan base-package="ipint.glp.web.controller" />
-     
-    <!-- Enables the Spring MVC @Controller programming model -->
-    <mvc:annotation-driven />
- 
-    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-    <resources mapping="/resources/**" location="/resources/" />
- 
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-    <beans:bean id="tilesConfigurer"
-        class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-        <beans:property name="definitions">
-            <beans:list>
-                <beans:value>/WEB-INF/tiles.xml</beans:value>
-                <beans:value>/WEB-INF/views/**/views.xml</beans:value>
-            </beans:list>
-        </beans:property>
-    </beans:bean>
-    <beans:bean id="tilesViewResolver"
-        class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <beans:property name="viewClass">
-            <beans:value>
-                org.springframework.web.servlet.view.tiles3.TilesView
-            </beans:value>
-        </beans:property>
-        <beans:property name="order" value="0"/>
-    </beans:bean>
-    
-    <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<beans:property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<context:component-scan base-package="ipint.glp.web.controller" />
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles.xml</beans:value>
+				<beans:value>/WEB-INF/views/**/views.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass">
+			<beans:value>
+				org.springframework.web.servlet.view.tiles3.TilesView
+			</beans:value>
+		</beans:property>
+		<beans:property name="order" value="0" />
+	</beans:bean>
+
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
 		<beans:property name="prefix" value="/WEB-INF/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-    
-    <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/ArticleImpl" business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb>
-    <jee:local-slsb id="groupeBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/GroupeImpl" business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb>
-    <jee:local-slsb id="utilisateurBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilisateurImpl" business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb>
-    <jee:local-slsb id="utilisateurEnAttenteBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilisateurEnAttenteImpl" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb>
-    <jee:local-slsb id="utilsBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilsImpl" business-interface="ipint.glp.api.itf.UtilsService"></jee:local-slsb>
-    
-    
-<!--     <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl" business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb> -->
-<!--     <jee:local-slsb id="groupeBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl" business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb> -->
-<!--     <jee:local-slsb id="utilisateurBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl" business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb> -->
-<!--     <jee:local-slsb id="utilisateurEnAttenteBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurEnAttenteImpl" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb> -->
-<!--    <jee:remote-slsb id="articleBean" business-interface="ipint.glp.api.itf.ArticleService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl"/> -->
-<!--    <jee:remote-slsb id="groupeBean" business-interface="ipint.glp.api.itf.GroupeService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl"/> -->
-<!--    <jee:remote-slsb id="utilisateurBean" business-interface="ipint.glp.api.itf.UtilisateurService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl"/> -->
-<!--    <jee:remote-slsb id="utilisateurEnAttenteBean" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurEnAttenteImpl"/> -->
+
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="WEB-INF/errorMessages" />
+	</beans:bean>
+
+	<beans:bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<beans:property name="validationMessageSource" ref="messageSource" />
+	</beans:bean>
+
+
+
+	<jee:local-slsb id="articleBean"
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/ArticleImpl"
+		business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb>
+	<jee:local-slsb id="groupeBean"
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/GroupeImpl"
+		business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb>
+	<jee:local-slsb id="utilisateurBean"
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilisateurImpl"
+		business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb>
+	<jee:local-slsb id="utilisateurEnAttenteBean"
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilisateurEnAttenteImpl"
+		business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb>
+	<jee:local-slsb id="utilsBean"
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilsImpl"
+		business-interface="ipint.glp.api.itf.UtilsService"></jee:local-slsb>
+
+
+	<!-- <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl" 
+		business-interface="ipint.glp.api.itf.ArticleService"></jee:local-slsb> -->
+	<!-- <jee:local-slsb id="groupeBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl" 
+		business-interface="ipint.glp.api.itf.GroupeService"></jee:local-slsb> -->
+	<!-- <jee:local-slsb id="utilisateurBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl" 
+		business-interface="ipint.glp.api.itf.UtilisateurService"></jee:local-slsb> -->
+	<!-- <jee:local-slsb id="utilisateurEnAttenteBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurEnAttenteImpl" 
+		business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService"></jee:local-slsb> -->
+	<!-- <jee:remote-slsb id="articleBean" business-interface="ipint.glp.api.itf.ArticleService" 
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl"/> -->
+	<!-- <jee:remote-slsb id="groupeBean" business-interface="ipint.glp.api.itf.GroupeService" 
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/GroupeImpl"/> -->
+	<!-- <jee:remote-slsb id="utilisateurBean" business-interface="ipint.glp.api.itf.UtilisateurService" 
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurImpl"/> -->
+	<!-- <jee:remote-slsb id="utilisateurEnAttenteBean" business-interface="ipint.glp.api.itf.UtilisateurEnAttenteService" 
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/UtilisateurEnAttenteImpl"/> -->
 </beans:beans>
