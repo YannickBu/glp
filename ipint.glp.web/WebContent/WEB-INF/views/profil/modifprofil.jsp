@@ -1,6 +1,6 @@
 <%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page import="java.util.Date"%>
@@ -9,7 +9,7 @@
 <%@ page import="ipint.glp.api.DTO.ProfilDTO"%>
 <%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
 <script type="text/javascript"
-    src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
+	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 <script type="text/javascript">
 
 function SoumettreFormulaire(){  
@@ -454,44 +454,45 @@ function varExp() {
 
 
 <form:form role="form" method="post" action="" name="modif_form"
-    commandName="utilisateur">
+	commandName="utilisateur">
 
-    <div class="col-md-6 publication">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2">
-                    <img
-                        src="${pageContext.servletContext.contextPath}/resources/img/logoA.png"
-                        class="img-responsive" alt="Responsive image">
-                </div>
-                <div class="col-md-10">
-                    <h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
-                    <div class="col-md-12 situation form-group ">
-                        <label for="InputDiplomePrincipal"> Situation professionnelle actuelle </label>
+	<div class="col-md-6 publication">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+					<img
+						src="${pageContext.servletContext.contextPath}/resources/img/logoA.png"
+						class="img-responsive" alt="Responsive image">
+				</div>
+				<div class="col-md-10">
+					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
+					<div class="col-md-12 situation form-group ">
+						<label for="InputDiplomePrincipal"> Situation
+							professionnelle actuelle </label>
 
-                        <form:input path="profil.situation" type="text"
-                            class="form-control" id="InputSituation"
-                            placeholder="ex: Chef de projet à CGI France" />
-
-
-                    </div>
-                    <div class="col-md-6 situation form-group">
-                        <label for="InputDiplomePrincipal"> Diplôme principal </label>
-
-                        <form:input path="profil.diplomePrincipal" type="text"
-                            class="form-control" id="InputDiplomePrincipal"
-                            placeholder="ex: Master MIAGE" />
+						<form:input path="profil.situation" type="text"
+							class="form-control" id="InputSituation"
+							placeholder="ex: Chef de projet à CGI France" />
 
 
-                    </div>
-                    <div class="col-md-6">
+					</div>
+					<div class="col-md-6 situation form-group">
+						<label for="InputDiplomePrincipal"> Diplôme principal </label>
 
-                        <label for="InputAnneeDiplomel"> Année d'obtention du
-                            diplôme </label>
-                        <c:set var="TEST" value="${profil.anneeDiplome}" scope="request" />
-                        <form:select path="profil.anneeDiplome" class="form-control"
-                            id="InputAnneDiplome">
-                            <%
+						<form:input path="profil.diplomePrincipal" type="text"
+							class="form-control" id="InputDiplomePrincipal"
+							placeholder="ex: Master MIAGE" />
+
+
+					</div>
+					<div class="col-md-6">
+
+						<label for="InputAnneeDiplomel"> Année d'obtention du
+							diplôme </label>
+						<c:set var="TEST" value="${profil.anneeDiplome}" scope="request" />
+						<form:select path="profil.anneeDiplome" class="form-control"
+							id="InputAnneDiplome">
+							<%
                                 //(Integer) request.getAttribute("yannick")).intValue()
                                         Calendar calendar = new GregorianCalendar();
                                         calendar.setTime(new Date());
@@ -504,101 +505,62 @@ function varExp() {
                                                             + ">" + i + "</option>");
                                         }
                             %>
-                        </form:select>
-                    </div>
+						</form:select>
+					</div>
 
 
-                </div>
-                <hr />
-            </div>
-        </div>
-        <div class="navProfil">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success alert-dismissable" hidden>
-                            <button type="button" class="close" data-dismiss="alert"
-                                aria-hidden="true">×</button>
-                            <h4>Alert!</h4>
-                            <strong>Warning!</strong> Best check yo self, you're not looking
-                            too good. <a href="#" class="alert-link">alert link</a>
-                        </div>
-                        <div class="form-group">
-                            <label for="InputNom"> Nom * : </label>
-                            <form:input path="nom" type="text" class="form-control"
-                                id="InputNom" placeholder="ex: Dupont" />
-                        </div>
-                        <div class="form-group">
-                            <label for="InputPrenom"> Prénom * : </label>
-                            <form:input path="prenom" type="text" class="form-control"
-                                id="InputPrenom" placeholder="ex: Jean" />
-                        </div>
-                        <div class="form-group">
-                            <label for="InputPassword"> Mot de passe * :</label>
-                            <form:input path="password" type="password" class="form-control"
-                                id="InputPassword" />
-                        </div>
-                        <div class="form-group">
-                            <label for="InputTel"> Téléphone :</label>
-                            <form:input path="profil.telephone" type="text"
-                                class="form-control" id="InputTel" />
-                        </div>
-                        <div class="form-group">
-                            <label for="InputMesAttentes"> Mes attentes du réseau
-                                L1nk.fr </label>
-                            <form:input path="profil.mesAttentes" type="text"
-                                class="form-control" id="InputMesAttentes" />
-                        </div>
-                        <div class="form-group">
-                            <label for="InputCursus"> Diplômes : </label>
-
-<<<<<<< HEAD
-                            <div id="diplForm">
-                                <c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
-                                    var="i">
-                                    <div class="row" id="idDipl${i}">
-                                        <div class="col-md-2">
-                                            <form:input path="profil.diplomes[${i}].anneeDebut"
-                                                data-toggle="tooltip" title="Année de début"
-                                                value="${profil.diplomes[i].anneeDebut}" type="text"
-                                                class="form-control" id="InputDipDebut" placeholder="Début" />
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form:input path="profil.diplomes[${i}].anneFin"
-                                                data-toggle="tooltip" title="Année de fin"
-                                                value="${profil.diplomes[i].anneFin}" type="text"
-                                                class="form-control" id="InputDipAnneFin" placeholder="Fin" />
-                                        </div>
-                                        <div class="col-md-5">
-                                            <form:input path="profil.diplomes[${i}].libelle"
-                                                data-toggle="tooltip" title="Libelle du diplome"
-                                                value="${profil.diplomes[i].libelle}" type="text"
-                                                class="form-control" id="InputDipDesc" placeholder="Libelle" />
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form:input path="profil.diplomes[${i}].lieu"
-                                                data-toggle="tooltip" title="Lieu"
-                                                value="${profil.diplomes[i].lieu}" type="text"
-                                                class="form-control" id="InputDipLieu" placeholder="Lieu" />
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button type="button" style="margin-top: 1%;"
-                                                class="btn btn-default" id="btn_delete_comp"
-                                                onClick="deleteDiplome(${i});">x</button>
-                                        </div>
-
-                                    </div>
-                                </c:forEach>
-=======
+				</div>
+				<hr />
+			</div>
+		</div>
+		<div class="navProfil">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-success alert-dismissable" hidden>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">×</button>
+							<h4>Alert!</h4>
+							<strong>Warning!</strong> Best check yo self, you're not looking
+							too good. <a href="#" class="alert-link">alert link</a>
+						</div>
+						<div class="form-group">
+							<label for="InputNom"> Nom * : </label>
+							<form:input path="nom" type="text" class="form-control"
+								id="InputNom" placeholder="ex: Dupont" />
+						</div>
+						<div class="form-group">
+							<label for="InputPrenom"> Prénom * : </label>
+							<form:input path="prenom" type="text" class="form-control"
+								id="InputPrenom" placeholder="ex: Jean" />
+						</div>
+						<div class="form-group">
+							<label for="InputPassword"> Mot de passe * :</label>
+							<form:input path="password" type="password" class="form-control"
+								id="InputPassword" />
+						</div>
+						<div class="form-group">
+							<label for="InputTel"> Téléphone :</label>
+							<form:input path="profil.telephone" type="text"
+								class="form-control" id="InputTel" />
+						</div>
+						<div class="form-group">
+							<label for="InputMesAttentes"> Mes attentes du réseau
+								L1nk.fr </label>
+							<form:input path="profil.mesAttentes" type="text"
+								class="form-control" id="InputMesAttentes" />
+						</div>
+						<div class="form-group">
+							<label for="InputCursus"> Diplômes : </label>
 							<div id="diplForm">
 								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
-										<form:input path="profil.diplomes[${i}].anneeDebut"
-											data-toggle="tooltip" title="Année de début"
-											value="${profil.diplomes[i].anneeDebut}" type="number"
-											class="form-control" id="InputDipDebut" placeholder="Début"/>
+											<form:input path="profil.diplomes[${i}].anneeDebut"
+												data-toggle="tooltip" title="Année de début"
+												value="${profil.diplomes[i].anneeDebut}" type="number"
+												class="form-control" id="InputDipDebut" placeholder="Début" />
 										</div>
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].anneFin"
@@ -623,24 +585,24 @@ function varExp() {
 												class="btn btn-default" id="btn_delete_comp"
 												onClick="deleteDiplome(${i});">x</button>
 										</div>
-									<form:errors path="profil.diplomes[${i}].anneeDebut"/><br/>
-									<form:errors path="profil.diplomes[${i}].anneFin"/>
+										<form:errors path="profil.diplomes[${i}].anneeDebut" />
+										<br />
+										<form:errors path="profil.diplomes[${i}].anneFin" />
 									</div>
 								</c:forEach>
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 
 
-                            </div>
-                            <button type="button" style="margin-top: 1%;"
-                                class="btn btn-default" id="btn_new_dipl"
-                                onClick="varDipl();newDiplome();">Ajouter un diplome</button>
+							</div>
+							<button type="button" style="margin-top: 1%;"
+								class="btn btn-default" id="btn_new_dipl"
+								onClick="varDipl();newDiplome();">Ajouter un diplome</button>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="InputExp"> Expériences Professionnelles : </label>
-                            <div id="expForm">
-                                <c:forEach begin="0"
-                                    end="${utilisateur.profil.experiences.size()}" var="i">
+						</div>
+						<div class="form-group">
+							<label for="InputExp"> Expériences Professionnelles : </label>
+							<div id="expForm">
+								<c:forEach begin="0"
+									end="${utilisateur.profil.experiences.size()}" var="i">
 									<div class="row" id="idExp${i}">
 										<div class="col-md-12">
 											<div class="row">
@@ -729,79 +691,80 @@ function varExp() {
 														id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
 												</div>
 											</div>
-									<form:errors path="profil.experiences[${i}].anneeDebut"/><br/>
-									<form:errors path="profil.experiences[${i}].anneFin"/>
+											<form:errors path="profil.experiences[${i}].anneeDebut" />
+											<br />
+											<form:errors path="profil.experiences[${i}].anneFin" />
 											<hr>
 										</div>
 									</div>
-                                </c:forEach>
-                            </div>
+								</c:forEach>
+							</div>
 
-                            <button type="button" class="btn btn-default" id="btn_new_exp"
-                                onClick="varExp();newExperience(${i});">Ajouter une
-                                expérience</button>
+							<button type="button" class="btn btn-default" id="btn_new_exp"
+								onClick="varExp();newExperience(${i});">Ajouter une
+								expérience</button>
 
 
-                        </div>
-                        <div class="form-group">
-                            <label for="InputSkills"> Compétences :</label>
-                            <div id="compForm">
-                                <c:forEach begin="0"
-                                    end="${utilisateur.profil.competence.size()}" var="i">
-                                    <div class="row" id="idComp${i}">
-                                        <div class="col-md-3">
-                                            <form:input path="profil.competence[${i}].libelle"
-                                                value="${profil.competence[i].libelle}" type="text"
-                                                class="form-control" id="InputDipDebut"
-                                                placeholder="Libelle" data-toggle="tooltip" title="Libelle" />
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form:select class="form-control" id="selectNoteCompetence"
-                                                path="profil.competence[${i}].note">
-                                                <form:option value="${profil.competence[i].note}"
-                                                    selected="selected">Selectionner une note</form:option>
-                                                <form:option value="1"></form:option>
-                                                <form:option value="2"></form:option>
-                                                <form:option value="3"></form:option>
-                                                <form:option value="4"></form:option>
-                                                <form:option value="5"></form:option>
-                                            </form:select>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button type="button" style="margin-top: 1%;"
-                                                class="btn btn-default" id="btn_new_comp"
-                                                onClick="deleteCompetence(${i});">x</button>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                            <button type="button" style="margin-top: 1%;"
-                                class="btn btn-default" id="btn_new_comp"
-                                onClick="varComp();newCompetence();">Ajouter une
-                                compétence</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="InputInterets"> Centres d'interets :</label>
-                            <form:textarea path="profil.centreInteret" type="text-aera"
-                                rows="3" class="form-control" id="InputInterets"
-                                placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
-                        </div>
-                        <!--                         <div class="form-group"> -->
-                        <!--                             <label for="InputInterets"> Réseaux sociaux </label> -->
-                        <%--                             <c:forEach begin="0" --%>
-                        <%--                                 end="${utilisateur.profil.reseauxSociaux.size()}" var="i"> --%>
-                        <%--                                 <form:input path="profil.centreInteret" type="text-aera" --%>
-                        <%--                                     rows="3" class="form-control" id="InputInterets" --%>
-                        <%--                                     placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
-                        <%--                             </c:forEach> --%>
-                        <!--                         </div> -->
-                        <a href="${pageContext.servletContext.contextPath}/profil/"><button
-                                type="button" class="btn btn-default">Annuler</button></a>
-                        <button type="submit" class="btn btn-default"
-                            onclick="SoumettreFormulaire();">Enregistrer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						</div>
+						<div class="form-group">
+							<label for="InputSkills"> Compétences :</label>
+							<div id="compForm">
+								<c:forEach begin="0"
+									end="${utilisateur.profil.competence.size()}" var="i">
+									<div class="row" id="idComp${i}">
+										<div class="col-md-3">
+											<form:input path="profil.competence[${i}].libelle"
+												value="${profil.competence[i].libelle}" type="text"
+												class="form-control" id="InputDipDebut"
+												placeholder="Libelle" data-toggle="tooltip" title="Libelle" />
+										</div>
+										<div class="col-md-2">
+											<form:select class="form-control" id="selectNoteCompetence"
+												path="profil.competence[${i}].note">
+												<form:option value="${profil.competence[i].note}"
+													selected="selected">Selectionner une note</form:option>
+												<form:option value="1"></form:option>
+												<form:option value="2"></form:option>
+												<form:option value="3"></form:option>
+												<form:option value="4"></form:option>
+												<form:option value="5"></form:option>
+											</form:select>
+										</div>
+										<div class="col-md-1">
+											<button type="button" style="margin-top: 1%;"
+												class="btn btn-default" id="btn_new_comp"
+												onClick="deleteCompetence(${i});">x</button>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<button type="button" style="margin-top: 1%;"
+								class="btn btn-default" id="btn_new_comp"
+								onClick="varComp();newCompetence();">Ajouter une
+								compétence</button>
+						</div>
+						<div class="form-group">
+							<label for="InputInterets"> Centres d'interets :</label>
+							<form:textarea path="profil.centreInteret" type="text-aera"
+								rows="3" class="form-control" id="InputInterets"
+								placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
+						</div>
+						<!--                         <div class="form-group"> -->
+						<!--                             <label for="InputInterets"> Réseaux sociaux </label> -->
+						<%--                             <c:forEach begin="0" --%>
+						<%--                                 end="${utilisateur.profil.reseauxSociaux.size()}" var="i"> --%>
+						<%--                                 <form:input path="profil.centreInteret" type="text-aera" --%>
+						<%--                                     rows="3" class="form-control" id="InputInterets" --%>
+						<%--                                     placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
+						<%--                             </c:forEach> --%>
+						<!--                         </div> -->
+						<a href="${pageContext.servletContext.contextPath}/profil/"><button
+								type="button" class="btn btn-default">Annuler</button></a>
+						<button type="submit" class="btn btn-default"
+							onclick="SoumettreFormulaire();">Enregistrer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </form:form>
