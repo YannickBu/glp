@@ -366,7 +366,7 @@ public class UtilisateurImpl implements UtilisateurService {
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
-				
+		em.refresh(utilisateur);		
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
 		
 		return utilisateurDTO;
