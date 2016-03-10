@@ -393,8 +393,9 @@ public class UtilisateurImpl implements UtilisateurService {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
 
-		System.out.println(
-				"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " + nouvelUtilisateur.getPassword());
+		// System.out.println(
+		// "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " +
+		// nouvelUtilisateur.getPassword());
 
 		if (nouvelUtilisateur.getPassword() != null && !"".equals(nouvelUtilisateur.getPassword())) {
 			utilisateurMAJ.setPassword(nouvelUtilisateur.getPassword());
@@ -558,7 +559,8 @@ public class UtilisateurImpl implements UtilisateurService {
 			}
 			profil.setExperiences(exps);
 
-			System.out.println("CENTRE INTERETS " + nouvelUtilisateur.getProfil().getCentreInteret());
+			// System.out.println("CENTRE INTERETS " +
+			// nouvelUtilisateur.getProfil().getCentreInteret());
 			profil.setCentreInteret(nouvelUtilisateur.getProfil().getCentreInteret());
 			// profil.setCursus(nouvelUtilisateur.getProfil().getCursus());
 			utilisateurMAJ.setProfil(profil);

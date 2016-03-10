@@ -35,15 +35,18 @@
 					</div>
 				</li>
 
-				<li class="formPubli"><form:input
-						class="inputForm form-control" path="titre"
-						placeholder="Titre de la publication" id="titrePubli" value="" />
+				<li class="formPubli">
 
-					<form:textarea type="text-area" rows="3"
-						class="inputForm form-control" path="contenu"
-						placeholder="Tapez votre publication..." id="contenuPubli" /> <input
-					class="inputBtn btn btn-default" type="submit"
-					value="Publier l'article" /></li>
+					<form:input class="inputForm form-control"
+						path="titre" placeholder="Titre de la publication" id="titrePubli" value=""/> 
+
+					<form:textarea
+						type="text-area" rows="3" class="inputForm form-control" path="contenu"
+						placeholder="Tapez votre publication..." id="contenuPubli"/>
+					
+					<input
+					class="inputBtn btn btn-default btnModifProfif" type="submit" value="Publier l'article" />
+				</li>
 			</form:form>
 		</ul>
 	</div>

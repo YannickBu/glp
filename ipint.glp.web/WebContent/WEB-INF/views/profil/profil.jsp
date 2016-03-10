@@ -133,9 +133,9 @@
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 												<li>Mes groupes :
 													<ul>
-														<c:forEach items="${utilisateur.groupes}" var="grp">
+													<c:forEach items="${utilisateur.groupes}" var="grp">
 															<li><a
-																href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
+																href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.grp.idGroupe}">${grp.nomGroupe}</a></li>
 														</c:forEach>
 													</ul>
 												</li>
@@ -153,16 +153,16 @@
 											</ul>
 										</div>
 										<%
-											if (request.getAttribute("id") == null) {
-										%>
+														if (request.getAttribute("id") == null) {
+														%>
 										<a
-											href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
-												type="button" style="margin-top: 1%; float: right"
-												class="btn btn-default" id="btn_new_exp">Modifier
-												mon profil</button></a>
-										<%
-											}
-										%>
+														href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
+														type="button" style="margin-top: 1%; float: right"
+														class="btn btn-default btnModifProfif" id="btn_new_exp">Modifier mon
+														profil</button></a>
+														<%
+													}
+													%>
 									</div>
 								</div>
 							</div>

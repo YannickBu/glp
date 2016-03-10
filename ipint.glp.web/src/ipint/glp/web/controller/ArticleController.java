@@ -98,11 +98,11 @@ public class ArticleController {
 		List<GroupeDTO> groupes = uDTO.getGroupes();
 		GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
 		groupes.add(groupePrincipal);
-		for (GroupeDTO groupe : groupes) {
-			for (ArticleDTO articleDTO : as.listerParGroupe(groupe)) {
-				articles.add(articleDTO);
-			}
+		//for(GroupeDTO groupe : groupes){
+		for(ArticleDTO articleDTO : as.listerParDate(groupes)){
+			articles.add(articleDTO);
 		}
+//	}
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
