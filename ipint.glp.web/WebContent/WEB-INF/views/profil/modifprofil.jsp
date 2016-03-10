@@ -7,27 +7,25 @@
 <%@ page import="java.util.GregorianCalendar"%>
 <%@ page import="ipint.glp.api.DTO.ProfilDTO"%>
 <%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
-
 <script type="text/javascript"
 	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 <script type="text/javascript">
 
-
-function SoumettreFormulaire(){  
+function SoumettreFormulaire(){
      document.forms["modif_form"].submit();
  }
-  
+
 var nbComp = ${utilisateur.profil.competence.size()-1};
 var nbComp2 = ${utilisateur.profil.diplomes.size()-1};
 var nbComp3 = ${utilisateur.profil.experiences.size()-1};
 
 function varComp() {
 	nbComp++;
-}	
+}
 
 function varDipl() {
 	nbComp2++;
-}	
+}
 
 function varExp() {
 	nbComp3++;
@@ -41,12 +39,12 @@ function varExp() {
 		div1.setAttribute('class','row');
 		div1.setAttribute('id','idComp'+nbComp);
 		comp.appendChild(div1);
-		
-		
+
+
 		div2 = document.createElement('div');
 		div2.setAttribute('class','col-md-3');
 		div1.appendChild(div2);
-		
+
 		input1 = document.createElement('input');
 		input1.setAttribute('name','profil.competence['+nbComp+'].libelle');
 		input1.setAttribute('type','text');
@@ -54,54 +52,54 @@ function varExp() {
 		input1.setAttribute('placeholder','Libelle');
 		input1.setAttribute('data-toggle','tooltip');
 		input1.setAttribute('title','Libelle');
-		div2.appendChild(input1);	
-		
+		div2.appendChild(input1);
+
 		div3 = document.createElement('div');
 		div3.setAttribute('class','col-md-2');
 		div1.appendChild(div3);
-		
+
 		select1 = document.createElement('select');
 		select1.setAttribute('class','form-control');
 		select1.setAttribute('name','profil.competence['+nbComp+'].note');
 		div3.appendChild(select1);
-		
+
 		option1 = document.createElement('option');
 		option1.setAttribute('selected','selected');
 		option1.setAttribute('value','');
 		option1.innerHTML='Selectionner une note';
-		
-		
+
+
 		option2 = document.createElement('option');
 		option2.setAttribute('value','1');
 		option2.innerHTML='1';
-		
+
 		option3 = document.createElement('option');
 		option3.setAttribute('value','2');
 		option3.innerHTML='2';
-		
+
 		option4 = document.createElement('option');
 		option4.setAttribute('value','3');
 		option4.innerHTML='3';
-		
+
 		option5 = document.createElement('option');
 		option5.setAttribute('value','4');
 		option5.innerHTML='4';
-		
+
 		option6 = document.createElement('option');
 		option6.setAttribute('value','5');
 		option6.innerHTML='5';
-		
+
  		select1.appendChild(option1);
 		select1.appendChild(option2);
 		select1.appendChild(option3);
 		select1.appendChild(option4);
 		select1.appendChild(option5);
 		select1.appendChild(option6);
-		
+
 		div4 = document.createElement('div');
 		div4.setAttribute('class','col-md-1');
 		div1.appendChild(div4);
-		
+
 		button = document.createElement(button);
 		button.setAttribute('type','button');
 		button.setAttribute('style','margin-top: 1%;');
@@ -111,9 +109,9 @@ function varExp() {
 		button.innerHTML='x';
 
 		div4.appendChild(button);
-		
+
 	};
-	
+
 	function newDiplome() {
 		var comp, div1, div2, div3, div4, div5, div6, input1, input2, input3, input4, button;
 		comp = document.getElementById('diplForm');
@@ -125,7 +123,7 @@ function varExp() {
 		div2 = document.createElement('div');
 		div2.setAttribute('class','col-md-2');
 		div1.appendChild(div2);
-		
+
 		input1 = document.createElement('input');
 		input1.setAttribute('name','profil.diplomes['+nbComp2+'].anneeDebut');
 		input1.setAttribute('type','text');
@@ -133,12 +131,12 @@ function varExp() {
 		input1.setAttribute('placeholder','Début');
 		input1.setAttribute('data-toggle','tooltip');
 		input1.setAttribute('title','Année de début');
-		div2.appendChild(input1);	
-		
+		div2.appendChild(input1);
+
 		div3 = document.createElement('div');
 		div3.setAttribute('class','col-md-2');
 		div1.appendChild(div3);
-		
+
 		input2 = document.createElement('input');
 		input2.setAttribute('name','profil.diplomes['+nbComp2+'].anneFin');
 		input2.setAttribute('type','text');
@@ -147,11 +145,11 @@ function varExp() {
 		input2.setAttribute('data-toggle','tooltip');
 		input2.setAttribute('title','Année de fin');
 		div3.appendChild(input2);
-		
+
 		div4 = document.createElement('div');
 		div4.setAttribute('class','col-md-5');
 		div1.appendChild(div4);
-		
+
 		input3 = document.createElement('input');
 		input3.setAttribute('name','profil.diplomes['+nbComp2+'].libelle');
 		input3.setAttribute('type','text');
@@ -160,11 +158,11 @@ function varExp() {
 		input3.setAttribute('data-toggle','tooltip');
 		input3.setAttribute('title','Libelle du diplome');
 		div4.appendChild(input3);
-		
+
 		div5 = document.createElement('div');
 		div5.setAttribute('class','col-md-2');
 		div1.appendChild(div5);
-		
+
 		input4 = document.createElement('input');
 		input4.setAttribute('name','profil.diplomes['+nbComp2+'].lieu');
 		input4.setAttribute('type','text');
@@ -173,7 +171,7 @@ function varExp() {
 		input4.setAttribute('data-toggle','tooltip');
 		input4.setAttribute('title','Lieu');
 		div5.appendChild(input4);
-		
+
 		div6 = document.createElement('div');
 		div6.setAttribute('class','col-md-1');
 		div1.appendChild(div6);
@@ -187,41 +185,29 @@ function varExp() {
 		button.innerHTML='x';
 
 		div6.appendChild(button);
-		
+
 	};
 	function newExperience() {
-		var nbExp = parseInt(nbComp3);
-		alert(nbExp);
-		var div = document.getElementById('idExp'+nbExp);
-	    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
-		clone.id = 'idExp'+(nbExp+1);
-		global = document.getElementById('expForm');
-		global.appendChild(clone);
-		alert(document.getElementById('idExp'+(nbExp+1)).children.length);
-	    for(var i=0; i < document.getElementById('idExp'+(nbExp+1)).children.length;i++){
-	    	children[i].id=(children[i].id)+(nbExp+1);
-	    }
-		
 // 		var hr, comp, divP, divP2, div1, div2, div3, div4, div5, div6, div7, div8, div9, div10, div11, div12, div13, div14, input1, input2, input3, input4, input5, input6, input7, input8, button;
 // 		comp = document.getElementById('expForm');
-		
+
 // 		divP2 = document.createElement('div');
 // 		divP2.setAttribute('class','row');
 // 		divP2.setAttribute('id','idExp'+nbComp3);
-// 		comp.appendChild(divP2);		
-		
+// 		comp.appendChild(divP2);
+
 // 		divP = document.createElement('div');
 // 		divP.setAttribute('class','col-md-12');
-// 		divP2.appendChild(divP);		
-		
+// 		divP2.appendChild(divP);
+
 // 		div1 = document.createElement('div');
 // 		div1.setAttribute('class','row');
-// 		divP.appendChild(div1);		
+// 		divP.appendChild(div1);
 
 // 		div2 = document.createElement('div');
 // 		div2.setAttribute('class','col-md-2');
 // 		div1.appendChild(div2);
-		
+
 // 		input1 = document.createElement('input');
 // 		input1.setAttribute('name','profil.experiences['+nbComp3+'].anneeDebut');
 // 		input1.setAttribute('type','text');
@@ -229,12 +215,12 @@ function varExp() {
 // 		input1.setAttribute('placeholder','Début');
 // 		input1.setAttribute('data-toggle','tooltip');
 // 		input1.setAttribute('title','Année de début');
-// 		div2.appendChild(input1);	
-		
+// 		div2.appendChild(input1);
+
 // 		div3 = document.createElement('div');
 // 		div3.setAttribute('class','col-md-2');
 // 		div1.appendChild(div3);
-		
+
 // 		input2 = document.createElement('input');
 // 		input2.setAttribute('name','profil.experiences['+nbComp3+'].anneFin');
 // 		input2.setAttribute('type','text');
@@ -243,11 +229,11 @@ function varExp() {
 // 		input2.setAttribute('data-toggle','tooltip');
 // 		input2.setAttribute('title','Année de fin');
 // 		div3.appendChild(input2);
-		
+
 // 		div4 = document.createElement('div');
 // 		div4.setAttribute('class','col-md-2');
 // 		div1.appendChild(div4);
-		
+
 // 		input3 = document.createElement('input');
 // 		input3.setAttribute('name','profil.experiences['+nbComp3+'].entreprise');
 // 		input3.setAttribute('type','text');
@@ -256,7 +242,7 @@ function varExp() {
 // 		input3.setAttribute('data-toggle','tooltip');
 // 		input3.setAttribute('title','Entreprise');
 // 		div4.appendChild(input3);
-		
+
 // 		div5 = document.createElement('div');
 // 		div5.setAttribute('class','col-md-2');
 // 		div1.appendChild(div5);
@@ -268,62 +254,74 @@ function varExp() {
 // 		div7 = document.createElement('div');
 // 		div7.setAttribute('class','col-md-2');
 // 		div1.appendChild(div7);
-		
+
 // 		div0 = document.createElement('div');
 // 		div0.setAttribute('class','row');
 // 		div0.setAttribute('style','margin-top: 1%;');
 // 		divP.appendChild(div0);
-		
+
 // 		diva = document.createElement('div');
 // 		diva.setAttribute('class','col-md-3');
 // 		div0.appendChild(diva);
-		
+
 // 		input6 = document.createElement('select');
-// 		input6.setAttribute('name','pays');
+// 		input6.setAttribute('name','profil.experiences['+nbComp3+'].pays');
 // 		input6.setAttribute('id','selectPays');
 // 		input6.setAttribute('class','form-control');
-// 		input6.setAttribute('onchange',chargeRegions(),enableVille());
+// 		input6.setAttribute('onchange','chargeRegions('+nbComp3+')');
 // 		//input6.setAttribute('data-CommandArgument','${regions}');
 // 		input6.setAttribute('selected','selected');
 // 		input6.setAttribute('data-toggle','tooltip');
 // 		input61 = document.createElement('option');
+// 		input61.setAttribute('value','');
 // 		input61.innerHTML=' -- Choissez le pays --';
 // 		input6.appendChild(input61);
-// 		pays = document.getElementById('paysCaches').innerHTML;
-// 		alert(pays.split(',')[0]);
-// 		for (var i = 0; i < pays.length; i++) {
+// 		var pays1 = document.getElementById('expForm').getAttribute('data-CommandArgument');
+// 		var pays2 = pays1.split('[').join('');
+// 		var pays3 = pays2.split(']').join('');
+// 		var pays = pays3.split(',');
+// 		//alert(pays[0]);
+// 		for (i = 0; i < pays.length; i++) {
 // 			input = document.createElement('option');
 // 			input.text = pays[i];
 // 			input.value = pays[i];
 // 			input6.options.add(input);
 // 		}
-		
 // 		diva.appendChild(input6);
-		
-		
-		
+
+
+
 // 		divb = document.createElement('div');
 // 		divb.setAttribute('class','col-md-3');
 // 		div0.appendChild(divb);
-		
+
 // 		input5 = document.createElement('select');
-// 		input5.setAttribute('name','regions');
-// 		input5.setAttribute('id','selectPays');
+// 		input5.setAttribute('name','profil.experiences['+nbComp3+'].region');
+// 		input5.setAttribute('id','selectRegion'+nbComp3+'');
 // 		input5.setAttribute('class','form-control');
-// 		//input5.setAttribute('onchange','chargeRegions(),enableVille();')
+// 		input5.setAttribute('disabled','true')
 // 		//input5.setAttribute('data-CommandArgument','${regions}');
 // 		input5.setAttribute('selected','selected');
 // 		input5.setAttribute('data-toggle','tooltip');
 // 		input51 = document.createElement('option');
+// 		input51.setAttribute('value','');
 // 		input51.innerHTML=' -- Choissez la région --';
 // 		input5.appendChild(input51);
+// 		regions = document.getElementById('regionsCaches').innerHTML;
+// 		//alert(regions.split(',')[0]);
+// 		for (var i = 0; i < regions.length; i++) {
+// 			input = document.createElement('option');
+// 			input.text = regions[i];
+// 			input.value = regions[i];
+// 			input6.options.add(input);
+// 		}
 // 		divb.appendChild(input5);
-		
-		
+
+
 // 		divc = document.createElement('div');
 // 		divc.setAttribute('class','col-md-3');
 // 		div0.appendChild(divc);
-		
+
 // 		input4 = document.createElement('input');
 // 		input4.setAttribute('name','profil.experiences['+nbComp3+'].lieu');
 // 		input4.setAttribute('type','text');
@@ -332,17 +330,17 @@ function varExp() {
 // 		input4.setAttribute('data-toggle','tooltip');
 // 		input4.setAttribute('title','Ville');
 // 		divc.appendChild(input4);
-		
-		
+
+
 // 		div8 = document.createElement('div');
 // 		div8.setAttribute('class','row');
 // 		div8.setAttribute('style','margin-top: 1%;');
 // 		divP.appendChild(div8);
-	
+
 // 		div9 = document.createElement('div');
 // 		div9.setAttribute('class','col-md-12');
 // 		div8.appendChild(div9);
-		
+
 // 		input7 = document.createElement('input');
 // 		input7.setAttribute('name','profil.experiences['+nbComp3+'].poste');
 // 		input7.setAttribute('type','text');
@@ -351,16 +349,16 @@ function varExp() {
 // 		input7.setAttribute('data-toggle','tooltip');
 // 		input7.setAttribute('title','Poste occupé');
 // 		div9.appendChild(input7);
-		
+
 // 		div10 = document.createElement('div');
 // 		div10.setAttribute('class','row');
 // 		div10.setAttribute('style','margin-top: 1%;');
 // 		divP.appendChild(div10);
-	
+
 // 		div11 = document.createElement('div');
 // 		div11.setAttribute('class','col-md-12');
 // 		div10.appendChild(div11);
-		
+
 // 		input8 = document.createElement('textarea');
 // 		input8.setAttribute('name','profil.experiences['+nbComp3+'].description');
 // 		input8.setAttribute('type','text-area');
@@ -369,21 +367,21 @@ function varExp() {
 // 		input8.setAttribute('data-toggle','tooltip');
 // 		input8.setAttribute('title','Description de votre mission');
 // 		div11.appendChild(input8);
-		
-		
+
+
 // 		div12 = document.createElement('div');
 // 		div12.setAttribute('class','row');
 // 		divP.appendChild(div12);
-		
+
 // 		div13 = document.createElement('div');
 // 		div13.setAttribute('class','col-md-11');
 // 		div12.appendChild(div13);
-		
+
 // 		div14 = document.createElement('div');
 // 		div14.setAttribute('class','col-md-1');
 // 		div14.setAttribute('style','margin-top:1%;text-align:right');
 // 		div12.appendChild(div14);
-		
+
 // 		button = document.createElement(button);
 // 		button.setAttribute('type','button');
 // 		button.setAttribute('style','margin-top: 1%;text-align:right');
@@ -393,29 +391,43 @@ function varExp() {
 // 		button.innerHTML='x';
 
 // 		div14.appendChild(button);
-		
+
 // 		hr = document.createElement('hr');
 // 		divP.appendChild(hr);
-		
+		var nbExp = parseInt(nbComp3);
+		var div = document.getElementById('idExp'+(nbExp));
+	    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+		clone.id = 'idExp'+(nbExp+1);
+		form = document.getElementById('expForm');
+		form.appendChild(clone);
+		oChild1 = clone.getElementsByTagName('select')[0];
+		oChild2 = clone.getElementsByTagName('select')[1];
+		oChild1.setAttribute('id','selectPays'+(nbExp+1));
+		oChild1.setAttribute('onchange','chargeRegions('+(nbExp+1)+')');
+		alert(oChild1.getAttribute('id'));
+		oChild2.setAttribute('id','selectRegion'+(nbExp+1));
+
 	};
-	
+
 	function deleteCompetence(i) {
-		var comp = document.getElementById('idComp'+i);  
+		var comp = document.getElementById('idComp'+i);
 		comp.innerHTML = '';
 	};
-	
+
 	function deleteDiplome(i) {
-		var dipl = document.getElementById('idDipl'+i);  
+		var dipl = document.getElementById('idDipl'+i);
 		dipl.innerHTML = '';
 	};
-	
+
 	function deleteExperience(i) {
-		var exp = document.getElementById('idExp'+i);  
+		var exp = document.getElementById('idExp'+i);
 		exp.innerHTML = '';
 	};
-	
+
 	function chargeRegions(i){
+
 		var pays = document.getElementById('selectPays'+i);
+		alert(pays.getAttribute('data-CommandArgument').split[0]);
 		var selectedPays = pays.options[pays.selectedIndex].innerHTML;
 		var region = document.getElementById('selectRegion'+i);
 		var ville = document.getElementById('selectVille');
@@ -424,20 +436,20 @@ function varExp() {
 		ville.value='';
 		if(selectedPays == 'France'){
 			region.disabled=false;
-		}		
+		}
 	}
-	
+
 	function enableRegion(i){
 		var element = document.getElementById('selectRegion'+i);
 		element.disabled=false;
 	}
-	
+
 	$(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip(); 
+	    $('[data-toggle="tooltip"]').tooltip();
 	});
-	
+
 	$(document).change(function(){
-	    $('[data-toggle="tooltip"]').tooltip(); 
+	    $('[data-toggle="tooltip"]').tooltip();
 	});
 </script>
 
@@ -457,8 +469,7 @@ function varExp() {
 				<div class="col-md-10">
 					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
 					<div class="col-md-12 situation form-group ">
-						<label for="InputDiplomePrincipal"> Situation
-							professionnelle actuelle </label>
+						<label for="InputDiplomePrincipal"> Situation professionnelle actuelle </label>
 
 						<form:input path="profil.situation" type="text"
 							class="form-control" id="InputSituation"
@@ -544,7 +555,7 @@ function varExp() {
 							<label for="InputCursus"> Diplômes : </label>
 
 							<div id="diplForm">
-								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()-1}"
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
@@ -579,7 +590,7 @@ function varExp() {
 
 									</div>
 								</c:forEach>
-
+								</div>
 
 							</div>
 							<button type="button" style="margin-top: 1%;"
@@ -589,9 +600,9 @@ function varExp() {
 						</div>
 						<div class="form-group" id="divExpForm">
 							<label for="InputExp"> Expériences Professionnelles : </label>
-							<div id="expForm">
+							<div id="expForm" data-CommandArgument="${pays}">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.experiences.size()-1}" var="i">
+									end="${utilisateur.profil.experiences.size()}" var="i">
 									<div class="row" id="idExp${i}">
 										<div class="col-md-12">
 											<div class="row">
@@ -685,11 +696,6 @@ function varExp() {
 									</div>
 								</c:forEach>
 							</div>
-<<<<<<< HEAD
-							
-=======
-
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 							<button type="button" class="btn btn-default btnModifProfif" id="btn_new_exp"
 								onClick="varExp();newExperience();">Ajouter une
 								expérience</button>
@@ -700,7 +706,7 @@ function varExp() {
 							<label for="InputSkills"> Compétences :</label>
 							<div id="compForm">
 								<c:forEach begin="0"
-									end="${utilisateur.profil.competence.size()-1}" var="i">
+									end="${utilisateur.profil.competence.size()}" var="i">
 									<div class="row" id="idComp${i}">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle"
@@ -760,4 +766,3 @@ function varExp() {
 		</div>
 	</div>
 </form:form>
-
