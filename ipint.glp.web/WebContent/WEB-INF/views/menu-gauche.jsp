@@ -5,6 +5,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2 gauche ">
 		<ul data-spy="affix" class="menu-gauche">
+			<% if(!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")){ %>
 			<a href="${pageContext.servletContext.contextPath}/profil">
 				<li>Mon profil
 						<span class="glyphicon glyphicon-user gly-menu"
@@ -12,6 +13,7 @@
 						</span>
 				</li>
 			</a>
+			<% } %>
 			<a href="${pageContext.servletContext.contextPath}/publication">
 				<li>Fil d'actualité
 					<span class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span>
