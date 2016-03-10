@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,13 +62,15 @@ public class Utilisateur implements Serializable {
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Article> articles;
 
-	@OneToMany(mappedBy = "utilisateurResponsable")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateurResponsable")
+	// @OneToMany(mappedBy = "utilisateurResponsable")
 	private List<Groupe> groupesGeres;
 
-	@ManyToMany(mappedBy = "utilisateurs")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "utilisateurs")
 	private List<Groupe> groupes;
 
-	@ManyToMany(mappedBy = "animateurs")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "animateurs")
+	// @ManyToMany(mappedBy = "animateurs")
 	private List<Groupe> groupesAnimes;
 
 	public Utilisateur() {
@@ -158,6 +161,7 @@ public class Utilisateur implements Serializable {
 	}
 
 	public List<Groupe> getGroupes() {
+		System.out.println("GROUPE DATABASE : " + groupes);
 		return groupes;
 	}
 

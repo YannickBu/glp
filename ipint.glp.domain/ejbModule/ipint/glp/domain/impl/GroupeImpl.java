@@ -1,6 +1,7 @@
 package ipint.glp.domain.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -20,6 +21,7 @@ import ipint.glp.api.itf.GroupeService;
 import ipint.glp.domain.entity.Article;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Utilisateur;
+import ipint.glp.domain.entity.UtilisateurGroupes;
 import ipint.glp.domain.util.MappingToDTO;
 
 @Stateless
@@ -28,6 +30,7 @@ public class GroupeImpl implements GroupeService {
 	@PersistenceContext(unitName = "PU")
 	private EntityManager em;
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public GroupeDTO creer(GroupeDTO obj) throws MetierException {
 		if(obj==null){
@@ -80,9 +83,12 @@ public class GroupeImpl implements GroupeService {
 				utilisateur.setGroupesGeres(new ArrayList<>());
 			}
 			if(!utilisateur.getGroupesGeres().contains(groupe)){
-				utilisateur.getGroupesGeres().add(groupe);
-				em.persist(utilisateur);
+				List<Groupe> groupesGeres = utilisateur.getGroupesGeres();
+				groupesGeres.add(groupe);
+				utilisateur.setGroupesGeres(groupesGeres);
 			}
+			
+			em.persist(utilisateur);
 		}
 		groupe.setUtilisateurResponsable(utilisateur);
 
@@ -165,8 +171,29 @@ public class GroupeImpl implements GroupeService {
 				}
 		groupe.setAnimateurs(animateurs);
 
+		
+	
+		
 		em.persist(groupe);
-
+		UtilisateurGroupes utilGrp = new UtilisateurGroupes();
+		q = em.createQuery(
+				"select u from UtilisateurGroupes u where u.email = :email");
+		q.setParameter("email", utilisateur.getEmail());
+		List results = q.getResultList();
+		Iterator it = results.iterator();
+		boolean isAlreadyModerator = false;
+		while(it.hasNext()){
+			UtilisateurGroupes uGrpTmp = (UtilisateurGroupes) it.next();
+			if(uGrpTmp.getGroupe().equals("moderateur")){
+				isAlreadyModerator = true;
+			}
+		}
+		if(!isAlreadyModerator){
+			utilGrp.setEmail(utilisateur.getEmail());
+			utilGrp.setGroupe("moderateur");
+			em.persist(utilGrp);
+		}
+		
 		return MappingToDTO.groupeToGroupeDTO(groupe);
 	}
 

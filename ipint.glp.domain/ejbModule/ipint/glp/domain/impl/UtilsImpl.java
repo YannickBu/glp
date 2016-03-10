@@ -18,6 +18,12 @@ import ipint.glp.domain.entity.Region;
 import ipint.glp.domain.entity.Ville;
 import ipint.glp.domain.util.MappingToDTO;
 
+/**
+ * Gestion des pays et région
+ * 
+ * @author mame
+ *
+ */
 @Stateless
 public class UtilsImpl implements UtilsService{
 

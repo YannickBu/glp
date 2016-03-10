@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -551,6 +552,7 @@ function varExp() {
                         <div class="form-group">
                             <label for="InputCursus"> Diplômes : </label>
 
+<<<<<<< HEAD
                             <div id="diplForm">
                                 <c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
                                     var="i">
@@ -587,6 +589,45 @@ function varExp() {
 
                                     </div>
                                 </c:forEach>
+=======
+							<div id="diplForm">
+								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
+									var="i">
+									<div class="row" id="idDipl${i}">
+										<div class="col-md-2">
+										<form:input path="profil.diplomes[${i}].anneeDebut"
+											data-toggle="tooltip" title="Année de début"
+											value="${profil.diplomes[i].anneeDebut}" type="number"
+											class="form-control" id="InputDipDebut" placeholder="Début"/>
+										</div>
+										<div class="col-md-2">
+											<form:input path="profil.diplomes[${i}].anneFin"
+												data-toggle="tooltip" title="Année de fin"
+												value="${profil.diplomes[i].anneFin}" type="number"
+												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
+										</div>
+										<div class="col-md-5">
+											<form:input path="profil.diplomes[${i}].libelle"
+												data-toggle="tooltip" title="Libelle du diplome"
+												value="${profil.diplomes[i].libelle}" type="text"
+												class="form-control" id="InputDipDesc" placeholder="Libelle" />
+										</div>
+										<div class="col-md-2">
+											<form:input path="profil.diplomes[${i}].lieu"
+												data-toggle="tooltip" title="Lieu"
+												value="${profil.diplomes[i].lieu}" type="text"
+												class="form-control" id="InputDipLieu" placeholder="Lieu" />
+										</div>
+										<div class="col-md-1">
+											<button type="button" style="margin-top: 1%;"
+												class="btn btn-default" id="btn_delete_comp"
+												onClick="deleteDiplome(${i});">x</button>
+										</div>
+									<form:errors path="profil.diplomes[${i}].anneeDebut"/><br/>
+									<form:errors path="profil.diplomes[${i}].anneFin"/>
+									</div>
+								</c:forEach>
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 
 
                             </div>
@@ -688,6 +729,8 @@ function varExp() {
 														id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
 												</div>
 											</div>
+									<form:errors path="profil.experiences[${i}].anneeDebut"/><br/>
+									<form:errors path="profil.experiences[${i}].anneFin"/>
 											<hr>
 										</div>
 									</div>
