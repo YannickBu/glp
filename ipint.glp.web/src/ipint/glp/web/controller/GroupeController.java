@@ -42,6 +42,8 @@ public class GroupeController {
 	ArticleService articleService;
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
+	@Inject
+	UtilisateurService utilisateurS;
 
 	// @RequestMapping(value = "/groupe")
 	// public ModelAndView groupeGET() {
@@ -49,9 +51,18 @@ public class GroupeController {
 	// }
 
 	@RequestMapping(value = "/groupe/{id}/inscriptionGroupe", method = RequestMethod.GET)
-	public ModelAndView groupeInscription(HttpServletRequest request, @PathVariable String id,
+	public ModelAndView groupeInscription(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur",u2DTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -90,9 +101,18 @@ public class GroupeController {
 	}
 
 	@RequestMapping(value = "/groupe/{id}/desinscriptionGroupe", method = RequestMethod.GET)
-	public ModelAndView groupeDesinscription(HttpServletRequest request, @PathVariable String id,
+	public ModelAndView groupeDesinscription(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur",u2DTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -128,9 +148,18 @@ public class GroupeController {
 	}
 
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
-	public ModelAndView groupeidGET(HttpServletRequest request, @PathVariable String id,
+	public ModelAndView groupeidGET(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 		GroupeDTO gDTO = new GroupeDTO();
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur",u2DTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 
 		try {
