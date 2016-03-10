@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ipint.glp.api.DTO.GroupeDTO;
+import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.api.exception.MetierException;
 import ipint.glp.api.itf.UtilisateurEnAttenteService;
+import ipint.glp.api.itf.UtilisateurService;
 
 /**
  * 
@@ -31,6 +35,8 @@ public class ModerationController {
 
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
+	@Inject
+	UtilisateurService utilisateurS;
 
 
 	public ModerationController() {
@@ -76,9 +82,21 @@ public class ModerationController {
 	 * @return
 	 */
 	@RequestMapping(value = {"/moderation/panelInscription","/moderation"}, method = RequestMethod.GET)
-	public ModelAndView administrationGET(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
+	public ModelAndView administrationGET(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		List<UtilisateurEnAttenteDTO> list;
+		UtilisateurDTO uDTO = new UtilisateurDTO();
+		uDTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			uDTO = utilisateurS.trouver(uDTO);
+			model.addAttribute("utilisateur",uDTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		List<GroupeDTO> listGroupe;
+		listGroupe = uDTO.getGroupesGeres();
+		model.addAttribute("groupesGeres",listGroupe);
 		try {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);

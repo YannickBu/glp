@@ -112,7 +112,7 @@ public class MappingToDTO {
 			}
 		}
 
-		System.out.println(" DIPLOME PRINCIPAL DTO ->>>>>>>>>>>>>>>>>>>>>>>>>><   " + proDTO.getDiplomePrincipal());
+//		System.out.println(" DIPLOME PRINCIPAL DTO ->>>>>>>>>>>>>>>>>>>>>>>>>><   " + proDTO.getDiplomePrincipal());
 		return proDTO;
 	}
 
@@ -124,7 +124,7 @@ public class MappingToDTO {
 
 		UtilisateurDTO utilDTO = utilisateurToUtilisateurDTOHorsRelation(util);
 		utilDTO.setProfil(profilToProfilDTO(util.getProfil()));
-		utilDTO.setGroupePrincipal(groupeToGroupeDTO(util.getGroupePrincipal()));
+		utilDTO.setGroupePrincipal(groupeToGroupeDTOLazy(util.getGroupePrincipal()));
 
 		utilDTO.setArticles(new ArrayList<>());
 		if (util.getArticles() != null && !util.getArticles().isEmpty()) {
