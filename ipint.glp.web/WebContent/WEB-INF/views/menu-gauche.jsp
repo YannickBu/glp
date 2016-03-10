@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="row">
 	<div class="col-md-1"></div>
@@ -31,6 +32,11 @@
 					href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
 					<li>${utilisateur.groupePrincipal.nomGroupe}</li>
 				</a>
+				<c:forEach items="${utilisateur.groupes}" var="grp">
+
+					<li><a
+						href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
+				</c:forEach>
 			</ul>
 			</li>
 			<%
