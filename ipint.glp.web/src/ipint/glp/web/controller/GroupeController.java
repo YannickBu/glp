@@ -1,6 +1,5 @@
 package ipint.glp.web.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -50,6 +49,9 @@ public class GroupeController {
 	// return new ModelAndView("groupe");
 	// }
 
+	
+
+	
 	@RequestMapping(value = "/groupe/{id}/inscriptionGroupe", method = RequestMethod.GET)
 	public ModelAndView groupeInscription(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
@@ -149,7 +151,11 @@ public class GroupeController {
 
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
 	public ModelAndView groupeidGET(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
+<<<<<<< HEAD
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
+=======
+			@ModelAttribute GroupeDTO leGroupe, Model model) {
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());

@@ -26,7 +26,7 @@
 										<li> Inscriptions en attente :
 										<ul>
 											<c:forEach items="${list}" var="utilEnAttente">
-												<c:if test="${utilEnAttente.groupeprincipal.idgroupe = groupe.idgroupe}">
+												<c:if test="${utilEnAttente.groupePrincipal.idGroupe == groupe.idGroupe}">
 												<li>${utilEnAttente.prenom}&nbsp;${utilEnAttente.nom}</li>
 												</c:if>
 											</c:forEach>
