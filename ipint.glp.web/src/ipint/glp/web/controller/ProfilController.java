@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ipint.glp.api.DTO.CompetenceDTO;
 import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
+import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.RegionDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.VilleDTO;
@@ -45,7 +46,7 @@ public class ProfilController {
 	}
 
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
-	public ModelAndView profilGet(HttpServletRequest request, @ModelAttribute UtilisateurDTO utilisateur, Model model) {
+	public ModelAndView profilGet(HttpServletRequest request, @ModelAttribute UtilisateurDTO utilisateur, Model model) throws MetierException {
 		// ModelAndView model = new ModelAndView("profil");
 
 		UtilisateurDTO uDTO = new UtilisateurDTO();
@@ -56,30 +57,18 @@ public class ProfilController {
 			logger.severe("Erreur acces profil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		//
-		// UtilisateurDTO uDTO2 = new UtilisateurDTO();
-		// GroupeDTO gDTO = new GroupeDTO();
-		// gDTO.setNomGroupe("MIAGE");
-		// gDTO = groupeS.trouver(gDTO);
-		// GroupeDTO gDTO2 = new GroupeDTO();
-		// gDTO2.setNomGroupe("SIAD");
-		// gDTO2 = groupeS.trouver(gDTO2);
-		// List<GroupeDTO> grp = new ArrayList<GroupeDTO>();
-		// grp.add(gDTO);
-		// grp.add(gDTO2);
-		// uDTO2.setGroupes(grp);
-		// List<String> dipl = new ArrayList<String>();
-		// dipl.add("2015/2016 - M2MIAGE");
-		// dipl.add("2012/2013 - L3MIAGE");
-		// dipl.add("2010/2011 - DUT Informatique");
-		// if(uDTO.getProfil() == null){
-		// System.out.println("------------------------------");
-		// }
-		// ProfilDTO pDTO= uDTO.getProfil();
-		// //pDTO.setDiplomes(dipl);
-		// uDTO2.setProfil(pDTO);
-		//
-		// uDTO = utilisateurService.modifier(uDTO, uDTO2);
+			
+		List<GroupeDTO> tousLesGroupes = groupeS.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		model.addAttribute("tousLesGroupes", tousLesGroupes);
+		
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
@@ -90,7 +79,7 @@ public class ProfilController {
 
 	@RequestMapping(value = "/profil/{id}", method = RequestMethod.GET)
 	public ModelAndView profilIdGet(HttpServletRequest request, @PathVariable String id,
-			@ModelAttribute UtilisateurDTO utilisateur, Model model) {
+			@ModelAttribute UtilisateurDTO utilisateur, Model model) throws MetierException {
 		// ModelAndView model = new ModelAndView("profil");
 
 		UtilisateurDTO uDTO = new UtilisateurDTO();
@@ -110,9 +99,20 @@ public class ProfilController {
 		for (CompetenceDTO competence : uDTO.getProfil().getCompetence()) {
 			System.out.println("Competence --------------------------->  " + competence.getLibelle());
 		}
+		
+		List<GroupeDTO> tousLesGroupes = groupeS.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		model.addAttribute("tousLesGroupes", tousLesGroupes);
+		
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
-
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);
@@ -139,6 +139,16 @@ public class ProfilController {
 					"Erreur acces profil/modifProfil GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
+		List<GroupeDTO> tousLesGroupes = groupeS.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		model.addAttribute("tousLesGroupes", tousLesGroupes);
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("modifprofil", "utilisateur", uDTO);
 	}

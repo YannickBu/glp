@@ -672,5 +672,16 @@ public class GroupeImpl implements GroupeService {
 		}
 		return lesGroupesDTO;
 	}
+	
+	@Override
+	public List<GroupeDTO> listerTousLesGroupes() throws MetierException {
+		Query q = em.createQuery("select g from Groupe g");
+		List<Groupe> lesGroupes = q.getResultList();
+		List<GroupeDTO> lesGroupesDTO = new ArrayList<GroupeDTO>();
+		for (Groupe groupe : lesGroupes) {
+			lesGroupesDTO.add(MappingToDTO.groupeToGroupeDTO(groupe));
+		}
+		return lesGroupesDTO;
+	}
 
 }

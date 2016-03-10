@@ -258,6 +258,14 @@ h3 {
 	color: #f6921e;
 }
 
+.nomGroupe {
+	text-align: center;
+	word-wrap: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;"
+}
+
 .publication {
 	padding-top: 1%;
 	padding-bottom: 1%;

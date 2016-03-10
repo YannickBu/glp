@@ -118,6 +118,8 @@ public interface GroupeService {
 	public List<GroupeDTO> listerParType(boolean isGroupeOfficiel) throws MetierException;
 	
 	public List<UtilisateurDTO> listerUtilisateurs(GroupeDTO groupeDTO) throws MetierException;
+
+	public List<GroupeDTO> listerTousLesGroupes() throws MetierException;
 	
 
 }

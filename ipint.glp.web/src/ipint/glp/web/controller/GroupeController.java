@@ -129,7 +129,7 @@ public class GroupeController {
 
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
 	public ModelAndView groupeidGET(HttpServletRequest request, @PathVariable String id,
-			@ModelAttribute GroupeDTO leGroupe, Model model) {
+			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 		GroupeDTO gDTO = new GroupeDTO();
 		gDTO.setIdGroupe(Integer.parseInt(id));
 
@@ -174,6 +174,17 @@ public class GroupeController {
 		} catch (MetierException e) {
 
 		}
+		
+		List<GroupeDTO> tousLesGroupes = groupeService.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		model.addAttribute("tousLesGroupes", tousLesGroupes);
 
 		model.addAttribute("leGroupe", gDTO);
 		model.addAttribute("animateursGroupe", animateursGroupe);
