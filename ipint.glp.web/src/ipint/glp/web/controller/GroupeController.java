@@ -151,11 +151,9 @@ public class GroupeController {
 
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
 	public ModelAndView groupeidGET(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
-<<<<<<< HEAD
+
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
-=======
-			@ModelAttribute GroupeDTO leGroupe, Model model) {
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
+
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
