@@ -251,6 +251,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 					"UtilisateurEnAttenteImpl.trouver : L'utilisateurEnAttente ayant pour id " + idUtilisateurEnAttente
 							+ " n'existe pas");
 		}
+		em.refresh(utilisateurEnAttente);
 		return MappingToDTO.utilisateurEnAttenteToUtilisateurEnAttenteDTO(utilisateurEnAttente);
 	}
 

@@ -226,6 +226,8 @@ public class GroupeImpl implements GroupeService {
 			//			grp.setArticles(lesArt);
 		}
 		
+		em.refresh(gr);
+		
 		return MappingToDTO.groupeToGroupeDTO(gr);
 	}
 
