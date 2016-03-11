@@ -4,13 +4,6 @@
 
 <div class="col-md-2 droite">
 	<div data-spy="affix" class="menu-droite">
-		<p class="suggestion-titre">Suggestions de profils</p>
-		<ul class="menu-droite-1">
-			<a href="#"><li>Profil 1<span
-					class="glyphicon glyphicon-chevron-right gly-menu"
-					aria-hidden="true"></span></li></a>
-		</ul>
-
 		<p class="suggestion-titre">Suggestions de groupes</p>
 		<ul class="menu-droite-2">
 			<c:forEach items="${tousLesGroupes}" var="grp">

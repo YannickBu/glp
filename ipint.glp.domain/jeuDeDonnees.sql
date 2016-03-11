@@ -15,6 +15,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
 --
 -- Table structure for table `ARTICLE`
 --
@@ -28,11 +29,12 @@ CREATE TABLE `ARTICLE` (
   `DATEPUBLICATION` datetime DEFAULT NULL,
   `GROUPE_IDGROUPE` int(11) DEFAULT NULL,
   `UTILISATEUR_IDUTILISATEUR` int(11) DEFAULT NULL,
+  `TITRE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IDARTICLE`),
   KEY `FK_ARTICLE_GROUPE_IDGROUPE` (`GROUPE_IDGROUPE`),
   KEY `FK_ARTICLE_UTILISATEUR_IDUTILISATEUR` (`UTILISATEUR_IDUTILISATEUR`),
-  CONSTRAINT `FK_ARTICLE_UTILISATEUR_IDUTILISATEUR` FOREIGN KEY (`UTILISATEUR_IDUTILISATEUR`) REFERENCES `UTILISATEUR` (`IDUTILISATEUR`),
-  CONSTRAINT `FK_ARTICLE_GROUPE_IDGROUPE` FOREIGN KEY (`GROUPE_IDGROUPE`) REFERENCES `GROUPE` (`IDGROUPE`)
+  CONSTRAINT `FK_ARTICLE_GROUPE_IDGROUPE` FOREIGN KEY (`GROUPE_IDGROUPE`) REFERENCES `GROUPE` (`IDGROUPE`),
+  CONSTRAINT `FK_ARTICLE_UTILISATEUR_IDUTILISATEUR` FOREIGN KEY (`UTILISATEUR_IDUTILISATEUR`) REFERENCES `UTILISATEUR` (`IDUTILISATEUR`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -42,7 +44,7 @@ CREATE TABLE `ARTICLE` (
 
 LOCK TABLES `ARTICLE` WRITE;
 /*!40000 ALTER TABLE `ARTICLE` DISABLE KEYS */;
-INSERT INTO `ARTICLE` VALUES (101,'Moi j\'ai une attitude sport ! ','2016-02-03 14:09:35',0,54),(102,'J\'ai eu mon diplome ! :)','2016-02-03 14:10:51',0,4),(111,'Salut tout le monde !','2016-02-03 14:16:34',1,110),(116,'Je reviendrais !','2016-02-03 14:18:59',1,115),(121,'Vivement les vacs ! ;)','2016-02-03 14:25:14',2,120),(122,'J\'adore ce site ! <3','2016-02-03 14:27:17',2,106);
+INSERT INTO `ARTICLE` VALUES (101,'Moi j\'ai une attitude sport ! ','2016-02-03 14:09:35',0,54,NULL),(102,'J\'ai eu mon diplome ! :)','2016-02-03 14:10:51',0,4,NULL),(111,'Salut tout le monde !','2016-02-03 14:16:34',1,110,NULL),(116,'Je reviendrais !','2016-02-03 14:18:59',1,115,NULL),(121,'Vivement les vacs ! ;)','2016-02-03 14:25:14',2,120,NULL),(122,'J\'adore ce site ! <3','2016-02-03 14:27:17',2,106,NULL);
 /*!40000 ALTER TABLE `ARTICLE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +166,7 @@ CREATE TABLE `GROUPE` (
 
 LOCK TABLES `GROUPE` WRITE;
 /*!40000 ALTER TABLE `GROUPE` DISABLE KEYS */;
-INSERT INTO `GROUPE` VALUES (0,'Groupe des Sciences, Technologies, Santé','Sciences, Technologies, Santé',NULL,0),(1,'Groupe des Droit, Economie, Gestion','Droit, Economie, Gestion',NULL,0),(2,'Groupe des Sciences Humaines et Sociales','Sciences Humaines et Sociales',NULL,0),(205,'aaaab','aaaab',54,0),(206,'aaaabc','aaaabc',54,0),(207,'aaaabcd','aaaabcd',54,0),(251,'Groupe institutionnel de géométrie','Géométrie',54,1),(301,'Groupe officiel de l\'Algébrique','Algébrique',54,1),(351,'Groupe des pandas','Bambou',54,1),(401,'English Groupe','Anglais',4,1),(451,'por favor','Espanol',54,1),(453,'Arbeit','Allemand',4,1),(501,'Ni ao !','Chinois',4,1),(502,'Guerre !','Vietnamien',54,1),(551,'Yamété','Japonais',4,1),(601,'Sacrebleu','Français',4,1),(651,'E = mc2','Physique',4,1),(701,'DSK','Economie',4,1),(751,'H20','Chimie',4,1),(801,'SoS :x','Sociologie',4,1),(851,'Psykowak','Psychologie',4,1),(901,'Litté quoi ?','Littérature',4,1),(951,'Apéro','Cacahuète',4,1);
+INSERT INTO `GROUPE` VALUES (0,'Groupe des Sciences, Technologies, Santé','Sciences, Technologies, Santé',NULL,0),(1,'Groupe des Droit, Economie, Gestion','Droit, Economie, Gestion',NULL,0),(2,'Groupe des Sciences Humaines et Sociales','Sciences Humaines et Sociales',NULL,0),(251,'Groupe institutionnel de géométrie','Géométrie',54,1),(301,'Groupe officiel de l\'Algébrique','Algébrique',54,1),(351,'Groupe des pandas','Bambou',54,1),(401,'English Groupe','Anglais',4,1),(451,'por favor','Espanol',54,1),(453,'Arbeit','Allemand',4,1),(501,'Ni ao !','Chinois',4,1),(502,'Guerre !','Vietnamien',54,1),(551,'Yamété','Japonais',4,1),(601,'Sacrebleu','Français',4,1),(651,'E = mc2','Physique',4,1),(701,'DSK','Economie',4,1),(751,'H20','Chimie',4,1),(801,'SoS :x','Sociologie',4,1),(851,'Psykowak','Psychologie',4,1),(901,'Litté quoi ?','Littérature',4,1),(951,'Apéro','Cacahuète',4,1);
 /*!40000 ALTER TABLE `GROUPE` ENABLE KEYS */;
 UNLOCK TABLES;
 
