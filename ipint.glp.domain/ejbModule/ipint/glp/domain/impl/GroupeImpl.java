@@ -225,7 +225,7 @@ public class GroupeImpl implements GroupeService {
 			//			List<Article> lesArt = q2.getResultList();
 			//			grp.setArticles(lesArt);
 		}
-		
+		em.refresh(gr);
 		return MappingToDTO.groupeToGroupeDTO(gr);
 	}
 
