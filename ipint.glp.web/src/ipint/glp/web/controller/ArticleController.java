@@ -75,7 +75,7 @@ public class ArticleController {
 	}
 
 	@RequestMapping(value = "/publication", method = RequestMethod.POST)
-	public ModelAndView publicationGet(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article,
+	public ModelAndView publicationPost(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article,
 			BindingResult result, Model model) throws MetierException {
 
 		UtilisateurDTO uDTO = new UtilisateurDTO();
@@ -111,11 +111,23 @@ public class ArticleController {
 		GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
 		groupes.add(groupePrincipal);
 		// for(GroupeDTO groupe : groupes){
-
+		
 		for (ArticleDTO articleDTO : as.listerParDate(groupes)) {
 			articles.add(articleDTO);
 		}
 		// }
+		
+		
+		List<GroupeDTO> tousLesGroupes = gs.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		model.addAttribute("tousLesGroupes", tousLesGroupes);
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
