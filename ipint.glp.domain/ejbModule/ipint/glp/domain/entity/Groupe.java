@@ -118,7 +118,7 @@ public class Groupe {
 	}
 
 	public List<Utilisateur> getUtilisateurs() {
-		System.out.println("Utilisateurs DATABASE : " + utilisateurs);
+		//System.out.println("Utilisateurs DATABASE : " + utilisateurs);
 		return utilisateurs;
 	}
 
