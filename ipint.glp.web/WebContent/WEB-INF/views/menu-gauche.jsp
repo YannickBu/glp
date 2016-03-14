@@ -28,10 +28,6 @@
 					class="glyphicon glyphicon-heart gly-menu" aria-hidden="true"></span>
 			</a>
 			<ul>
-				<a
-					href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
-					<li class="nomGroupe">${utilisateur.groupePrincipal.nomGroupe}</li>
-				</a>
 				<c:forEach items="${utilisateur.groupes}" var="grp">
 
 					<li class="nomGroupe"><a
