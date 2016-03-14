@@ -33,6 +33,12 @@
 					<li class="nomGroupe"><a
 						href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 				</c:forEach>
+				<% if(request.getAttribute("grpPrinciapl") != null){ %>
+					<a
+						href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
+						<li class="nomGroupe">${utilisateur.groupePrincipal.nomGroupe}</li>
+					</a>
+				<% } %>
 			</ul>
 			</li>
 			<%

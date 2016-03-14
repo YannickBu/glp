@@ -227,11 +227,12 @@ public class ArticleImpl implements ArticleService {
 			request += " where ";
 			if(groupes.size()==1){
 				request += " a.groupe.idGroupe = '"+groupes.get(0).getIdGroupe()+"' ";
-			}else
+			}else {
 				for(int ind=0; ind<groupes.size()-1; ind++){
 					request += " a.groupe.idGroupe =  '"+groupes.get(ind).getIdGroupe()+"' or ";
 				}
-			request += " a.groupe.idGroupe =  '"+groupes.get(groupes.size()-1).getIdGroupe()+"' ";
+				request += " a.groupe.idGroupe =  '"+groupes.get(groupes.size()-1).getIdGroupe()+"' ";
+			}
 		}
 		request += " order by a.datePublication desc";
 		q = em.createQuery(request);
