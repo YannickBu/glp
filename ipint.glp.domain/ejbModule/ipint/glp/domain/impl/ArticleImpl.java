@@ -36,11 +36,10 @@ public class ArticleImpl implements ArticleService {
 		if (articleDTO.getUtilisateur().getEmail() == null && articleDTO.getUtilisateur().getIdUtilisateur() == null) {
 			throw new InformationManquanteException("ArticleImpl.creer : L'utilisateur dans l'articleDTO est null");
 		}
-		// if (articleDTO.getGroupe() == null) {
-		// throw new InformationManquanteException(
-		// "ArticleImpl.creer : L'articleDTO n'a pas de groupe principal
-		// associé");
-		// }
+//		if (articleDTO.getGroupe() == null) {
+//			throw new InformationManquanteException(
+//					"ArticleImpl.creer : L'articleDTO n'a pas de groupe principal associé");
+//		}
 		// if(articleDTO.getGroupes()==null ||
 		// articleDTO.getGroupes().isEmpty()){
 		// throw new InformationManquanteException("ArticleDTO.creer :
@@ -57,7 +56,8 @@ public class ArticleImpl implements ArticleService {
 		Utilisateur util = null;
 		Query q;
 		if (articleDTO.getUtilisateur().getEmail() != null) {
-			q = em.createQuery("select e from Utilisateur e where e.email = :email");
+			q = em.createQuery(
+					"select e from Utilisateur e where e.email = :email");
 			q.setParameter("email", articleDTO.getUtilisateur().getEmail());
 			try {
 				util = (Utilisateur) q.getSingleResult();
@@ -209,7 +209,7 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public List<ArticleDTO> listerParGroupe(GroupeDTO groupe) throws MetierException {
-		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "'");
+		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "' order by a.datePublication desc");
 		List<Article> articles = q.getResultList();
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
@@ -217,19 +217,30 @@ public class ArticleImpl implements ArticleService {
 		}
 		return articlesDTO;
 	}
-
+	
 	@Override
 	public List<ArticleDTO> listerParDate(List<GroupeDTO> groupes) throws MetierException {
-		Query q = em.createQuery("select a from Article a order by a.idArticle desc");
+		String request = "select distinct a from Article a ";
+		Query q = null;
+		
+		if(!groupes.isEmpty()){
+			request += " where ";
+			if(groupes.size()==1){
+				request += " a.groupe.idGroupe = '"+groupes.get(0).getIdGroupe()+"' ";
+			}else {
+				for(int ind=0; ind<groupes.size()-1; ind++){
+					request += " a.groupe.idGroupe =  '"+groupes.get(ind).getIdGroupe()+"' or ";
+				}
+				request += " a.groupe.idGroupe =  '"+groupes.get(groupes.size()-1).getIdGroupe()+"' ";
+			}
+		}
+		request += " order by a.datePublication desc";
+		q = em.createQuery(request);
 		List<Article> articles = q.getResultList();
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
-			for (GroupeDTO groupe : groupes) {
-				if (groupe.getIdGroupe() == article.getGroupe().getIdGroupe()) {
-					articlesDTO.add(MappingToDTO.articleToArticleDTO(article));
-				}
-			}
+				articlesDTO.add(MappingToDTO.articleToArticleDTO(article));
 		}
 		return articlesDTO;
-	}
+	} 
 }
