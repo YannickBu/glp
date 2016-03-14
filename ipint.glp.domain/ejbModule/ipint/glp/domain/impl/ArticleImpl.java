@@ -209,7 +209,7 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public List<ArticleDTO> listerParGroupe(GroupeDTO groupe) throws MetierException {
-		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "'");
+		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "' order by a.datePublication desc");
 		List<Article> articles = q.getResultList();
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
