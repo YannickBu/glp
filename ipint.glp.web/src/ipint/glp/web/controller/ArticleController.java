@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,9 +71,9 @@ public class ArticleController {
 	}
 
 	@RequestMapping(value = "/publication", method = RequestMethod.POST)
-	public ModelAndView publicationGet(HttpServletRequest request, @ModelAttribute("article") ArticleDTO article,
+	public ModelAndView publicationGet(HttpServletRequest request, @Valid @ModelAttribute("article") ArticleDTO article,
 			BindingResult result, Model model) throws MetierException {
-
+		
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
@@ -95,11 +96,13 @@ public class ArticleController {
 		grp = gs.trouver(grp);
 		articleDto.setGroupe(grp);
 //		System.out.println(" ArticleController - publicationGet - grp.getNomGroupe() = " + grp.getNomGroupe());
-		try {
-			articleDto = as.creer(articleDto);
-		} catch (MetierException e) {
-			logger.severe("Erreur acces publication POST - ArticleService.creer renvoie : " + e.getMessage());
-			return new ModelAndView("redirect:/erreur");
+		if(!result.hasErrors()){
+			try {
+				articleDto = as.creer(articleDto);
+			} catch (MetierException e) {
+				logger.severe("Erreur acces publication POST - ArticleService.creer renvoie : " + e.getMessage());
+				return new ModelAndView("redirect:/erreur");
+			}
 		}
 		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
 		List<GroupeDTO> groupes = uDTO.getGroupes();
