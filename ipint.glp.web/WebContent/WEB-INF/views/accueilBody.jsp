@@ -46,6 +46,7 @@
 					
 					<input
 					class="inputBtn btn btn-default btnModifProfif" type="submit" value="Publier l'article" />
+					<form:errors path="contenu"/>
 				</li>
 			</form:form>
 		</ul>
