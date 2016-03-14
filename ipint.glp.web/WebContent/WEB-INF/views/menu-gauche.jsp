@@ -28,15 +28,17 @@
 					class="glyphicon glyphicon-heart gly-menu" aria-hidden="true"></span>
 			</a>
 			<ul>
-				<a
-					href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
-					<li class="nomGroupe">${utilisateur.groupePrincipal.nomGroupe}</li>
-				</a>
 				<c:forEach items="${utilisateur.groupes}" var="grp">
 
 					<li class="nomGroupe"><a
 						href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 				</c:forEach>
+				<% if(request.getAttribute("grpPrinciapl") != null){ %>
+					<a
+						href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
+						<li class="nomGroupe">${utilisateur.groupePrincipal.nomGroupe}</li>
+					</a>
+				<% } %>
 			</ul>
 			</li>
 			<%

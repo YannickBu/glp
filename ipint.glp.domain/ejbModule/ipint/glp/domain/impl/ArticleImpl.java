@@ -135,7 +135,7 @@ public class ArticleImpl implements ArticleService {
 			throw new ArticleInconnuException("ArticleImpl.trouver : " + articleDTO.toString() + " inconnu");
 		}
 		
-		em.refresh(art);
+		//em.refresh(art);
 		
 		return MappingToDTO.articleToArticleDTO(art);
 	}

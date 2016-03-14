@@ -1,5 +1,6 @@
 package ipint.glp.web.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -172,9 +173,11 @@ public class GroupeController {
 			logger.severe("Erreur acces groupeidProfil GET - groupeService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
+		List<GroupeDTO> grpesDTO = new ArrayList<>();
+		grpesDTO.add(gDTO);
 		List<UtilisateurDTO> animateursGroupe = gDTO.getAnimateurs();
 		List<UtilisateurDTO> membresGroupe = gDTO.getUtilisateurs();
-		List<ArticleDTO> articlesGroupe = gDTO.getArticles();
+		List<ArticleDTO> articlesGroupe = articleService.listerParDate(grpesDTO);
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
 		try {
@@ -223,6 +226,7 @@ public class GroupeController {
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe", membresGroupe);
 		model.addAttribute("articlesGroupe", articlesGroupe);
+		model.addAttribute("grpPrinciapl", uDTO.getGroupePrincipal());
 		model.addAttribute("inscription", inscription);
 		return new ModelAndView("groupe");
 	}
