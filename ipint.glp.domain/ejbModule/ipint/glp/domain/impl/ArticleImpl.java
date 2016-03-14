@@ -233,6 +233,7 @@ public class ArticleImpl implements ArticleService {
 				}
 			request += " a.groupe.idGroupe =  '"+groupes.get(groupes.size()-1).getIdGroupe()+"' ";
 		}
+		request += " order by a.datePublication desc";
 		q = em.createQuery(request);
 		List<Article> articles = q.getResultList();
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
