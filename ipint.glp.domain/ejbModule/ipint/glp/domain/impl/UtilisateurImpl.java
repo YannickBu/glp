@@ -376,7 +376,7 @@ public class UtilisateurImpl implements UtilisateurService {
 		em.refresh(utilisateur);
 
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
-		System.out.println("UTILISATEURIMPL " + "trouver " + "Après mapping" + utilisateur.getGroupes());
+		//System.out.println("UTILISATEURIMPL " + "trouver " + "Après mapping" + utilisateur.getGroupes());
 		return utilisateurDTO;
 	}
 
