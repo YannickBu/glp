@@ -103,6 +103,7 @@ public class GroupeController {
 		 */
 		try {
 			groupeService.ajouterUtilisateur(gDTO, utilisateurDTO);
+			
 		} catch (MetierException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
