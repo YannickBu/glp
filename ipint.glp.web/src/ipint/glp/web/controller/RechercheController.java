@@ -51,8 +51,6 @@ public class RechercheController {
 		List<UtilisateurDTO> utilisateurs = new ArrayList<UtilisateurDTO>();
 		groupes = rs.rechercheGroupes(search);
 		utilisateurs = rs.rechercheUtilisateurs(search);
-		System.out.println("**************groupes = "+ groupes);
-		
 		List<GroupeDTO> tousLesGroupes = gs.listerTousLesGroupes();
 		tousLesGroupes.remove(uDTO.getGroupePrincipal());
 		for(GroupeDTO groupe1 : uDTO.getGroupes()){
@@ -65,6 +63,8 @@ public class RechercheController {
 		model.addAttribute("tousLesGroupes", tousLesGroupes);
 		model.addAttribute("groupes", groupes);
 		model.addAttribute("utilisateurs", utilisateurs);
+		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
 		return new ModelAndView("recherche");
 	}
 	
@@ -83,8 +83,6 @@ public class RechercheController {
 		List<UtilisateurDTO> utilisateurs = new ArrayList<UtilisateurDTO>();
 		groupes = rs.rechercheGroupes(search);
 		utilisateurs = rs.rechercheUtilisateurs(search);
-		System.out.println("**************groupes = "+ groupes);
-		
 		List<GroupeDTO> tousLesGroupes = gs.listerTousLesGroupes();
 		tousLesGroupes.remove(uDTO.getGroupePrincipal());
 		for(GroupeDTO groupe1 : uDTO.getGroupes()){
@@ -97,6 +95,8 @@ public class RechercheController {
 		model.addAttribute("tousLesGroupes", tousLesGroupes);
 		model.addAttribute("groupes", groupes);
 		model.addAttribute("utilisateurs", utilisateurs);
+		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
 		return new ModelAndView("recherche");
 	}
 }
