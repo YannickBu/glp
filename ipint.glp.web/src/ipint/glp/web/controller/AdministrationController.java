@@ -60,6 +60,7 @@ public class AdministrationController {
 		try {	
 			u2DTO = utilisateurS.trouver(u2DTO);
 			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -96,6 +97,7 @@ public class AdministrationController {
 		try {	
 			u2DTO = utilisateurS.trouver(u2DTO);
 			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -160,6 +162,7 @@ public class AdministrationController {
 		try {	
 			u2DTO = utilisateurS.trouver(u2DTO);
 			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -192,6 +195,7 @@ public class AdministrationController {
 		try {	
 			u2DTO = utilisateurS.trouver(u2DTO);
 			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

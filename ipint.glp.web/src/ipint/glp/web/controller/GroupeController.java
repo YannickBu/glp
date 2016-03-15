@@ -50,18 +50,16 @@ public class GroupeController {
 	// return new ModelAndView("groupe");
 	// }
 
-	
-
-	
 	@RequestMapping(value = "/groupe/{id}/inscriptionGroupe", method = RequestMethod.GET)
-	public ModelAndView groupeInscription(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
+	public ModelAndView groupeInscription(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("utilisateur", u2DTO);
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -82,36 +80,49 @@ public class GroupeController {
 			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
-		UtilisateurEnAttenteDTO utilisateurEnAttenteDTO = new UtilisateurEnAttenteDTO();
-		utilisateurEnAttenteDTO.setAnneeDiplome(utilisateurDTO.getProfil().getAnneeDiplome());
-		// TODO : gestion de la date
-		utilisateurEnAttenteDTO.setDateNaissance(new Date());
-		utilisateurEnAttenteDTO.setDiplome(utilisateurDTO.getProfil().getDiplomePrincipal());
-		utilisateurEnAttenteDTO.setEmail(utilisateurDTO.getEmail());
-		utilisateurEnAttenteDTO.setGroupePrincipal(gDTO);
-		utilisateurEnAttenteDTO.setNom(utilisateurDTO.getNom());
-		utilisateurEnAttenteDTO.setPrenom(utilisateurDTO.getPrenom());
+		/*
+		 * UtilisateurEnAttenteDTO utilisateurEnAttenteDTO = new
+		 * UtilisateurEnAttenteDTO();
+		 * utilisateurEnAttenteDTO.setAnneeDiplome(utilisateurDTO.getProfil().
+		 * getAnneeDiplome()); // TODO : gestion de la date
+		 * utilisateurEnAttenteDTO.setDateNaissance(new Date());
+		 * utilisateurEnAttenteDTO.setDiplome(utilisateurDTO.getProfil().
+		 * getDiplomePrincipal());
+		 * utilisateurEnAttenteDTO.setEmail(utilisateurDTO.getEmail());
+		 * utilisateurEnAttenteDTO.setGroupePrincipal(gDTO);
+		 * utilisateurEnAttenteDTO.setNom(utilisateurDTO.getNom());
+		 * utilisateurEnAttenteDTO.setPrenom(utilisateurDTO.getPrenom());
+		 * 
+		 * try { utilisateurEnAttenteService.creer(utilisateurEnAttenteDTO); }
+		 * catch (MetierException e) { logger.severe(
+		 * "Erreur acces publication GET - UtilisateurService.trouver renvoie : "
+		 * + e.getMessage()); return new ModelAndView("redirect:/erreur"); } try
+		 * { utilisateurEnAttenteService.valider(utilisateurEnAttenteDTO, ""); }
+		 * catch (MetierException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); }
+		 */
 		try {
-			utilisateurEnAttenteService.creer(utilisateurEnAttenteDTO);
+			groupeService.ajouterUtilisateur(gDTO, utilisateurDTO);
+			
 		} catch (MetierException e) {
-			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
-			return new ModelAndView("redirect:/erreur");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 		model.addAttribute("leGroupe", gDTO);
 
 		return new ModelAndView("redirect:/groupe/{id}");
 	}
 
 	@RequestMapping(value = "/groupe/{id}/desinscriptionGroupe", method = RequestMethod.GET)
-	public ModelAndView groupeDesinscription(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
+	public ModelAndView groupeDesinscription(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("utilisateur", u2DTO);
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -151,16 +162,17 @@ public class GroupeController {
 	}
 
 	@RequestMapping(value = "/groupe/{id}", method = RequestMethod.GET)
-	public ModelAndView groupeidGET(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
+	public ModelAndView groupeidGET(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
+			model.addAttribute("utilisateur", u2DTO);
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -210,13 +222,13 @@ public class GroupeController {
 		} catch (MetierException e) {
 
 		}
-		
+
 		List<GroupeDTO> tousLesGroupes = groupeService.listerTousLesGroupes();
 		tousLesGroupes.remove(uDTO.getGroupePrincipal());
-		for(GroupeDTO groupe1 : uDTO.getGroupes()){
-			for(GroupeDTO groupe2 : tousLesGroupes){
-				if(groupe1.equals(groupe2)){
-					groupe2=null;
+		for (GroupeDTO groupe1 : uDTO.getGroupes()) {
+			for (GroupeDTO groupe2 : tousLesGroupes) {
+				if (groupe1.equals(groupe2)) {
+					groupe2 = null;
 				}
 			}
 		}
@@ -226,7 +238,7 @@ public class GroupeController {
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe", membresGroupe);
 		model.addAttribute("articlesGroupe", articlesGroupe);
-		model.addAttribute("grpPrinciapl", uDTO.getGroupePrincipal());
+		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("inscription", inscription);
 		return new ModelAndView("groupe");
 	}
