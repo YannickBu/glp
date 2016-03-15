@@ -76,6 +76,8 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>not use</web-resource-name>
+			<url-pattern>/recherche</url-pattern>
+			<url-pattern>/recherche/*</url-pattern>
 			<url-pattern>/profil/*/</url-pattern>
 			<url-pattern>/profil/*</url-pattern>
 			<url-pattern>/publication/</url-pattern>

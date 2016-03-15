@@ -1,3 +1,6 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -14,13 +17,13 @@
 								L1nk</li></a>
 						</ul>
 						<ul id="barre-recherche" class="nav navbar-nav navbar-left">
-							<form class="navbar-form" role="search">
+							<form:form action="${pageContext.servletContext.contextPath}/recherche" class="navbar-form" role="search">
 								<div class="form-group">
 									<input type="text" size="50" class="form-control"
-										placeholder="Rechercher...">
+										placeholder="Rechercher..."/>
 								</div>
 								<button type="submit" class="btn btn-default">Rechercher</button>
-							</form>
+							</form:form>
 						</ul>
 						<ul style="margin-top: 0.5%" class="nav navbar-nav navbar-right">
 							<li class="nom-etudiant">${utilisateur.prenom}&nbsp;${utilisateur.nom}</li>
