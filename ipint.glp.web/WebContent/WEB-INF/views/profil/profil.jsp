@@ -37,7 +37,7 @@
 									les publications</a></li>
 
 						</ul>
-						<div class="tab-content">
+						<div class="tab-content accueilBody">
 							<div class="tab-pane " id="panel-1">
 								<div class="row">
 									<div class="col-md-12">
