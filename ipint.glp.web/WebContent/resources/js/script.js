@@ -20,11 +20,26 @@ $(document).ready(function(){
 		minView : 'month',
 		autoclose : true,
 		endDate : new Date(),
-		language : "fr"
+		language : "fr",
+		forceParse: false
 	});
 	
-
 });
+
+
+function adaptDateOnPicker() {
+	var dateOnPicker = new Date($('#inputBirthday').val()).getTime();
+	$('#inputBirthday').attr('value',dateOnPicker);
+	adaptDate();
+}
+
+function adaptDate() {
+	var optionDate = {day: "2-digit", month:"2-digit", year: "numeric"};
+	var birthday = new Date(parseFloat($('#inputBirthday').attr('value')));
+	$('#inputBirthday').attr('value', birthday.getTime());
+	var modifiedDay = new Date(parseFloat($('#inputBirthday').attr('value')));
+	$('#inputBirthday').val(modifiedDay.toLocaleDateString('en-GB',optionDate));		
+}
 
 // ModifProfil
 //
