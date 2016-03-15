@@ -77,6 +77,9 @@
 	<jee:local-slsb id="utilsBean"
 		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/UtilsImpl"
 		business-interface="ipint.glp.api.itf.UtilsService"></jee:local-slsb>
+	<jee:local-slsb id="rechercheBean"
+		jndi-name="java:global/ipint.glp.ear/ipint.glp.domain-0.0.1-SNAPSHOT/RechercheImpl"
+		business-interface="ipint.glp.api.itf.RechercheService"></jee:local-slsb>
 
 
 	<!-- <jee:local-slsb id="articleBean" jndi-name="java:global/ipint.glp.ear/ipint.glp.domain/ArticleImpl" 

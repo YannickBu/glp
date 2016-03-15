@@ -9,7 +9,7 @@
 			<c:forEach items="${tousLesGroupes}" var="grp">
 			
 				<a
-					href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}"><li><span class="nomGroupe">${grp.nomGroupe}</span></li></a>
+					href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}"><li class="nomGroupe">${grp.nomGroupe}</li></a>
 			
 			</c:forEach>
 		</ul>

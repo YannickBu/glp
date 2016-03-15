@@ -37,7 +37,7 @@ public class ArticleController {
 	GroupeService gs;
 
 	@RequestMapping(value = "/publication", method = RequestMethod.GET)
-	public ModelAndView welcomeGet(HttpServletRequest request, Model model, @ModelAttribute UtilisateurDTO utilisateur) throws MetierException {
+	public ModelAndView welcomeGet(HttpServletRequest request, Model model, @ModelAttribute UtilisateurDTO utilisateur, @ModelAttribute("recherche") String recherche) throws MetierException {
 		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
@@ -116,5 +116,4 @@ public class ArticleController {
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
 		return new ModelAndView("accueil");
 	}
-
 }

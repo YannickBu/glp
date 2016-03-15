@@ -131,7 +131,8 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 			throw new UtilisateurEnAttenteInconnuException("UtilisateurEnAttenteImpl.refuser : "
 					+ utilisateurEnAttenteAValiderDTO.toString() + " n'existe pas");
 		}
-		String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
+		String email = utilisateurEnAttenteAValiderDTO.getEmail();
+		String messageMail = Mail.construireMail(typeDeMessage, email, messageOptionel, password);
 		Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 		supprimer(utilisateurEnAttenteAValiderDTO);
 	}
@@ -167,6 +168,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 		Query q = em.createQuery("select u from Utilisateur u where u.email = '" + utilisateurDTO.getEmail() + "'");
 		try {
 			utilisateur = (Utilisateur) q.getSingleResult();
+			String email = utilisateur.getEmail();
 			Groupe groupe = new Groupe();
 			GroupeDTO groupeDTO = utilisateurEnAttenteAValiderDTO.getGroupePrincipal();
 			groupe.setIdGroupe(groupeDTO.getIdGroupe());
@@ -187,7 +189,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 			em.merge(utilisateur);
 			int typeDeMessage = 5;
 			String messageOptionel = "";
-			String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, groupe.getNomGroupe());
+			String messageMail = Mail.construireMail(typeDeMessage, email, messageOptionel, groupe.getNomGroupe());
 			Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 
 		} catch (NoResultException e) {
@@ -212,6 +214,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 			utilisateurDTO.setPrenom(utilisateurEnAttenteAValiderDTO.getPrenom());
 			utilisateurDTO.setStatut(Statut.DIPLOME);
 			utilisateurDTO.setGroupePrincipal(utilisateurEnAttenteAValiderDTO.getGroupePrincipal());
+			String email = utilisateurEnAttenteAValiderDTO.getEmail();
 			Profil profil = new Profil();
 			profil.setDiplomePrincipal(utilisateurEnAttenteAValiderDTO.getDiplome());
 			profil.setAnneeDiplome(utilisateurEnAttenteAValiderDTO.getAnneeDiplome());
@@ -219,7 +222,7 @@ public class UtilisateurEnAttenteImpl implements UtilisateurEnAttenteService {
 			GenererMotDePasse generationMotDePasse = new GenererMotDePasse(10);
 			String password = generationMotDePasse.nextString();
 			utilisateurDTO.setPassword(password);
-			String messageMail = Mail.construireMail(typeDeMessage, messageOptionel, password);
+			String messageMail = Mail.construireMail(typeDeMessage, email, messageOptionel, password);
 			Mail.envoyerMail(utilisateurEnAttenteAValiderDTO.getEmail(), messageMail);
 			UtilisateurImpl utilisateurService = new UtilisateurImpl(em);
 
