@@ -15,12 +15,11 @@
 			</div>
 			<div class="col-md-10">
 				<h1 class="nomEtu">${utilisateur.prenom}&nbsp;${utilisateur.nom}</h1>
-				<h1>${utilisateur.profil.situation}</h1>
+				<h1>${utilisateur.profil.situation},
+					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}
+				</h1>
 				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 					${utilisateur.profil.anneeDiplome}</div>
-				<div>
-					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Lille,France
-				</div>
 			</div>
 			<hr />
 		</div>
@@ -38,7 +37,7 @@
 									les publications</a></li>
 
 						</ul>
-						<div class="tab-content">
+						<div class="tab-content accueilBody">
 							<div class="tab-pane " id="panel-1">
 								<div class="row">
 									<div class="col-md-12">
@@ -133,7 +132,7 @@
 													${utilisateur.profil.centreInteret}</li>
 												<li><b>Groupe principal : </b><a
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
-												<li><b>Mes groupes : </b>
+												<li style="margin-top: 1%;"><b>Mes groupes : </b>
 													<ul>
 
 														<c:forEach items="${utilisateur.groupes}" var="grp">
@@ -145,29 +144,29 @@
 												</li>
 												<c:forEach items="${profil.reseauxSociaux}" var="reseau">
 													<c:if test="${fn:contains(reseau.lien, 'facebook')}">
-													<a href="${reseau.lien}" target="_blank"> <img
-														src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
-														class="img-responsive2" alt="Responsive image" /></a>
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
+															class="img-responsive2" alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'twitter')}">
-													<a href="${reseau.lien}" target="_blank"> <img
-														src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
-														class="img-responsive2" alt="Responsive image" /></a>
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
+															class="img-responsive2" alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'viadeo')}">
-													<a href="${reseau.lien}" target="_blank"> <img
-														src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
-														class="img-responsive2" alt="Responsive image" /></a>
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
+															class="img-responsive2" alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'linkedin')}">
-													<a href="${reseau.lien}" target="_blank"> <img
-														src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
-														class="img-responsive2" alt="Responsive image" /></a>
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
+															class="img-responsive2" alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'plus.google')}">
-													<a href="${reseau.lien}" target="_blank"> <img
-														src="${pageContext.servletContext.contextPath}/resources/img/google.png"
-														class="img-responsive2" alt="Responsive image" /></a>
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/google.png"
+															class="img-responsive2" alt="Responsive image" /></a>
 													</c:if>
 												</c:forEach>
 											</ul>
