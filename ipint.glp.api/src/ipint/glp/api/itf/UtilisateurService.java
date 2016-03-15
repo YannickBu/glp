@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.exception.MetierException;
 
@@ -56,5 +57,12 @@ public interface UtilisateurService {
 	 * @return liste du personnel
 	 */
 	public List<UtilisateurDTO> listerParType(String type) throws MetierException;
+
+	/** Recupère l'experience la plus récente de l'utilisateur
+	 * @param utilisateurDTO
+	 * @return
+	 * @throws MetierException
+	 */
+	public ExperienceDTO derniereExperience(UtilisateurDTO utilisateurDTO) throws MetierException;
 
 }

@@ -38,6 +38,8 @@ public class Profil {
 	private int anneeDiplome;
 	private String mesAttentes;
 	private String situation;
+	//lieu de la situation / exemple si recherche de stage, c'est le lieu où l'on cherche et si en activité, le lieu de l'entreprise actuelle
+	private String lieuSituation;
 
 	public Profil() {
 		this.competence = new ArrayList<Competence>();
@@ -200,6 +202,14 @@ public class Profil {
 		this.situation = situation;
 	}
 
+	public String getLieuSituation() {
+		return lieuSituation;
+	}
+
+	public void setLieuSituation(String lieuSituation) {
+		this.lieuSituation = lieuSituation;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -211,6 +221,7 @@ public class Profil {
 		result = prime * result + ((diplomes == null) ? 0 : diplomes.hashCode());
 		result = prime * result + ((experiences == null) ? 0 : experiences.hashCode());
 		result = prime * result + ((idProfil == null) ? 0 : idProfil.hashCode());
+		result = prime * result + ((lieuSituation == null) ? 0 : lieuSituation.hashCode());
 		result = prime * result + ((mesAttentes == null) ? 0 : mesAttentes.hashCode());
 		result = prime * result + ((reseauxSociaux == null) ? 0 : reseauxSociaux.hashCode());
 		result = prime * result + ((situation == null) ? 0 : situation.hashCode());
@@ -259,6 +270,11 @@ public class Profil {
 				return false;
 		} else if (!idProfil.equals(other.idProfil))
 			return false;
+		if (lieuSituation == null) {
+			if (other.lieuSituation != null)
+				return false;
+		} else if (!lieuSituation.equals(other.lieuSituation))
+			return false;
 		if (mesAttentes == null) {
 			if (other.mesAttentes != null)
 				return false;
@@ -281,8 +297,5 @@ public class Profil {
 			return false;
 		return true;
 	}
-
-	
-	
 
 }
