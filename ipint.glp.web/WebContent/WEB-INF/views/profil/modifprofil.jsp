@@ -114,7 +114,7 @@ function varExp() {
     };
     
     function newDiplome() {
-        var comp, div1, div2, div3, div4, div5, div6, input1, input2, input3, input4, button;
+        var comp, div1, div2, div3, div4, div5, div6, input1, input2, input3, input4, button, option, date, annee, text;
         comp = document.getElementById('diplForm');
         div1 = document.createElement('div');
         div1.setAttribute('class','row');
@@ -125,26 +125,43 @@ function varExp() {
         div2.setAttribute('class','col-md-2');
         div1.appendChild(div2);
         
-        input1 = document.createElement('input');
+        input1 = document.createElement('select');
         input1.setAttribute('name','profil.diplomes['+nbComp2+'].anneeDebut');
-        input1.setAttribute('type','text');
         input1.setAttribute('class','form-control');
         input1.setAttribute('placeholder','Début');
         input1.setAttribute('data-toggle','tooltip');
         input1.setAttribute('title','Année de début');
+        
+        date = new Date();
+        annee = date.getFullYear();
+        for (var i = annee; i > 1950; i--) {
+            option = document.createElement('option');
+            option.setAttribute('value', i);
+            text = document.createTextNode(i); 
+            option.appendChild(text);
+            input1.appendChild(option);
+        }
         div2.appendChild(input1);    
         
         div3 = document.createElement('div');
         div3.setAttribute('class','col-md-2');
         div1.appendChild(div3);
         
-        input2 = document.createElement('input');
+        input2 = document.createElement('select');
         input2.setAttribute('name','profil.diplomes['+nbComp2+'].anneFin');
-        input2.setAttribute('type','text');
         input2.setAttribute('class','form-control');
         input2.setAttribute('placeholder','Fin');
         input2.setAttribute('data-toggle','tooltip');
         input2.setAttribute('title','Année de fin');
+        
+        annee = date.getFullYear();
+        for (var i = annee+1; i > 1950; i--) {
+            option = document.createElement('option');
+            option.setAttribute('value', i);
+            text = document.createTextNode(i); 
+            option.appendChild(text);
+            input2.appendChild(option);
+        }
         div3.appendChild(input2);
         
         div4 = document.createElement('div');
@@ -543,6 +560,7 @@ function varExp() {
 							<label for="InputTel"> Téléphone :</label>
 							<form:input path="profil.telephone" type="text"
 								class="form-control" id="InputTel" />
+								<form:errors path="profil.telephone"/>
 						</div>
 						<div class="form-group">
 							<label for="InputMesAttentes"> Mes attentes du réseau
@@ -557,16 +575,35 @@ function varExp() {
 									var="i">
 									<div class="row" id="idDipl${i}">
 										<div class="col-md-2">
-											<form:input path="profil.diplomes[${i}].anneeDebut"
+											<form:select path="profil.diplomes[${i}].anneeDebut"
 												data-toggle="tooltip" title="Année de début"
-												value="${profil.diplomes[i].anneeDebut}" type="number"
-												class="form-control" id="InputDipDebut" placeholder="Début" />
+												value="${profil.diplomes[i].anneeDebut}"
+												class="form-control" id="InputDipDebut" placeholder="Début" >
+												
+												<% 
+												Calendar calendar = new GregorianCalendar();
+		                                        calendar.setTime(new Date());
+		                                        int annee = calendar.get(Calendar.YEAR);
+												for (int i = annee; i > 1950; i--) {
+		                                            out.println(
+		                                                    "<option value='" + i + "'>" + i + "</option>");
+		                                        } %>
+		                                	</form:select>
 										</div>
 										<div class="col-md-2">
-											<form:input path="profil.diplomes[${i}].anneFin"
+											<form:select path="profil.diplomes[${i}].anneFin"
 												data-toggle="tooltip" title="Année de fin"
-												value="${profil.diplomes[i].anneFin}" type="number"
-												class="form-control" id="InputDipAnneFin" placeholder="Fin" />
+												value="${profil.diplomes[i].anneFin}"
+												class="form-control" id="InputDipAnneFin" placeholder="Fin" >
+												<% 
+												Calendar calendar = new GregorianCalendar();
+		                                        calendar.setTime(new Date());
+		                                        int annee = calendar.get(Calendar.YEAR);
+												for (int i = annee+1; i > 1950; i--) {
+		                                            out.println(
+		                                                    "<option value='" + i + "'>" + i + "</option>");
+		                                        } %>
+		                                	</form:select>
 										</div>
 										<div class="col-md-5">
 											<form:input path="profil.diplomes[${i}].libelle"
@@ -607,18 +644,36 @@ function varExp() {
 										<div class="col-md-12">
 											<div class="row">
 												<div class="col-md-2">
-													<form:input path="profil.experiences[${i}].anneeDebut"
-														value="${profil.experiences[i].anneeDebut}" type="text"
+													<form:select path="profil.experiences[${i}].anneeDebut"
+														value="${profil.experiences[i].anneeDebut}"
 														class="form-control" id="InputExpDebut"
 														placeholder="Début" data-toggle="tooltip"
-														title="Année de début" />
+														title="Année de début" >
+														<% 
+														Calendar calendar = new GregorianCalendar();
+				                                        calendar.setTime(new Date());
+				                                        int annee = calendar.get(Calendar.YEAR);
+														for (int i = annee; i > 1950; i--) {
+				                                            out.println(
+				                                                    "<option value='" + i + "'>" + i + "</option>");
+				                                        } %>
+				                                	</form:select>
 												</div>
 												<div class="col-md-2">
-													<form:input path="profil.experiences[${i}].anneFin"
-														value="${profil.experiences[i].anneFin}" type="text"
+													<form:select path="profil.experiences[${i}].anneFin"
+														value="${profil.experiences[i].anneFin}"
 														class="form-control" id="InputExpAnneFin"
 														placeholder="Fin" data-toggle="tooltip"
-														title="Année de fin" />
+														title="Année de fin" >
+														<% 
+														Calendar calendar = new GregorianCalendar();
+				                                        calendar.setTime(new Date());
+				                                        int annee = calendar.get(Calendar.YEAR);
+														for (int i = annee+1; i > 1950; i--) {
+				                                            out.println(
+				                                                    "<option value='" + i + "'>" + i + "</option>");
+				                                        } %>
+				                                	</form:select>
 												</div>
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].entreprise"

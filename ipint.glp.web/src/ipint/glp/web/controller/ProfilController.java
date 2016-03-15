@@ -69,6 +69,7 @@ public class ProfilController {
 		}
 		model.addAttribute("tousLesGroupes", tousLesGroupes);
 		
+		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
@@ -110,7 +111,8 @@ public class ProfilController {
 			}
 		}
 		model.addAttribute("tousLesGroupes", tousLesGroupes);
-		
+
+		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
@@ -149,6 +151,7 @@ public class ProfilController {
 			}
 		}
 		model.addAttribute("tousLesGroupes", tousLesGroupes);
+		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("modifprofil", "utilisateur", uDTO);
 	}
@@ -176,9 +179,10 @@ public class ProfilController {
 		// }
 
 		// Erreur telephone
-		if (utilisateur.getProfil().getTelephone() == null || "".equals(utilisateur.getProfil().getTelephone()))
-			result.rejectValue("profil.telephone", "Size", "Le téléphone est invalide");
-		else if (!utilisateur.getProfil().getTelephone().matches("[0-9]{10}"))
+//		if (utilisateur.getProfil().getTelephone() == null || "".equals(utilisateur.getProfil().getTelephone()))
+//			result.rejectValue("profil.telephone", "Size", "Le téléphone est invalide");
+		if (utilisateur.getProfil().getTelephone() != null && !"".equals(utilisateur.getProfil().getTelephone())
+				&& !utilisateur.getProfil().getTelephone().matches("[0-9]{10}"))
 			result.rejectValue("profil.telephone", "Pattern", "Le téléphone est invalide");
 
 		// Erreur annees diplomes
@@ -188,18 +192,23 @@ public class ProfilController {
 			cal.setTime(new Date());
 			dipl = utilisateur.getProfil().getDiplomes().get(indDipl);
 			if (dipl != null) {
-				if (dipl.getAnneeDebut() != null) {
-					if (dipl.getAnneeDebut() < 1950 || dipl.getAnneeDebut() > cal.get(GregorianCalendar.YEAR)) {
-						result.rejectValue("profil.diplomes[" + indDipl + "].anneeDebut", "Pattern",
-								"L'année de début est invalide");
-					}
-				}
-				if (dipl.getAnneFin() != null) {
-					if (dipl.getAnneFin() == null || dipl.getAnneFin() < 1950
-							|| dipl.getAnneFin() > cal.get(GregorianCalendar.YEAR)) {
-						result.rejectValue("profil.diplomes[" + indDipl + "].anneFin", "Pattern",
-								"L'année de fin est invalide");
-					}
+//				if (dipl.getAnneeDebut() != null) {
+//					if (dipl.getAnneeDebut() < 1950 || dipl.getAnneeDebut() > cal.get(GregorianCalendar.YEAR)) {
+//						result.rejectValue("profil.diplomes[" + indDipl + "].anneeDebut", "Pattern",
+//								"L'année de début est invalide ");
+//					}
+//				}
+//				if (dipl.getAnneFin() != null) {
+//					if (dipl.getAnneFin() == null || dipl.getAnneFin() < 1950
+//							|| dipl.getAnneFin() > cal.get(GregorianCalendar.YEAR)) {
+//						result.rejectValue("profil.diplomes[" + indDipl + "].anneFin", "Pattern",
+//								"L'année de fin est invalide ");
+//					}
+//				}
+				if(dipl.getAnneFin() != null && dipl.getAnneeDebut() != null
+						&& dipl.getAnneeDebut()>dipl.getAnneFin()){
+					result.rejectValue("profil.diplomes[" + indDipl + "].anneFin", "Pattern",
+							"L'année de début ne peut pas être supérieure à l'année de fin ");
 				}
 			}
 		}
@@ -212,17 +221,22 @@ public class ProfilController {
 			exp = utilisateur.getProfil().getExperiences().get(indExp);
 			System.out.println("ProfilController - profilModifPost - utilisateur.getProfil().getExperiences() = " + utilisateur.getProfil().getExperiences());
 			if (exp != null) {
-				if (exp.getAnneeDebut() != null) {
-					if (exp.getAnneeDebut() < 1950 || exp.getAnneeDebut() > cal.get(GregorianCalendar.YEAR)) {
-						result.rejectValue("profil.experiences[" + indExp + "].anneeDebut", "Pattern",
-								"L'année de début est invalide");
-					}
-				}
-				if (exp.getAnneFin() != null) {
-					if (exp.getAnneFin() < 1950 || exp.getAnneFin() > cal.get(GregorianCalendar.YEAR)) {
-						result.rejectValue("profil.experiences[" + indExp + "].anneFin", "Pattern",
-								"L'année de fin est invalide");
-					}
+//				if (exp.getAnneeDebut() != null) {
+//					if (exp.getAnneeDebut() < 1950 || exp.getAnneeDebut() > cal.get(GregorianCalendar.YEAR)) {
+//						result.rejectValue("profil.experiences[" + indExp + "].anneeDebut", "Pattern",
+//								"L'année de début est invalide ");
+//					}
+//				}
+//				if (exp.getAnneFin() != null) {
+//					if (exp.getAnneFin() < 1950 || exp.getAnneFin() > cal.get(GregorianCalendar.YEAR)) {
+//						result.rejectValue("profil.experiences[" + indExp + "].anneFin", "Pattern",
+//								"L'année de fin est invalide ");
+//					}
+//				}
+				if(exp.getAnneFin() != null && exp.getAnneeDebut() != null
+						&& exp.getAnneeDebut()>exp.getAnneFin()){
+					result.rejectValue("profil.diplomes[" + indExp + "].anneFin", "Pattern",
+							"L'année de début ne peut pas être supérieure à l'année de fin ");
 				}
 			}
 		}
@@ -230,10 +244,6 @@ public class ProfilController {
 		// for(DiplomeDTO dipl : utilisateur.getProfil().getDiplomes()){
 		// if(dipl.getAnneeDebut())
 		// }
-
-		if (result.hasErrors()) {
-			return new ModelAndView("modifprofil");
-		}
 
 		UtilisateurDTO uDTO = new UtilisateurDTO();
 		uDTO.setEmail(request.getUserPrincipal().getName());
@@ -252,6 +262,15 @@ public class ProfilController {
 		uDTO.setPrenom(utilisateur.getPrenom());
 		uDTO.getProfil().setIdProfil(idTemp);
 
+
+
+		if (result.hasErrors()) {
+			System.out.println(utilisateur.getGroupes()+" |||| "+uDTO.getGroupePrincipal());
+			model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
+			model.addAttribute("utilisateur", uDTO);
+			return new ModelAndView("modifprofil");
+		}
+		
 		try {
 			utilisateur = utilisateurService.modifier(uDTO);
 		} catch (MetierException e) {
@@ -260,6 +279,7 @@ public class ProfilController {
 			return new ModelAndView("redirect:/erreur");
 		}
 		model.addAttribute("articles", uDTO.getArticles());
+		model.addAttribute("grpPrincipal", utilisateur.getGroupePrincipal());
 		model.addAttribute("utilisateur", utilisateur);
 		// return "redirect:/profil/{id}";
 		return new ModelAndView("redirect:/profil", "util"
