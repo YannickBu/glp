@@ -57,13 +57,18 @@
 			<div class="col-md-12">
 				<h1 class="text-center">Panel d'administration</h1>
 				<hr />
+				<a
+					href="${pageContext.servletContext.contextPath}/administration/creergroupe">
+					<button type="button" style="margin-bottom: 1%" class="btn btn-default"
+						id="btn_new_exp">Créer un nouveau groupe</button>
+				</a>
 				<c:set var="count" value="1" scope="page" />
 				<c:forEach items="${groupesOfficiel}" var="groupe">
 					<div class="panel-group" id="panel1-${count}">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<a class="panel-title" data-toggle="collapse"
-									data-parent="#panel1-${count}" href="#panel-element1-${count}">${groupe.nomGroupe}</a>
+									data-parent="#panel1-${count}" href="#panel-element1-${count}">${groupe.nomGroupe} <span class="glyphicon glyphicon-menu-down" style="float:  right;"></span></a>
 							</div>
 							<div id="panel-element1-${count}" class="panel-collapse collapse">
 								<div class="panel-body">
@@ -87,7 +92,7 @@
 				</c:forEach>
 				<a
 					href="${pageContext.servletContext.contextPath}/administration/creergroupe">
-					<button type="button" style="float: right" class="btn btn-default"
+					<button type="button" class="btn btn-default"
 						id="btn_new_exp">Créer un nouveau groupe</button>
 				</a>
 			</div>
