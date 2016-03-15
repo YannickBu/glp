@@ -52,9 +52,18 @@ public class ModerationController {
 	 * @return
 	 */
 	@RequestMapping(value = "/moderation/panelInscription/{id}", method = RequestMethod.GET)
-	public ModelAndView profilGet(@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
+	public ModelAndView profilGet(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,@PathVariable String id, @ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur",u2DTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 		} catch (MetierException e) {
@@ -116,9 +125,18 @@ public class ModerationController {
 	 * @return
 	 */
 	@RequestMapping(value = {"/moderation/panelInscription","/moderation"}, method = RequestMethod.POST)
-	public ModelAndView administrationPOST(@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
+	public ModelAndView administrationPOST(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp,
 			Model model) {
 		List<UtilisateurEnAttenteDTO> list;
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur",u2DTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			list = utilisateurEnAttenteService.lister();
 			model.addAttribute("list", list);
@@ -141,10 +159,18 @@ public class ModerationController {
 	 * @return
 	 */
 	@RequestMapping(value = "/moderation/panelInscription/{id}", method = RequestMethod.POST)
-	public ModelAndView profilPost(@RequestParam("action") String action,@RequestParam("optionalMessage") String optionalMessage, @PathVariable String id,
+	public ModelAndView profilPost(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,@RequestParam("action") String action,@RequestParam("optionalMessage") String optionalMessage, @PathVariable String id,
 			@ModelAttribute UtilisateurEnAttenteDTO utilisateurTmp, Model model){
 		UtilisateurEnAttenteDTO uDTO = new UtilisateurEnAttenteDTO();
-
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {	
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur",u2DTO);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try{
 			uDTO = utilisateurEnAttenteService.trouver(Integer.parseInt(id));
 		} catch (MetierException e) {

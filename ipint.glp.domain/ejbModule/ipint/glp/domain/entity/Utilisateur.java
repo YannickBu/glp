@@ -63,14 +63,14 @@ public class Utilisateur implements Serializable {
 	private List<Article> articles;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateurResponsable")
-//	@OneToMany(mappedBy = "utilisateurResponsable")
+	// @OneToMany(mappedBy = "utilisateurResponsable")
 	private List<Groupe> groupesGeres;
 
-	@ManyToMany(mappedBy = "utilisateurs")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "utilisateurs")
 	private List<Groupe> groupes;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "animateurs")
-//	@ManyToMany(mappedBy = "animateurs")
+	// @ManyToMany(mappedBy = "animateurs")
 	private List<Groupe> groupesAnimes;
 
 	public Utilisateur() {
@@ -161,6 +161,7 @@ public class Utilisateur implements Serializable {
 	}
 
 	public List<Groupe> getGroupes() {
+//		System.out.println("GROUPE DATABASE : " + groupes);
 		return groupes;
 	}
 

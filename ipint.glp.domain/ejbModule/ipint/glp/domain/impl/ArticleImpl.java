@@ -134,6 +134,9 @@ public class ArticleImpl implements ArticleService {
 		if (art == null) {
 			throw new ArticleInconnuException("ArticleImpl.trouver : " + articleDTO.toString() + " inconnu");
 		}
+		
+		//em.refresh(art);
+		
 		return MappingToDTO.articleToArticleDTO(art);
 	}
 
@@ -206,7 +209,7 @@ public class ArticleImpl implements ArticleService {
 
 	@Override
 	public List<ArticleDTO> listerParGroupe(GroupeDTO groupe) throws MetierException {
-		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "'");
+		Query q = em.createQuery("select a from Article a where a.groupe.idGroupe = '" + groupe.getIdGroupe() + "' order by a.datePublication desc");
 		List<Article> articles = q.getResultList();
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
@@ -217,15 +220,26 @@ public class ArticleImpl implements ArticleService {
 	
 	@Override
 	public List<ArticleDTO> listerParDate(List<GroupeDTO> groupes) throws MetierException {
-		Query q = em.createQuery("select a from Article a order by a.idArticle desc");
-		List<Article> articles = q.getResultList(); 
+		String request = "select distinct a from Article a ";
+		Query q = null;
+		
+		if(!groupes.isEmpty()){
+			request += " where ";
+			if(groupes.size()==1){
+				request += " a.groupe.idGroupe = '"+groupes.get(0).getIdGroupe()+"' ";
+			}else {
+				for(int ind=0; ind<groupes.size()-1; ind++){
+					request += " a.groupe.idGroupe =  '"+groupes.get(ind).getIdGroupe()+"' or ";
+				}
+				request += " a.groupe.idGroupe =  '"+groupes.get(groupes.size()-1).getIdGroupe()+"' ";
+			}
+		}
+		request += " order by a.datePublication desc";
+		q = em.createQuery(request);
+		List<Article> articles = q.getResultList();
 		List<ArticleDTO> articlesDTO = new ArrayList<ArticleDTO>();
 		for (Article article : articles) {
-			for(GroupeDTO groupe : groupes){
-				if(groupe.getIdGroupe()==article.getGroupe().getIdGroupe()){
-				articlesDTO.add(MappingToDTO.articleToArticleDTO(article));   
-				}
-			}
+				articlesDTO.add(MappingToDTO.articleToArticleDTO(article));
 		}
 		return articlesDTO;
 	} 

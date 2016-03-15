@@ -81,7 +81,7 @@
 												<li>Expériences Professionnelles : <c:set var="count"
 														value="1" scope="page" /> <c:forEach
 														items="${utilisateur.profil.experiences}" var="exp">
-														<div class="panel-group" id="panel-${count}">
+														<div style="margin-top: 2%" class="panel-group" id="panel-${count}">
 															<div class="panel panel-default">
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
@@ -117,7 +117,7 @@
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
 															<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																${diplome.libelle}- ${diplome.lieu}</li>
+																${diplome.libelle}-${diplome.lieu}</li>
 														</c:forEach>
 													</ul>
 												</li>
@@ -133,9 +133,11 @@
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 												<li>Mes groupes :
 													<ul>
+
 														<c:forEach items="${utilisateur.groupes}" var="grp">
+
 															<li><a
-																href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.grp.idGroupe}">${grp.nomGroupe}</a></li>
+																href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 														</c:forEach>
 													</ul>
 												</li>

@@ -194,7 +194,7 @@ public class MappingToDTO {
 			artDTO.setUtilisateur(utilisateurToUtilisateurDTOLazy(art.getUtilisateur()));
 		}
 		if (art.getGroupe() != null) {
-			artDTO.setGroupe(groupeToGroupeDTO(art.getGroupe()));
+			artDTO.setGroupe(groupeToGroupeDTOLazy(art.getGroupe()));
 		}
 		// artDTO.setGroupes(new ArrayList<>());
 		// if (art.getGroupes() != null && !art.getGroupes().isEmpty()) {

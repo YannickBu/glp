@@ -226,6 +226,8 @@ public class GroupeImpl implements GroupeService {
 			//			grp.setArticles(lesArt);
 		}
 		
+		em.refresh(gr);
+		
 		return MappingToDTO.groupeToGroupeDTO(gr);
 	}
 
@@ -665,6 +667,17 @@ public class GroupeImpl implements GroupeService {
 	public List<GroupeDTO> listerParType(boolean isGroupeOfficiel) throws MetierException {
 		Query q = em.createQuery("select g from Groupe g where g.isGroupeOfficiel = :isGroupeOfficiel");
 		q.setParameter("isGroupeOfficiel", isGroupeOfficiel);
+		List<Groupe> lesGroupes = q.getResultList();
+		List<GroupeDTO> lesGroupesDTO = new ArrayList<GroupeDTO>();
+		for (Groupe groupe : lesGroupes) {
+			lesGroupesDTO.add(MappingToDTO.groupeToGroupeDTO(groupe));
+		}
+		return lesGroupesDTO;
+	}
+	
+	@Override
+	public List<GroupeDTO> listerTousLesGroupes() throws MetierException {
+		Query q = em.createQuery("select g from Groupe g");
 		List<Groupe> lesGroupes = q.getResultList();
 		List<GroupeDTO> lesGroupesDTO = new ArrayList<GroupeDTO>();
 		for (Groupe groupe : lesGroupes) {

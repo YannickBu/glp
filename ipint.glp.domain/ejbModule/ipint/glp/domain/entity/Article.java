@@ -22,12 +22,10 @@ public class Article implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idArticle;
-	@javax.validation.constraints.NotNull(message = "Veuillez remplir le contenu")
+	@javax.validation.constraints.Size(min=1,message = "Aucun message saisi")
+	@javax.validation.constraints.NotNull(message = "Aucun message saisi")
 	private String contenu;
 	@Temporal(TemporalType.TIMESTAMP)
-	//TODO décommenter apres test
-	/*@javax.validation.constraints.NotNull(message = "Veuillez remplir la date de publication")
-	@javax.validation.constraints.Past(message = "Date de publication invalide")*/
 	private Calendar datePublication;
 	
 	private String titre;

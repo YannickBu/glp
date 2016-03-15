@@ -361,14 +361,22 @@ public class UtilisateurImpl implements UtilisateurService {
 			q.setParameter("email", utilisateurDTO.getEmail());
 			try {
 				utilisateur = (Utilisateur) q.getSingleResult();
+				utilisateurDTO.setIdUtilisateur(utilisateur.getIdUtilisateur());
+				utilisateur = em.find(Utilisateur.class, utilisateurDTO.getIdUtilisateur());
 			} catch (NoResultException e) {
 				throw new UtilisateurInconnuException(
 						"UtilisateurImpl.trouver : " + utilisateurDTO.toString() + " n'existe pas avec cet email");
 			}
 		}
-				
+
+		em.refresh(utilisateur);		
 		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+
 		
+		em.refresh(utilisateur);
+
+		utilisateurDTO = MappingToDTO.utilisateurToUtilisateurDTO(utilisateur);
+		//System.out.println("UTILISATEURIMPL " + "trouver " + "Après mapping" + utilisateur.getGroupes());
 		return utilisateurDTO;
 	}
 
@@ -394,9 +402,6 @@ public class UtilisateurImpl implements UtilisateurService {
 		if (nouvelUtilisateur.getNom() != null && !"".equals(nouvelUtilisateur.getNom())) {
 			utilisateurMAJ.setNom(nouvelUtilisateur.getNom());
 		}
-		// System.out.println(
-		// "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MDP : " +
-		// nouvelUtilisateur.getPassword());
 
 		if (nouvelUtilisateur.getPassword() != null && !"".equals(nouvelUtilisateur.getPassword())) {
 			utilisateurMAJ.setPassword(nouvelUtilisateur.getPassword());
@@ -442,7 +447,7 @@ public class UtilisateurImpl implements UtilisateurService {
 								if (!comps.contains(comp)) {
 									comps.add(comp);
 								}
-								em.merge(comp);
+								em.persist(comp);
 							}
 						} else {
 							comp = new Competence();
@@ -468,6 +473,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			// les diplomes
 			List<Diplome> dipls = new ArrayList<Diplome>();
 			List<Diplome> oldDipls = new ArrayList<Diplome>();
+			oldDipls = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getDiplomes();
 			if (nouvelUtilisateur.getProfil().getDiplomes() != null
 					&& !nouvelUtilisateur.getProfil().getDiplomes().isEmpty()) {
 				Diplome dipl = new Diplome();
@@ -494,6 +500,7 @@ public class UtilisateurImpl implements UtilisateurService {
 							dipl.setLibelle(diplDTO.getLibelle());
 							dipl.setAnneeDebut(diplDTO.getAnneeDebut());
 							dipl.setAnneFin(diplDTO.getAnneFin());
+							dipl.setLieu(diplDTO.getLieu());
 							dipls.add(dipl);
 							em.persist(dipl);
 						}
@@ -510,6 +517,7 @@ public class UtilisateurImpl implements UtilisateurService {
 			// les experiences
 			List<Experience> exps = new ArrayList<Experience>();
 			List<Experience> oldExps = new ArrayList<Experience>();
+			oldExps = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getExperiences();
 			if (nouvelUtilisateur.getProfil().getExperiences() != null
 					&& !nouvelUtilisateur.getProfil().getExperiences().isEmpty()) {
 				Experience exp = new Experience();
