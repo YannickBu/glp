@@ -31,6 +31,8 @@ public class ProfilDTO extends DTO implements Serializable {
 	private int anneeDiplome;
 	private String mesAttentes;
 	private String situation;
+	//lieu de la situation / exemple si recherche de stage, c'est le lieu où l'on cherche et si en activité, le lieu de l'entreprise actuelle
+	private String lieuSituation;
 
 	@OneToMany(mappedBy = "profil")
 	private List<ReseauSocialDTO> reseauxSociaux;
@@ -231,9 +233,14 @@ public class ProfilDTO extends DTO implements Serializable {
 		return serialVersionUID;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	public String getLieuSituation() {
+		return lieuSituation;
+	}
+
+	public void setLieuSituation(String lieuSituation) {
+		this.lieuSituation = lieuSituation;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -247,6 +254,7 @@ public class ProfilDTO extends DTO implements Serializable {
 		result = prime * result + ((diplomes == null) ? 0 : diplomes.hashCode());
 		result = prime * result + ((experiences == null) ? 0 : experiences.hashCode());
 		result = prime * result + ((idProfil == null) ? 0 : idProfil.hashCode());
+		result = prime * result + ((lieuSituation == null) ? 0 : lieuSituation.hashCode());
 		result = prime * result + ((mesAttentes == null) ? 0 : mesAttentes.hashCode());
 		result = prime * result + ((reseauxSociaux == null) ? 0 : reseauxSociaux.hashCode());
 		result = prime * result + ((situation == null) ? 0 : situation.hashCode());
@@ -254,9 +262,6 @@ public class ProfilDTO extends DTO implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -308,6 +313,11 @@ public class ProfilDTO extends DTO implements Serializable {
 				return false;
 		} else if (!idProfil.equals(other.idProfil))
 			return false;
+		if (lieuSituation == null) {
+			if (other.lieuSituation != null)
+				return false;
+		} else if (!lieuSituation.equals(other.lieuSituation))
+			return false;
 		if (mesAttentes == null) {
 			if (other.mesAttentes != null)
 				return false;
@@ -330,7 +340,5 @@ public class ProfilDTO extends DTO implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

@@ -105,6 +105,7 @@ public class MappingToDTO {
 		proDTO.setDiplomePrincipal(pro.getDiplomePrincipal());
 		proDTO.setMesAttentes(pro.getMesAttentes());
 		proDTO.setSituation(pro.getSituation());
+		proDTO.setLieuSituation(pro.getLieuSituation());
 		proDTO.setAnneeDiplome(pro.getAnneeDiplome());
 
 		proDTO.setCompetence(new ArrayList<>());

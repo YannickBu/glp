@@ -324,9 +324,19 @@ function varExp() {
 						<label for="InputDiplomePrincipal"> Situation
 							professionnelle actuelle </label>
 
-						<form:input path="profil.situation" type="text"
-							class="form-control" id="InputSituation"
-							placeholder="ex: Chef de projet à CGI France" />
+
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-md-3">
+								<form:input path="profil.situation" type="text"
+									class="form-control" id="InputSituation"
+									placeholder="ex: Chef de projet à CGI France" />
+							</div>
+							<div class="col-md-3">
+								<form:input path="profil.lieuSituation" type="text"
+									class="form-control" id="InputlieuSituation"
+									placeholder="ex: Paris" />
+							</div>
+						</div>
 
 
 					</div>
@@ -668,9 +678,11 @@ function varExp() {
 						</div>
 
 						<a href="${pageContext.servletContext.contextPath}/profil/"><button
-								style="margin-top: 2%;" type="button" class="btn hrefBlack btnValidModifProfif">Annuler</button></a>
+								style="margin-top: 2%;" type="button"
+								class="btn hrefBlack btnValidModifProfif">Annuler</button></a>
 						<button style="margin-top: 2%;" type="submit"
-							class="btn hrefBlack btnValidModifProfif" onclick="SoumettreFormulaire();">Enregistrer</button>
+							class="btn hrefBlack btnValidModifProfif"
+							onclick="SoumettreFormulaire();">Enregistrer</button>
 
 					</div>
 				</div>

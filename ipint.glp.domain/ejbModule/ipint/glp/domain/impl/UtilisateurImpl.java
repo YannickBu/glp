@@ -431,6 +431,7 @@ public class UtilisateurImpl implements UtilisateurService {
 
 			profil.setMesAttentes(nouvelUtilisateur.getProfil().getMesAttentes());
 			profil.setSituation(nouvelUtilisateur.getProfil().getSituation());
+			profil.setLieuSituation(nouvelUtilisateur.getProfil().getLieuSituation());
 
 			// les competences
 			List<Competence> comps = new ArrayList<Competence>();
@@ -648,5 +649,17 @@ public class UtilisateurImpl implements UtilisateurService {
 		}
 
 		return utilisateursDTO;
+	}
+	
+	@Override
+	public ExperienceDTO derniereExperience(UtilisateurDTO utilisateurDTO) throws MetierException{
+		Query q;
+		int idProfil = utilisateurDTO.getProfil().getIdProfil();
+		q = em.createQuery("select e from Experience e where e.profil.idProfil = :idProfil orber by e.anneFin desc");
+		q.setParameter("idProfil", idProfil);
+		Experience exp= (Experience)q.getSingleResult();
+		em.refresh(exp);		
+		ExperienceDTO expDTO = MappingToDTO.experienceToExperienceDTO(exp);
+		return expDTO;
 	}
 }
