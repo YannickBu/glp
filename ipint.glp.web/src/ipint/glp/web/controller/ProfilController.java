@@ -282,6 +282,7 @@ public class ProfilController {
 		model.addAttribute("grpPrincipal", utilisateur.getGroupePrincipal());
 		model.addAttribute("utilisateur", utilisateur);
 		// return "redirect:/profil/{id}";
-		return new ModelAndView("redirect:/profil", "utilisateur", utilisateur);
+		return new ModelAndView("redirect:/profil", "util"
+				+ "isateur", utilisateur);
 	}
 }

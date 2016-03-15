@@ -233,6 +233,10 @@ public class GroupeImpl implements GroupeService {
 			// List<Article> lesArt = q2.getResultList();
 			// grp.setArticles(lesArt);
 		}
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 		em.refresh(gr);
 
 		return MappingToDTO.groupeToGroupeDTO(gr);
@@ -710,11 +714,19 @@ public class GroupeImpl implements GroupeService {
 
 		return utilisateursDTO;
 	}
+<<<<<<< HEAD
+=======
 
 	@Override
 	public void supprimer(GroupeDTO obj) {
 		// TODO Auto-generated method stub
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp.git
 
+	@Override
+	public void supprimer(GroupeDTO groupeASupprimer) {
+		Query q = em.createQuery("delete from Groupe g where g.idGroupe = :groupeASupprimer");
+		q.setParameter("groupeASupprimer", groupeASupprimer.getIdGroupe());
+		q.executeUpdate();
 	}
 
 	@Override
