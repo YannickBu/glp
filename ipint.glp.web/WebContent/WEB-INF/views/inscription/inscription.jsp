@@ -3,10 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.util.Calendar" %>
-<%@ page import="java.util.GregorianCalendar" %>
-<body class="body_without_menu">
+<%@ page import="java.util.Date"%>
+<%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.GregorianCalendar"%>
+<body class="body_without_menu" style="overflow:hidden">
 	<div class="entete-inscrip">
 		<div class="row">
 			<center>
@@ -61,7 +61,8 @@
 				<div class="input col-md-4">
 					<div class="input-append date form_datetime">
 						<form:input path="dateNaissance" class="form-control"
-							id="inputBirthday" placeholder="Ex: 1990/10/28" readonly="true"></form:input>
+							id="inputBirthday" placeholder="Ex: 1990/10/28" readonly="true"
+							onchange="adaptDateOnPicker()"></form:input>
 						<span class="add-on"><i class="icon-th"></i></span>
 
 						<spring:bind path="dateNaissance">
@@ -91,14 +92,14 @@
 					<form:select path="anneeDiplome" id="selectAnnee"
 						class="form-control">
 						<%
-						Calendar calendar =new GregorianCalendar();
-						calendar.setTime(new Date());
-						int annee =calendar.get(Calendar.YEAR);
-						for(int i =annee;i>1950;i--){
-							out.println("<option value='"+i+"'>"+i+"</option>");
-						}
+							Calendar calendar = new GregorianCalendar();
+									calendar.setTime(new Date());
+									int annee = calendar.get(Calendar.YEAR);
+									for (int i = annee; i > 1950; i--) {
+										out.println("<option value='" + i + "'>" + i + "</option>");
+									}
 						%>
-						</form:select>
+					</form:select>
 					<form:errors path="anneeDiplome" />
 				</div>
 			</div>
@@ -120,7 +121,8 @@
 			<div class="row ">
 				<label for="" class="col-md-4 control-label"></label> <a
 					href="${pageContext.servletContext.contextPath}/profil/"><button
-						type="button" class="btn btn-default col-md-2" style="margin-top: 1%;">Retour</button></a>
+						type="button" class="btn btn-default col-md-2"
+						style="margin-top: 1%;">Retour</button></a>
 				<button type="submit" class="btn btn-default col-md-2"
 					style="margin-top: 1%;">S'inscrire</button>
 			</div>
