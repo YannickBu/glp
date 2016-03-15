@@ -5,7 +5,7 @@
 function gras(id)
 {
 var champ = document.getElementById(id) ;
-     texte.value.style.fontStyle = "bold";
+     champ.style.color = 'orange';
 }
 </script>
 <div class="row">
@@ -16,8 +16,8 @@ var champ = document.getElementById(id) ;
 			<%
 				if (!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")) {
 			%>
-			<a href="${pageContext.servletContext.contextPath}/profil">
-				<li id="profil" onclick="gras('profil')">Mon profil <span class="glyphicon glyphicon-user gly-menu"
+			<a href="${pageContext.servletContext.contextPath}/profil" id="profil" onclick="gras('profil');">
+				<li>Mon profil <span class="glyphicon glyphicon-user gly-menu"
 					aria-hidden="true"> </span>
 			</li>
 			</a>
@@ -39,7 +39,7 @@ var champ = document.getElementById(id) ;
 					<li class="nomGroupe"><a
 						href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 				</c:forEach>
-				<% if(request.getAttribute("grpPrinciapl") != null){ %>
+				<% if(request.getAttribute("grpPrincipal") != null){ %>
 					<a
 						href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">
 						<li class="nomGroupe">${utilisateur.groupePrincipal.nomGroupe}</li>
