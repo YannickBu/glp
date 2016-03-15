@@ -32,8 +32,8 @@ public class Profil {
 	private String telephone;
 	@OneToMany(mappedBy = "profil")
 	private List<Experience> experiences;
-	// @OneToMany(mappedBy = "profil")
-	// private List<String> reseauxSociaux;
+	@OneToMany(mappedBy = "profil")
+	private List<ReseauSocial> reseauxSociaux;
 	private String diplomePrincipal;
 	private int anneeDiplome;
 	private String mesAttentes;
@@ -43,63 +43,105 @@ public class Profil {
 		this.competence = new ArrayList<Competence>();
 		this.diplomes = new ArrayList<Diplome>();
 		this.experiences = new ArrayList<Experience>();
-		// this.reseauxSociaux = new ArrayList<String>();
+		this.reseauxSociaux = new ArrayList<ReseauSocial>();
 	}
 
+	/**
+	 * @return the idProfil
+	 */
 	public Integer getIdProfil() {
 		return idProfil;
 	}
 
+	/**
+	 * @param idProfil the idProfil to set
+	 */
 	public void setIdProfil(Integer idProfil) {
 		this.idProfil = idProfil;
 	}
 
-	/*
-	 * public String getCursus() { return cursus; }
+	/**
+	 * @return the diplomes
 	 */
-
-	/*
-	 * public void setCursus(String cursus) { this.cursus = cursus; }
-	 */
-
-	public List<Competence> getCompetence() {
-		return competence;
-	}
-
-	public void setCompetence(List<Competence> list) {
-		this.competence = list;
-	}
-
-	public String getCentreInteret() {
-		return centreInteret;
-	}
-
-	public void setCentreInteret(String centreInteret) {
-		this.centreInteret = centreInteret;
-	}
-
 	public List<Diplome> getDiplomes() {
 		return diplomes;
 	}
 
+	/**
+	 * @param diplomes the diplomes to set
+	 */
 	public void setDiplomes(List<Diplome> diplomes) {
 		this.diplomes = diplomes;
 	}
 
+	/**
+	 * @return the competence
+	 */
+	public List<Competence> getCompetence() {
+		return competence;
+	}
+
+	/**
+	 * @param competence the competence to set
+	 */
+	public void setCompetence(List<Competence> competence) {
+		this.competence = competence;
+	}
+
+	/**
+	 * @return the centreInteret
+	 */
+	public String getCentreInteret() {
+		return centreInteret;
+	}
+
+	/**
+	 * @param centreInteret the centreInteret to set
+	 */
+	public void setCentreInteret(String centreInteret) {
+		this.centreInteret = centreInteret;
+	}
+
+	/**
+	 * @return the telephone
+	 */
 	public String getTelephone() {
 		return telephone;
 	}
 
+	/**
+	 * @param telephone the telephone to set
+	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
+	/**
+	 * @return the experiences
+	 */
 	public List<Experience> getExperiences() {
 		return experiences;
 	}
 
+	/**
+	 * @param experiences the experiences to set
+	 */
 	public void setExperiences(List<Experience> experiences) {
 		this.experiences = experiences;
+	}
+
+	/**
+	 * @return the reseauxSociaux
+	 */
+	public List<ReseauSocial> getReseauxSociaux() {
+		return reseauxSociaux;
+	}
+
+	/**
+	 * @param reseauxSociaux the reseauxSociaux to set
+	 */
+	public void setReseauxSociaux(List<ReseauSocial> reseauxSociaux) {
+		this.reseauxSociaux = reseauxSociaux;
 	}
 
 	/**
@@ -110,8 +152,7 @@ public class Profil {
 	}
 
 	/**
-	 * @param diplomePrincipal
-	 *            the diplomePrincipal to set
+	 * @param diplomePrincipal the diplomePrincipal to set
 	 */
 	public void setDiplomePrincipal(String diplomePrincipal) {
 		this.diplomePrincipal = diplomePrincipal;
@@ -125,25 +166,11 @@ public class Profil {
 	}
 
 	/**
-	 * @param anneeDiplome
-	 *            the anneeDiplome to set
+	 * @param anneeDiplome the anneeDiplome to set
 	 */
 	public void setAnneeDiplome(int anneeDiplome) {
 		this.anneeDiplome = anneeDiplome;
 	}
-
-	@Override
-	public String toString() {
-		return "[Profil - id=" + this.idProfil + "]";
-	}
-
-	// public List<String> getReseauxSociaux() {
-	// return reseauxSociaux;
-	// }
-
-	// public void setReseauxSociaux(List<String> reseauxSociaux) {
-	// this.reseauxSociaux = reseauxSociaux;
-	// }
 
 	/**
 	 * @return the mesAttentes
@@ -153,24 +180,40 @@ public class Profil {
 	}
 
 	/**
-	 * @param mesAttentes
-	 *            the mesAttentes to set
+	 * @param mesAttentes the mesAttentes to set
 	 */
 	public void setMesAttentes(String mesAttentes) {
 		this.mesAttentes = mesAttentes;
+	}
+
+	/**
+	 * @return the situation
+	 */
+	public String getSituation() {
+		return situation;
+	}
+
+	/**
+	 * @param situation the situation to set
+	 */
+	public void setSituation(String situation) {
+		this.situation = situation;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + anneeDiplome;
 		result = prime * result + ((centreInteret == null) ? 0 : centreInteret.hashCode());
 		result = prime * result + ((competence == null) ? 0 : competence.hashCode());
+		result = prime * result + ((diplomePrincipal == null) ? 0 : diplomePrincipal.hashCode());
 		result = prime * result + ((diplomes == null) ? 0 : diplomes.hashCode());
 		result = prime * result + ((experiences == null) ? 0 : experiences.hashCode());
 		result = prime * result + ((idProfil == null) ? 0 : idProfil.hashCode());
-		// result = prime * result + ((reseauxSociaux == null) ? 0 :
-		// reseauxSociaux.hashCode());
+		result = prime * result + ((mesAttentes == null) ? 0 : mesAttentes.hashCode());
+		result = prime * result + ((reseauxSociaux == null) ? 0 : reseauxSociaux.hashCode());
+		result = prime * result + ((situation == null) ? 0 : situation.hashCode());
 		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
 		return result;
 	}
@@ -184,6 +227,8 @@ public class Profil {
 		if (getClass() != obj.getClass())
 			return false;
 		Profil other = (Profil) obj;
+		if (anneeDiplome != other.anneeDiplome)
+			return false;
 		if (centreInteret == null) {
 			if (other.centreInteret != null)
 				return false;
@@ -193,6 +238,11 @@ public class Profil {
 			if (other.competence != null)
 				return false;
 		} else if (!competence.equals(other.competence))
+			return false;
+		if (diplomePrincipal == null) {
+			if (other.diplomePrincipal != null)
+				return false;
+		} else if (!diplomePrincipal.equals(other.diplomePrincipal))
 			return false;
 		if (diplomes == null) {
 			if (other.diplomes != null)
@@ -209,11 +259,21 @@ public class Profil {
 				return false;
 		} else if (!idProfil.equals(other.idProfil))
 			return false;
-		// if (reseauxSociaux == null) {
-		// if (other.reseauxSociaux != null)
-		// return false;
-		// } else if (!reseauxSociaux.equals(other.reseauxSociaux))
-		// return false;
+		if (mesAttentes == null) {
+			if (other.mesAttentes != null)
+				return false;
+		} else if (!mesAttentes.equals(other.mesAttentes))
+			return false;
+		if (reseauxSociaux == null) {
+			if (other.reseauxSociaux != null)
+				return false;
+		} else if (!reseauxSociaux.equals(other.reseauxSociaux))
+			return false;
+		if (situation == null) {
+			if (other.situation != null)
+				return false;
+		} else if (!situation.equals(other.situation))
+			return false;
 		if (telephone == null) {
 			if (other.telephone != null)
 				return false;
@@ -222,19 +282,7 @@ public class Profil {
 		return true;
 	}
 
-	/**
-	 * @return the situation
-	 */
-	public String getSituation() {
-		return situation;
-	}
-
-	/**
-	 * @param situation
-	 *            the situation to set
-	 */
-	public void setSituation(String situation) {
-		this.situation = situation;
-	}
+	
+	
 
 }

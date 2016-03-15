@@ -13,6 +13,7 @@ import ipint.glp.api.DTO.CompetenceDTO;
 import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
 import ipint.glp.api.DTO.GroupeDTO;
+import ipint.glp.api.DTO.ReseauSocialDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.enumType.Statut;
 import ipint.glp.api.exception.GroupeInconnuException;
@@ -27,6 +28,7 @@ import ipint.glp.domain.entity.Diplome;
 import ipint.glp.domain.entity.Experience;
 import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Profil;
+import ipint.glp.domain.entity.ReseauSocial;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurGroupes;
 import ipint.glp.domain.util.GenererMotDePasse;
@@ -312,15 +314,18 @@ public class UtilisateurImpl implements UtilisateurService {
 
 			// Assoc reseaux sociaux
 
-			// if (utilisateurDTO.getProfil().getReseauxSociaux() != null
-			// && !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
-			// List<String> listRes = new ArrayList<String>();
-			// for (String res : utilisateurDTO.getProfil().getReseauxSociaux())
-			// {
-			// em.persist(res);
-			// }
-			// pro.setReseauxSociaux(listRes);
-			// }
+			 if (utilisateurDTO.getProfil().getReseauxSociaux() != null	 && !utilisateurDTO.getProfil().getReseauxSociaux().isEmpty()) {
+			 List<ReseauSocial> listRes = new ArrayList<ReseauSocial>();
+			 for (ReseauSocialDTO reseauSocialDTO : utilisateurDTO.getProfil().getReseauxSociaux())
+			 {
+				 ReseauSocial reseauSocial = new ReseauSocial();
+				 reseauSocial.setLien(reseauSocialDTO.getLien());
+				 reseauSocial.setProfil(pro);
+				 listRes.add(reseauSocial);
+				 em.persist(reseauSocial);
+			 }
+			 pro.setReseauxSociaux(listRes);
+			 }
 
 		}
 		em.persist(pro);
@@ -567,6 +572,43 @@ public class UtilisateurImpl implements UtilisateurService {
 				}
 			}
 			profil.setExperiences(exps);
+			
+			// les réseaux sociaux
+			List<ReseauSocial> reseaux = new ArrayList<ReseauSocial>();
+			List<ReseauSocial> oldReseaux = new ArrayList<ReseauSocial>();
+			oldReseaux = em.find(Utilisateur.class, nouvelUtilisateur.getIdUtilisateur()).getProfil().getReseauxSociaux();
+			if (nouvelUtilisateur.getProfil().getReseauxSociaux() != null
+					&& !nouvelUtilisateur.getProfil().getReseauxSociaux().isEmpty()) {
+				ReseauSocial reseau = new ReseauSocial();
+				for (ReseauSocialDTO reseauDTO : nouvelUtilisateur.getProfil().getReseauxSociaux()) {
+					if (reseauDTO.getLien() != null && !"".equals(reseauDTO.getLien())) {
+						Query q = em.createQuery(
+								"select r from ReseauSocial r where r.lien = :lien and r.profil.idProfil = :idProfil");
+						q.setParameter("idProfil", idProfil);
+						q.setParameter("lien", reseauDTO.getLien());
+						if (!q.getResultList().isEmpty()) {
+							reseau = (ReseauSocial) q.getSingleResult();
+							if (reseau != null) {
+								reseau.setLien(reseauDTO.getLien());
+								reseaux.add(reseau);
+								em.merge(reseau);
+							}
+						} else {
+							reseau = new ReseauSocial();
+							reseau.setProfil(em.find(Profil.class, nouvelUtilisateur.getProfil().getIdProfil()));
+							reseau.setLien(reseauDTO.getLien());
+							reseaux.add(reseau);
+							em.persist(reseau);
+						}
+					}
+				}
+			}
+			for (ReseauSocial d : oldReseaux) {
+				if (!reseaux.contains(d)) {
+					em.remove(d);
+				}
+			}
+			profil.setReseauxSociaux(reseaux);
 
 			// System.out.println("CENTRE INTERETS " +
 			// nouvelUtilisateur.getProfil().getCentreInteret());

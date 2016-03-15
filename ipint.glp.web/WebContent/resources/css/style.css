@@ -121,6 +121,15 @@ h3 {
 .btnModifProfif{
 	background-color:#F1F2F1
 }
+
+.btnValidModifProfif{
+	background-color:#FF8C00
+}
+
+.hrefBlack{
+	color : Black;
+}
+
 .titreArt{
 	font-weight: bold;
 }
@@ -260,6 +269,12 @@ h3 {
 .nomBloc {
 	font-weight: bold;
 	color: #f6921e;
+}
+
+.nomBlocProfil {
+	font-weight: bold;
+	color: #f6921e;
+	font-size: 18px;
 }
 
 .nomGroupe {
