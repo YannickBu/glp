@@ -26,8 +26,6 @@
 							<li class="nom-etudiant">${utilisateur.prenom}&nbsp;${utilisateur.nom}</li>
 							<li><a href="${pageContext.servletContext.contextPath}/profil"><span
 									class="glyphicon glyphicon-user couleurgly" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span
-									class="glyphicon glyphicon-bell couleurgly" aria-hidden="true"></span></a></li>
 							<li class="dropdown-parametre"><a href="#"
 								class="dropdown-toggle" data-toggle="dropdown" role="button"
 								aria-haspopup="true" aria-expanded="false"><span

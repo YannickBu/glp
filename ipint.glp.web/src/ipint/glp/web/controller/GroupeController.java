@@ -226,7 +226,7 @@ public class GroupeController {
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe", membresGroupe);
 		model.addAttribute("articlesGroupe", articlesGroupe);
-		model.addAttribute("grpPrinciapl", uDTO.getGroupePrincipal());
+		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("inscription", inscription);
 		return new ModelAndView("groupe");
 	}
