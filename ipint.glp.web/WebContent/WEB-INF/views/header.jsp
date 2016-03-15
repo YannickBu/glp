@@ -12,22 +12,37 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<a href="${pageContext.servletContext.contextPath}/publication"><li class="name-logo"><img class="img-logo" alt="Logo"
-								src="${pageContext.servletContext.contextPath}/resources/img/petit-logo.png">
-								L1nk</li></a>
+							<a href="${pageContext.servletContext.contextPath}/publication"><li
+								class="name-logo"><img class="img-logo" alt="Logo"
+									src="${pageContext.servletContext.contextPath}/resources/img/petit-logo.png">
+									L1nk</li></a>
 						</ul>
 						<ul id="barre-recherche" class="nav navbar-nav navbar-left">
-							<form:form action="${pageContext.servletContext.contextPath}/recherche" class="navbar-form" role="search">
-								<div class="form-group">
-									<input type="text" size="50" class="form-control"
-										placeholder="Rechercher..."/>
-								</div>
-								<button type="submit" class="btn btn-default">Rechercher</button>
-							</form:form>
+							<li style="margin-top:1.5%">
+
+								<form
+									action="${pageContext.servletContext.contextPath}/recherche"
+									method="post">
+									<div class="row">
+										<div class="col-md-10">
+											<div class="form-group">
+												<input type="text" size="50" class="form-control"
+													name="recherche" placeholder="Rechercher..." />
+
+											</div>
+										</div>
+										<div class="col-md-2">
+											<button type="submit" class="btn btn-default">Rechercher</button>
+										</div>
+									</div>
+								</form>
+
+							</li>
 						</ul>
 						<ul style="margin-top: 0.5%" class="nav navbar-nav navbar-right">
 							<li class="nom-etudiant">${utilisateur.prenom}&nbsp;${utilisateur.nom}</li>
-							<li><a href="${pageContext.servletContext.contextPath}/profil"><span
+							<li><a
+								href="${pageContext.servletContext.contextPath}/profil"><span
 									class="glyphicon glyphicon-user couleurgly" aria-hidden="true"></span></a></li>
 							<li><a href="#"><span
 									class="glyphicon glyphicon-bell couleurgly" aria-hidden="true"></span></a></li>
@@ -37,16 +52,33 @@
 									class="glyphicon glyphicon-cog couleurgly" aria-hidden="true"></span><span
 									class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<% if(!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")){ %>
-										<li><a href='${pageContext.servletContext.contextPath}/profil/modifprofil'>Modifier profil</a></li>
-									<% } %>
-									<% if(request.isUserInRole("moderateur")){ %>
-										<li><a href="${pageContext.servletContext.contextPath}/moderation">Moderation</a></li>
-									<% } %>
-									<% if(request.isUserInRole("administrateur")){ %>
-										<li><a href="${pageContext.servletContext.contextPath}/administration">Administration</a></li>
-									<% } %>
-									<li><a href="${pageContext.servletContext.contextPath}/deconnexion">Déconnexion</a></li>
+									<%
+										if (!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")) {
+									%>
+									<li><a
+										href='${pageContext.servletContext.contextPath}/profil/modifprofil'>Modifier
+											profil</a></li>
+									<%
+										}
+									%>
+									<%
+										if (request.isUserInRole("moderateur")) {
+									%>
+									<li><a
+										href="${pageContext.servletContext.contextPath}/moderation">Moderation</a></li>
+									<%
+										}
+									%>
+									<%
+										if (request.isUserInRole("administrateur")) {
+									%>
+									<li><a
+										href="${pageContext.servletContext.contextPath}/administration">Administration</a></li>
+									<%
+										}
+									%>
+									<li><a
+										href="${pageContext.servletContext.contextPath}/deconnexion">Déconnexion</a></li>
 								</ul></li>
 						</ul>
 					</div>

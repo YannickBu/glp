@@ -65,6 +65,10 @@ textarea {
 	list-style-type: none;
 }
 
+.accueilBody{
+	margin-bottom : 3%; ;
+}
+
 .affix {
 	width: inherit;
 	margin-left: -50px;
@@ -298,4 +302,15 @@ h3 {
 .vertical-center-row {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.titreRech{
+	font-weight: bold;
+		font-size: 200%;
+}
+
+.soustitreRech{
+	font-weight: bold;
+	font-size: 100%;
+	margin-left:4%;
 }
