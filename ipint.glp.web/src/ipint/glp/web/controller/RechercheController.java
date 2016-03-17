@@ -65,6 +65,7 @@ public class RechercheController {
 		model.addAttribute("utilisateurs", utilisateurs);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
+		model.addAttribute("recherche", search);
 		return new ModelAndView("recherche");
 	}
 	
@@ -96,6 +97,7 @@ public class RechercheController {
 		model.addAttribute("groupes", groupes);
 		model.addAttribute("utilisateurs", utilisateurs);
 		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("recherche", search);
 		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
 		return new ModelAndView("recherche");
 	}
