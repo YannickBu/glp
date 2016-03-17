@@ -21,7 +21,7 @@
 				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 					${utilisateur.profil.anneeDiplome}</div>
 			</div>
-			<hr />
+			<hr/>
 		</div>
 	</div>
 	<br>

@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 
 <script>
 	$(document).ready(function viderForm() {
@@ -26,7 +28,7 @@
 								<%-- 								<c:forEach items="${utilisateur.groupes}" var="grp"> --%>
 								<%-- 									<form:option value="Selectionner un groupe de publication" --%>
 								<%--  										selected="selected"></form:option>  --%>
-<%-- 								<form:option value="${utilisateur.groupePrincipal.nomGroupe}"></form:option> --%>
+								<%-- 								<form:option value="${utilisateur.groupePrincipal.nomGroupe}"></form:option> --%>
 								<form:options items="${utilisateur.groupes}"
 									itemValue="idGroupe" itemLabel="nomGroupe"></form:options>
 								<%-- 								</c:forEach> --%>
@@ -35,19 +37,15 @@
 					</div>
 				</li>
 
-				<li class="formPubli">
+				<li class="formPubli"><form:input
+						class="inputForm form-control" path="titre"
+						placeholder="Titre de la publication" id="titrePubli" value="" />
 
-					<form:input class="inputForm form-control"
-						path="titre" placeholder="Titre de la publication" id="titrePubli" value=""/> 
-
-					<form:textarea
-						type="text-area" rows="3" class="inputForm form-control" path="contenu"
-						placeholder="Tapez votre publication..." id="contenuPubli"/>
-					
-					<input
-					class="inputBtn btn btn-default btnModifProfif" type="submit" value="Publier l'article" />
-					<form:errors path="contenu"/>
-				</li>
+					<form:textarea type="text-area" rows="3"
+						class="inputForm form-control" path="contenu"
+						placeholder="Tapez votre publication..." id="contenuPubli" /> <input
+					class="inputBtn btn btn-default btnModifProfif" type="submit"
+					value="Publier l'article" /> <form:errors path="contenu" /></li>
 			</form:form>
 		</ul>
 	</div>
@@ -63,7 +61,21 @@
 						dateStyle="short" timeStyle="short"
 						value="${art.datePublication.time}" /></li>
 				<li class="titreArt">${art.titre}</li>
-				<li>${art.contenu}</li>
+				<c:choose>
+					<c:when test="${fn:startsWith(art.contenu, 'http://') || fn:startsWith(art.contenu, 'https://') || fn:startsWith(art.contenu, 'www.')}">
+						<li><a href="${art.contenu}" target="_blank" class="hrefChocolate">${art.contenu}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li>${art.contenu}</li>
+					</c:otherwise>
+				</c:choose>
+
+<%-- 				<c:if test="${fn:startsWith(art.contenu, 'http://')}"> --%>
+<%-- 					<a href="${art.contenu}" target="_blank"> <!-- 					<img --> 						src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png" --%>
+<!-- 												class="img-responsive2" alt="Responsive image" /> -->
+<!-- 					</a> -->
+<%-- 				</c:if> --%>
+<%-- 				<li>${art.contenu}</li> --%>
 			</ul>
 		</div>
 	</c:forEach>
