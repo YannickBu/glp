@@ -2,6 +2,7 @@ package ipint.glp.web.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -64,7 +65,9 @@ public class ArticleController {
 				}
 			}
 		}
-		model.addAttribute("tousLesGroupes", tousLesGroupes);
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("accueil", "article", new ArticleDTO());
