@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.opensaml.ws.wssecurity.UsageBearing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -115,6 +116,8 @@ public class ProfilController {
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
+		System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+utilisateurService.derniereExperience(uDTO).getLieu());
+		model.addAttribute("derniereExperience", utilisateurService.derniereExperience(uDTO));
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);
@@ -286,6 +289,7 @@ public class ProfilController {
 		model.addAttribute("grpPrincipal", utilisateur.getGroupePrincipal());
 		model.addAttribute("utilisateur", utilisateur);
 		// return "redirect:/profil/{id}";
-		return new ModelAndView("redirect:/profil", "utilisateur", utilisateur);
+		return new ModelAndView("redirect:/profil", "util"
+				+ "isateur", utilisateur);
 	}
 }

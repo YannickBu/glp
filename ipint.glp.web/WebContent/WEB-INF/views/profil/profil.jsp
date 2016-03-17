@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <div class="col-md-6 publication">
 	<div class="container">
@@ -14,12 +15,11 @@
 			</div>
 			<div class="col-md-10">
 				<h1 class="nomEtu">${utilisateur.prenom}&nbsp;${utilisateur.nom}</h1>
-				<h1>${utilisateur.profil.situation}</h1>
+				<h1>${utilisateur.profil.situation},
+					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}
+				</h1>
 				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 					${utilisateur.profil.anneeDiplome}</div>
-				<div>
-					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Lille,France
-				</div>
 			</div>
 			<hr />
 		</div>
@@ -37,7 +37,7 @@
 									les publications</a></li>
 
 						</ul>
-						<div class="tab-content">
+						<div class="tab-content accueilBody">
 							<div class="tab-pane " id="panel-1">
 								<div class="row">
 									<div class="col-md-12">
@@ -64,24 +64,25 @@
 									<div class="col-md-12" id="scrollable">
 										<div class="bloc">
 											<ul>
-												<li class="nomBloc" style="list-style-type: none;">Informations
+												<li class="nomBlocProfil" style="list-style-type: none;">Informations
 													personnelles</li>
-												<li>E-mail : ${utilisateur.email}</li>
-												<li>Téléphone : ${utilisateur.profil.telephone}</li>
-												<li>Mes attentes du réseau L1nk.fr :
+												<li><b>E-mail : </b>${utilisateur.email}</li>
+												<li><b>Téléphone : </b>${utilisateur.profil.telephone}</li>
+												<li><b>Mes attentes du réseau L1nk.fr : </b>
 													${utilisateur.profil.mesAttentes}</li>
 											</ul>
 										</div>
 
 										<div class="bloc">
 											<ul>
-												<li class="nomBloc" style="list-style-type: none;">Informations
+												<li class="nomBlocProfil" style="list-style-type: none;">Informations
 													professionnelles</li>
 												<br>
-												<li>Expériences Professionnelles : <c:set var="count"
+												<li><b>Expériences Professionnelles : </b><c:set var="count"
 														value="1" scope="page" /> <c:forEach
 														items="${utilisateur.profil.experiences}" var="exp">
-														<div style="margin-top: 2%" class="panel-group" id="panel-${count}">
+														<div style="margin-top: 2%" class="panel-group"
+															id="panel-${count}">
 															<div class="panel panel-default">
 																<div class="panel-heading">
 																	<a class="panel-title" data-toggle="collapse"
@@ -100,7 +101,7 @@
 													</c:forEach>
 												</li>
 												<br>
-												<li>Compétences :
+												<li><b>Compétences : </b>
 													<ul class="nav nav-pills">
 														<c:forEach items="${utilisateur.profil.competence}"
 															var="comp">
@@ -112,7 +113,7 @@
 													</ul>
 												</li>
 												<br>
-												<li>Cursus :
+												<li><b>Cursus : </b>
 													<ul>
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
@@ -125,13 +126,13 @@
 										</div>
 										<div class="bloc">
 											<ul>
-												<li class="nomBloc" style="list-style-type: none;">Informations
-													sociales</li>
-												<li>Centres d'interêt :
+												<li class="nomBlocProfil" style="list-style-type: none;">Informations
+													complémentaires</li>
+												<li><b>Centres d'interêt : </b>
 													${utilisateur.profil.centreInteret}</li>
-												<li>Groupe principal : <a
+												<li><b>Groupe principal : </b><a
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
-												<li>Mes groupes :
+												<li style="margin-top: 1%;"><b>Mes groupes : </b>
 													<ul>
 
 														<c:forEach items="${utilisateur.groupes}" var="grp">
@@ -141,30 +142,46 @@
 														</c:forEach>
 													</ul>
 												</li>
-												<li><img
-													src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
-													class="img-responsive2" alt="Responsive image" /> <img
-													src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
-													class="img-responsive2" alt="Responsive image" /> <img
-													src="${pageContext.servletContext.contextPath}/resources/img/google.png"
-													class="img-responsive2" alt="Responsive image" /> <img
-													src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
-													class="img-responsive2" alt="Responsive image" /> <img
-													src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
-													class="img-responsive2" alt="Responsive image" />
+												<c:forEach items="${profil.reseauxSociaux}" var="reseau">
+													<c:if test="${fn:contains(reseau.lien, 'facebook')}">
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
+															class="img-responsive2" alt="Responsive image" /></a>
+													</c:if>
+													<c:if test="${fn:contains(reseau.lien, 'twitter')}">
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
+															class="img-responsive2" alt="Responsive image" /></a>
+													</c:if>
+													<c:if test="${fn:contains(reseau.lien, 'viadeo')}">
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
+															class="img-responsive2" alt="Responsive image" /></a>
+													</c:if>
+													<c:if test="${fn:contains(reseau.lien, 'linkedin')}">
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
+															class="img-responsive2" alt="Responsive image" /></a>
+													</c:if>
+													<c:if test="${fn:contains(reseau.lien, 'plus.google')}">
+														<a href="${reseau.lien}" target="_blank"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/google.png"
+															class="img-responsive2" alt="Responsive image" /></a>
+													</c:if>
+												</c:forEach>
 											</ul>
 										</div>
 										<%
-														if (request.getAttribute("id") == null) {
-														%>
+											if (request.getAttribute("id") == null) {
+										%>
 										<a
-														href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
-														type="button" style="margin-top: 1%; float: right"
-														class="btn btn-default btnModifProfif" id="btn_new_exp">Modifier mon
-														profil</button></a>
-														<%
-													}
-													%>
+											href="${pageContext.servletContext.contextPath}/profil/modifprofil"><button
+												type="button" style="margin-top: 1%; float: right"
+												class="btn btn-default btnModifProfif" id="btn_new_exp">Modifier
+												mon profil</button></a>
+										<%
+											}
+										%>
 									</div>
 								</div>
 							</div>

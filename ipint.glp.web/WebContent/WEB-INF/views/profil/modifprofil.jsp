@@ -19,10 +19,15 @@ function SoumettreFormulaire(){
 var nbComp = ${utilisateur.profil.competence.size()};
 var nbComp2 = ${utilisateur.profil.diplomes.size()};
 var nbComp3 = ${utilisateur.profil.experiences.size()};
+var nbReseau =  ${utilisateur.profil.reseauxSociaux.size()};
 
 function varComp() {
     nbComp++;
-}    
+}  
+
+function varReseaux() {
+    nbReseau++;
+} 
 
 function varDipl() {
     nbComp2++;
@@ -206,217 +211,8 @@ function varExp() {
         
     };
     function newExperience() {
-        // 		var hr, comp, divP, divP2, div1, div2, div3, div4, div5, div6, div7, div8, div9, div10, div11, div12, div13, div14, input1, input2, input3, input4, input5, input6, input7, input8, button;
-// 		comp = document.getElementById('expForm');
-
-// 		divP2 = document.createElement('div');
-// 		divP2.setAttribute('class','row');
-// 		divP2.setAttribute('id','idExp'+nbComp3);
-// 		comp.appendChild(divP2);
-
-// 		divP = document.createElement('div');
-// 		divP.setAttribute('class','col-md-12');
-// 		divP2.appendChild(divP);
-
-// 		div1 = document.createElement('div');
-// 		div1.setAttribute('class','row');
-// 		divP.appendChild(div1);
-
-// 		div2 = document.createElement('div');
-// 		div2.setAttribute('class','col-md-2');
-// 		div1.appendChild(div2);
-
-// 		input1 = document.createElement('input');
-// 		input1.setAttribute('name','profil.experiences['+nbComp3+'].anneeDebut');
-// 		input1.setAttribute('type','text');
-// 		input1.setAttribute('class','form-control');
-// 		input1.setAttribute('placeholder','Début');
-// 		input1.setAttribute('data-toggle','tooltip');
-// 		input1.setAttribute('title','Année de début');
-// 		div2.appendChild(input1);
-
-// 		div3 = document.createElement('div');
-// 		div3.setAttribute('class','col-md-2');
-// 		div1.appendChild(div3);
-
-// 		input2 = document.createElement('input');
-// 		input2.setAttribute('name','profil.experiences['+nbComp3+'].anneFin');
-// 		input2.setAttribute('type','text');
-// 		input2.setAttribute('class','form-control');
-// 		input2.setAttribute('placeholder','Fin');
-// 		input2.setAttribute('data-toggle','tooltip');
-// 		input2.setAttribute('title','Année de fin');
-// 		div3.appendChild(input2);
-
-// 		div4 = document.createElement('div');
-// 		div4.setAttribute('class','col-md-2');
-// 		div1.appendChild(div4);
-
-// 		input3 = document.createElement('input');
-// 		input3.setAttribute('name','profil.experiences['+nbComp3+'].entreprise');
-// 		input3.setAttribute('type','text');
-// 		input3.setAttribute('class','form-control');
-// 		input3.setAttribute('placeholder','Entreprise');
-// 		input3.setAttribute('data-toggle','tooltip');
-// 		input3.setAttribute('title','Entreprise');
-// 		div4.appendChild(input3);
-
-// 		div5 = document.createElement('div');
-// 		div5.setAttribute('class','col-md-2');
-// 		div1.appendChild(div5);
-
-// 		div6 = document.createElement('div');
-// 		div6.setAttribute('class','col-md-2');
-// 		div1.appendChild(div6);
-
-// 		div7 = document.createElement('div');
-// 		div7.setAttribute('class','col-md-2');
-// 		div1.appendChild(div7);
-
-// 		div0 = document.createElement('div');
-// 		div0.setAttribute('class','row');
-// 		div0.setAttribute('style','margin-top: 1%;');
-// 		divP.appendChild(div0);
-
-// 		diva = document.createElement('div');
-// 		diva.setAttribute('class','col-md-3');
-// 		div0.appendChild(diva);
-
-// 		input6 = document.createElement('select');
-// 		input6.setAttribute('name','profil.experiences['+nbComp3+'].pays');
-// 		input6.setAttribute('id','selectPays');
-// 		input6.setAttribute('class','form-control');
-// 		input6.setAttribute('onchange','chargeRegions('+nbComp3+')');
-// 		//input6.setAttribute('data-CommandArgument','${regions}');
-// 		input6.setAttribute('selected','selected');
-// 		input6.setAttribute('data-toggle','tooltip');
-// 		input61 = document.createElement('option');
-// 		input61.setAttribute('value','');
-// 		input61.innerHTML=' -- Choissez le pays --';
-// 		input6.appendChild(input61);
-// 		var pays1 = document.getElementById('expForm').getAttribute('data-CommandArgument');
-// 		var pays2 = pays1.split('[').join('');
-// 		var pays3 = pays2.split(']').join('');
-// 		var pays = pays3.split(',');
-// 		//alert(pays[0]);
-// 		for (i = 0; i < pays.length; i++) {
-// 			input = document.createElement('option');
-// 			input.text = pays[i];
-// 			input.value = pays[i];
-// 			input6.options.add(input);
-// 		}
-// 		diva.appendChild(input6);
-
-
-
-// 		divb = document.createElement('div');
-// 		divb.setAttribute('class','col-md-3');
-// 		div0.appendChild(divb);
-
-// 		input5 = document.createElement('select');
-// 		input5.setAttribute('name','profil.experiences['+nbComp3+'].region');
-// 		input5.setAttribute('id','selectRegion'+nbComp3+'');
-// 		input5.setAttribute('class','form-control');
-// 		input5.setAttribute('disabled','true')
-// 		//input5.setAttribute('data-CommandArgument','${regions}');
-// 		input5.setAttribute('selected','selected');
-// 		input5.setAttribute('data-toggle','tooltip');
-// 		input51 = document.createElement('option');
-// 		input51.setAttribute('value','');
-// 		input51.innerHTML=' -- Choissez la région --';
-// 		input5.appendChild(input51);
-// 		regions = document.getElementById('regionsCaches').innerHTML;
-// 		//alert(regions.split(',')[0]);
-// 		for (var i = 0; i < regions.length; i++) {
-// 			input = document.createElement('option');
-// 			input.text = regions[i];
-// 			input.value = regions[i];
-// 			input6.options.add(input);
-// 		}
-// 		divb.appendChild(input5);
-
-
-// 		divc = document.createElement('div');
-// 		divc.setAttribute('class','col-md-3');
-// 		div0.appendChild(divc);
-
-// 		input4 = document.createElement('input');
-// 		input4.setAttribute('name','profil.experiences['+nbComp3+'].lieu');
-// 		input4.setAttribute('type','text');
-// 		input4.setAttribute('class','form-control');
-// 		input4.setAttribute('placeholder','Ville');
-// 		input4.setAttribute('data-toggle','tooltip');
-// 		input4.setAttribute('title','Ville');
-// 		divc.appendChild(input4);
-
-
-// 		div8 = document.createElement('div');
-// 		div8.setAttribute('class','row');
-// 		div8.setAttribute('style','margin-top: 1%;');
-// 		divP.appendChild(div8);
-
-// 		div9 = document.createElement('div');
-// 		div9.setAttribute('class','col-md-12');
-// 		div8.appendChild(div9);
-
-// 		input7 = document.createElement('input');
-// 		input7.setAttribute('name','profil.experiences['+nbComp3+'].poste');
-// 		input7.setAttribute('type','text');
-// 		input7.setAttribute('class','form-control');
-// 		input7.setAttribute('placeholder','Intitulé de poste');
-// 		input7.setAttribute('data-toggle','tooltip');
-// 		input7.setAttribute('title','Poste occupé');
-// 		div9.appendChild(input7);
-
-// 		div10 = document.createElement('div');
-// 		div10.setAttribute('class','row');
-// 		div10.setAttribute('style','margin-top: 1%;');
-// 		divP.appendChild(div10);
-
-// 		div11 = document.createElement('div');
-// 		div11.setAttribute('class','col-md-12');
-// 		div10.appendChild(div11);
-
-// 		input8 = document.createElement('textarea');
-// 		input8.setAttribute('name','profil.experiences['+nbComp3+'].description');
-// 		input8.setAttribute('type','text-area');
-// 		input8.setAttribute('class','form-control');
-// 		input8.setAttribute('placeholder','Description de votre mission');
-// 		input8.setAttribute('data-toggle','tooltip');
-// 		input8.setAttribute('title','Description de votre mission');
-// 		div11.appendChild(input8);
-
-
-// 		div12 = document.createElement('div');
-// 		div12.setAttribute('class','row');
-// 		divP.appendChild(div12);
-
-// 		div13 = document.createElement('div');
-// 		div13.setAttribute('class','col-md-11');
-// 		div12.appendChild(div13);
-
-// 		div14 = document.createElement('div');
-// 		div14.setAttribute('class','col-md-1');
-// 		div14.setAttribute('style','margin-top:1%;text-align:right');
-// 		div12.appendChild(div14);
-
-// 		button = document.createElement(button);
-// 		button.setAttribute('type','button');
-// 		button.setAttribute('style','margin-top: 1%;text-align:right');
-// 		button.setAttribute('class','btn btn-default');
-// 		button.setAttribute('id','btn_new_comp');
-// 		button.setAttribute('onclick','deleteExperience('+nbComp3+');');
-// 		button.innerHTML='x';
-
-// 		div14.appendChild(button);
-
-// 		hr = document.createElement('hr');
-// 		divP.appendChild(hr);
-		
-		 //= parseInt(nbComp3);
 		var div = document.getElementById('idExp0');
-		//alert(nbExp);
-	    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+	    clone = div.cloneNode(true); 
 		var nbExp = varExp();
 		clone.id = 'idExp'+(nbExp);
 		form = document.getElementById('expForm');
@@ -425,8 +221,45 @@ function varExp() {
 		oChild2 = clone.getElementsByTagName('select')[1];
 		oChild1.setAttribute('id','selectPays'+(nbExp));
 		oChild1.setAttribute('onchange','chargeRegions('+(nbExp)+')');
-		alert(oChild1.getAttribute('id'));
 		oChild2.setAttribute('id','selectRegion'+(nbExp));
+
+	};
+	
+	function newReseauSocial() {
+		var div1, div2, input1, comp, select1, option1, option2, option3, option4, option4, option5, option6, div4, button;
+        comp = document.getElementById('resForm');
+        div1 = document.createElement('div');
+        div1.setAttribute('class','row');
+        div1.setAttribute('id','idReseau'+nbReseau);
+        comp.appendChild(div1);
+        
+        
+        div2 = document.createElement('div');
+        div2.setAttribute('class','col-md-3');
+        div1.appendChild(div2);
+        
+        input1 = document.createElement('input');
+        input1.setAttribute('name','profil.reseauxSociaux['+nbReseau+'].lien');
+        input1.setAttribute('type','text');
+        input1.setAttribute('class','form-control');
+        input1.setAttribute('placeholder','Reseau social');
+        input1.setAttribute('data-toggle','tooltip');
+        input1.setAttribute('title','Reseau social');
+        div2.appendChild(input1);
+        
+        div4 = document.createElement('div');
+        div4.setAttribute('class','col-md-1');
+        div1.appendChild(div4);
+        
+        button = document.createElement(button);
+        button.setAttribute('type','button');
+        button.setAttribute('style','margin-top: 1%;');
+        button.setAttribute('class','btn btn-default');
+        button.setAttribute('id','btn_new_rs');
+        button.setAttribute('onclick','deleteReseauSocial('+nbReseau+');');
+        button.innerHTML='x';
+
+        div4.appendChild(button);
 
 	};
     
@@ -440,6 +273,11 @@ function varExp() {
         dipl.innerHTML = '';
     };
     
+    function deleteReseauSocial(i) {
+        var reseau = document.getElementById('idReseau'+i);  
+        reseau.innerHTML = '';
+    };
+    
     function deleteExperience(i) {
         var exp = document.getElementById('idExp'+i);  
         exp.innerHTML = '';
@@ -447,7 +285,6 @@ function varExp() {
     
     function chargeRegions(i){
        var pays = document.getElementById('selectPays'+i);
-		//alert(pays.getAttribute('data-CommandArgument').split[0]);
 		var selectedPays = pays.options[pays.selectedIndex].innerHTML;
 		var region = document.getElementById('selectRegion'+i);
 		var ville = document.getElementById('selectVille');
@@ -487,9 +324,19 @@ function varExp() {
 						<label for="InputDiplomePrincipal"> Situation
 							professionnelle actuelle </label>
 
-						<form:input path="profil.situation" type="text"
-							class="form-control" id="InputSituation"
-							placeholder="ex: Chef de projet à CGI France" />
+
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-md-3">
+								<form:input path="profil.situation" type="text"
+									class="form-control" id="InputSituation"
+									placeholder="ex: Chef de projet à CGI France" />
+							</div>
+							<div class="col-md-3">
+								<form:input path="profil.lieuSituation" type="text"
+									class="form-control" id="InputlieuSituation"
+									placeholder="ex: Paris" />
+							</div>
+						</div>
 
 
 					</div>
@@ -560,7 +407,7 @@ function varExp() {
 							<label for="InputTel"> Téléphone :</label>
 							<form:input path="profil.telephone" type="text"
 								class="form-control" id="InputTel" />
-								<form:errors path="profil.telephone"/>
+							<form:errors path="profil.telephone" />
 						</div>
 						<div class="form-group">
 							<label for="InputMesAttentes"> Mes attentes du réseau
@@ -573,13 +420,13 @@ function varExp() {
 							<div id="diplForm">
 								<c:forEach begin="0" end="${utilisateur.profil.diplomes.size()}"
 									var="i">
-									<div class="row" id="idDipl${i}">
+									<div class="row" id="idDipl${i}" style="margin-top: 1%;">
 										<div class="col-md-2">
 											<form:select path="profil.diplomes[${i}].anneeDebut"
 												data-toggle="tooltip" title="Année de début"
 												value="${profil.diplomes[i].anneeDebut}"
-												class="form-control" id="InputDipDebut" placeholder="Début" >
-												
+												class="form-control" id="InputDipDebut" placeholder="Début">
+
 												<% 
 												Calendar calendar = new GregorianCalendar();
 		                                        calendar.setTime(new Date());
@@ -588,13 +435,13 @@ function varExp() {
 		                                            out.println(
 		                                                    "<option value='" + i + "'>" + i + "</option>");
 		                                        } %>
-		                                	</form:select>
+											</form:select>
 										</div>
 										<div class="col-md-2">
 											<form:select path="profil.diplomes[${i}].anneFin"
 												data-toggle="tooltip" title="Année de fin"
-												value="${profil.diplomes[i].anneFin}"
-												class="form-control" id="InputDipAnneFin" placeholder="Fin" >
+												value="${profil.diplomes[i].anneFin}" class="form-control"
+												id="InputDipAnneFin" placeholder="Fin">
 												<% 
 												Calendar calendar = new GregorianCalendar();
 		                                        calendar.setTime(new Date());
@@ -603,7 +450,7 @@ function varExp() {
 		                                            out.println(
 		                                                    "<option value='" + i + "'>" + i + "</option>");
 		                                        } %>
-		                                	</form:select>
+											</form:select>
 										</div>
 										<div class="col-md-5">
 											<form:input path="profil.diplomes[${i}].libelle"
@@ -620,7 +467,7 @@ function varExp() {
 										</div>
 										<div class="col-md-1">
 											<button type="button" style="margin-top: 1%;"
-												class="btn btn-default" id="btn_delete_comp"
+												class="btn btnModifProfif" id="btn_delete_comp"
 												onClick="deleteDiplome(${i});">x</button>
 										</div>
 										<form:errors path="profil.diplomes[${i}].anneeDebut" />
@@ -632,7 +479,7 @@ function varExp() {
 
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_dipl"
+								class="btn btnModifProfif" id="btn_new_dipl"
 								onClick="varDipl();newDiplome();">Ajouter un diplome</button>
 
 						</div>
@@ -649,7 +496,7 @@ function varExp() {
 														value="${profil.experiences[i].anneeDebut}"
 														class="form-control" id="InputExpDebut"
 														placeholder="Début" data-toggle="tooltip"
-														title="Année de début" >
+														title="Année de début">
 														<% 
 														Calendar calendar = new GregorianCalendar();
 				                                        calendar.setTime(new Date());
@@ -658,14 +505,14 @@ function varExp() {
 				                                            out.println(
 				                                                    "<option value='" + i + "'>" + i + "</option>");
 				                                        } %>
-				                                	</form:select>
+													</form:select>
 												</div>
 												<div class="col-md-2">
 													<form:select path="profil.experiences[${i}].anneFin"
 														value="${profil.experiences[i].anneFin}"
 														class="form-control" id="InputExpAnneFin"
 														placeholder="Fin" data-toggle="tooltip"
-														title="Année de fin" >
+														title="Année de fin">
 														<% 
 														Calendar calendar = new GregorianCalendar();
 				                                        calendar.setTime(new Date());
@@ -674,7 +521,7 @@ function varExp() {
 				                                            out.println(
 				                                                    "<option value='" + i + "'>" + i + "</option>");
 				                                        } %>
-				                                	</form:select>
+													</form:select>
 												</div>
 												<div class="col-md-2">
 													<form:input path="profil.experiences[${i}].entreprise"
@@ -743,7 +590,7 @@ function varExp() {
 												<div class="col-md-11"></div>
 												<div class="col-md-1"
 													style="margin-top: 1%; text-align: right">
-													<button type="button" class="btn btn-default"
+													<button type="button" class="btn btnModifProfif"
 														id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
 												</div>
 											</div>
@@ -756,7 +603,7 @@ function varExp() {
 								</c:forEach>
 							</div>
 
-							<button type="button" class="btn btn-default" id="btn_new_exp"
+							<button type="button" class="btn btnModifProfif" id="btn_new_exp"
 								onClick="varExp();newExperience(${i});">Ajouter une
 								expérience</button>
 
@@ -767,7 +614,7 @@ function varExp() {
 							<div id="compForm">
 								<c:forEach begin="0"
 									end="${utilisateur.profil.competence.size()}" var="i">
-									<div class="row" id="idComp${i}">
+									<div class="row" id="idComp${i}" style="margin-top: 1%;">
 										<div class="col-md-3">
 											<form:input path="profil.competence[${i}].libelle"
 												value="${profil.competence[i].libelle}" type="text"
@@ -788,14 +635,14 @@ function varExp() {
 										</div>
 										<div class="col-md-1">
 											<button type="button" style="margin-top: 1%;"
-												class="btn btn-default" id="btn_new_comp"
+												class="btn btnModifProfif" id="btn_new_comp"
 												onClick="deleteCompetence(${i});">x</button>
 										</div>
 									</div>
 								</c:forEach>
 							</div>
 							<button type="button" style="margin-top: 1%;"
-								class="btn btn-default" id="btn_new_comp"
+								class="btn btnModifProfif" id="btn_new_comp"
 								onClick="varComp();newCompetence();">Ajouter une
 								compétence</button>
 						</div>
@@ -805,22 +652,41 @@ function varExp() {
 								rows="3" class="form-control" id="InputInterets"
 								placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
 						</div>
-						<!--                         <div class="form-group"> -->
-						<!--                             <label for="InputInterets"> Réseaux sociaux </label> -->
-						<%--                             <c:forEach begin="0" --%>
-						<%--                                 end="${utilisateur.profil.reseauxSociaux.size()}" var="i"> --%>
-						<%--                                 <form:input path="profil.centreInteret" type="text-aera" --%>
-						<%--                                     rows="3" class="form-control" id="InputInterets" --%>
-						<%--                                     placeholder="ex: https://www.facebook.com/mon.facebook"></form:input> --%>
-						<%--                             </c:forEach> --%>
-						<!--                         </div> -->
+						<div class="form-group" id="formReseaux">
+							<label for="InputInterets"> Réseaux sociaux </label>
+							<div id="resForm">
+								<c:forEach begin="0"
+									end="${utilisateur.profil.reseauxSociaux.size()}" var="i">
+									<div class="row" style="margin-top: 1%" id="idReseau${i}">
+										<div class="col-md-3">
+											<form:input path="profil.reseauxSociaux[${i}].lien"
+												value="${profil.reseauxSociaux[i].lien}" type="text"
+												class="form-control" id="InputDipDebut" placeholder="Lien"
+												data-toggle="tooltip" title="Lien" />
+										</div>
+										<div class="col-md-1">
+											<button type="button" style="margin-top: 1%;"
+												class="btn btnModifProfif" id="btn_remove_comp"
+												onClick="deleteReseauSocial(${i});">x</button>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+							<button type="button" style="margin-top: 1%;"
+								class="btn btnModifProfif" id="btn_new_rs"
+								onClick="varReseaux();newReseauSocial();">Ajouter un
+								réseau social</button>
+						</div>
+
 						<a href="${pageContext.servletContext.contextPath}/profil/"><button
-								type="button" class="btn btn-default">Annuler</button></a>
-						<button type="submit" class="btn btn-default"
+								style="margin-top: 2%;" type="button"
+								class="btn hrefBlack btnValidModifProfif">Annuler</button></a>
+						<button style="margin-top: 2%;" type="submit"
+							class="btn hrefBlack btnValidModifProfif"
 							onclick="SoumettreFormulaire();">Enregistrer</button>
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </form:form>

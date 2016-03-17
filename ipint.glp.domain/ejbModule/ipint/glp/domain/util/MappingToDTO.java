@@ -10,6 +10,7 @@ import ipint.glp.api.DTO.GroupeDTO;
 import ipint.glp.api.DTO.PaysDTO;
 import ipint.glp.api.DTO.ProfilDTO;
 import ipint.glp.api.DTO.RegionDTO;
+import ipint.glp.api.DTO.ReseauSocialDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.UtilisateurEnAttenteDTO;
 import ipint.glp.api.DTO.VilleDTO;
@@ -24,6 +25,7 @@ import ipint.glp.domain.entity.Groupe;
 import ipint.glp.domain.entity.Pays;
 import ipint.glp.domain.entity.Profil;
 import ipint.glp.domain.entity.Region;
+import ipint.glp.domain.entity.ReseauSocial;
 import ipint.glp.domain.entity.Utilisateur;
 import ipint.glp.domain.entity.UtilisateurEnAttente;
 import ipint.glp.domain.entity.Ville;
@@ -78,6 +80,18 @@ public class MappingToDTO {
 
 		return diplDTO;
 	}
+	
+	public static ReseauSocialDTO reseauToReseauDTO(ReseauSocial reseau) throws MetierException {
+		if (reseau == null) {
+			throw new InformationManquanteException("reseauToReseauDTO : Le éseau social à mapper en DTO est null");
+		}
+
+		ReseauSocialDTO reseauDTO = new ReseauSocialDTO();
+		reseauDTO.setId(reseau.getId());
+		reseauDTO.setLien(reseau.getLien());
+
+		return reseauDTO;
+	}
 
 	public static ProfilDTO profilToProfilDTO(Profil pro) throws MetierException {
 		if (pro == null) {
@@ -91,6 +105,7 @@ public class MappingToDTO {
 		proDTO.setDiplomePrincipal(pro.getDiplomePrincipal());
 		proDTO.setMesAttentes(pro.getMesAttentes());
 		proDTO.setSituation(pro.getSituation());
+		proDTO.setLieuSituation(pro.getLieuSituation());
 		proDTO.setAnneeDiplome(pro.getAnneeDiplome());
 
 		proDTO.setCompetence(new ArrayList<>());
@@ -109,6 +124,12 @@ public class MappingToDTO {
 		if (pro.getExperiences() != null && !pro.getExperiences().isEmpty()) {
 			for (Experience exp : pro.getExperiences()) {
 				proDTO.getExperiences().add(experienceToExperienceDTO(exp));
+			}
+		}
+		proDTO.setReseauxSociaux(new ArrayList<ReseauSocialDTO>());
+		if (pro.getReseauxSociaux() != null && !pro.getReseauxSociaux().isEmpty()) {
+			for (ReseauSocial reseau : pro.getReseauxSociaux()) {
+				proDTO.getReseauxSociaux().add(reseauToReseauDTO(reseau));
 			}
 		}
 

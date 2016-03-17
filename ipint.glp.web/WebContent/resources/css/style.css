@@ -65,6 +65,10 @@ textarea {
 	list-style-type: none;
 }
 
+.accueilBody{
+	margin-bottom : 3%; ;
+}
+
 .affix {
 	width: inherit;
 	margin-left: -50px;
@@ -88,10 +92,10 @@ textarea {
 	padding-top: 0;
 }
 
-.container-bas,
+/* .container-bas,
 h3 {
 	padding-bottom: 5%;
-}
+} */
 
 .container-table {
 	display: table;
@@ -117,6 +121,15 @@ h3 {
 .btnModifProfif{
 	background-color:#F1F2F1
 }
+
+.btnValidModifProfif{
+	background-color:#FF8C00
+}
+
+.hrefBlack{
+	color : Black;
+}
+
 .titreArt{
 	font-weight: bold;
 }
@@ -258,8 +271,13 @@ h3 {
 	color: #f6921e;
 }
 
+.nomBlocProfil {
+	font-weight: bold;
+	color: #f6921e;
+	font-size: 18px;
+}
+
 .nomGroupe {
-	text-align: center;
 	word-wrap: break-word;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -298,4 +316,15 @@ h3 {
 .vertical-center-row {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.titreRech{
+	font-weight: bold;
+		font-size: 200%;
+}
+
+.soustitreRech{
+	font-weight: bold;
+	font-size: 100%;
+	margin-left:4%;
 }
