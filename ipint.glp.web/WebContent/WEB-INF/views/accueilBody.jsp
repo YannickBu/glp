@@ -60,7 +60,7 @@
 						${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 						dateStyle="short" timeStyle="short"
 						value="${art.datePublication.time}" /></li>
-				<li class="titreArt">${art.titre}</li>
+				<li class="titreArt" style="margin-top: 1%;">${art.titre}</li>
 				<c:choose>
 					<c:when test="${fn:startsWith(art.contenu, 'http://') || fn:startsWith(art.contenu, 'https://') || fn:startsWith(art.contenu, 'www.')}">
 						<li><a href="${art.contenu}" target="_blank" class="hrefChocolate">${art.contenu}</a></li>

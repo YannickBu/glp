@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 
 <!-- Icone groupe officiel : glyphicon glyphicon-education -->
 <!-- Icone animateur groupe : glyphicon glyphicon-flag  -->
@@ -27,14 +29,45 @@
 				<div class="col-md-12">
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
-							<li class="active col-md-6"><a href="#panel-2"
-								data-toggle="tab">Publications</a></li>
-							<li class="col-md-6"><a href="#panel-1" data-toggle="tab">Informations</a>
-							</li>
+							<li class="active col-md-6"><a href="#panel-1"
+								data-toggle="tab">Informations</a></li>
+							<li class="col-md-6"><a href="#panel-2" data-toggle="tab">Publications</a></li>
+
 
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane " id="panel-1">
+							<div class="tab-pane " id="panel-2">
+								<div class="row">
+									<div class="col-md-12">
+										<c:forEach items="${articlesGroupe}" var="article">
+											<div class="article">
+												<ul>
+
+													<li class="nomEtu" style="list-style-type: none;"><a
+														href="${pageContext.servletContext.contextPath}/profil/${article.utilisateur.idUtilisateur}">${article.utilisateur.prenom}
+															${article.utilisateur.nom}</a> - <fmt:formatDate type="both"
+															dateStyle="short" timeStyle="short"
+															value="${article.datePublication.time}" /></li>
+													<li style="list-style-type: none;" class="titreArt">${article.titre}</li>
+													<c:choose>
+														<c:when
+															test="${fn:startsWith(article.contenu, 'http://') || fn:startsWith(article.contenu, 'https://') || fn:startsWith(article.contenu, 'www.')}">
+															<li style="list-style-type: none;"><a
+																href="${article.contenu}" target="_blank"
+																class="hrefChocolate">${article.contenu}</a></li>
+														</c:when>
+														<c:otherwise>
+															<li style="list-style-type: none;">${article.contenu}</li>
+														</c:otherwise>
+													</c:choose>
+												</ul>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane active" id="panel-1">
 								<div class="row">
 									<div class="col-md-12">
 										<div class="bloc">
@@ -71,27 +104,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="tab-pane active" id="panel-2">
-								<div class="row">
-									<div class="col-md-12">
-										<c:forEach items="${articlesGroupe}" var="article">
-											<div class="article">
-												<ul>
 
-													<li class="nomEtu" style="list-style-type: none;"><a
-														href="${pageContext.servletContext.contextPath}/profil/${article.utilisateur.idUtilisateur}">${article.utilisateur.prenom}
-															${article.utilisateur.nom}</a> - <fmt:formatDate type="both"
-															dateStyle="short" timeStyle="short"
-															value="${article.datePublication.time}" /></li>
-													<li style="list-style-type: none;" class="titreArt">${article.titre}</li>
-
-													<li style="list-style-type: none;">${article.contenu}</li>
-												</ul>
-											</div>
-										</c:forEach>
-									</div>
-								</div>
 							</div>
 						</div>
 						<c:if test="${inscription == 1}">
@@ -111,9 +124,9 @@
 									ce groupe</button></a>
 						</c:if>
 						<c:if test="${inscription == 2}">
-							<button
-									type="button" style="margin-top: 1%; float: right"
-									class="btn btn-default" id="btn_new_exp" disabled="true">En attente de validation d'inscription</button>
+							<button type="button" style="margin-top: 1%; float: right"
+								class="btn btn-default" id="btn_new_exp" disabled="true">En
+								attente de validation d'inscription</button>
 						</c:if>
 
 					</div>

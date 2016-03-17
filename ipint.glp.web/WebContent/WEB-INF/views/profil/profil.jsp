@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <div class="col-md-6 publication">
 	<div class="container">
@@ -21,7 +21,7 @@
 				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
 					${utilisateur.profil.anneeDiplome}</div>
 			</div>
-			<hr/>
+			<hr />
 		</div>
 	</div>
 	<br>
@@ -52,7 +52,16 @@
 															${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 															dateStyle="short" timeStyle="short"
 															value="${art.datePublication.time}" /></li>
-													<li>${art.contenu}</li>
+													<c:choose>
+														<c:when
+															test="${fn:startsWith(art.contenu, 'http://') || fn:startsWith(art.contenu, 'https://') || fn:startsWith(art.contenu, 'www.')}">
+															<li><a href="${art.contenu}" target="_blank"
+																class="hrefChocolate">${art.contenu}</a></li>
+														</c:when>
+														<c:otherwise>
+															<li>${art.contenu}</li>
+														</c:otherwise>
+													</c:choose>
 												</ul>
 											</div>
 										</c:forEach>
@@ -78,8 +87,8 @@
 												<li class="nomBlocProfil" style="list-style-type: none;">Informations
 													professionnelles</li>
 												<br>
-												<li><b>Expériences Professionnelles : </b><c:set var="count"
-														value="1" scope="page" /> <c:forEach
+												<li><b>Expériences Professionnelles : </b>
+												<c:set var="count" value="1" scope="page" /> <c:forEach
 														items="${utilisateur.profil.experiences}" var="exp">
 														<div style="margin-top: 2%" class="panel-group"
 															id="panel-${count}">
@@ -98,8 +107,7 @@
 															</div>
 														</div>
 														<c:set var="count" value="${count + 1}" scope="page" />
-													</c:forEach>
-												</li>
+													</c:forEach></li>
 												<br>
 												<li><b>Compétences : </b>
 													<ul class="nav nav-pills">
@@ -110,8 +118,7 @@
 																	${comp.libelle}
 															</a></li>
 														</c:forEach>
-													</ul>
-												</li>
+													</ul></li>
 												<br>
 												<li><b>Cursus : </b>
 													<ul>
@@ -120,8 +127,7 @@
 															<li>${diplome.anneeDebut}/${diplome.anneFin}-
 																${diplome.libelle}-${diplome.lieu}</li>
 														</c:forEach>
-													</ul>
-												</li>
+													</ul></li>
 											</ul>
 										</div>
 										<div class="bloc">
@@ -140,33 +146,42 @@
 															<li><a
 																href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}">${grp.nomGroupe}</a></li>
 														</c:forEach>
-													</ul>
-												</li>
+													</ul></li>
 												<c:forEach items="${profil.reseauxSociaux}" var="reseau">
 													<c:if test="${fn:contains(reseau.lien, 'facebook')}">
-														<a href="${reseau.lien}" target="_blank"> <img
+														<a href="${reseau.lien}" target="_blank"
+															style="margin-top: 1%;"> <img
 															src="${pageContext.servletContext.contextPath}/resources/img/facebook.png"
-															class="img-responsive2" alt="Responsive image" /></a>
+															style="margin-top: 1%;" class="img-responsive2"
+															alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'twitter')}">
-														<a href="${reseau.lien}" target="_blank"> <img
+														<a href="${reseau.lien}" target="_blank"
+															style="margin-top: 1%;"> <img
 															src="${pageContext.servletContext.contextPath}/resources/img/twitter.png"
-															class="img-responsive2" alt="Responsive image" /></a>
+															style="margin-top: 1%;" class="img-responsive2"
+															alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'viadeo')}">
-														<a href="${reseau.lien}" target="_blank"> <img
+														<a href="${reseau.lien}" target="_blank"
+															style="margin-top: 1%;"> <img
 															src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png"
-															class="img-responsive2" alt="Responsive image" /></a>
+															style="margin-top: 1%;" class="img-responsive2"
+															alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'linkedin')}">
-														<a href="${reseau.lien}" target="_blank"> <img
+														<a href="${reseau.lien}" target="_blank"
+															style="margin-top: 1%;"> <img
 															src="${pageContext.servletContext.contextPath}/resources/img/linkedin.png"
-															class="img-responsive2" alt="Responsive image" /></a>
+															style="margin-top: 1%;" class="img-responsive2"
+															alt="Responsive image" /></a>
 													</c:if>
 													<c:if test="${fn:contains(reseau.lien, 'plus.google')}">
-														<a href="${reseau.lien}" target="_blank"> <img
+														<a href="${reseau.lien}" target="_blank"
+															style="margin-top: 1%;"> <img
 															src="${pageContext.servletContext.contextPath}/resources/img/google.png"
-															class="img-responsive2" alt="Responsive image" /></a>
+															style="margin-top: 1%;" class="img-responsive2"
+															alt="Responsive image" /></a>
 													</c:if>
 												</c:forEach>
 											</ul>
