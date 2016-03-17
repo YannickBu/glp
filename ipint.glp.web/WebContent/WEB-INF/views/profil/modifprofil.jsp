@@ -610,6 +610,7 @@ function varExp() {
 												data-toggle="tooltip" title="Libelle du diplome"
 												value="${profil.diplomes[i].libelle}" type="text"
 												class="form-control" id="InputDipDesc" placeholder="Libelle" />
+											<form:errors path="profil.diplomes[${i}].libelle"/>
 										</div>
 										<div class="col-md-2">
 											<form:input path="profil.diplomes[${i}].lieu"

@@ -210,6 +210,10 @@ public class ProfilController {
 					result.rejectValue("profil.diplomes[" + indDipl + "].anneFin", "Pattern",
 							"L'année de début ne peut pas être supérieure à l'année de fin ");
 				}
+				if(dipl.getLibelle()==null || "".equals(dipl.getLibelle())){
+					result.rejectValue("profil.diplomes[" + indDipl + "].libelle", "Pattern",
+							"Veuillez saisir un nom pour ce diplôme");
+				}
 			}
 		}
 
