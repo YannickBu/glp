@@ -8,7 +8,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="text-center">Panel de création de groupe</h1>
+				<h1 class="nomEtu text-center">Panel de création de groupe</h1>
 				<hr/>
 				<form:form class="form-horizontal" role="form" method="post" action=""
 					commandName="groupeTmp">
