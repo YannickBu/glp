@@ -6,7 +6,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2 gauche ">
 		<ul data-spy="affix" class="menu-gauche">
-
+		<%= request.getServletPath() %>
 			<%
 				if (!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")) {
 			%>
@@ -23,10 +23,7 @@
 					class="glyphicon glyphicon-home gly-menu" aria-hidden="true"></span>
 			</li>
 			</a>
-			<a href="#">
-				<li>Mes groupes <span
-					class="glyphicon glyphicon-heart gly-menu" aria-hidden="true"></span>
-			</a>
+			<li>Mes groupes <span class="glyphicon glyphicon-heart gly-menu" aria-hidden="true"></span>
 			<ul>
 				<c:forEach items="${utilisateur.groupes}" var="grp">
 
@@ -48,14 +45,23 @@
 			<%
 				if (request.isUserInRole("moderateur")) {
 			%>
-			<a href="${pageContext.servletContext.contextPath}/moderation"><li>Moderation</li></a>
+			<a href="${pageContext.servletContext.contextPath}/moderation"><li>Moderation<span class="glyphicon glyphicon-flag gly-menu" aria-hidden="true"></span></li></a>
 			<%
 				}
 			%>
 			<%
 				if (request.isUserInRole("administrateur")) {
 			%>
-			<a href="${pageContext.servletContext.contextPath}/administration"><li>Administration</li></a>
+			<a href="${pageContext.servletContext.contextPath}/administration"><li>Administration<span class="glyphicon glyphicon-blackboard gly-menu" aria-hidden="true"></span></li></a>
+			<%
+				}
+			%>
+			<%
+				if (request.isUserInRole("diplome") || request.isUserInRole("personnel")) {
+			%>
+			<a
+				href="${pageContext.servletContext.contextPath}/creergroupeutilisateur"><li>Créer
+					un groupe</li></a>
 			<%
 				}
 			%>
