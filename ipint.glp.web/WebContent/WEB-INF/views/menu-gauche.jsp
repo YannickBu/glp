@@ -53,6 +53,7 @@
 				if (request.isUserInRole("administrateur")) {
 			%>
 			<a href="${pageContext.servletContext.contextPath}/administration"><li>Administration<span class="glyphicon glyphicon-blackboard gly-menu" aria-hidden="true"></span></li></a>
+<<<<<<< HEAD
 			<%
 				}
 			%>
@@ -62,6 +63,8 @@
 			<a
 				href="${pageContext.servletContext.contextPath}/creergroupeutilisateur"><li>Créer
 					un groupe</li></a>
+=======
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 			<%
 				}
 			%>

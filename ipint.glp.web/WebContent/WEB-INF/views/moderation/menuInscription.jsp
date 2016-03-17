@@ -16,7 +16,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="text-center">Panel de modération
+				<h1 class="nomEtu text-center">Panel de modération
 				</h1>
 				<hr />
 				<div style="margin-bottom: 1%"><span class="glyphicon glyphicon-warning-sign"></span> = des incriptions sont en attentes de validation. </div>

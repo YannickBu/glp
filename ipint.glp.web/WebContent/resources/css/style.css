@@ -130,6 +130,10 @@ h3 {
 	color : Black;
 }
 
+.hrefChocolate{
+	color : DarkGreen;
+}
+
 .titreArt{
 	font-weight: bold;
 }
@@ -155,7 +159,7 @@ h3 {
 }
 
 .glyphicon-map-marker {
-	font-size: 2em;
+	font-size: 1em;
 }
 
 .header {
