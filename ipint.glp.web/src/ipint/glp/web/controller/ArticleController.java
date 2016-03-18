@@ -121,7 +121,7 @@ public class ArticleController {
 		return new ModelAndView("redirect:/");
 	}
 
-	@RequestMapping(value = "/supprimerArticle/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/supprimerArticleDuFilDactualite/{id}", method = RequestMethod.GET)
 	public ModelAndView supprimer(HttpServletRequest request,  @PathVariable String id,
 			@ModelAttribute ArticleDTO article, Model model) throws MetierException {
 
