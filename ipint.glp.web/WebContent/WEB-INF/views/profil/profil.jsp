@@ -49,7 +49,7 @@
 													test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
 													<div class="col-md-1" style="float: right">
 														<a
-															href="${pageContext.servletContext.contextPath}/supprimerArticle/${art.idArticle}"
+															href="${pageContext.servletContext.contextPath}/supprimerArticleDuProfil/${art.idArticle}"
 															style="margin-top: 1%; float: right;"> <img
 															src="${pageContext.servletContext.contextPath}/resources/img/deleteArticle.png"
 															style="margin-top: 1%;" class="img-responsive3"
@@ -62,7 +62,7 @@
 															<c:when
 																test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
 																<a
-																	href="${pageContext.servletContext.contextPath}/profil">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+																	href="${pageContext.servletContext.contextPath}/profil">Moi</a>
 															</c:when>
 															<c:otherwise>
 																<a
@@ -157,8 +157,7 @@
 													<ul>
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
-															<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																${diplome.libelle}-${diplome.lieu}</li>
+															<li>${diplome.anneeDebut}/${diplome.anneFin}&nbsp;-&nbsp;${diplome.libelle}&nbsp;-&nbsp;${diplome.lieu}</li>
 														</c:forEach>
 													</ul></li>
 											</ul>
@@ -167,9 +166,9 @@
 											<ul>
 												<li class="nomBlocProfil" style="list-style-type: none;">Informations
 													complémentaires</li>
-												<li><b>Centres d'interêt : </b>
+												<li style="margin-top: 1%;"><b>Centres d'interêt : </b>
 													${utilisateur.profil.centreInteret}</li>
-												<li><b>Groupe principal : </b><a
+												<li style="margin-top: 1%;"><b>Groupe principal : </b><a
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 												<li style="margin-top: 1%;"><b>Mes groupes : </b>
 													<ul>

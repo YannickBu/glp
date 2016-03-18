@@ -54,11 +54,11 @@
 													</div>
 												</c:if>
 												<ul>
-													<li class="nomEtu"><c:choose>
+													<li class=infoArticle><c:choose>
 															<c:when
 																test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
 																<a
-																	href="${pageContext.servletContext.contextPath}/profil">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+																	href="${pageContext.servletContext.contextPath}/profil">Moi</a>
 															</c:when>
 															<c:otherwise>
 																<a

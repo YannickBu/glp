@@ -32,14 +32,6 @@ public class AccueilController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView accueil(HttpServletRequest request, Model model, @ModelAttribute UtilisateurDTO utilisateur) {
-		UtilisateurDTO uDTO = new UtilisateurDTO();
-		uDTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			uDTO = us.trouver(uDTO);
-		} catch (MetierException e) {
-			logger.severe("Erreur acces publication POST - UtilisateurService.trouver renvoie : " + e.getMessage());
-			return new ModelAndView("redirect:/erreur");
-		}
 		GroupeDTO g = new GroupeDTO();
 		g.setIdGroupe(1);
 		List<UtilisateurDTO> utilisateurs=new ArrayList<>();
@@ -53,7 +45,6 @@ public class AccueilController {
 		for(UtilisateurDTO u : utilisateurs){
 			System.out.println(u.getEmail());
 		}
-		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("redirect:/connexion");
 	}
 }

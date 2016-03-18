@@ -87,7 +87,7 @@
 				<li class="infoArticle">
 				<c:choose>
 					<c:when test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
-						<a class="blackLink" href="${pageContext.servletContext.contextPath}/profil">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+						<a class="blackLink" href="${pageContext.servletContext.contextPath}/profil">Moi</a>
 					</c:when>
 					<c:otherwise>
 					<a href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
