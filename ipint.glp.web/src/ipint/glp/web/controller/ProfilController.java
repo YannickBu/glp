@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ipint.glp.api.DTO.ArticleDTO;
 import ipint.glp.api.DTO.CompetenceDTO;
 import ipint.glp.api.DTO.DiplomeDTO;
 import ipint.glp.api.DTO.ExperienceDTO;
@@ -28,6 +29,7 @@ import ipint.glp.api.DTO.RegionDTO;
 import ipint.glp.api.DTO.UtilisateurDTO;
 import ipint.glp.api.DTO.VilleDTO;
 import ipint.glp.api.exception.MetierException;
+import ipint.glp.api.itf.ArticleService;
 import ipint.glp.api.itf.GroupeService;
 import ipint.glp.api.itf.UtilisateurService;
 import ipint.glp.api.itf.UtilsService;
@@ -42,6 +44,8 @@ public class ProfilController {
 	GroupeService groupeS;
 	@Inject
 	UtilsService utilsS;
+	@Inject
+	ArticleService articleService;
 
 	public ProfilController() {
 	}
@@ -284,6 +288,8 @@ public class ProfilController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
+			utilisateur.setGroupePrincipal(uDTO.getGroupePrincipal());
+			utilisateur.setGroupes(uDTO.getGroupes());
 			return new ModelAndView("modifprofil");
 		}
 		
@@ -302,5 +308,20 @@ public class ProfilController {
 		// return "redirect:/profil/{id}";
 		return new ModelAndView("redirect:/profil", "util"
 				+ "isateur", utilisateur);
+	}
+	
+	@RequestMapping(value = "/supprimerArticleDuProfil/{idArt}", method = RequestMethod.GET)
+	public ModelAndView supprimer(HttpServletRequest request, @PathVariable String idArt,
+			@ModelAttribute ArticleDTO article, Model model) throws MetierException {
+
+		article.setIdArticle(Integer.parseInt(idArt));
+		try {
+			article = articleService.trouver(article);
+		} catch (MetierException e) {
+			logger.severe("Erreur acces publication POST - ArticleService.trouver renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
+		}
+		articleService.supprimer(article);
+		return new ModelAndView("redirect:/profil");
 	}
 }

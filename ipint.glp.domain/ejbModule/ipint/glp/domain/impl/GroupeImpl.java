@@ -176,6 +176,7 @@ public class GroupeImpl implements GroupeService {
 					u.getGroupesAnimes().add(groupe);
 					em.persist(u);
 				}
+
 			}
 		}
 		groupe.setAnimateurs(animateurs);
@@ -193,7 +194,7 @@ public class GroupeImpl implements GroupeService {
 				isAlreadyModerator = true;
 			}
 		}
-		if (!isAlreadyModerator) {
+		if (!isAlreadyModerator && groupe.isGroupeOfficiel()) {
 			utilGrp.setEmail(utilisateur.getEmail());
 			utilGrp.setGroupe("moderateur");
 			em.persist(utilGrp);
@@ -710,12 +711,36 @@ public class GroupeImpl implements GroupeService {
 
 		return utilisateursDTO;
 	}
-	
+
 	@Override
 	public void supprimer(GroupeDTO groupeASupprimer) {
-		Query q = em.createQuery("delete from Groupe g where g.idGroupe = :groupeASupprimer");
-		q.setParameter("groupeASupprimer", groupeASupprimer.getIdGroupe());
-		q.executeUpdate();
+		// em.refresh(groupeASupprimer);
+		Groupe groupe = new Groupe();
+		groupe.setIdGroupe(groupeASupprimer.getIdGroupe());
+		groupe = em.find(Groupe.class, groupe.getIdGroupe());
+		for (Utilisateur utilisateur : groupe.getUtilisateurs()) {
+			utilisateur.getGroupes().remove(groupe);
+			em.persist(utilisateur);
+		}
+		for (Article article : groupe.getArticles()) {
+			em.remove(article);
+		}
+
+		em.remove(groupe);
+		/*
+		 * Query q = em.createQuery(
+		 * "delete from GROUPEANIME_ANIMATEUR g where groupes_idGroupe = :groupeASupprimer"
+		 * ); q.setParameter("groupeASupprimer",
+		 * groupeASupprimer.getIdGroupe()); q.executeUpdate(); q =
+		 * em.createQuery(
+		 * "delete from GROUPE_UTILISATEUR g where groupes_idGroupe = :groupeASupprimer"
+		 * ); q.setParameter("groupeASupprimer",
+		 * groupeASupprimer.getIdGroupe()); q.executeUpdate(); q =
+		 * em.createQuery(
+		 * "delete from Groupe g where g.idGroupe = :groupeASupprimer");
+		 * q.setParameter("groupeASupprimer", groupeASupprimer.getIdGroupe());
+		 * q.executeUpdate();
+		 */
 	}
 
 	@Override

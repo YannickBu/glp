@@ -4,11 +4,57 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header alert-white">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Succès !</h4>
+			</div>
+			<div class="modal-body alert-white">
+				<p>Le groupe a été correctement créé.</p>
+			</div>
+			<div class="modal-footer alert-white">
+				<button type="button" id="Close" class="btn btn-default"
+					data-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header alert-white">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Echec !</h4>
+			</div>
+			<div class="modal-body alert-white">
+				<p>Le groupe n'a pas été créé suite à une erreur.</p>
+			</div>
+			<div class="modal-footer alert-white">
+				<button type="button" id="Close" class="btn btn-default"
+					data-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- Icone groupe officiel : glyphicon glyphicon-education -->
 <!-- Icone animateur groupe : glyphicon glyphicon-flag  -->
-
+<span id="hiddenResponse" style="display: none">${createdGroupe}</span>
 <div class="col-md-6 publication">
 	<div class="container-fluid">
 		<div class="row">
@@ -54,11 +100,11 @@
 													</div>
 												</c:if>
 												<ul>
-													<li class="nomEtu"><c:choose>
+													<li class=infoArticle><c:choose>
 															<c:when
 																test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
 																<a
-																	href="${pageContext.servletContext.contextPath}/profil">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+																	href="${pageContext.servletContext.contextPath}/profil">Moi</a>
 															</c:when>
 															<c:otherwise>
 																<a
@@ -166,7 +212,7 @@
 
 							</div>
 						</div>
-						<c:if test="${inscription == 1}">
+						<c:if test="${inscription == 1 && createur == 0}">
 							<a
 								href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/desinscriptionGroupe"><button
 									type="button" style="margin-top: 1%; float: right"
@@ -174,7 +220,7 @@
 									désinscrire</button></a>
 
 						</c:if>
-						<c:if test="${inscription == 0}">
+						<c:if test="${inscription == 0 && createur == 0}">
 
 							<a
 								href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/inscriptionGroupe"><button
@@ -182,10 +228,13 @@
 									class="btn btn-default" id="btn_new_exp">S'inscrire à
 									ce groupe</button></a>
 						</c:if>
-						<c:if test="${inscription == 2}">
-							<button type="button" style="margin-top: 1%; float: right"
-								class="btn btn-default" id="btn_new_exp" disabled="true">En
-								attente de validation d'inscription</button>
+
+						<c:if test="${createur == 1 && typeGroupe == 0}">
+							<a
+								href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/supprimerGroupe"><button
+									type="button" style="margin-top: 1%; float: right"
+									class="btn btn-default" id="btn_new_exp">Supprimer ce
+									groupe</button></a>
 						</c:if>
 
 					</div>
@@ -198,3 +247,17 @@
 		</div>
 	</div>
 </div>
+<span id="hiddenUrl" style="display: none">${pageContext.servletContext.contextPath}</span>
+<script>
+	var response = document.getElementById("hiddenResponse").innerHTML;
+	var url = document.getElementById("hiddenUrl").innerHTML;
+	//url = url + "/administration";
+	if (response == "SUCCESS") {
+		$('#myModal1').modal('toggle');
+		window.history.replaceState('administration', 'L1NK', url);
+	}
+	if (response == "FAIL") {
+		$('#myModal2').modal('toggle');
+		window.history.replaceState('administration', 'L1NK', url);
+	}
+</script>
