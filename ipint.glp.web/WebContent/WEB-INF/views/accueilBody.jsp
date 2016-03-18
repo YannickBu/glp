@@ -53,9 +53,9 @@
 
 		<div class="article">
 			<ul>
-				<li class="nomEtu"><a
+				<li class="infoArticle"><a class="blackLink"
 					href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
-					via <a
+					via <a class="blackLink"
 					href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
 						${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 						dateStyle="short" timeStyle="short"
@@ -63,7 +63,7 @@
 				<li class="titreArt" style="margin-top: 1%;">${art.titre}</li>
 				<c:choose>
 					<c:when test="${fn:startsWith(art.contenu, 'http://') || fn:startsWith(art.contenu, 'https://') || fn:startsWith(art.contenu, 'www.')}">
-						<li><a href="${art.contenu}" target="_blank" class="hrefChocolate">${art.contenu}</a></li>
+						<li><a href="${art.contenu}" target="_blank">${art.contenu}</a></li>
 					</c:when>
 					<c:otherwise>
 						<li>${art.contenu}</li>
