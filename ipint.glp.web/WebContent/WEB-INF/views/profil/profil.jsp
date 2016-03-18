@@ -14,12 +14,13 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu">${utilisateur.prenom}&nbsp;${utilisateur.nom}</h1>
-				<h1>${utilisateur.profil.situation},
-					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}
+				<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
+				<h1>${utilisateur.profil.situation}<c:if test="${not empty utilisateur.profil.lieuSituation}">,
+					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}</c:if>
 				</h1>
-				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
-					${utilisateur.profil.anneeDiplome}</div>
+				<div class='diplomePrincipal'>
+					${utilisateur.profil.diplomePrincipal}-${utilisateur.profil.anneeDiplome}
+				</div>
 			</div>
 			<hr />
 		</div>
@@ -44,19 +45,51 @@
 										<c:forEach items="${articles}" var="art">
 
 											<div class="article">
+												<c:if
+													test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
+													<div class="col-md-1" style="float: right">
+														<a
+															href="${pageContext.servletContext.contextPath}/supprimerArticleDuProfil/${art.idArticle}"
+															style="margin-top: 1%; float: right;"> <img
+															src="${pageContext.servletContext.contextPath}/resources/img/deleteArticle.png"
+															style="margin-top: 1%;" class="img-responsive3"
+															alt="Responsive image" data-toggle="tooltip"
+															title="Supprimer" /></a>
+													</div>
+												</c:if>
 												<ul>
-													<li class="nomEtu"><a
-														href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
-														via <a
+													<li class="nomEtu"><c:choose>
+															<c:when
+																test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
+																<a
+																	href="${pageContext.servletContext.contextPath}/profil">Moi</a>
+															</c:when>
+															<c:otherwise>
+																<a
+																	href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+															</c:otherwise>
+														</c:choose> via <a
 														href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
 															${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 															dateStyle="short" timeStyle="short"
-															value="${art.datePublication.time}" /></li>
+															value="${art.datePublication.time}" />
+													<li class="titreArt" style="margin-top: 1%;">${art.titre}</li>
 													<c:choose>
 														<c:when
-															test="${fn:startsWith(art.contenu, 'http://') || fn:startsWith(art.contenu, 'https://') || fn:startsWith(art.contenu, 'www.')}">
-															<li><a href="${art.contenu}" target="_blank"
-																class="hrefChocolate">${art.contenu}</a></li>
+															test="${fn:contains(art.contenu, 'http://') || fn:contains(art.contenu, 'https://') || fn:contains(art.contenu, 'www.')}">
+															<c:set var="string" value="${fn:split(art.contenu,' ')}" />
+															<c:forEach var="i" begin="0" end="${fn:length(string)}">
+																<c:choose>
+																	<c:when
+																		test="${fn:startsWith(string[i], 'http://') || fn:startsWith(string[i], 'https://') || fn:startsWith(string[i], 'www.')}">
+																		<a href="${string[i]}" target="_blank"
+																			class="hrefChocolate">${string[i]}</a>
+																	</c:when>
+																	<c:otherwise>
+									${string[i]} 
+								</c:otherwise>
+																</c:choose>
+															</c:forEach>
 														</c:when>
 														<c:otherwise>
 															<li>${art.contenu}</li>
@@ -124,8 +157,7 @@
 													<ul>
 														<c:forEach items="${utilisateur.profil.diplomes}"
 															var="diplome">
-															<li>${diplome.anneeDebut}/${diplome.anneFin}-
-																${diplome.libelle}-${diplome.lieu}</li>
+															<li>${diplome.anneeDebut}/${diplome.anneFin}&nbsp;-&nbsp;${diplome.libelle}&nbsp;-&nbsp;${diplome.lieu}</li>
 														</c:forEach>
 													</ul></li>
 											</ul>
@@ -134,9 +166,9 @@
 											<ul>
 												<li class="nomBlocProfil" style="list-style-type: none;">Informations
 													complémentaires</li>
-												<li><b>Centres d'interêt : </b>
+												<li style="margin-top: 1%;"><b>Centres d'interêt : </b>
 													${utilisateur.profil.centreInteret}</li>
-												<li><b>Groupe principal : </b><a
+												<li style="margin-top: 1%;"><b>Groupe principal : </b><a
 													href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</a></li>
 												<li style="margin-top: 1%;"><b>Mes groupes : </b>
 													<ul>

@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
+
 <script>
 	$(document).ready(function viderForm() {
 		var titre = document.getElementById("titrePubli");
@@ -68,14 +69,14 @@
 			</form:form>
 		</ul>
 	</div>
-	<c:forEach items="${articles}" var="art">
+		<c:forEach items="${articles}" var="art">
 
 		<div class="article">
 			<c:if
 				test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
 				<div class="col-md-1" style="float: right">
 					<a
-						href="${pageContext.servletContext.contextPath}/supprimerArticle/${art.idArticle}"
+						href="${pageContext.servletContext.contextPath}/supprimerArticleDuFilDactualite/${art.idArticle}"
 						style="margin-top: 1%; float: right;"> <img
 						src="${pageContext.servletContext.contextPath}/resources/img/deleteArticle.png"
 						style="margin-top: 1%;" class="img-responsive3"
@@ -83,9 +84,15 @@
 				</div>
 			</c:if>
 			<ul>
-				<li class="infoArticle"><a class="blackLink"
-					href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
-					via <a class="blackLink"
+				<li class="infoArticle">
+				<c:choose>
+					<c:when test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
+						<a class="blackLink" href="${pageContext.servletContext.contextPath}/profil">Moi</a>
+					</c:when>
+					<c:otherwise>
+					<a href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+					</c:otherwise>
+				</c:choose> via <a class="blackLink"
 					href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
 						${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 						dateStyle="short" timeStyle="short"
@@ -112,11 +119,6 @@
 						<li>${art.contenu}</li>
 					</c:otherwise>
 				</c:choose>
-
-				<%-- 				<c:if test="${fn:startsWith(art.contenu, 'http://')}"> --%>
-				<%-- 					<a href="${art.contenu}" target="_blank"> <!-- 					<img --> 						src="${pageContext.servletContext.contextPath}/resources/img/viadeo.png" --%>
-				<!-- 												class="img-responsive2" alt="Responsive image" /> -->
-
 			</ul>
 		</div>
 	</c:forEach>

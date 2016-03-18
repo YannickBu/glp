@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="java.util.List"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.util.List"%>
@@ -11,6 +12,7 @@
 <%@ page import="ipint.glp.api.DTO.DiplomeDTO"%>
 <%@ page import="ipint.glp.api.DTO.ExperienceDTO"%>
 <%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
+<%@ page import="ipint.glp.api.DTO.DiplomeDTO"%>
 <script type="text/javascript"
 	src="${pageContext.servletContext.contextPath}/resources/js/script.js"></script>
 <script type="text/javascript">
@@ -322,7 +324,7 @@ function varExp() {
 						class="img-responsive" alt="Responsive image">
 				</div>
 				<div class="col-md-10">
-					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
+					<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
 					<div class="col-md-12 situation form-group ">
 						<label for="InputDiplomePrincipal"> Situation
 							professionnelle actuelle </label>
@@ -339,6 +341,8 @@ function varExp() {
 									class="form-control" id="InputlieuSituation"
 									placeholder="ex: Paris" />
 							</div>
+							
+							<form:errors path="profil.situation" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 
 
@@ -384,39 +388,41 @@ function varExp() {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="alert alert-success alert-dismissable" hidden>
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">×</button>
-							<h4>Alert!</h4>
-							<strong>Warning!</strong> Best check yo self, you're not looking
-							too good. <a href="#" class="alert-link">alert link</a>
-						</div>
 						<div class="form-group">
 							<label for="InputNom"> Nom * : </label>
 							<form:input path="nom" type="text" class="form-control"
 								id="InputNom" placeholder="ex: Dupont" />
+							<form:errors path="nom" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 						<div class="form-group">
 							<label for="InputPrenom"> Prénom * : </label>
 							<form:input path="prenom" type="text" class="form-control"
 								id="InputPrenom" placeholder="ex: Jean" />
+							<form:errors path="prenom" cssStyle="color:#FF6600;font-style:italic;"/>
+						</div>
+						<div class="form-group">
+							<label for="InputEmail"> Email : </label>
+							<form:input path="email" type="text" class="form-control"
+								id="InputEmail" value="${utilisateur.email}" readonly="true" />
 						</div>
 						<div class="form-group">
 							<label for="InputPassword"> Mot de passe * :</label>
 							<form:input path="password" type="password" class="form-control"
 								id="InputPassword" />
+							<form:errors path="password" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 						<div class="form-group">
 							<label for="InputTel"> Téléphone :</label>
 							<form:input path="profil.telephone" type="text"
 								class="form-control" id="InputTel" />
-							<form:errors path="profil.telephone" />
+							<form:errors path="profil.telephone" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 						<div class="form-group">
 							<label for="InputMesAttentes"> Mes attentes du réseau
 								L1nk.fr </label>
 							<form:input path="profil.mesAttentes" type="text"
 								class="form-control" id="InputMesAttentes" />
+							<form:errors path="profil.mesAttentes" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 						<div class="form-group">
 							<label for="InputCursus"> Diplômes : </label>
@@ -429,7 +435,6 @@ function varExp() {
 												data-toggle="tooltip" title="Année de début"
 												value="${profil.diplomes[i].anneeDebut}"
 												class="form-control" id="InputDipDebut" placeholder="Début">
-
 												<%
 													Calendar calendar = new GregorianCalendar();
 																calendar.setTime(new Date());
@@ -486,9 +491,7 @@ function varExp() {
 												class="btn btnModifProfif" id="btn_delete_comp"
 												onClick="deleteDiplome(${i});">x</button>
 										</div>
-										<form:errors path="profil.diplomes[${i}].anneeDebut" />
-										<br />
-										<form:errors path="profil.diplomes[${i}].anneFin" />
+										<form:errors path="profil.diplomes[${i}].*" cssStyle="color:#FF6600;font-style:italic;"/>
 									</div>
 								</c:forEach>
 
@@ -614,6 +617,7 @@ function varExp() {
 														data-toggle="tooltip" title="Description de votre mission" />
 												</div>
 											</div>
+											<form:errors path="profil.experiences[${i}].*" cssStyle="color:#FF6600;font-style:italic;"/>
 											<div class="row">
 												<div class="col-md-11"></div>
 												<div class="col-md-1"
@@ -622,9 +626,6 @@ function varExp() {
 														id="btn_new_exp" onClick="deleteExperience(${i});">x</button>
 												</div>
 											</div>
-											<form:errors path="profil.experiences[${i}].anneeDebut" />
-											<br />
-											<form:errors path="profil.experiences[${i}].anneFin" />
 											<hr>
 										</div>
 									</div>
@@ -666,6 +667,7 @@ function varExp() {
 												class="btn btnModifProfif" id="btn_new_comp"
 												onClick="deleteCompetence(${i});">x</button>
 										</div>
+										<form:errors path="profil.competence[${i}].*" cssStyle="color:#FF6600;font-style:italic;"/>
 									</div>
 								</c:forEach>
 							</div>
@@ -679,6 +681,7 @@ function varExp() {
 							<form:textarea path="profil.centreInteret" type="text-aera"
 								rows="3" class="form-control" id="InputInterets"
 								placeholder="ex: [Interet1],[Interet2],..."></form:textarea>
+							<form:errors path="profil.centreInteret" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 						<div class="form-group" id="formReseaux">
 							<label for="InputInterets"> Réseaux sociaux </label>
@@ -697,6 +700,7 @@ function varExp() {
 												class="btn btnModifProfif" id="btn_remove_comp"
 												onClick="deleteReseauSocial(${i});">x</button>
 										</div>
+										<form:errors path="profil.reseauxSociaux[${i}].*" cssStyle="color:#FF6600;font-style:italic;"/>
 									</div>
 								</c:forEach>
 							</div>
