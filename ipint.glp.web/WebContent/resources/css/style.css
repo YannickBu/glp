@@ -177,6 +177,11 @@ h3 {
 	width: 25px;
 	height: 25px;
 }
+.img-responsive3 {
+	width: 16px;
+	height: 16px;
+	margin-right : 10px
+}
 
 .infoArticle{
 	color : #666666;
