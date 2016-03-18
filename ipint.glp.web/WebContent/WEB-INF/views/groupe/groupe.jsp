@@ -108,7 +108,7 @@
 															</c:when>
 															<c:otherwise>
 																<a
-																	href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+																	href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
 															</c:otherwise>
 														</c:choose> via <a
 														href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
@@ -116,27 +116,7 @@
 															dateStyle="short" timeStyle="short"
 															value="${art.datePublication.time}" />
 													<li class="titreArt" style="margin-top: 1%;">${art.titre}</li>
-													<c:choose>
-														<c:when
-															test="${fn:contains(art.contenu, 'http://') || fn:contains(art.contenu, 'https://') || fn:contains(art.contenu, 'www.')}">
-															<c:set var="string" value="${fn:split(art.contenu,' ')}" />
-															<c:forEach var="i" begin="0" end="${fn:length(string)}">
-																<c:choose>
-																	<c:when
-																		test="${fn:startsWith(string[i], 'http://') || fn:startsWith(string[i], 'https://') || fn:startsWith(string[i], 'www.')}">
-																		<a href="${string[i]}" target="_blank"
-																			class="hrefChocolate">${string[i]}</a>
-																	</c:when>
-																	<c:otherwise>
-									${string[i]} 
-								</c:otherwise>
-																</c:choose>
-															</c:forEach>
-														</c:when>
-														<c:otherwise>
-															<li>${art.contenu}</li>
-														</c:otherwise>
-													</c:choose>
+
 												</ul>
 											</div>
 										</c:forEach>
@@ -193,17 +173,17 @@
 												<li class="nomBloc" style="list-style-type: none;">Membres
 													du groupe</li>
 												<c:forEach items="${membresGroupe}" var="membre">
-												<c:choose>
-															<c:when
-																test="${membre.idUtilisateur == utilisateur.idUtilisateur}">
-																<li style="margin-left: 4%"><a
-																	href="${pageContext.servletContext.contextPath}/profil">${membre.prenom}&nbsp;${membre.nom}</a></li>
-															</c:when>
-															<c:otherwise>
-																<li style="margin-left: 4%"><a
-																	href="${pageContext.servletContext.contextPath}/profil/${membre.idUtilisateur}">${membre.prenom}&nbsp;${membre.nom}</a></li>
-															</c:otherwise>
-														</c:choose>
+													<c:choose>
+														<c:when
+															test="${membre.idUtilisateur == utilisateur.idUtilisateur}">
+															<li style="margin-left: 4%"><a
+																href="${pageContext.servletContext.contextPath}/profil">${membre.prenom}&nbsp;${membre.nom}</a></li>
+														</c:when>
+														<c:otherwise>
+															<li style="margin-left: 4%"><a
+																href="${pageContext.servletContext.contextPath}/profil/${membre.idUtilisateur}">${membre.prenom}&nbsp;${membre.nom}</a></li>
+														</c:otherwise>
+													</c:choose>
 												</c:forEach>
 											</ul>
 										</div>
@@ -230,11 +210,15 @@
 						</c:if>
 
 						<c:if test="${createur == 1 && typeGroupe == 0}">
-							<a
-								href="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/supprimerGroupe"><button
-									type="button" style="margin-top: 1%; float: right"
-									class="btn btn-default" id="btn_new_exp">Supprimer ce
-									groupe</button></a>
+
+							<form method="POST"
+								action="${pageContext.servletContext.contextPath}/groupe/${leGroupe.idGroupe}/supprimerGroupe">
+								<input type="submit" value="Supprimer ce
+									groupe"
+									style="margin-top: 1%; float: right" class="btn btn-default"
+									id="btn_new_exp" />
+							</form>
+
 						</c:if>
 
 					</div>
