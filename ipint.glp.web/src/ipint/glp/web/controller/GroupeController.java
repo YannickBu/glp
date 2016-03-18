@@ -44,8 +44,8 @@ public class GroupeController {
 	ArticleService articleService;
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
-	@Inject
-	UtilisateurService utilisateurS;
+//	@Inject
+//	UtilisateurService utilisateurS;
 
 	// @RequestMapping(value = "/groupe")
 	// public ModelAndView groupeGET() {
@@ -57,15 +57,15 @@ public class GroupeController {
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
-		UtilisateurDTO u2DTO = new UtilisateurDTO();
-		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur", u2DTO);
-		} catch (MetierException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		UtilisateurDTO u2DTO = new UtilisateurDTO();
+//		u2DTO.setEmail(request.getUserPrincipal().getName());
+//		try {
+//			u2DTO = utilisateurS.trouver(u2DTO);
+//			model.addAttribute("utilisateur", u2DTO);
+//		} catch (MetierException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -111,7 +111,7 @@ public class GroupeController {
 			e.printStackTrace();
 		}
 		model.addAttribute("leGroupe", gDTO);
-
+		model.addAttribute("typeGroupe", gDTO.isGroupeOfficiel());
 		return new ModelAndView("redirect:/groupe/{id}");
 	}
 
@@ -135,15 +135,15 @@ public class GroupeController {
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
-		UtilisateurDTO u2DTO = new UtilisateurDTO();
-		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur", u2DTO);
-		} catch (MetierException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		UtilisateurDTO u2DTO = new UtilisateurDTO();
+//		u2DTO.setEmail(request.getUserPrincipal().getName());
+//		try {
+//			u2DTO = utilisateurS.trouver(u2DTO);
+//			model.addAttribute("utilisateur", u2DTO);
+//		} catch (MetierException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -172,7 +172,7 @@ public class GroupeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		model.addAttribute("typeGroupe", gDTO.isGroupeOfficiel());
 		model.addAttribute("leGroupe", gDTO);
 
 		return new ModelAndView("redirect:/groupe/{id}");
@@ -185,15 +185,15 @@ public class GroupeController {
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 
 		GroupeDTO gDTO = new GroupeDTO();
-		UtilisateurDTO u2DTO = new UtilisateurDTO();
-		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur", u2DTO);
-		} catch (MetierException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		UtilisateurDTO u2DTO = new UtilisateurDTO();
+//		u2DTO.setEmail(request.getUserPrincipal().getName());
+//		try {
+//			u2DTO = utilisateurS.trouver(u2DTO);
+//			model.addAttribute("utilisateur", u2DTO);
+//		} catch (MetierException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 
 		try {
@@ -242,7 +242,6 @@ public class GroupeController {
 				}
 			}
 		} catch (MetierException e) {
-
 		}
 
 		List<GroupeDTO> tousLesGroupes = groupeService.listerTousLesGroupes();
@@ -254,11 +253,15 @@ public class GroupeController {
 				}
 			}
 		}
-<<<<<<< HEAD
+		
+		model.addAttribute("utilisateur", uDTO);
+		int typeGroupe = 0;
+		if (gDTO.isGroupeOfficiel()) {
+			typeGroupe = 1;
+		}
 		model.addAttribute("createur", createur);
-=======
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
-		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		model.addAttribute("typeGroupe", typeGroupe);
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes);
 		Collections.shuffle(nouvelle);
 		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("leGroupe", gDTO);
@@ -267,6 +270,22 @@ public class GroupeController {
 		model.addAttribute("articlesGroupe", articlesGroupe);
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("inscription", inscription);
+		System.out.println("typeGroupe : " + typeGroupe);
 		return new ModelAndView("groupe");
+	}
+	
+	@RequestMapping(value = "/supprimerArticleDuGroupe/{idGroup}/{idArt}", method = RequestMethod.GET)
+	public ModelAndView supprimer(HttpServletRequest request,  @PathVariable String idGroup, @PathVariable String idArt,
+			@ModelAttribute ArticleDTO article, Model model) throws MetierException {
+
+		article.setIdArticle(Integer.parseInt(idArt));
+		try {
+			article = articleService.trouver(article);
+		} catch (MetierException e) {
+			logger.severe("Erreur acces publication POST - ArticleService.trouver renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
+		}
+		articleService.supprimer(article);
+		return new ModelAndView("redirect:/groupe/"+idGroup);
 	}
 }
