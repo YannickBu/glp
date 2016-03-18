@@ -1,6 +1,8 @@
 package ipint.glp.web.controller;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -103,7 +105,7 @@ public class GroupeController {
 		 */
 		try {
 			groupeService.ajouterUtilisateur(gDTO, utilisateurDTO);
-			
+
 		} catch (MetierException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,6 +113,21 @@ public class GroupeController {
 		model.addAttribute("leGroupe", gDTO);
 
 		return new ModelAndView("redirect:/groupe/{id}");
+	}
+
+	@RequestMapping(value = "/groupe/{id}/supprimerGroupe", method = RequestMethod.GET)
+	public ModelAndView groupesuppression(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
+			@ModelAttribute GroupeDTO leGroupe, Model model) {
+		leGroupe.setIdGroupe(Integer.parseInt(id));
+		try {
+			leGroupe = groupeService.trouver(leGroupe);
+		} catch (MetierException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		groupeService.supprimer(leGroupe);
+		return new ModelAndView("redirect:/");
 	}
 
 	@RequestMapping(value = "/groupe/{id}/desinscriptionGroupe", method = RequestMethod.GET)
@@ -199,6 +216,7 @@ public class GroupeController {
 			return new ModelAndView("redirect:/erreur");
 		}
 		int inscription = 0;
+		int createur = 0;
 
 		for (GroupeDTO groupeDTO : uDTO.getGroupes()) {
 			if (groupeDTO.getIdGroupe() == gDTO.getIdGroupe()) {
@@ -207,6 +225,10 @@ public class GroupeController {
 		}
 		if (uDTO.getGroupePrincipal().getIdGroupe() == gDTO.getIdGroupe()) {
 			inscription = 3;
+		}
+		if (!gDTO.isGroupeOfficiel()
+				&& uDTO.getIdUtilisateur() == gDTO.getUtilisateurResponsable().getIdUtilisateur()) {
+			createur = 1;
 		}
 
 		try {
@@ -232,8 +254,10 @@ public class GroupeController {
 				}
 			}
 		}
-		model.addAttribute("tousLesGroupes", tousLesGroupes);
-
+		model.addAttribute("createur", createur);
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("leGroupe", gDTO);
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe", membresGroupe);
