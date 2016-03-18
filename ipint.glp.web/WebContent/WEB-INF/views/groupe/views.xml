@@ -3,7 +3,13 @@
       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-<definition name="groupe" extends="baseLayout">
-<put-attribute name="body" value="/WEB-INF/views/groupe/groupe.jsp"></put-attribute>
-</definition>
+	<definition name="groupe" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/groupe/groupe.jsp"></put-attribute>
+	</definition>
+	<definition name="createGroupeUtilisateur" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/groupe/createGroupeUtilisateur.jsp"></put-attribute>
+		<put-attribute name="menu-gauche" value="/WEB-INF/views/menu-gauche.jsp"></put-attribute>
+		<put-attribute name="menu-droite" value="/WEB-INF/views/menu-droite.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

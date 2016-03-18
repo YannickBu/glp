@@ -80,7 +80,7 @@ public class MappingToDTO {
 
 		return diplDTO;
 	}
-	
+
 	public static ReseauSocialDTO reseauToReseauDTO(ReseauSocial reseau) throws MetierException {
 		if (reseau == null) {
 			throw new InformationManquanteException("reseauToReseauDTO : Le éseau social à mapper en DTO est null");
@@ -133,7 +133,8 @@ public class MappingToDTO {
 			}
 		}
 
-//		System.out.println(" DIPLOME PRINCIPAL DTO ->>>>>>>>>>>>>>>>>>>>>>>>>><   " + proDTO.getDiplomePrincipal());
+		// System.out.println(" DIPLOME PRINCIPAL DTO
+		// ->>>>>>>>>>>>>>>>>>>>>>>>>>< " + proDTO.getDiplomePrincipal());
 		return proDTO;
 	}
 
@@ -332,7 +333,7 @@ public class MappingToDTO {
 
 		return grpDTO;
 	}
-	
+
 	public static PaysDTO paysToPaysDTO(Pays pays) throws MetierException {
 		if (pays == null) {
 			return null;
@@ -409,6 +410,7 @@ public class MappingToDTO {
 		grpDTO.setIdGroupe(grp.getIdGroupe());
 		grpDTO.setDescription(grp.getDescription());
 		grpDTO.setNomGroupe(grp.getNomGroupe());
+		grpDTO.setGroupeOfficiel(grp.isGroupeOfficiel());
 
 		return grpDTO;
 	}

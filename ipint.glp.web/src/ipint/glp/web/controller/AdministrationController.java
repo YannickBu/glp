@@ -36,12 +36,39 @@ public class AdministrationController {
 	GroupeService groupeS;
 	@Inject
 	UtilisateurService utilisateurS;
-	
-	
-	
+
 	public AdministrationController() {
 	}
-	
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param groupeTmp
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/creergroupeutilisateur", method = RequestMethod.GET)
+	public ModelAndView createGroupeUtilisateurGET(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
+			BindingResult result, Model model) {
+		GroupeDTO gDTO = new GroupeDTO();
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur", u2DTO);
+			model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		model.addAttribute("groupeTmp", gDTO);
+		return new ModelAndView("createGroupeUtilisateur");
+	}
+
 	/**
 	 * 
 	 * 
@@ -52,15 +79,16 @@ public class AdministrationController {
 	 * @return
 	 */
 	@RequestMapping(value = "/administration/creergroupe", method = RequestMethod.GET)
-	public ModelAndView createGroupeGet(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
+	public ModelAndView createGroupeGet(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
-			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
+			model.addAttribute("utilisateur", u2DTO);
+			model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -71,6 +99,7 @@ public class AdministrationController {
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
 		}
+		model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
 		model.addAttribute("animateurs", listPersonnel);
 		model.addAttribute("utilisateurResponsables", listPersonnel);
 		model.addAttribute("groupeTmp", gDTO);
@@ -88,16 +117,98 @@ public class AdministrationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/administration/creergroupe", method = RequestMethod.POST)
-	public ModelAndView createGroupePost(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @ModelAttribute("utilisateurTmp") UtilisateurDTO utilisateurTmp, @ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
-			BindingResult result, Model model) {
+	@RequestMapping(value = "/creergroupeutilisateur", method = RequestMethod.POST)
+	public ModelAndView creerGroupeUtilisateurPost(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,
+			@ModelAttribute("utilisateurTmp") UtilisateurDTO utilisateurTmp,
+			@ModelAttribute("groupeTmp") GroupeDTO groupeTmp, BindingResult result, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
-			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
+			model.addAttribute("utilisateur", u2DTO);
+			model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		UtilisateurDTO uDTO = new UtilisateurDTO();
+		List<UtilisateurDTO> luDTO = new ArrayList<UtilisateurDTO>();
+		luDTO.add(u2DTO);
+		uDTO.setIdUtilisateur(u2DTO.getIdUtilisateur());
+		gDTO.setIdGroupe(groupeTmp.getIdGroupe());
+		gDTO.setNomGroupe(groupeTmp.getNomGroupe());
+		gDTO.setDescription(groupeTmp.getDescription());
+		gDTO.setGroupeOfficiel(false);
+		gDTO.setAnimateurs(luDTO);
+		gDTO.setUtilisateurResponsable(uDTO);
+		try {
+			groupeTmp = groupeS.creer(gDTO);
+		} catch (MetierException e) {
+			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
+			return new ModelAndView("createGroupeUtilisateur", "createdGroupe", "FAIL");
+		}
+		try {
+			gDTO = groupeS.trouver(groupeTmp);
+		} catch (MetierException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
+		listPersonnel.add(u2DTO);
+		try {
+			groupeS.ajouterUtilisateur(groupeTmp, u2DTO);
+		} catch (MetierException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<GroupeDTO> tousLesGroupes;
+		try {
+			tousLesGroupes = groupeS.listerTousLesGroupes();
+			tousLesGroupes.remove(uDTO.getGroupePrincipal());
+			for (GroupeDTO groupe1 : uDTO.getGroupes()) {
+				for (GroupeDTO groupe2 : tousLesGroupes) {
+					if (groupe1.equals(groupe2)) {
+						groupe2 = null;
+					}
+				}
+			}
+			model.addAttribute("tousLesGroupes", tousLesGroupes);
+		} catch (MetierException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("animateurs", listPersonnel);
+		model.addAttribute("utilisateurResponsables", listPersonnel);
+		model.addAttribute("leGroupe", gDTO);
+
+		return new ModelAndView("redirect:/groupe/" + gDTO.getIdGroupe(), "createdGroupe", "SUCCESS");
+	}
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param request
+	 * @param utilisateurTmp
+	 * @param groupeTmp
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/administration/creergroupe", method = RequestMethod.POST)
+	public ModelAndView createGroupePost(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,
+			@ModelAttribute("utilisateurTmp") UtilisateurDTO utilisateurTmp,
+			@ModelAttribute("groupeTmp") GroupeDTO groupeTmp, BindingResult result, Model model) {
+		GroupeDTO gDTO = new GroupeDTO();
+		UtilisateurDTO u2DTO = new UtilisateurDTO();
+		u2DTO.setEmail(request.getUserPrincipal().getName());
+		try {
+			u2DTO = utilisateurS.trouver(u2DTO);
+			model.addAttribute("utilisateur", u2DTO);
+			model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -107,9 +218,9 @@ public class AdministrationController {
 		String[] moderateurList = request.getParameterValues("utilisateurResponsable.idUtilisateur");
 		int idModerateur = Integer.parseInt(moderateurList[0].toString());
 		String[] animateurList = request.getParameterValues("animateurs");
-		for(int i=0; i<animateurList.length;i++){
+		for (int i = 0; i < animateurList.length; i++) {
 			UtilisateurDTO animTmp = new UtilisateurDTO();
-			animTmp.setIdUtilisateur(Integer.parseInt(animateurList[i].toString())); 
+			animTmp.setIdUtilisateur(Integer.parseInt(animateurList[i].toString()));
 			try {
 				luDTO.add(utilisateurS.trouver(animTmp));
 			} catch (MetierException e) {
@@ -126,25 +237,41 @@ public class AdministrationController {
 			groupeTmp = groupeS.creer(gDTO);
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
-			return new ModelAndView("panelAdministration","createdGroupe", "FAIL");
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
 		}
 		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
 		try {
 			listPersonnel = utilisateurS.listerParType("PERSONNEL");
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
-			return new ModelAndView("panelAdministration","createdGroupe", "FAIL");
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
 		}
 		model.addAttribute("animateurs", listPersonnel);
 		model.addAttribute("utilisateurResponsables", listPersonnel);
 		try {
-			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
+			model.addAttribute("groupesOfficiel", groupeS.listerParType(true));
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupePOST - groupeS.listerParType renvoie : " + e.getMessage());
 		}
-		return new ModelAndView("panelAdministration","createdGroupe", "SUCCESS");
+		List<GroupeDTO> tousLesGroupes;
+		try {
+			tousLesGroupes = groupeS.listerTousLesGroupes();
+			tousLesGroupes.remove(uDTO.getGroupePrincipal());
+			for (GroupeDTO groupe1 : uDTO.getGroupes()) {
+				for (GroupeDTO groupe2 : tousLesGroupes) {
+					if (groupe1.equals(groupe2)) {
+						groupe2 = null;
+					}
+				}
+			}
+			model.addAttribute("tousLesGroupes", tousLesGroupes);
+		} catch (MetierException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ModelAndView("panelAdministration", "createdGroupe", "SUCCESS");
 	}
-		
+
 	/**
 	 * 
 	 * 
@@ -154,27 +281,27 @@ public class AdministrationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.GET)
-	public ModelAndView panelAdministrationGet(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
+	@RequestMapping(value = { "/administration", "/administration/paneladministration" }, method = RequestMethod.GET)
+	public ModelAndView panelAdministrationGet(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
-			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
+			model.addAttribute("utilisateur", u2DTO);
+			model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
+
 		try {
-			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
+			model.addAttribute("groupesOfficiel", groupeS.listerParType(true));
 		} catch (MetierException e) {
 			e.printStackTrace();
 		}
-		
+
 		return new ModelAndView("panelAdministration");
 	}
 
@@ -187,26 +314,27 @@ public class AdministrationController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = {"/administration","/administration/paneladministration"}, method = RequestMethod.POST)
-	public ModelAndView panelAdministrationPost(HttpServletRequest request,@ModelAttribute("utilisateur") UtilisateurDTO utilisateur,@ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
+	@RequestMapping(value = { "/administration", "/administration/paneladministration" }, method = RequestMethod.POST)
+	public ModelAndView panelAdministrationPost(HttpServletRequest request,
+			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @ModelAttribute("groupeTmp") GroupeDTO groupeTmp,
 			BindingResult result, Model model) {
 		UtilisateurDTO u2DTO = new UtilisateurDTO();
 		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {	
+		try {
 			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur",u2DTO);
-			model.addAttribute("grpPrincipal",u2DTO.getGroupePrincipal());
+			model.addAttribute("utilisateur", u2DTO);
+			model.addAttribute("grpPrincipal", u2DTO.getGroupePrincipal());
 		} catch (MetierException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		try {
-			model.addAttribute("groupesOfficiel",  groupeS.listerParType(true));
+			model.addAttribute("groupesOfficiel", groupeS.listerParType(true));
 		} catch (MetierException e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView("panelAdministration");
 	}
-	
+
 }
