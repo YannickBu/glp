@@ -9,8 +9,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="text-center">Panel de modération des inscriptions
+				<h1 class="nomEtu text-center">Panel de modération des inscriptions
 				</h1>
+				<hr/>
 				<br /> <label>Informations du demandeur:</label>
 				<ul>
 					<li><u>Nom:</u> ${utilisateurTmp.nom}</li>

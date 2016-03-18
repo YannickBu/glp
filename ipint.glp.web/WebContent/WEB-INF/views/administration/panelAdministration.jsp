@@ -55,7 +55,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="text-center">Panel d'administration</h1>
+				<h1 class="nomEtu text-center">Panel d'administration</h1>
 				<hr />
 				<a
 					href="${pageContext.servletContext.contextPath}/administration/creergroupe">

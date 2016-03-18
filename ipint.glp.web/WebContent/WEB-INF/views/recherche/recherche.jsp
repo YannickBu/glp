@@ -6,7 +6,12 @@
 
 <div class="col-md-6 accueilBody">
 	<div class="publication">
-		<h1 class="titreRech" align="center">Recherche de résultats pour			: "..."</h1>
+		<h1 class="titreRech" align="center">Recherche de résultats pour : "
+		<% 
+            String attribut = (String) request.getAttribute("recherche");
+            out.println( attribut );
+            %>
+           "</h1>
 		<hr size=4 align=center width="90%">
 		<h2 class="soustitreRech">Profil(s) trouvé(s) :</h2>
 		<ul>
