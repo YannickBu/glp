@@ -324,7 +324,7 @@ function varExp() {
 						class="img-responsive" alt="Responsive image">
 				</div>
 				<div class="col-md-10">
-					<h1 class="nomEtu">${utilisateur.prenom}&nbsp${utilisateur.nom}</h1>
+					<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
 					<div class="col-md-12 situation form-group ">
 						<label for="InputDiplomePrincipal"> Situation
 							professionnelle actuelle </label>

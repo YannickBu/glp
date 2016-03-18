@@ -287,6 +287,8 @@ public class ProfilController {
 		
 		try {
 			utilisateur = utilisateurService.modifier(uDTO);
+			request.getSession().setAttribute("nomUtil", utilisateur.getNom());
+			request.getSession().setAttribute("prenomUtil", utilisateur.getPrenom());
 		} catch (MetierException e) {
 			logger.severe(
 					"Erreur acces profil/modifProfil POST - UtilisateurService.modifier renvoie : " + e.getMessage());
