@@ -401,6 +401,11 @@ function varExp() {
 							<form:errors path="prenom" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 						<div class="form-group">
+							<label for="InputEmail"> Email : </label>
+							<form:input path="email" type="text" class="form-control"
+								id="InputEmail" value="${utilisateur.email}" readonly="true" />
+						</div>
+						<div class="form-group">
 							<label for="InputPassword"> Mot de passe * :</label>
 							<form:input path="password" type="password" class="form-control"
 								id="InputPassword" />
