@@ -78,7 +78,7 @@
 					</div>
 
 
-					<button type="submit" class="btn btn-default ">Creer le
+					<button type="submit" class="btn btn-default ">Créer le
 						groupe</button>
 				</form:form>
 
