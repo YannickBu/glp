@@ -175,6 +175,10 @@ public class ProfilController {
 
 		// Gestion des erreurs
 
+		if((utilisateur.getProfil().getSituation()==null || "".equals(utilisateur.getProfil().getSituation()))
+				&& (utilisateur.getProfil().getLieuSituation()!=null || !"".equals(utilisateur.getProfil().getLieuSituation()))){
+			result.rejectValue("profil.situation", "Null", "Aucune situation saisie");
+		}
 
 		if (utilisateur.getProfil().getTelephone() != null && !"".equals(utilisateur.getProfil().getTelephone())
 				&& !utilisateur.getProfil().getTelephone().matches("[0-9]{10}")){

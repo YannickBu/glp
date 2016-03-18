@@ -341,6 +341,8 @@ function varExp() {
 									class="form-control" id="InputlieuSituation"
 									placeholder="ex: Paris" />
 							</div>
+							
+							<form:errors path="profil.situation" cssStyle="color:#FF6600;font-style:italic;"/>
 						</div>
 
 

@@ -15,11 +15,12 @@
 			</div>
 			<div class="col-md-10">
 				<h1 class="nomEtu">${utilisateur.prenom}&nbsp;${utilisateur.nom}</h1>
-				<h1>${utilisateur.profil.situation},
-					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}
+				<h1>${utilisateur.profil.situation}<c:if test="${not empty utilisateur.profil.lieuSituation}">,
+					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}</c:if>
 				</h1>
-				<div class='diplomePrincipal'>${utilisateur.profil.diplomePrincipal}-
-					${utilisateur.profil.anneeDiplome}</div>
+				<div class='diplomePrincipal'>
+					${utilisateur.profil.diplomePrincipal}-${utilisateur.profil.anneeDiplome}
+				</div>
 			</div>
 			<hr />
 		</div>
