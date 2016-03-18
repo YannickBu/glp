@@ -114,6 +114,8 @@ public class ProfilController {
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
+		request.setAttribute("nomWithId", uDTO.getNom());
+		request.setAttribute("prenomWithId", uDTO.getPrenom());
 
 		// model.addObject("utilisateur", uDTO);
 		request.setAttribute("id", id);
