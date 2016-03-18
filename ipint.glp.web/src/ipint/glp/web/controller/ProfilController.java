@@ -120,8 +120,6 @@ public class ProfilController {
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
-		System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+utilisateurService.derniereExperience(uDTO).getLieu());
-		model.addAttribute("derniereExperience", utilisateurService.derniereExperience(uDTO));
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);
