@@ -147,7 +147,7 @@ public class AdministrationController {
 			groupeTmp = groupeS.creer(gDTO);
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
-			return new ModelAndView("createGroupeUtilisateur", "createdGroupe", "FAIL");
+			return new ModelAndView("redirect:/creergroupeutilisateur", "createdGroupe", "FAIL");
 		}
 		try {
 			gDTO = groupeS.trouver(groupeTmp);

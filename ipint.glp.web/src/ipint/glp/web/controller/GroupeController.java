@@ -115,7 +115,7 @@ public class GroupeController {
 		return new ModelAndView("redirect:/groupe/{id}");
 	}
 
-	@RequestMapping(value = "/groupe/{id}/supprimerGroupe", method = RequestMethod.GET)
+	@RequestMapping(value = "/groupe/{id}/supprimerGroupe", method = RequestMethod.POST)
 	public ModelAndView groupesuppression(HttpServletRequest request,
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
