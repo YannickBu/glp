@@ -6,6 +6,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2 gauche ">
 		<ul data-spy="affix" class="menu-gauche">
+
 			<%=request.getServletPath()%>
 			<%
 				if (!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")) {

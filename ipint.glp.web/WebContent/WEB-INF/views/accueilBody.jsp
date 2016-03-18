@@ -83,9 +83,9 @@
 				</div>
 			</c:if>
 			<ul>
-				<li class="nomEtu"><a
+				<li class="infoArticle"><a class="blackLink"
 					href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
-					via <a
+					via <a class="blackLink"
 					href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
 						${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 						dateStyle="short" timeStyle="short"
