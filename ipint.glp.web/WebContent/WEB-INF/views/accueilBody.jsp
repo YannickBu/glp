@@ -90,7 +90,7 @@
 						<a class="blackLink" href="${pageContext.servletContext.contextPath}/profil">Moi</a>
 					</c:when>
 					<c:otherwise>
-					<a href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+					<a href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
 					</c:otherwise>
 				</c:choose> via <a class="blackLink"
 					href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">

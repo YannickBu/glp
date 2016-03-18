@@ -108,7 +108,7 @@
 															</c:when>
 															<c:otherwise>
 																<a
-																	href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+																	href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
 															</c:otherwise>
 														</c:choose> via <a
 														href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
