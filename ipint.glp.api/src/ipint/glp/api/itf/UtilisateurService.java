@@ -58,11 +58,4 @@ public interface UtilisateurService {
 	 */
 	public List<UtilisateurDTO> listerParType(String type) throws MetierException;
 
-	/** Recupère l'experience la plus récente de l'utilisateur
-	 * @param utilisateurDTO
-	 * @return
-	 * @throws MetierException
-	 */
-	public ExperienceDTO derniereExperience(UtilisateurDTO utilisateurDTO) throws MetierException;
-
 }

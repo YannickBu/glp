@@ -6,8 +6,11 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.List"%>
 <%@ page import="java.util.GregorianCalendar"%>
 <%@ page import="ipint.glp.api.DTO.ProfilDTO"%>
+<%@ page import="ipint.glp.api.DTO.DiplomeDTO"%>
+<%@ page import="ipint.glp.api.DTO.ExperienceDTO"%>
 <%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
 <%@ page import="ipint.glp.api.DTO.DiplomeDTO"%>
 <script type="text/javascript"
@@ -359,17 +362,18 @@ function varExp() {
 						<form:select path="profil.anneeDiplome" class="form-control"
 							id="InputAnneDiplome">
 							<%
-                                        Calendar calendar = new GregorianCalendar();
-                                        calendar.setTime(new Date());
-                                        int annee = calendar.get(Calendar.YEAR);
-                                        for (int i = annee; i > 1950; i--) {
-                                            out.println(
-                                                    "<option value='" + i + "' "
-                                                            + ((((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
-                                                                    .getAnneeDiplome() == i) ? "selected='true'" : "")
-                                                            + ">" + i + "</option>");
-                                        }
-                            %>
+								//(Integer) request.getAttribute("yannick")).intValue()
+										Calendar calendar = new GregorianCalendar();
+										calendar.setTime(new Date());
+										int annee = calendar.get(Calendar.YEAR);
+										for (int i = annee; i > 1950; i--) {
+											out.println(
+													"<option value='" + i + "' "
+															+ ((((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
+																	.getAnneeDiplome() == i) ? "selected='selected'" : "")
+															+ ">" + i + "</option>");
+										}
+							%>
 						</form:select>
 					</div>
 
@@ -424,33 +428,43 @@ function varExp() {
 												data-toggle="tooltip" title="Année de début"
 												value="${profil.diplomes[i].anneeDebut}"
 												class="form-control" id="InputDipDebut" placeholder="Début">
-
-												<% 
-												Calendar calendar = new GregorianCalendar();
-		                                        calendar.setTime(new Date());
-		                                        List<DiplomeDTO> diplomes = ((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil().getDiplomes();
-		                                        int varI = Integer.parseInt(pageContext.getAttribute("i").toString());
-		                                        int annee = calendar.get(Calendar.YEAR);
-												for (int i = annee; i > 1950; i--) {
-		                                            out.println(
-		                                                    "<option value='" + i + "' "+ ((diplomes.get(varI)!=null && diplomes.get(varI).getAnneeDebut()!=null && i == 
-		                                                    diplomes.get(varI).getAnneeDebut() )?" selected='true'":"") +"  >" + i + "</option>");
-		                                        } %>
+												<%
+													Calendar calendar = new GregorianCalendar();
+																calendar.setTime(new Date());
+																List<DiplomeDTO> diplomes = ((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
+																		.getDiplomes();
+																int varI = Integer.parseInt(pageContext.getAttribute("i").toString());
+																int annee = calendar.get(Calendar.YEAR);
+																for (int i = annee; i > 1950; i--) {
+																	out.println("<option value='" + i + "' "
+																			+ ((diplomes.get(varI) != null && diplomes.get(varI).getAnneeDebut() != null
+																					&& i == diplomes.get(varI).getAnneeDebut()) ? " selected='true'" : "")
+																			+ "  >" + i + "</option>");
+																}
+												%>
 											</form:select>
+
 										</div>
 										<div class="col-md-2">
 											<form:select path="profil.diplomes[${i}].anneFin"
 												data-toggle="tooltip" title="Année de fin"
-												value="${profil.diplomes[i].anneFin}" class="form-control"
-												id="InputDipAnneFin" placeholder="Fin">
-												<% 
-												Calendar calendar = new GregorianCalendar();
-		                                        calendar.setTime(new Date());
-		                                        int annee = calendar.get(Calendar.YEAR);
-												for (int i = annee+1; i > 1950; i--) {
-		                                            out.println(
-		                                                    "<option value='" + i + "'>" + i + "</option>");
-		                                        } %>
+												value="${profil.diplomes[i].anneFin}"
+												class="form-control" id="InputDipFin" placeholder="Fin">
+
+												<%
+													Calendar calendar = new GregorianCalendar();
+																calendar.setTime(new Date());
+																List<DiplomeDTO> diplomes = ((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
+																		.getDiplomes();
+																int varI = Integer.parseInt(pageContext.getAttribute("i").toString());
+																int annee = calendar.get(Calendar.YEAR);
+																for (int i = annee; i > 1950; i--) {
+																	out.println("<option value='" + i + "' "
+																			+ ((diplomes.get(varI) != null && diplomes.get(varI).getAnneFin() != null
+																					&& i == diplomes.get(varI).getAnneFin()) ? " selected='true'" : "")
+																			+ "  >" + i + "</option>");
+																}
+												%>
 											</form:select>
 										</div>
 										<div class="col-md-5">
@@ -495,30 +509,42 @@ function varExp() {
 														class="form-control" id="InputExpDebut"
 														placeholder="Début" data-toggle="tooltip"
 														title="Année de début">
-														<% 
-														Calendar calendar = new GregorianCalendar();
-				                                        calendar.setTime(new Date());
-				                                        int annee = calendar.get(Calendar.YEAR);
-														for (int i = annee; i > 1950; i--) {
-				                                            out.println(
-				                                                    "<option value='" + i + "'>" + i + "</option>");
-				                                        } %>
+														<%
+													Calendar calendar = new GregorianCalendar();
+																calendar.setTime(new Date());
+																List<ExperienceDTO> experiences = ((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
+																		.getExperiences();
+																int varI = Integer.parseInt(pageContext.getAttribute("i").toString());
+																int annee = calendar.get(Calendar.YEAR);
+																for (int i = annee; i > 1950; i--) {
+																	out.println("<option value='" + i + "' "
+																			+ ((experiences.get(varI) != null && experiences.get(varI).getAnneeDebut() != null
+																					&& i == experiences.get(varI).getAnneeDebut()) ? " selected='true'" : "")
+																			+ "  >" + i + "</option>");
+																}
+												%>
 													</form:select>
 												</div>
 												<div class="col-md-2">
 													<form:select path="profil.experiences[${i}].anneFin"
-														value="${profil.experiences[i].anneFin}"
-														class="form-control" id="InputExpAnneFin"
+														value="${profil.experiences[i].anneeFin}"
+														class="form-control" id="InputExpFin"
 														placeholder="Fin" data-toggle="tooltip"
-														title="Année de fin">
-														<% 
-														Calendar calendar = new GregorianCalendar();
-				                                        calendar.setTime(new Date());
-				                                        int annee = calendar.get(Calendar.YEAR);
-														for (int i = annee+1; i > 1950; i--) {
-				                                            out.println(
-				                                                    "<option value='" + i + "'>" + i + "</option>");
-				                                        } %>
+														title="Année de Fin">
+														<%
+													Calendar calendar = new GregorianCalendar();
+																calendar.setTime(new Date());
+																List<ExperienceDTO> experiences = ((UtilisateurDTO) request.getAttribute("utilisateur")).getProfil()
+																		.getExperiences();
+																int varI = Integer.parseInt(pageContext.getAttribute("i").toString());
+																int annee = calendar.get(Calendar.YEAR);
+																for (int i = annee; i > 1950; i--) {
+																	out.println("<option value='" + i + "' "
+																			+ ((experiences.get(varI) != null && experiences.get(varI).getAnneFin() != null
+																					&& i == experiences.get(varI).getAnneFin()) ? " selected='true'" : "")
+																			+ "  >" + i + "</option>");
+																}
+												%>
 													</form:select>
 												</div>
 												<div class="col-md-2">

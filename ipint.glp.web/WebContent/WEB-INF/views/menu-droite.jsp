@@ -6,7 +6,7 @@
 	<div data-spy="affix" class="menu-droite">
 		<p class="suggestion-titre">Suggestions de groupes</p>
 		<ul class="menu-droite-2">
-			<c:forEach items="${tousLesGroupes}" var="grp">
+			<c:forEach begin="0" end="15" items="${tousLesGroupes}" var="grp">
 			
 				<a
 					href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}"><li class="nomGroupe">${grp.nomGroupe}</li></a>

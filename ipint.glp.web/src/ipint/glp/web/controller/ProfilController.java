@@ -1,5 +1,7 @@
 package ipint.glp.web.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -66,8 +68,9 @@ public class ProfilController {
 				}
 			}
 		}
-		model.addAttribute("tousLesGroupes", tousLesGroupes);
-		
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);		
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
@@ -100,12 +103,12 @@ public class ProfilController {
 				}
 			}
 		}
-		model.addAttribute("tousLesGroupes", tousLesGroupes);
-
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
-		model.addAttribute("derniereExperience", utilisateurService.derniereExperience(uDTO));
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);
@@ -157,6 +160,10 @@ public class ProfilController {
 					"Erreur modifProfil GET - GroupeService.listerTousLesGroupes renvoie : " + e.getMessage());
 			return new ModelAndView("redirect:/erreur");
 		}
+
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("modifprofil", "utilisateur", uDTO);
