@@ -255,17 +255,13 @@ public class GroupeController {
 		}
 		
 		model.addAttribute("utilisateur", uDTO);
-<<<<<<< HEAD
 		int typeGroupe = 0;
 		if (gDTO.isGroupeOfficiel()) {
 			typeGroupe = 1;
 		}
 		model.addAttribute("createur", createur);
 		model.addAttribute("typeGroupe", typeGroupe);
-		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes);
-=======
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 		Collections.shuffle(nouvelle);
 		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("leGroupe", gDTO);

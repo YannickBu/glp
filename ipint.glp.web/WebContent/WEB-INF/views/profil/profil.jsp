@@ -14,7 +14,13 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
+				<% if(request.getAttribute("nomWithId")!=null && !"".equals(request.getAttribute("nomWithId"))){%>
+					<h1 class="nomEtu"><%=request.getAttribute("prenomWithId") %>&nbsp;<%=request.getAttribute("nomWithId") %></h1>
+				<%
+				}else{ 
+				%>
+					<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
+				<% } %>
 				<h1>${utilisateur.profil.situation}<c:if test="${not empty utilisateur.profil.lieuSituation}">,
 					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}</c:if>
 				</h1>
@@ -66,7 +72,7 @@
 															</c:when>
 															<c:otherwise>
 																<a
-																	href="${pageContext.servletContext.contextPath}/profil/${utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+																	href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
 															</c:otherwise>
 														</c:choose> via <a
 														href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
