@@ -138,6 +138,9 @@ h3 {
 	width: 100%;
 	background-color: #F1F2F1;
 }
+.error{
+	color : Red;
+}
 
 .form-inscrip {
 	padding-top: 2.5%;
@@ -177,6 +180,11 @@ h3 {
 
 .infoArticle{
 	color : #666666;
+}
+.img-responsive3 {
+	width: 16px;
+	height: 16px;
+	margin-right : 10px
 }
 
 .inputForm {

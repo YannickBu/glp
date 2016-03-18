@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -128,6 +129,23 @@ public class ArticleController {
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
-		return new ModelAndView("accueil");
+		return new ModelAndView("redirect:/");
 	}
+
+	@RequestMapping(value = "/supprimerArticle/{id}", method = RequestMethod.GET)
+	public ModelAndView supprimer(HttpServletRequest request,  @PathVariable String id,
+			@ModelAttribute ArticleDTO article, Model model) throws MetierException {
+
+		article.setIdArticle(Integer.parseInt(id));
+		try {
+			article = as.trouver(article);
+		} catch (MetierException e) {
+			logger.severe("Erreur acces publication POST - ArticleService.trouver renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
+		}
+		as.supprimer(article);
+		return new ModelAndView("redirect:/");
+	}
+	
+
 }
