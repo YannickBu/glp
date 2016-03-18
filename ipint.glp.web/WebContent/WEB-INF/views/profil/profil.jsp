@@ -14,7 +14,13 @@
 					class="img-responsive" alt="Responsive image">
 			</div>
 			<div class="col-md-10">
-				<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
+				<% if(request.getAttribute("nomWithId")!=null && !"".equals(request.getAttribute("nomWithId"))){%>
+					<h1 class="nomEtu"><%=request.getAttribute("prenomWithId") %>&nbsp;<%=request.getAttribute("nomWithId") %></h1>
+				<%
+				}else{ 
+				%>
+					<h1 class="nomEtu"><%=session.getAttribute("prenomUtil") %>&nbsp;<%=session.getAttribute("nomUtil") %></h1>
+				<% } %>
 				<h1>${utilisateur.profil.situation}<c:if test="${not empty utilisateur.profil.lieuSituation}">,
 					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>${utilisateur.profil.lieuSituation}</c:if>
 				</h1>
