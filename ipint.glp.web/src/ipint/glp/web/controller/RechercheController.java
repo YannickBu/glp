@@ -1,6 +1,7 @@
 package ipint.glp.web.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -60,7 +61,9 @@ public class RechercheController {
 				}
 			}
 		}
-		model.addAttribute("tousLesGroupes", tousLesGroupes);
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("groupes", groupes);
 		model.addAttribute("utilisateurs", utilisateurs);
 		model.addAttribute("utilisateur", uDTO);
@@ -93,7 +96,9 @@ public class RechercheController {
 				}
 			}
 		}
-		model.addAttribute("tousLesGroupes", tousLesGroupes);
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("groupes", groupes);
 		model.addAttribute("utilisateurs", utilisateurs);
 		model.addAttribute("utilisateur", uDTO);

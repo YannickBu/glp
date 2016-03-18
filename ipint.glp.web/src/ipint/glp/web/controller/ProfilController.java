@@ -96,6 +96,15 @@ public class ProfilController {
 			return new ModelAndView("redirect:/erreur");
 		}
 
+		System.out.println("profil : " + uDTO.getProfil());
+		System.out.println("ID util controller : " + uDTO.getIdUtilisateur());
+		System.out.println(uDTO.getNom());
+		// System.out.println(uDTO.getProfil());
+
+		for (CompetenceDTO competence : uDTO.getProfil().getCompetence()) {
+			System.out.println("Competence --------------------------->  " + competence.getLibelle());
+		}
+		
 		List<GroupeDTO> tousLesGroupes = groupeS.listerTousLesGroupes();
 		tousLesGroupes.remove(uDTO.getGroupePrincipal());
 		for(GroupeDTO groupe1 : uDTO.getGroupes()){
@@ -111,7 +120,6 @@ public class ProfilController {
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
-		model.addAttribute("derniereExperience", utilisateurService.derniereExperience(uDTO));
 		model.addAttribute("articles", uDTO.getArticles());
 
 		// model.addObject("utilisateur", uDTO);

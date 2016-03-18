@@ -254,7 +254,10 @@ public class GroupeController {
 				}
 			}
 		}
+<<<<<<< HEAD
 		model.addAttribute("createur", createur);
+=======
+>>>>>>> branch 'dev' of https://github.com/YannickBu/glp
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
 		Collections.shuffle(nouvelle);
 		model.addAttribute("tousLesGroupes", nouvelle);
