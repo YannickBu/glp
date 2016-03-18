@@ -43,8 +43,8 @@ public class GroupeController {
 	ArticleService articleService;
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
-	@Inject
-	UtilisateurService utilisateurS;
+//	@Inject
+//	UtilisateurService utilisateurS;
 
 	// @RequestMapping(value = "/groupe")
 	// public ModelAndView groupeGET() {
@@ -56,15 +56,15 @@ public class GroupeController {
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
-		UtilisateurDTO u2DTO = new UtilisateurDTO();
-		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur", u2DTO);
-		} catch (MetierException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		UtilisateurDTO u2DTO = new UtilisateurDTO();
+//		u2DTO.setEmail(request.getUserPrincipal().getName());
+//		try {
+//			u2DTO = utilisateurS.trouver(u2DTO);
+//			model.addAttribute("utilisateur", u2DTO);
+//		} catch (MetierException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -119,15 +119,15 @@ public class GroupeController {
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
-		UtilisateurDTO u2DTO = new UtilisateurDTO();
-		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur", u2DTO);
-		} catch (MetierException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		UtilisateurDTO u2DTO = new UtilisateurDTO();
+//		u2DTO.setEmail(request.getUserPrincipal().getName());
+//		try {
+//			u2DTO = utilisateurS.trouver(u2DTO);
+//			model.addAttribute("utilisateur", u2DTO);
+//		} catch (MetierException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -169,15 +169,15 @@ public class GroupeController {
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 
 		GroupeDTO gDTO = new GroupeDTO();
-		UtilisateurDTO u2DTO = new UtilisateurDTO();
-		u2DTO.setEmail(request.getUserPrincipal().getName());
-		try {
-			u2DTO = utilisateurS.trouver(u2DTO);
-			model.addAttribute("utilisateur", u2DTO);
-		} catch (MetierException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		UtilisateurDTO u2DTO = new UtilisateurDTO();
+//		u2DTO.setEmail(request.getUserPrincipal().getName());
+//		try {
+//			u2DTO = utilisateurS.trouver(u2DTO);
+//			model.addAttribute("utilisateur", u2DTO);
+//		} catch (MetierException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		gDTO.setIdGroupe(Integer.parseInt(id));
 
 		try {
@@ -221,7 +221,6 @@ public class GroupeController {
 				}
 			}
 		} catch (MetierException e) {
-
 		}
 
 		List<GroupeDTO> tousLesGroupes = groupeService.listerTousLesGroupes();
@@ -233,6 +232,8 @@ public class GroupeController {
 				}
 			}
 		}
+		
+		model.addAttribute("utilisateur", uDTO);
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
 		Collections.shuffle(nouvelle);
 		model.addAttribute("tousLesGroupes", nouvelle);
@@ -243,5 +244,20 @@ public class GroupeController {
 		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("inscription", inscription);
 		return new ModelAndView("groupe");
+	}
+	
+	@RequestMapping(value = "/supprimerArticleDuGroupe/{idGroup}/{idArt}", method = RequestMethod.GET)
+	public ModelAndView supprimer(HttpServletRequest request,  @PathVariable String idGroup, @PathVariable String idArt,
+			@ModelAttribute ArticleDTO article, Model model) throws MetierException {
+
+		article.setIdArticle(Integer.parseInt(idArt));
+		try {
+			article = articleService.trouver(article);
+		} catch (MetierException e) {
+			logger.severe("Erreur acces publication POST - ArticleService.trouver renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
+		}
+		articleService.supprimer(article);
+		return new ModelAndView("redirect:/groupe/"+idGroup);
 	}
 }
