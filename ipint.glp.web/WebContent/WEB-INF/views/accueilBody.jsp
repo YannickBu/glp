@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
+
 <script>
 	$(document).ready(function viderForm() {
 		var titre = document.getElementById("titrePubli");

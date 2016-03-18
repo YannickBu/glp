@@ -1,6 +1,7 @@
 package ipint.glp.web.controller;
 
 import java.util.Iterator;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -22,7 +23,8 @@ import ipint.glp.api.itf.UtilisateurService;
 
 @Controller
 public class ConnexionController {
-
+	private Logger logger = Logger.getLogger("ProfilController");
+	
 	public static final String ATTR_CAS = "_const_cas_assertion_";
 	
 	@Inject
@@ -75,6 +77,8 @@ public class ConnexionController {
 
 			try {
 				request.login(utilSeConnectant.getEmail(), utilSeConnectant.getPassword());
+				request.getSession().setAttribute("nomUtil", utilSeConnectant.getNom());
+				request.getSession().setAttribute("prenomUtil", utilSeConnectant.getPrenom());
 			} catch (ServletException e) {
 				return new ModelAndView("redirect:/erreur");
 			}
@@ -85,7 +89,16 @@ public class ConnexionController {
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
 	public ModelAndView loginGet(HttpServletRequest request) {
 		if(request.getUserPrincipal() != null){
-			System.out.println(request.isUserInRole("administrateur")+" "+request.isUserInRole("moderateur")+" "+request.isUserInRole("diplome"));
+			UtilisateurDTO util = new UtilisateurDTO();
+			util.setEmail(request.getUserPrincipal().getName());
+			try {
+				util = utilServ.trouver(util);
+				request.getSession().setAttribute("nomUtil", util.getNom());
+				request.getSession().setAttribute("prenomUtil", util.getPrenom());
+			} catch (MetierException e) {
+				logger.severe("Erreur connexion GET - UtilisateurService.trouver renvoie : " + e.getMessage());
+				return new ModelAndView("redirect:/erreur");
+			}
 			if(request.isUserInRole("administrateur")){
 				return new ModelAndView("redirect:/administration");
 			}else if(request.isUserInRole("moderateur")){

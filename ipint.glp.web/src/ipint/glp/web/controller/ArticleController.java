@@ -114,7 +114,18 @@ public class ArticleController {
 		groupes.add(groupePrincipal);
 
 		articles = as.listerParDate(groupes);
-
+		List<GroupeDTO> tousLesGroupes = gs.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());

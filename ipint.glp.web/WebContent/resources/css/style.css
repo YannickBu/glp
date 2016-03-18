@@ -88,9 +88,24 @@ textarea {
 	background-color: #ffffff;
 }
 
+.blackLink,
+.blackLink:hover {
+	color : #D2691E;
+	font-weight: bold;
+}
+
 .body_without_menu {
 	padding-top: 0;
 }
+
+.btnModifProfif{
+	background-color:#F1F2F1
+}
+
+.btnValidModifProfif{
+	background-color:#FF8C00
+}
+
 
 /* .container-bas,
 h3 {
@@ -118,25 +133,7 @@ h3 {
 	font-weight: bold;
 }
 
-.btnModifProfif{
-	background-color:#F1F2F1
-}
 
-.btnValidModifProfif{
-	background-color:#FF8C00
-}
-
-.hrefBlack{
-	color : Black;
-}
-
-.hrefChocolate{
-	color : DarkGreen;
-}
-
-.titreArt{
-	font-weight: bold;
-}
 .entete-inscrip {
 	width: 100%;
 	background-color: #F1F2F1;
@@ -179,6 +176,15 @@ h3 {
 .img-responsive2 {
 	width: 25px;
 	height: 25px;
+}
+.img-responsive3 {
+	width: 16px;
+	height: 16px;
+	margin-right : 10px
+}
+
+.infoArticle{
+	color : #666666;
 }
 .img-responsive3 {
 	width: 16px;
@@ -328,6 +334,10 @@ h3 {
 .vertical-center-row {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.titreArt{
+	font-weight: bold;
 }
 
 .titreRech{
