@@ -44,8 +44,8 @@ public class GroupeController {
 	ArticleService articleService;
 	@Inject
 	UtilisateurEnAttenteService utilisateurEnAttenteService;
-//	@Inject
-//	UtilisateurService utilisateurS;
+	// @Inject
+	// UtilisateurService utilisateurS;
 
 	// @RequestMapping(value = "/groupe")
 	// public ModelAndView groupeGET() {
@@ -57,15 +57,15 @@ public class GroupeController {
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
-//		UtilisateurDTO u2DTO = new UtilisateurDTO();
-//		u2DTO.setEmail(request.getUserPrincipal().getName());
-//		try {
-//			u2DTO = utilisateurS.trouver(u2DTO);
-//			model.addAttribute("utilisateur", u2DTO);
-//		} catch (MetierException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		// UtilisateurDTO u2DTO = new UtilisateurDTO();
+		// u2DTO.setEmail(request.getUserPrincipal().getName());
+		// try {
+		// u2DTO = utilisateurS.trouver(u2DTO);
+		// model.addAttribute("utilisateur", u2DTO);
+		// } catch (MetierException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -135,15 +135,15 @@ public class GroupeController {
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
 			@ModelAttribute GroupeDTO leGroupe, Model model) {
 		GroupeDTO gDTO = new GroupeDTO();
-//		UtilisateurDTO u2DTO = new UtilisateurDTO();
-//		u2DTO.setEmail(request.getUserPrincipal().getName());
-//		try {
-//			u2DTO = utilisateurS.trouver(u2DTO);
-//			model.addAttribute("utilisateur", u2DTO);
-//		} catch (MetierException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		// UtilisateurDTO u2DTO = new UtilisateurDTO();
+		// u2DTO.setEmail(request.getUserPrincipal().getName());
+		// try {
+		// u2DTO = utilisateurS.trouver(u2DTO);
+		// model.addAttribute("utilisateur", u2DTO);
+		// } catch (MetierException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
 		gDTO.setIdGroupe(Integer.parseInt(id));
 		try {
 			gDTO = groupeService.trouver(gDTO);
@@ -185,15 +185,15 @@ public class GroupeController {
 			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 
 		GroupeDTO gDTO = new GroupeDTO();
-//		UtilisateurDTO u2DTO = new UtilisateurDTO();
-//		u2DTO.setEmail(request.getUserPrincipal().getName());
-//		try {
-//			u2DTO = utilisateurS.trouver(u2DTO);
-//			model.addAttribute("utilisateur", u2DTO);
-//		} catch (MetierException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		// UtilisateurDTO u2DTO = new UtilisateurDTO();
+		// u2DTO.setEmail(request.getUserPrincipal().getName());
+		// try {
+		// u2DTO = utilisateurS.trouver(u2DTO);
+		// model.addAttribute("utilisateur", u2DTO);
+		// } catch (MetierException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
 		gDTO.setIdGroupe(Integer.parseInt(id));
 
 		try {
@@ -253,9 +253,9 @@ public class GroupeController {
 				}
 			}
 		}
-		
+
 		model.addAttribute("utilisateur", uDTO);
-<<<<<<< HEAD
+
 		int typeGroupe = 0;
 		if (gDTO.isGroupeOfficiel()) {
 			typeGroupe = 1;
@@ -263,9 +263,7 @@ public class GroupeController {
 		model.addAttribute("createur", createur);
 		model.addAttribute("typeGroupe", typeGroupe);
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes);
-=======
-		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
->>>>>>> branch 'dev' of https://github.com/YannickBu/glp
+
 		Collections.shuffle(nouvelle);
 		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("leGroupe", gDTO);
@@ -277,9 +275,9 @@ public class GroupeController {
 		System.out.println("typeGroupe : " + typeGroupe);
 		return new ModelAndView("groupe");
 	}
-	
+
 	@RequestMapping(value = "/supprimerArticleDuGroupe/{idGroup}/{idArt}", method = RequestMethod.GET)
-	public ModelAndView supprimer(HttpServletRequest request,  @PathVariable String idGroup, @PathVariable String idArt,
+	public ModelAndView supprimer(HttpServletRequest request, @PathVariable String idGroup, @PathVariable String idArt,
 			@ModelAttribute ArticleDTO article, Model model) throws MetierException {
 
 		article.setIdArticle(Integer.parseInt(idArt));
@@ -290,6 +288,6 @@ public class GroupeController {
 			return new ModelAndView("redirect:/erreur");
 		}
 		articleService.supprimer(article);
-		return new ModelAndView("redirect:/groupe/"+idGroup);
+		return new ModelAndView("redirect:/groupe/" + idGroup);
 	}
 }
