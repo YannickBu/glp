@@ -18,7 +18,7 @@
 									L1nk</li></a>
 						</ul>
 						<ul id="barre-recherche" class="nav navbar-nav navbar-left">
-							<li style="margin-top:1.5%">
+							<li style="margin-top: 1.5%">
 
 								<form
 									action="${pageContext.servletContext.contextPath}/recherche"
@@ -59,6 +59,15 @@
 									<%
 										}
 									%>
+									<%
+								if (request.isUserInRole("diplome") || request.isUserInRole("personnel")) {
+							%>
+									<li data-toggle="tooltip" title="Créer un groupe"><a
+										href="${pageContext.servletContext.contextPath}/creergroupeutilisateur">Créer
+											un groupe</a></li>
+									<%
+								}
+							%>
 									<%
 										if (request.isUserInRole("moderateur")) {
 									%>
