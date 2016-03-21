@@ -1,6 +1,7 @@
 package ipint.glp.web.controller;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -32,7 +33,7 @@ public class ConnexionController {
 	@Inject
 	private GroupeService groupeServ;
 	
-	@RequestMapping(value="/cas", method=RequestMethod.GET)
+	@RequestMapping(value="/cas")
 	public ModelAndView connexionCAS(HttpServletRequest request) {
 		Assertion assertion = (Assertion) request.getSession().getAttribute(ATTR_CAS); 
 		
@@ -50,6 +51,18 @@ public class ConnexionController {
 			try {
 				utilSeConnectant = utilServ.trouver(utilSeConnectant);
 			} catch (UtilisateurInconnuException e) {
+				
+				if(request.getParameter("idGroupePrincipal") == null || "".equals(request.getParameter("idGroupePrincipal"))){
+					List<GroupeDTO> allGroupesOff;
+					try {
+						allGroupesOff = groupeServ.listerParType(true);
+					} catch (MetierException e1) {
+						return new ModelAndView("redirect:/erreur");
+					}
+					request.setAttribute("groupes", allGroupesOff);
+					return new ModelAndView("inscriptionCas");
+				}
+				
 				//1ere connexion depuis le CAS -> on linscrit
 				utilSeConnectant.setNom((String) assertion.getPrincipal().getAttributes().get("sn"));
 				utilSeConnectant.setPrenom((String) assertion.getPrincipal().getAttributes().get("givenname"));
@@ -63,7 +76,7 @@ public class ConnexionController {
 				}
 				//TODO SETTER LE GROUPE PRINCIPAL
 				GroupeDTO gdto = new GroupeDTO();
-				gdto.setIdGroupe(0);
+				gdto.setIdGroupe(Integer.parseInt((String)request.getParameter("idGroupePrincipal")));
 				try {
 					gdto = groupeServ.trouver(gdto);
 					utilSeConnectant.setGroupePrincipal(gdto);

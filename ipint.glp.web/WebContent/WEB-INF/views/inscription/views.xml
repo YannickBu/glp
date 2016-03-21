@@ -6,4 +6,7 @@
 <definition name="inscription" extends="signLayout">
 <put-attribute name="body" value="/WEB-INF/views/inscription/inscription.jsp"></put-attribute>
 </definition>
+<definition name="inscriptionCas" extends="signLayout">
+<put-attribute name="body" value="/WEB-INF/views/inscription/inscriptionCas.jsp"></put-attribute>
+</definition>
 </tiles-definitions>
