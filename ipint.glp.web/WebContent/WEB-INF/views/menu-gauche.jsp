@@ -52,7 +52,7 @@
 							<%
 								if (request.getAttribute("grpPrincipal") != null) {
 							%>
-							<li><img alt="" class="img-responsive3"
+							<li class="nomGroupe"><img alt="" class="img-responsive3"
 								src="${pageContext.servletContext.contextPath}/resources/img/groupeInstitutionnel.png"
 								data-toggle="tooltip" title="Mon groupe principal"><a
 								href="${pageContext.servletContext.contextPath}/groupe/${utilisateur.groupePrincipal.idGroupe}"
@@ -65,10 +65,9 @@
 								<c:choose>
 									<c:when
 										test="${grp.utilisateurResponsable.nom == utilisateur.nom }">
-										<li><img alt="" class="img-responsive3"
+										<li class="nomGroupe"><img alt="" class="img-responsive3"
 											src="${pageContext.servletContext.contextPath}/resources/img/createdByMe.png"
 											data-toggle="tooltip" title="Groupe créé par moi même"><a
-											class="nomGroupe"
 											href="${pageContext.servletContext.contextPath}/groupe/${grp.idGroupe}"
 											data-toggle="tooltip" title="Groupe créé par moi même">${grp.nomGroupe}</a></li>
 									</c:when>
