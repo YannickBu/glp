@@ -295,6 +295,8 @@ public class ProfilController {
 		
 		try {
 			utilisateur = utilisateurService.modifier(uDTO);
+			request.getSession().removeAttribute("nomUtil");
+			request.getSession().removeAttribute("prenomUtil");
 			request.getSession().setAttribute("nomUtil", utilisateur.getNom());
 			request.getSession().setAttribute("prenomUtil", utilisateur.getPrenom());
 		} catch (MetierException e) {

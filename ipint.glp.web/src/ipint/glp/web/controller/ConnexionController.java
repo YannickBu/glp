@@ -90,6 +90,8 @@ public class ConnexionController {
 
 			try {
 				request.login(utilSeConnectant.getEmail(), utilSeConnectant.getPassword());
+				request.getSession().removeAttribute("nomUtil");
+				request.getSession().removeAttribute("prenomUtil");
 				request.getSession().setAttribute("nomUtil", utilSeConnectant.getNom());
 				request.getSession().setAttribute("prenomUtil", utilSeConnectant.getPrenom());
 			} catch (ServletException e) {
@@ -106,6 +108,8 @@ public class ConnexionController {
 			util.setEmail(request.getUserPrincipal().getName());
 			try {
 				util = utilServ.trouver(util);
+				request.getSession().removeAttribute("nomUtil");
+				request.getSession().removeAttribute("prenomUtil");
 				request.getSession().setAttribute("nomUtil", util.getNom());
 				request.getSession().setAttribute("prenomUtil", util.getPrenom());
 			} catch (MetierException e) {
