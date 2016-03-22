@@ -4,7 +4,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
 
 <div class="col-md-6 publication">
 	<div class="container">
