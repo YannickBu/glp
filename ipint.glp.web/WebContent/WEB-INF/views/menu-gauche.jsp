@@ -6,8 +6,6 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2 gauche ">
 		<ul data-spy="affix" class="menu-gauche">
-
-			<%=request.getServletPath()%>
 			<%
 				if (!request.isUserInRole("personnel") && !request.isUserInRole("etudiant")) {
 			%>
@@ -35,18 +33,6 @@
 
 				<div id="panel-element1-${count}" class="panel-collapse collapse">
 					<div class="panel-body">
-	<ul>
-							<%
-								if (request.isUserInRole("diplome") || request.isUserInRole("personnel")) {
-							%>
-							<li data-toggle="tooltip" title="Créer un groupe"><button
-									style="float: right;">
-									<a
-										href="${pageContext.servletContext.contextPath}/creergroupeutilisateur">Créer un groupe</a>
-								</button></li></br>
-							<%
-								}
-							%></ul>
 					
 							<ul>
 							<%
@@ -84,9 +70,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- 			</li> -->
-		</ul>
-		<ul>
 			<%
 				if (request.isUserInRole("moderateur")) {
 			%>
@@ -104,5 +87,6 @@
 				}
 			%>
 		</ul>
+		
 
 	</div>
