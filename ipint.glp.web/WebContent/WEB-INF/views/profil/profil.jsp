@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="ipint.glp.api.DTO.UtilisateurDTO"%>
 
 <div class="col-md-6 publication">
 	<div class="container">
@@ -64,7 +65,9 @@
 													</div>
 												</c:if>
 												<ul>
-													<li class="nomEtu"><c:choose>
+													<li class="nomEtu">
+														<% if(request.getAttribute("id")==null){ %>
+														<c:choose>
 															<c:when
 																test="${art.utilisateur.idUtilisateur == utilisateur.idUtilisateur}">
 																<a
@@ -74,7 +77,12 @@
 																<a
 																	href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
 															</c:otherwise>
-														</c:choose> via <a
+														</c:choose>
+														<% } else {%>
+																<a
+																	href="${pageContext.servletContext.contextPath}/profil/${art.utilisateur.idUtilisateur}">${art.utilisateur.prenom}&nbsp;${art.utilisateur.nom}</a>
+														<% } %>
+														 via <a
 														href="${pageContext.servletContext.contextPath}/groupe/${art.groupe.idGroupe}">
 															${art.groupe.nomGroupe} </a> - <fmt:formatDate type="both"
 															dateStyle="short" timeStyle="short"
