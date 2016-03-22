@@ -129,7 +129,7 @@ public class ArticleController {
 		model.addAttribute("articles", articles);
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("groupePrincipal", articleDto.getGroupe());
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("accueil");
 	}
 
 	@RequestMapping(value = "/supprimerArticleDuFilDactualite/{id}", method = RequestMethod.GET)
@@ -144,7 +144,7 @@ public class ArticleController {
 			return new ModelAndView("redirect:/erreur");
 		}
 		as.supprimer(article);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/publication");
 	}
 	
 

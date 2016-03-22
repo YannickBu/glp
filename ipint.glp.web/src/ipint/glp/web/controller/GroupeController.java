@@ -226,7 +226,7 @@ public class GroupeController {
 		if (uDTO.getGroupePrincipal().getIdGroupe() == gDTO.getIdGroupe()) {
 			inscription = 3;
 		}
-		if (!gDTO.isGroupeOfficiel()
+		if ((!gDTO.isGroupeOfficiel())
 				&& uDTO.getIdUtilisateur() == gDTO.getUtilisateurResponsable().getIdUtilisateur()) {
 			createur = 1;
 		}
