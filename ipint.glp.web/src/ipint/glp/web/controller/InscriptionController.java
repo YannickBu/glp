@@ -52,7 +52,6 @@ public class InscriptionController extends GeneralController {
 	public ModelAndView InscriptionPost(@Valid @ModelAttribute("utilisateurTmp") UtilisateurEnAttenteDTO utilisateurTmp,
 			BindingResult result, @ModelAttribute("groupes") GroupeDTO groupe, Model model) {
 		
-
 		
 		if(result.hasErrors()){
 			try {
@@ -63,7 +62,6 @@ public class InscriptionController extends GeneralController {
 			}
 			return new ModelAndView("inscription");
 		}
-		
 		UtilisateurEnAttenteDTO ueaDTO = new UtilisateurEnAttenteDTO();
 		GroupeDTO groupeDTO = new GroupeDTO();
 		groupeDTO.setIdGroupe(utilisateurTmp.getGroupePrincipal().getIdGroupe());
