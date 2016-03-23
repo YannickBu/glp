@@ -74,9 +74,10 @@ public class ProfilController {
 		}
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
 		Collections.shuffle(nouvelle);
+		uDTO.getGroupes().remove(uDTO.getGroupePrincipal());
 		model.addAttribute("tousLesGroupes", nouvelle);		
-		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
+		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
 
@@ -110,7 +111,6 @@ public class ProfilController {
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
 		Collections.shuffle(nouvelle);
 		model.addAttribute("tousLesGroupes", nouvelle);
-		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		model.addAttribute("profil", uDTO.getProfil());
 		model.addAttribute("articles", uDTO.getArticles());
@@ -169,8 +169,9 @@ public class ProfilController {
 
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
 		Collections.shuffle(nouvelle);
+		uDTO.getGroupes().remove(uDTO.getGroupePrincipal());
+		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
 		model.addAttribute("tousLesGroupes", nouvelle);
-		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("utilisateur", uDTO);
 		return new ModelAndView("modifprofil", "utilisateur", uDTO);
 	}

@@ -1,9 +1,7 @@
 package ipint.glp.web.controller;
 
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -265,12 +263,13 @@ public class GroupeController {
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes);
 
 		Collections.shuffle(nouvelle);
+		uDTO.getGroupes().remove(uDTO.getGroupePrincipal());
+		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
 		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("leGroupe", gDTO);
 		model.addAttribute("animateursGroupe", animateursGroupe);
 		model.addAttribute("membresGroupe", membresGroupe);
 		model.addAttribute("articlesGroupe", articlesGroupe);
-		model.addAttribute("grpPrincipal", uDTO.getGroupePrincipal());
 		model.addAttribute("inscription", inscription);
 		System.out.println("typeGroupe : " + typeGroupe);
 		return new ModelAndView("groupe");

@@ -8,7 +8,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog">p
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header alert-white">
@@ -55,7 +55,7 @@
 <!-- Icone groupe officiel : glyphicon glyphicon-education -->
 <!-- Icone animateur groupe : glyphicon glyphicon-flag  -->
 <span id="hiddenResponse" style="display: none">${createdGroupe}</span>
-<div class="col-md-6 publication">
+<div class="col-md-6 publication accueilBody">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -116,6 +116,7 @@
 															dateStyle="short" timeStyle="short"
 															value="${art.datePublication.time}" />
 													<li class="titreArt" style="margin-top: 1%;">${art.titre}</li>
+													<li style="margin-top: 1%;">${art.contenu}</li>
 
 												</ul>
 											</div>
