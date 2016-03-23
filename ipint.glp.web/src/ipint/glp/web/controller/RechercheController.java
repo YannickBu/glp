@@ -63,6 +63,7 @@ public class RechercheController {
 		}
 		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
 		Collections.shuffle(nouvelle);
+		uDTO.getGroupes().remove(uDTO.getGroupePrincipal());
 		model.addAttribute("tousLesGroupes", nouvelle);
 		model.addAttribute("groupes", groupes);
 		model.addAttribute("utilisateurs", utilisateurs);

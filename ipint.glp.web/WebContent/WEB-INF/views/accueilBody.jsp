@@ -52,6 +52,7 @@
 								<form:options items="${utilisateur.groupes}"
 									itemValue="idGroupe" itemLabel="nomGroupe"></form:options>
 								<%-- 								</c:forEach> --%>
+								<form:option value="${utilisateur.groupePrincipal.idGroupe}">${utilisateur.groupePrincipal.nomGroupe}</form:option>
 							</form:select>
 						</div>
 					</div>

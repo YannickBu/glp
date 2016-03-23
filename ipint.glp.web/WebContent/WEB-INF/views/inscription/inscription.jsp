@@ -110,7 +110,6 @@
 				<div class="input col-md-4">
 					<form:select path="groupePrincipal.idGroupe" name="groupe"
 						id="selectFormation" class="form-control">
-						<form:option value="0"> -- Choissez un groupe --</form:option>
 						<c:forEach var="groupe" items="${groupes}">
 							<form:option value="${groupe.idGroupe}">${groupe.nomGroupe}</form:option>
 						</c:forEach>
