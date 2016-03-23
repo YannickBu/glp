@@ -44,7 +44,12 @@ CREATE TABLE `ARTICLE` (
 
 LOCK TABLES `ARTICLE` WRITE;
 /*!40000 ALTER TABLE `ARTICLE` DISABLE KEYS */;
-INSERT INTO `ARTICLE` VALUES (101,'Moi j\'ai une attitude sport ! ','2016-02-03 14:09:35',0,54,NULL),(102,'J\'ai eu mon diplome ! :)','2016-02-03 14:10:51',0,4,NULL),(111,'Salut tout le monde !','2016-02-03 14:16:34',1,110,NULL),(116,'Je reviendrais !','2016-02-03 14:18:59',1,115,NULL),(121,'Vivement les vacs ! ;)','2016-02-03 14:25:14',2,120,NULL),(122,'J\'adore ce site ! <3','2016-02-03 14:27:17',2,106,NULL);
+/*INSERT INTO `ARTICLE` VALUES (101,'Moi j\'ai une attitude sport ! ','2016-02-03 14:09:35',0,54,NULL),
+(102,'J\'ai eu mon diplome ! :)','2016-02-03 14:10:51',0,4,NULL),
+(111,'Salut tout le monde !','2016-02-03 14:16:34',1,110,NULL),
+(116,'Je reviendrais !','2016-02-03 14:18:59',1,115,NULL),
+(121,'Vivement les vacs ! ;)','2016-02-03 14:25:14',2,120,NULL),
+(122,'Ce site est classe ! <3','2016-02-03 14:27:17',2,106,NULL);*/
 /*!40000 ALTER TABLE `ARTICLE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +141,8 @@ CREATE TABLE `EXPERIENCE` (
 
 LOCK TABLES `EXPERIENCE` WRITE;
 /*!40000 ALTER TABLE `EXPERIENCE` DISABLE KEYS */;
-INSERT INTO `EXPERIENCE` VALUES (125,2015,2015,'Automatisation de tests','CGI','Lille','France','Stagiaire','Nord-Pas de Calais-Picardie',2);
+INSERT INTO `EXPERIENCE` VALUES
+(125,2015,2015,'Automatisation de tests','CGI','Lille','France','Stagiaire','Nord-Pas de Calais-Picardie',2);
 /*!40000 ALTER TABLE `EXPERIENCE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +172,27 @@ CREATE TABLE `GROUPE` (
 
 LOCK TABLES `GROUPE` WRITE;
 /*!40000 ALTER TABLE `GROUPE` DISABLE KEYS */;
-INSERT INTO `GROUPE` VALUES (0,'Groupe des Sciences, Technologies, Santé','Sciences, Technologies, Santé',NULL,0),(1,'Groupe des Droit, Economie, Gestion','Droit, Economie, Gestion',NULL,0),(2,'Groupe des Sciences Humaines et Sociales','Sciences Humaines et Sociales',NULL,0),(251,'Groupe institutionnel de géométrie','Géométrie',54,1),(301,'Groupe officiel de l\'Algébrique','Algébrique',54,1),(351,'Groupe des pandas','Bambou',54,1),(401,'English Groupe','Anglais',4,1),(451,'por favor','Espanol',54,1),(453,'Arbeit','Allemand',4,1),(501,'Ni ao !','Chinois',4,1),(502,'Guerre !','Vietnamien',54,1),(551,'Yamété','Japonais',4,1),(601,'Sacrebleu','Français',4,1),(651,'E = mc2','Physique',4,1),(701,'DSK','Economie',4,1),(751,'H20','Chimie',4,1),(801,'SoS :x','Sociologie',4,1),(851,'Psykowak','Psychologie',4,1),(901,'Litté quoi ?','Littérature',4,1),(951,'Apéro','Cacahuète',4,1);
+INSERT INTO `GROUPE` VALUES
+(0,'Le groupe officiel des Miagistes','Master MIAGE',140,1),
+(1,'Le groupe officiel du Master IAGL','Master IAGL',140,1),
+(2,'Le groupe officiel du Master E-Service','Master E-Service',140,1),
+(251,'Le groupe officiel du Master TIIR','Master TIIR',140,1),
+(301,'Le groupe officiel du Master MOCAD','Master MOCAD',140,1),
+(351,'Le groupe officiel du Master IVI','Master IVI',140,1),
+(401,'Le groupe officiel du Master Finance','Master Finance',140,1),
+(451,'Le groupe officiel du Master Comptabilité, contrôle, audit','Master Comptabilité',140,1),
+(453,'Le groupe officiel du DUT Informatique','DUT Informatique',140,1),
+(501,'Le groupe officiel du DUT Mesures Physiques','DUT Mesures Physiques',140,1),
+(502,'Le groupe officiel du DUT Génie Biologique','DUT Génie Biologique',143,1),
+(551,'Le groupe officiel de la licence Informatique de Lille 1','Licence Informatique',143,1),
+(601,'Le groupe officiel de la licence DA2I','Licence DA2I',143,1),
+(651,'Le groupe officiel de la licence IRI','Licence IRI',143,1),
+(701,'Le groupe officiel de la licence CGIR','Licence CGIR',143,1),
+(751,'Le groupe officiel de la licence ACE','Licence ACE',143,1),
+(801,'Le groupe officiel de la licence ECPI','Licence ECPI',143,1),
+(851,'Le groupe officiel de la licence I-Pack','Licence I-Pack',143,1),
+(901,'Le groupe officiel de la licence ICM','Licence ICM',143,1),
+(951,'Le groupe officiel de la licence MTG','Licence MTG',143,1);
 /*!40000 ALTER TABLE `GROUPE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +219,47 @@ CREATE TABLE `GROUPEANIME_ANIMATEUR` (
 
 LOCK TABLES `GROUPEANIME_ANIMATEUR` WRITE;
 /*!40000 ALTER TABLE `GROUPEANIME_ANIMATEUR` DISABLE KEYS */;
-INSERT INTO `GROUPEANIME_ANIMATEUR` VALUES (54,205),(54,206),(54,207),(54,251),(54,301),(54,351),(54,401),(4,451),(54,453),(4,501),(54,502),(4,551),(54,601),(54,651),(4,701),(4,751),(4,801),(54,801),(4,851),(54,901),(54,951);
+INSERT INTO `GROUPEANIME_ANIMATEUR` VALUES
+(146,0),
+(148,0),
+(150,0),
+(146,1),
+(149,1),
+(150,1),
+(146,2),
+(147,2),
+(150,2),
+(146,251),
+(150,251),
+(146,301),
+(152,301),
+(146,351),
+(153,351),
+(146,401),
+(154,401),
+(146,451),
+(155,451),
+(146,453),
+(152,453),
+(146,501),
+(151,501),
+(146,502),
+(147,502),
+(146,551),
+(148,551),
+(146,601),
+(149,601),
+(146,651),
+(153,651),
+(146,701),
+(155,701),
+(146,751),
+(153,751),
+(146,851),
+(151,851),
+(146,901),
+(150,901),
+(146,951);
 /*!40000 ALTER TABLE `GROUPEANIME_ANIMATEUR` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,9 +285,47 @@ CREATE TABLE `GROUPE_UTILISATEUR` (
 --
 
 LOCK TABLES `GROUPE_UTILISATEUR` WRITE;
-/*!40000 ALTER TABLE `GROUPE_UTILISATEUR` DISABLE KEYS */;
-INSERT INTO `GROUPE_UTILISATEUR` VALUES (4,1);
-/*!40000 ALTER TABLE `GROUPE_UTILISATEUR` ENABLE KEYS */;
+INSERT INTO `GROUPE_UTILISATEUR` VALUES
+(146,0),
+(148,0),
+(150,0),
+(146,1),
+(149,1),
+(150,1),
+(146,2),
+(147,2),
+(150,2),
+(146,251),
+(150,251),
+(146,301),
+(152,301),
+(146,351),
+(153,351),
+(146,401),
+(154,401),
+(146,451),
+(155,451),
+(146,453),
+(152,453),
+(146,501),
+(151,501),
+(146,502),
+(147,502),
+(146,551),
+(148,551),
+(146,601),
+(149,601),
+(146,651),
+(153,651),
+(146,701),
+(155,701),
+(146,751),
+(153,751),
+(146,851),
+(151,851),
+(146,901),
+(150,901),
+(146,951);
 UNLOCK TABLES;
 
 --
@@ -249,7 +353,27 @@ CREATE TABLE `PROFIL` (
 
 LOCK TABLES `PROFIL` WRITE;
 /*!40000 ALTER TABLE `PROFIL` DISABLE KEYS */;
-INSERT INTO `PROFIL` VALUES (2,2016,'Emeu','MASTER MIAGE','une pomme !','Stagiaire a CGI','0623686545'),(52,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),(104,2000,'','Master Sociologie','Me faire des contacts','Chomeur',''),(108,2014,NULL,'Licence de droit',NULL,'Nouvel arrivant',NULL),(113,1990,'','Master de droit','','Annee sabbatique',''),(118,1992,'','Licence de psychologie','','Nouvel arrivant',''),(129,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),(132,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),(135,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL);
+INSERT INTO `PROFIL` VALUES (2,2016,'Emeu','MASTER MIAGE','une pomme !','Stagiaire a CGI','0623686545'),
+(52,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),
+(104,2000,'','Master Sociologie','Me faire des contacts','Chomeur',''),
+(108,2014,NULL,'Licence de droit',NULL,'Nouvel arrivant',NULL),
+(113,1990,'','Master de droit','','Annee sabbatique',''),
+(118,1992,'','Licence de psychologie','','Nouvel arrivant',''),
+(129,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),
+(132,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),
+(135,2016,NULL,'MASTER MIAGE',NULL,'Nouvel arrivant',NULL),
+(138,0,NULL,NULL,NULL,NULL,NULL),
+(141,0,NULL,NULL,NULL,NULL,NULL),
+(144,0,NULL,NULL,NULL,NULL,NULL),
+(145,0,NULL,NULL,NULL,NULL,NULL),
+(146,0,NULL,NULL,NULL,NULL,NULL),
+(147,0,NULL,NULL,NULL,NULL,NULL),
+(148,0,NULL,NULL,NULL,NULL,NULL),
+(149,0,NULL,NULL,NULL,NULL,NULL),
+(150,0,NULL,NULL,NULL,NULL,NULL),
+(151,0,NULL,NULL,NULL,NULL,NULL),
+(152,0,NULL,NULL,NULL,NULL,NULL),
+(153,0,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `PROFIL` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +432,29 @@ CREATE TABLE `UTILISATEUR` (
 
 LOCK TABLES `UTILISATEUR` WRITE;
 /*!40000 ALTER TABLE `UTILISATEUR` DISABLE KEYS */;
-INSERT INTO `UTILISATEUR` VALUES (4,'rodolphe.declerck@gmail.com','Declerck','pwd','Rodolphe',0,0,2),(54,'pl.hequet@gmail.com','Hecquet','pwd','Pierre-Louis',0,0,52),(106,'jean-kevin.mouloude@gmail.com','Mouloude','pwd','Jean-Kevin',0,2,104),(110,'jean.jean@gmail.com','Jean','pwd','Jean',0,1,108),(115,'paul.bismute@gmail.com','Bismute','pwd','Paul',0,1,113),(120,'john.doe@gmail.com','Doe','pwd','John',0,2,118),(131,'manon.barrois1@gmail.com','Barrois','pwd','Manon',0,0,129),(134,'mima.diagne@gmail.com','Diagne','pwd','Mame',0,0,132),(137,'yannick.buchart@gmail.com','Buchart','pwd','Yannick',0,0,135);
+INSERT INTO `UTILISATEUR` VALUES
+(4,'rodolphe.declerck@gmail.com','Declerck','pwd','Rodolphe',0,0,2),
+(54,'pl.hequet@gmail.com','Hecquet','pwd','Pierre-Louis',0,0,52),
+(106,'jean-kevin.mouloude@gmail.com','Mouloude','pwd','Jean-Kevin',0,2,104),
+(110,'jean.jean@gmail.com','Jean','pwd','Jean',0,1,108),
+(115,'paul.bismute@gmail.com','Bismute','pwd','Paul',0,1,113),
+(120,'john.doe@gmail.com','Doe','pwd','John',0,2,118),
+(131,'manon.barrois1@gmail.com','Barrois','pwd','Manon',0,0,129),
+(134,'mima.diagne@gmail.com','Diagne','pwd','Mame',0,0,132),
+(137,'gamerpw@hotmail.fr','Lamotte','pwd','Roger',0,0,135),
+(140,'Mireille.Clerbout@univ-lille1.fr','Clerbout','pwd','Mireille',1,0,138),
+(143,'Anne-Cecile.Caron@univ-lille1.fr','Caron','pwd','Anne-Cecile',1,0,141),
+(146,'Arnaud.Liefooghe@univ-lille1.fr','Liefooghe','pwd','Arnaud',1,0,144),
+(148,'Francis.Bossut@univ-lille1.fr','Bossut','pwd','Francis',1,0,145),
+(149,'Cedric.Dumoulin@univ-lille1.fr','Dumoulin','pwd','Cedric',1,0,146),
+(150,'Bruno.Mahiddine@univ-lille1.fr','Mahiddine','pwd','Bruno',1,0,147),
+(151,'Aline.Peers@univ-lille1.fr','Peers','pwd','Aline',1,0,148),
+(152,'Jean-Marie.Lebbe@univ-lille1.fr','Lebbe','pwd','Jean-Marie',1,0,149),
+(153,'Alexandre.Sedoglavic@univ-lille1.fr','Sedoglavic','pwd','Alexandre',1,0,150),
+(154,'Giuseppe.Lipari@univ-lille1.fr','Lipari','pwd','Giuseppe',1,0,151),
+(155,'Damien.Cassou@univ-lille1.fr','Cassou','pwd','Damien',1,0,152),
+(156,'Marie-Emilie.Voge@univ-lille1.fr','Voge','pwd','Marie-Emilie',1,0,153)
+;
 /*!40000 ALTER TABLE `UTILISATEUR` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,7 +510,35 @@ CREATE TABLE `UTILISATEURGROUPES` (
 
 LOCK TABLES `UTILISATEURGROUPES` WRITE;
 /*!40000 ALTER TABLE `UTILISATEURGROUPES` DISABLE KEYS */;
-INSERT INTO `UTILISATEURGROUPES` VALUES (3,'rodolphe.declerck@gmail.com','personnel'),(4,'rodolphe.declerck@gmail.com','administrateur'),(5,'rodolphe.declerck@gmail.com','moderateur'),(53,'pl.hequet@gmail.com','personnel'),(63,'test1@l1nk.com','personnel'),(105,'jean-kevin.mouloude@gmail.com','diplome'),(109,'jean.jean@gmail.com','diplome'),(114,'paul.bismute@gmail.com','diplome'),(119,'john.doe@gmail.com','diplome'),(130,'manon.barrois1@gmail.com','diplome'),(133,'mima.diagne@gmail.com','diplome'),(136,'yannick.buchart@gmail.com','diplome'),(452,'pl.hequet@gmail.com','moderateur'),(454,'rodolphe.declerck@gmail.com','moderateur');
+INSERT INTO `UTILISATEURGROUPES` VALUES (3,'rodolphe.declerck@gmail.com','personnel'),
+(4,'rodolphe.declerck@gmail.com','administrateur'),
+(5,'rodolphe.declerck@gmail.com','moderateur'),
+(53,'pl.hequet@gmail.com','personnel'),
+(63,'test1@l1nk.com','personnel'),
+(105,'jean-kevin.mouloude@gmail.com','diplome'),
+(109,'jean.jean@gmail.com','diplome'),
+(114,'paul.bismute@gmail.com','diplome'),
+(119,'john.doe@gmail.com','diplome'),
+(130,'manon.barrois1@gmail.com','diplome'),
+(133,'mima.diagne@gmail.com','diplome'),
+(136,'gamerpw@hotmail.fr','diplome'),
+(452,'pl.hequet@gmail.com','moderateur'),
+(454,'rodolphe.declerck@gmail.com','moderateur'),
+(456,'Mireille.Clerbout@univ-lille1.fr','administrateur'),
+(462,'Mireille.Clerbout@univ-lille1.fr','moderateur'),
+(464,'Mireille.Clerbout@univ-lille1.fr','personnel'),
+(458,'Anne-Cecile.Caron@univ-lille1.fr','moderateur'),
+(466,'Anne-Cecile.Caron@univ-lille1.fr','personnel'),
+(460,'Arnaud.Liefooghe@univ-lille1.fr','personnel'),
+(467,'Francis.Bossut@univ-lille1.fr','personnel'),
+(468,'Cedric.Dumoulin@univ-lille1.fr','personnel'),
+(469,'Bruno.Mahiddine@univ-lille1.fr','personnel'),
+(470,'Aline.Peers@univ-lille1.fr','personnel'),
+(471,'Jean-Marie.Lebbe@univ-lille1.fr','personnel'),
+(472,'Alexandre.Sedoglavic@univ-lille1.fr','personnel'),
+(473,'Giuseppe.Lipari@univ-lille1.fr','personnel'),
+(474,'Damien.Cassou@univ-lille1.fr','personnel'),
+(475,'Marie-Emilie.Voge@univ-lille1.fr','personnel');
 /*!40000 ALTER TABLE `UTILISATEURGROUPES` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,4 +589,3 @@ LOCK TABLES `REGION` WRITE;
 INSERT INTO `REGION` VALUES ('??rnak','TR'),('?anl?urfa','TR'),('?l?skie','PL'),('?ódzkie','PL'),('?stanbul','TR'),('?wi?tokrzyskie','PL'),('?zmir','TR'),('A?r?','TR'),('Aargau','CH'),('Abia','WAN'),('Abruzzo','I'),('Abuja','WAN'),('Aceh','RI'),('Acre','BR'),('Ad?yaman','TR'),('Adamaoua','CAM'),('Adamawa','WAN'),('Adana','TR'),('Addis Ababa','ETH'),('Adrar','RIM'),('Adygeya','R'),('Affar','ETH'),('Afghanistan','AFG'),('Afyonkarahisar','TR'),('Agadez','RN'),('Aghion Oros','GR'),('Agnéby','CI'),('Aguascalientes','MEX'),('Aichi','J'),('Akershus','N'),('Akhal','TM'),('Akita','J'),('Akmola','KAZ'),('Aksaray','TR'),('Aktobe','KAZ'),('Akwa Ibom','WAN'),('Al Hasakah','SYR'),('Al Ladhiqiyah','SYR'),('Al Qunaytirah','SYR'),('al-Anbar','IRQ'),('Al-Baha','SA'),('Al-Hudud ash Shamaliyah','SA'),('Al-Jouf','SA'),('Al-Madinah Al-Monawarah','SA'),('al-Muthanna','IRQ'),('al-Najaf','IRQ'),('al-Qadisiya','IRQ'),('Al-Qaseem','SA'),('Al-Riyadh','SA'),('Alabama','USA'),('Alagoas','BR'),('Alajuela','CR'),('Aland','SF'),('Alaska','USA'),('Alba','RO'),('Albania','AL'),('Alberta','CDN'),('Alborz','IR'),('Algarve','P'),('Algeria','DZ'),('Almaty','KAZ'),('Almaty City','KAZ'),('Alsace','F'),('Altay','R'),('Altayskiy','R'),('Amapá','BR'),('Amasya','TR'),('Amazonas','BR'),('Amazonas','CO'),('Amazonas','PE'),('Amazonas','YV'),('American Samoa','AMSA'),('Amhara','ETH'),('Amur','R'),('Anambra','WAN'),('Anatolikis Makedonias kai Thrakis','GR'),('Ancash','PE'),('Andalucía','E'),('Andaman and Nicobar Islands','IND'),('Andhra Pradesh','IND'),('Andijon','UZB'),('Andorra','AND'),('Anguilla','AXA'),('Anhui','CN'),('Ankara','TR'),('Antalya','TR'),('Antigua and Barbuda','AG'),('Antioquia','CO'),('Antofagasta','RCH'),('Antwerpen','B'),('Anzoátegui','YV'),('Aomori','J'),('Appenzell Ausserrhoden','CH'),('Appenzell Innerrhoden','CH'),('Apure','YV'),('Apurímac','PE'),('Aquitaine','F'),('Ar Raqqah','SYR'),('Arad','RO'),('Aragón','E'),('Aragua','YV'),('Arauca','CO'),('Araucanía','RCH'),('Ardahan','TR'),('Ardebil','IR'),('Arequipa','PE'),('Arge?','RO'),('Arica y Parinacota','RCH'),('Arizona','USA'),('Arkansas','USA'),('Arkhangel´skaya','R'),('Armenia','ARM'),('Artemisa','C'),('Artvin','TR'),('Aruba','ARU'),('Arunachal Pradesh','IND'),('Arusha','EAT'),('As Sulaymaniyah','IRQ'),('As Suwayda\'','SYR'),('Aseer','SA'),('Ash Sharqiyah','SA'),('Ashanti','GH'),('Ashgabat','TM'),('Assaba','RIM'),('Assam','IND'),('Astana','KAZ'),('Astrakhanskaya','R'),('Asturias','E'),('Atacama','RCH'),('Atlántico','CO'),('Atlántida','HCA'),('Attikis','GR'),('Atyrau','KAZ'),('Aust-Agder','N'),('Australia Capital Territory','AUS'),('Auvergne','F'),('Aveiro','P'),('Ayacucho','PE'),('Ayd?n','TR'),('Ayeyarwady','MYA'),('Aysén','RCH'),('Azad Jammu and Kashmir','PK'),('Azerbaijan','AZ'),('Azores','P'),('Babylon','IRQ'),('Bac?u','RO'),('Bács-Kiskun','H'),('Baden-Württemberg','D'),('Bafing','CI'),('Baghdad','IRQ'),('Bago','MYA'),('Bahamas','BS'),('Bahia','BR'),('Bahrain','BRN'),('Baikonur','KAZ'),('Baja California','MEX'),('Baja California Sur','MEX'),('Bal?kesir','TR'),('Bali','RI'),('Balkan','TM'),('Balochistan','PK'),('Bamako','RMM'),('Bandundu','ZRE'),('Banskobystrický','SK'),('Banten','RI'),('Baranya','H'),('Barbados','BDS'),('Barinas','YV'),('Barisal','BD'),('Bart?n','TR'),('Bas-Congo','ZRE'),('Bas-Sassandra','CI'),('Basel-Landschaft','CH'),('Basel-Stadt','CH'),('Bashkortostan','R'),('Basilicata','I'),('Basrah','IRQ'),('Basse Normandie','F'),('Batman','TR'),('Bauchi','WAN'),('Bayburt','TR'),('Bayelsa','WAN'),('Bayern','D'),('Beijing','CN'),('Beja','P'),('Békés','H'),('Belgorodskaya','R'),('Belize','BZ'),('Bengkulu','RI'),('Bengo','ANG'),('Benguela','ANG'),('Beni','BOL'),('Benin','BEN'),('Benishangul-Gumuz','ETH'),('Benue','WAN'),('Berlin','D'),('Bermuda','BERM'),('Bern','CH'),('Bhutan','BHT'),('Bicol','RP'),('Bié','ANG'),('Bihar','IND'),('Bihor','RO'),('Bilecik','TR'),('Bingöl','TR'),('Bío-Bío','RCH'),('Bistri?a-N?s?ud','RO'),('Bitlis','TR'),('Blekinge','S'),('Bocas del Toro','PA'),('Bolívar','CO'),('Bolívar','YV'),('Bolu','TR'),('Boreioy Aigaioy','GR'),('Borno','WAN'),('Borsod-Abaúj-Zemplén','H'),('Boto?ani','RO'),('Botswana','RB'),('Bouenza','RCB'),('Bourgogne','F'),('Boyacá','CO'),('Br?ila','RO'),('Br?ko','BIH'),('Bra?ov','RO'),('Brabant Wallon','B'),('Braga','P'),('Braganca','P'),('Brakna','RIM'),('Brandenburg','D'),('Bratislavský','SK'),('Brazzaville','RCB'),('Bremen','D'),('Brest','BY'),('Bretagne','F'),('British Columbia','CDN'),('British Virgin Islands','BVIR'),('Brong Ahafo','GH'),('Brunei','BRU'),('Bruxelles','B'),('Bryanskaya','R'),('Bucure?ti','RO'),('Budapest','H'),('Buenos Aires','RA'),('Bulgaria','BG'),('Burdur','TR'),('Burgenland','A'),('Burkina Faso','BF'),('Bursa','TR'),('Burundi','BI'),('Buryat','R'),('Bushehr','IR'),('Buskerud','N'),('Buxoro','UZB'),('Buz?u','RO'),('C?l?ra?i','RO'),('Cabinda','ANG'),('Cabo Delgado','MOC'),('Cagayan Valley','RP'),('Cajamarca','PE'),('Calabarzon','RP'),('Calabria','I'),('Caldas','CO'),('California','USA'),('Callao','PE'),('Camagüey','C'),('Cambodia','K'),('Campania','I'),('Campeche','MEX'),('Çanakkale','TR'),('Canarias','E'),('Çank?r?','TR'),('Cantabria','E'),('Cape Verde','CV'),('Caquetá','CO'),('Cara?-Severin','RO'),('Carabobo','YV'),('Caraga','RP'),('Cartago','CR'),('Casanare','CO'),('Castelo Branco','P'),('Castilla y León','E'),('Castilla-La Mancha','E'),('Cataluña','E'),('Catamarca','RA'),('Cauca','CO'),('Cayman Islands','CAYM'),('Ceará','BR'),('Central','GH'),('Central','Z'),('Central African Republic','RCA'),('Central Luzon','RP'),('Central Visayas','RP'),('Centre','CAM'),('Centre','F'),('Cesar','CO'),('Ceuta','CEU'),('Chaco','RA'),('Chad','TCH'),('Chaharmahal and Bakhtiyari','IR'),('Champagne-Ardenne','F'),('Chandigarh','IND'),('Chaouia Ouardigha','MA'),('Chechenskaya','R'),('Chelyabinsk','R'),('Cherkas´ka','UA'),('Chernihivs´ka','UA'),('Chernivets´ka','UA'),('Chhattisgarh','IND'),('Chiapas','MEX'),('Chiba','J'),('Chihuahua','MEX'),('Chin','MYA'),('Chiriquí','PA'),('Chittagong','BD'),('Chocó','CO'),('Choluteca','HCA'),('Chongqing','CN'),('Christmas Island','XMAS'),('Chubut','RA'),('Chukotka','R'),('Chuquisaca','BOL'),('Chuvash','R'),('Cidade de Maputo','MOC'),('Ciego de Ávila','C'),('Cienfuegos','C'),('Cluj','RO'),('Coahuila','MEX'),('Cochabamba','BOL'),('Coclé','PA'),('Cocos Islands','COCO'),('Coimbra','P'),('Cojedes','YV'),('Colima','MEX'),('Colón','HCA'),('Colón','PA'),('Colorado','USA'),('Comayagua','HCA'),('Comoros','COM'),('Connecticut','USA'),('Constan?a','RO'),('Continental','GQ'),('Cook Islands','COOK'),('Copán','HCA'),('Copperbelt','Z'),('Coquimbo','RCH'),('Cordillera','RP'),('Córdoba','CO'),('Córdoba','RA'),('Corrientes','RA'),('Corse','F'),('Cortés','HCA'),('Çorum','TR'),('Covasna','RO'),('Croatia','HR'),('Cross River','WAN'),('Csongrád','H'),('Cuando Cubango','ANG'),('Cuanza Norte','ANG'),('Cuanza Sul','ANG'),('Cundinamarca','CO'),('Cunene','ANG'),('Curacao','CUR'),('Cusco','PE'),('Cuvette','RCB'),('Cuvette-Ouest','RCB'),('Cyprus','CY'),('Dadra and Nagar Haveli','IND'),('Dagestan','R'),('Dakar','SN'),('Dakhlet Nouadhibou','RIM'),('Dalarna','S'),('Daman and Diu','IND'),('Dâmbovi?a','RO'),('Dar es Salaam','EAT'),('Darién','PA'),('Dar`a','SYR'),('Dashhowuz','TM'),('Davao','RP'),('Dayr az Zawr','SYR'),('Delaware','USA'),('Delhi','IND'),('Delta','WAN'),('Delta Amacuro','YV'),('Denguélé','CI'),('Denizli','TR'),('Dhaka','BD'),('DI Yogyakarta','RI'),('Diala','IRQ'),('Diffa','RN'),('Dimashq','SYR'),('Diourbel','SN'),('Dire Dawa','ETH'),('District of Columbia','USA'),('Distrito Federal','BR'),('Distrito Federal','MEX'),('Distrito Federal','RA'),('Distrito Federal','YV'),('Diyarbak?r','TR'),('Djibouti','DJI'),('DKI Jakarta','RI'),('Dnipropetrovs´ka','UA'),('Dodoma','EAT'),('Dolj','RO'),('Dolno?l?skie','PL'),('Dominica','WD'),('Dominican Republic','DOM'),('Donets´ka','UA'),('Dosso','RN'),('Doukala Abda','MA'),('Drenthe','NL'),('Duhouk','IRQ'),('Durango','MEX'),('Dushanbe','TAD'),('Dytikis Elladas','GR'),('Dytikis Makedonias','GR'),('Düzce','TR'),('East Azarbayejan','IR'),('East Midlands','GB'),('East of England','GB'),('East-Kazakhstan','KAZ'),('Eastern','GH'),('Eastern','Z'),('Eastern Cape','RSA'),('Eastern Visayas','RP'),('Ebonyi','WAN'),('Ecuador','EC'),('Edirne','TR'),('Edo','WAN'),('Egypt','ET'),('Ehime','J'),('Ekiti','WAN'),('El Paraíso','HCA'),('El Salvador','ES'),('Elaz??','TR'),('Emberá','PA'),('Emilia-Romagna','I'),('Entre Ríos','RA'),('Enugu','WAN'),('Equateur','ZRE'),('Erbil','IRQ'),('Eritrea','ER'),('Erzincan','TR'),('Erzurum','TR'),('Esfahan','IR'),('Eski?ehir','TR'),('Espírito Santo','BR'),('Est','CAM'),('Estonia','EW'),('Evora','P'),('Extremadura','E'),('Extrême-Nord','CAM'),('Falcón','YV'),('Falkland Islands','FALK'),('Farg?ona','UZB'),('Faroe Islands','FARX'),('Fars','IR'),('FATA','PK'),('Fatick','SN'),('FCT Islamabad','PK'),('Federacija Bosne i Hercegovine','BIH'),('Fejér','H'),('Fes Boulemane','MA'),('Fiji','FJI'),('Finnmark','N'),('Flevoland','NL'),('Florida','USA'),('Formosa','RA'),('Franche-Comté','F'),('Francisco Morazán','HCA'),('Free State','RSA'),('French Guiana','FGU'),('French Polynesia','FPOL'),('Fribourg','CH'),('Friesland','NL'),('Friuli-Venezia Giulia','I'),('Fromager','CI'),('Fujian','CN'),('Fukui','J'),('Fukuoka','J'),('Fukushima','J'),('Gabon','G'),('Gala?i','RO'),('Galicia','E'),('Gambella','ETH'),('Gambia','WAG'),('Gansu','CN'),('Gao','RMM'),('Gauteng','RSA'),('Gaza','MOC'),('Gaza Strip','GAZA'),('Gaziantep','TR'),('Geita','EAT'),('Gelderland','NL'),('Genève','CH'),('Georgia','GE'),('Georgia','USA'),('Gharb Chrarda Beni Hssen','MA'),('Gibraltar','GBZ'),('Gifu','J'),('Gilgit-Baltistan','PK'),('Gillan','IR'),('Giresun','TR'),('Giurgiu','RO'),('Glarus','CH'),('Goa','IND'),('Goiás','BR'),('Golestan','IR'),('Gombe','WAN'),('Gomel','BY'),('Gorgol','RIM'),('Gorj','RO'),('Gorno-Badakhshan','TAD'),('Gorontalo','RI'),('Gotland','S'),('Gracias a Dios','HCA'),('Grand Casablanca','MA'),('Granma','C'),('Graubünden','CH'),('Greater Accra','GH'),('Greenland','GROX'),('Grenada','WG'),('Grodno','BY'),('Groningen','NL'),('Guadeloupe','GUAD'),('Guainía','CO'),('Guam','GUAM'),('Guanacaste','CR'),('Guanajuato','MEX'),('Guangdong','CN'),('Guangxi','CN'),('Guantánamo','C'),('Guarda','P'),('Guárico','YV'),('Guatemala','GCA'),('Guaviare','CO'),('Guelmim Es Semara','MA'),('Guernsey','GBG'),('Guerrero','MEX'),('Guidimagha','RIM'),('Guinea','RG'),('Guinea-Bissau','GNB'),('Guizhou','CN'),('Gujarat','IND'),('Gumma','J'),('Guyana','GUY'),('Gy?r-Moson-Sopron','H'),('Gümü?hane','TR'),('Gävleborg','S'),('Ha\'il','SA'),('HaDarom','IL'),('Haeme','SF'),('Hainan','CN'),('Hainaut','B'),('Haiti','RH'),('Hajdú-Bihar','H'),('Hakkari','TR'),('Halab','SYR'),('Halland','S'),('Hamah','SYR'),('Hamburg','D'),('Hamedan','IR'),('HaMerkaz','IL'),('Harari','ETH'),('Harghita','RO'),('Haryana','IND'),('Hatay','TR'),('Haut-Sassandra','CI'),('Haute-Normandie','F'),('Hawaii','USA'),('HaZafon','IL'),('Hebei','CN'),('Hedmark','N'),('Hefa','IL'),('Heilongjiang','CN'),('Henan','CN'),('Heredia','CR'),('Herrera','PA'),('Hessen','D'),('Heves','H'),('Hidalgo','MEX'),('Himachal Pradesh','IND'),('Hims','SYR'),('Hiroshima','J'),('Hodh Chargui','RIM'),('Hodh El Gharbi','RIM'),('Hokkaido','J'),('Holguín','C'),('Holy See','V'),('Hong Kong','HONX'),('Hordaland','N'),('Hormozgan','IR'),('Hovedstaden','DK'),('Huambo','ANG'),('Huancavelica','PE'),('Huánuco','PE'),('Hubei','CN'),('Huíla','ANG'),('Huila','CO'),('Hunan','CN'),('Hunedoara','RO'),('Hyogo','J'),('I?d?r','TR'),('Ia?i','RO'),('Ialomi?a','RO'),('Ibaraki','J'),('Ica','PE'),('Iceland','IS'),('Idaho','USA'),('Idlib','SYR'),('Ilam','IR'),('Île-de-France','F'),('Ilfov','RO'),('Illes Balears','E'),('Illinois','USA'),('Ilocos','RP'),('Imo','WAN'),('Inchiri','RIM'),('Indiana','USA'),('Ingushskaya','R'),('Inhambane','MOC'),('Insular','GQ'),('Intibucá','HCA'),('Ionion Nison','GR'),('Iowa','USA'),('Ipeiroy','GR'),('Ireland','IRL'),('Iringa','EAT'),('Irkutsk','R'),('Ishikawa','J'),('Isla de la Juventud','C'),('Islas de la Bahía','HCA'),('Isle of Man','GBM'),('Isparta','TR'),('Ivano-Frankivs´ka','UA'),('Ivanovskaya','R'),('Iwate','J'),('Jalisco','MEX'),('Jamaica','JA'),('Jambi','RI'),('Jammu and Kashmir','IND'),('Jász-Nagykun-Szolnok','H'),('Jawa Barat','RI'),('Jawa Tengah','RI'),('Jawa Timur','RI'),('Jazan','SA'),('Jersey','GBJ'),('Jewish ao.','R'),('Jharkhand','IND'),('Jiangsu','CN'),('Jiangxi','CN'),('Jigawa','WAN'),('Jiho?eský','CZ'),('Jihomoravský','CZ'),('Jilin','CN'),('Jizzax','UZB'),('Johor','MAL'),('Jordan','JOR'),('Jujuy','RA'),('Junín','PE'),('Jura','CH'),('Jämtland','S'),('Jönköping','S'),('K?r?ehir','TR'),('K?r?kkale','TR'),('K?rklareli','TR'),('Kabardino-Balkarskaya','R'),('Kachin','MYA'),('Kaduna','WAN'),('Kaffrine','SN'),('Kagawa','J'),('Kagera','EAT'),('Kagoshima','J'),('Kahramanmara?','TR'),('Kalimantan Barat','RI'),('Kalimantan Selatan','RI'),('Kalimantan Tengah','RI'),('Kalimantan Timur','RI'),('Kaliningradskaya','R'),('Kalmar','S'),('Kalmykiya','R'),('Kaluzhskaya','R'),('Kamchatka','R'),('Kanagawa','J'),('Kano','WAN'),('Kansas','USA'),('Kaolack','SN'),('Karabük','TR'),('Karachayevo-Cherkesskaya','R'),('Karaganda','KAZ'),('Karaman','TR'),('Karelia','R'),('Karlovarský','CZ'),('Karnataka','IND'),('Kars','TR'),('Kasai-Occidental','ZRE'),('Kasai-Oriental','ZRE'),('Kaskazini Pemba','EAT'),('Kaskazini Unguja','EAT'),('Kastamonu','TR'),('Katanga','ZRE'),('Katavi','EAT'),('Katsina','WAN'),('Kayah','MYA'),('Kayes','RMM'),('Kayin','MYA'),('Kayseri','TR'),('Kebbi','WAN'),('Kedah','MAL'),('Kédougou','SN'),('Kelantan','MAL'),('Kemerov','R'),('Kentrikis Makedonias','GR'),('Kentucky','USA'),('Kenya','EAK'),('Kepulauan Bangka Belitung','RI'),('Kepulauan Riau','RI'),('Kerala','IND'),('Kerbela','IRQ'),('Kerman','IR'),('Kermanshah','IR'),('Khabarov','R'),('Khakasiya','R'),('Khanty Mansi ao','R'),('Kharkivs´ka','UA'),('Khatlon','TAD'),('Khersons´ka','UA'),('Khmel´nyts´ka','UA'),('Khorasan-e-Razavi','IR'),('Khulna','BD'),('Khuzestan','IR'),('Khyber Pakhtunkhwa','PK'),('Kidal','RMM'),('Kigoma','EAT'),('Kilimanjaro','EAT'),('Kilis','TR'),('Kinshasa','ZRE'),('Kiribati','KIR'),('Kirkuk','IRQ'),('Kirov','R'),('Kirovohrads´ka','UA'),('Kocaeli','TR'),('Kochi','J'),('Kogi','WAN'),('Kohgiluyeh and Boyerahmad','IR'),('Kolda','SN'),('Komárom-Esztergom','H'),('Komi','R'),('Konya','TR'),('Kosovo','KOS'),('Kostanai','KAZ'),('Kostromskaya','R'),('Kouilou','RCB'),('Koulikoro','RMM'),('Košický','SK'),('Královéhradecký','CZ'),('Krasnodarskiy','R'),('Krasnoyarsk','R'),('Kritis','GR'),('Kronoberg','S'),('Krym','UA'),('Kuala Lumpur','MAL'),('Kujawsko-Pomorskie','PL'),('Kumamoto','J'),('Kuna Yala','PA'),('Kuopio','SF'),('Kurdestan','IR'),('Kurgan','R'),('Kurskaya','R'),('Kusini Pemba','EAT'),('Kusini Unguja','EAT'),('Kuwait','KWT'),('Kwara','WAN'),('KwaZulu-Natal','RSA'),('Kyïv','UA'),('Kyïvs´ka','UA'),('Kymi','SF'),('Kyoto','J'),('Kyrgyzstan','KGZ'),('Kütahya','TR'),('Kyzylorda','KAZ'),('Kärnten','A'),('l1nk_mame.REGIONs of Republican Subordination','TAD'),('La Guajira','CO'),('La Habana','C'),('La Libertad','PE'),('La Pampa','RA'),('La Paz','BOL'),('La Paz','HCA'),('La Rioja','E'),('La Rioja','RA'),('Labuan','MAL'),('Lacs','CI'),('Lagos','RCH'),('Lagos','WAN'),('Lagunes','CI'),('Lakshadweep','IND'),('Lambayeque','PE'),('Lampung','RI'),('Languedoc-Roussillon','F'),('Laos','LAO'),('Lappia','SF'),('Lara','YV'),('Las Tunas','C'),('Latvia','LV'),('Lazio','I'),('Lebanon','RL'),('Lebap','TM'),('Leiria','P'),('Lékoumou','RCB'),('Lempira','HCA'),('Leningradskaya','R'),('Lesotho','LS'),('Liaoning','CN'),('Liberecký','CZ'),('Liberia','LB'),('Libertador General Bernardo O\'Higgins','RCH'),('Libya','LAR'),('Liechtenstein','FL'),('Liège','B'),('Liguria','I'),('Likouala','RCB'),('Lima','PE'),('Lima City','PE'),('Limburg','B'),('Limburg','NL'),('Limón','CR'),('Limousin','F'),('Limpopo','RSA'),('Lindi','EAT'),('Lipetskaya','R'),('Lisboa','P'),('Lithuania','LT'),('Littoral','CAM'),('Lombardia','I'),('London','GB'),('Lorestan','IR'),('Loreto','PE'),('Lorraine','F'),('Los Santos','PA'),('Louga','SN'),('Louisiana','USA'),('Luanda','ANG'),('Luapula','Z'),('Lubelskie','PL'),('Lubuskie','PL'),('Luhans´ka','UA'),('Lunda-Norte','ANG'),('Lunda-Sul','ANG'),('Lusaka','Z'),('Luxembourg','B'),('Luxembourg','L'),('Luzern','CH'),('L´vivs´ka','UA'),('Ma?opolskie','PL'),('Macao','MACX'),('Macedonia','MK'),('Madagascar','RM'),('Madeira','P'),('Madhya Pradesh','IND'),('Madre de Dios','PE'),('Madrid','E'),('Magadan','R'),('Magallanes','RCH'),('Magdalena','CO'),('Magwe','MYA'),('Maharashtra','IND'),('Maine','USA'),('Makkah Al-Mokarramah','SA'),('Malanje','ANG'),('Malatya','TR'),('Malawi','MW'),('Maldives','MV'),('Malta','M'),('Maluku','RI'),('Maluku Utara','RI'),('Mandalay','MYA'),('Mangistau','KAZ'),('Manica','MOC'),('Maniema','ZRE'),('Manipur','IND'),('Manisa','TR'),('Manitoba','CDN'),('Manyara','EAT'),('Maputo','MOC'),('Mara','EAT'),('Maradi','RN'),('Marahoué','CI'),('Maramure?','RO'),('Maranhão','BR'),('Marche','I'),('Mardin','TR'),('Mariy-El','R'),('Markazi','IR'),('Marrakech Tensift Al Haouz','MA'),('Marshall Islands','MH'),('Martinique','MART'),('Mary','TM'),('Maryland','USA'),('Massachusetts','USA'),('Matam','SN'),('Matanzas','C'),('Mato Grosso','BR'),('Mato Grosso do Sul','BR'),('Maule','RCH'),('Mauritius','MS'),('Mayabeque','C'),('Mayotte','MAYO'),('Maysan','IRQ'),('Mazandaran','IR'),('Mazowieckie','PL'),('Mbeya','EAT'),('Mecklenburg-Vorpommern','D'),('Meghalaya','IND'),('Mehedin?i','RO'),('Meknes Tafilalet','MA'),('Melaka','MAL'),('Melilla','MEL'),('Mendoza','RA'),('Mérida','YV'),('Mersin','TR'),('Meta','CO'),('Metro Manila','RP'),('México, Estado de','MEX'),('Michigan','USA'),('Michoacán','MEX'),('Micronesia','FSM'),('Midi-Pyrénées','F'),('Midtjylland','DK'),('Mie','J'),('Mikkeli','SF'),('Mimaropa','RP'),('Minas Gerais','BR'),('Minnesota','USA'),('Minsk','BY'),('Minsk City','BY'),('Miranda','YV'),('Misiones','RA'),('Mississippi','USA'),('Missouri','USA'),('Miyagi','J'),('Miyazaki','J'),('Mizoram','IND'),('Mjini Magharibi Unguja','EAT'),('Mogilev','BY'),('Moldova','MD'),('Molise','I'),('Mon','MYA'),('Monaco','MC'),('Monagas','YV'),('Mongolia','MNG'),('Montagnes','CI'),('Montana','USA'),('Montenegro','MNE'),('Montserrat','MNTS'),('Mopti','RMM'),('Moquegua','PE'),('Moravskoslezský','CZ'),('Mordoviya','R'),('Morelos','MEX'),('Morogoro','EAT'),('Moscow','R'),('Moskovskaya','R'),('Moxico','ANG'),('Moyen-Cavally','CI'),('Moyen-Comoé','CI'),('Mpumalanga','RSA'),('Mtwara','EAT'),('Mu?','TR'),('Mu?la','TR'),('Murcia','E'),('Mure?','RO'),('Murmanskaya','R'),('Muslim Mindanao','RP'),('Mwanza','EAT'),('Mykolaïvs´ka','UA'),('Møre og Romsdal','N'),('N\'zi-Comoé','CI'),('Nagaland','IND'),('Nagano','J'),('Nagasaki','J'),('Najran','SA'),('Namangan','UZB'),('Namibe','ANG'),('Namibia','NAM'),('Nampula','MOC'),('Namur','B'),('Nara','J'),('Nariño','CO'),('Nasarawa','WAN'),('Nauru','NAU'),('Navarra','E'),('Navoiy','UZB'),('Nay Pyi Taw','MYA'),('Nayarit','MEX'),('Neam?','RO'),('Nebraska','USA'),('Negeri Sembilan','MAL'),('Nei Mongol','CN'),('Nepal','NEP'),('Neuchâtel','CH'),('Neuquén','RA'),('Nev?ehir','TR'),('Nevada','USA'),('New Brunswick','CDN'),('New Caledonia','NCA'),('New Hampshire','USA'),('New Jersey','USA'),('New Mexico','USA'),('New South Wales','AUS'),('New York','USA'),('New Zealand','NZ'),('Newfoundland and Labrador','CDN'),('Ngöbe Buglé','PA'),('Ni?de','TR'),('Niamey','RN'),('Niari','RCB'),('Niassa','MOC'),('Nicaragua','NIC'),('Nidwalden','CH'),('Niedersachsen','D'),('Niederösterreich','A'),('Niger','WAN'),('Niigata','J'),('Nineveh','IRQ'),('Ningxia','CN'),('Nitriansky','SK'),('Niue','NIUE'),('Nizhnii Novgorod','R'),('Njombe','EAT'),('Nógrád','H'),('Noord-Brabant','NL'),('Noord-Holland','NL'),('Nord','CAM'),('Nord-Kivu','ZRE'),('Nord-Ouest','CAM'),('Nord-Pas-de-Calais','F'),('Nord-Trøndelag','N'),('Nordjylland','DK'),('Nordland','N'),('Nordrhein-Westfalen','D'),('Norfolk Island','NORF'),('Norrbotten','S'),('Norte de Santander','CO'),('North Carolina','USA'),('North Dakota','USA'),('North East','GB'),('North Khorasan','IR'),('North Korea','NOK'),('North Ossetia-Alania','R'),('North West','GB'),('North West','RSA'),('North-Kazakhstan','KAZ'),('North-Western','Z'),('Northern','GH'),('Northern','Z'),('Northern Cape','RSA'),('Northern Ireland','GB'),('Northern Mariana Islands','NMIS'),('Northern Mindanao','RP'),('Northern Territory','AUS'),('Northwest Territories','CDN'),('Notioy Aigaioy','GR'),('Nouakchott','RIM'),('Nova Scotia','CDN'),('Novgorodskaya','R'),('Novosibirsk','R'),('Nueva Esparta','YV'),('Nuevo Léon','MEX'),('Nunavut','CDN'),('Nusa Tenggara Barat','RI'),('Nusa Tenggara Timur','RI'),('Oaxaca','MEX'),('Oberösterreich','A'),('Obwalden','CH'),('Ocotepeque','HCA'),('Odes´ka','UA'),('Odisha','IND'),('Ogun','WAN'),('Ohio','USA'),('Oita','J'),('Okayama','J'),('Okinawa','J'),('Oklahoma','USA'),('Olancho','HCA'),('Olomoucký','CZ'),('Olt','RO'),('Oman','OM'),('Omsk','R'),('Ondo','WAN'),('Ontario','CDN'),('Oost-Vlaanderen','B'),('Opolskie','PL'),('Oppland','N'),('Ordu','TR'),('Oregon','USA'),('Orenburg','R'),('Oriental','MA'),('Orientale','ZRE'),('Orlovskaya','R'),('Oromia','ETH'),('Oruro','BOL'),('Osaka','J'),('Oslo','N'),('Osmaniye','TR'),('Osun','WAN'),('Ouest','CAM'),('Oulu','SF'),('Overijssel','NL'),('Oyo','WAN'),('Pahang','MAL'),('País Vasco','E'),('Palau','PAL'),('Panamá','PA'),('Pando','BOL'),('Papua','RI'),('Papua Barat','RI'),('Papua New Guinea','PNG'),('Pará','BR'),('Paraguay','PY'),('Paraíba','BR'),('Paraná','BR'),('Pardubický','CZ'),('Pasco','PE'),('Pavlodar','KAZ'),('Pays de la Loire','F'),('Peloponnisos','GR'),('Pennsylvania','USA'),('Penza','R'),('Perak','MAL'),('Perlis','MAL'),('Perm','R'),('Pernambuco','BR'),('Pest','H'),('Piauí','BR'),('Picardie','F'),('Piemonte','I'),('Pinar del Río','C'),('Pitcairn','PITC'),('Piura','PE'),('Plateau','WAN'),('Plateaux','RCB'),('Plze?ský','CZ'),('Podkarpackie','PL'),('Podlaskie','PL'),('Pohjols-Karjala','SF'),('Pointe-Noire','RCB'),('Poitou Charentes','F'),('Poltavs´ka','UA'),('Pomorskie','PL'),('Pool','RCB'),('Portalegre','P'),('Porto','P'),('Portuguesa','YV'),('Potosí','BOL'),('Praha','CZ'),('Prahova','RO'),('Prešovský','SK'),('Primorskiy','R'),('Prince Edward Island','CDN'),('Provence-Alpes-Côte d\'Azur','F'),('Pskovskaya','R'),('Puducherry','IND'),('Puebla','MEX'),('Puerto Rico','PR'),('Puglia','I'),('Pulau Pinang','MAL'),('Punjab','IND'),('Punjab','PK'),('Puno','PE'),('Puntarenas','CR'),('Putrajaya','MAL'),('Putumayo','CO'),('Pwani','EAT'),('Qasqadaryo','UZB'),('Qatar','Q'),('Qazvin','IR'),('Qinghai','CN'),('Qom','IR'),('Qoraqalpog?iston','UZB'),('Quebec','CDN'),('Queensland','AUS'),('Querétaro','MEX'),('Quindío','CO'),('Quintana Roo','MEX'),('Rabat Sale Zemmour Zaer','MA'),('Rajasthan','IND'),('Rajshahi','BD'),('Rakhine','MYA'),('Rangpur','BD'),('Republika Srpska','BIH'),('Reunion','REUN'),('Rheinland-Pfalz','D'),('Rhode Island','USA'),('Rhône-Alpes','F'),('Riau','RI'),('Rif Dimashq','SYR'),('Rio de Janeiro','BR'),('Rio Grande do Norte','BR'),('Rio Grande do Sul','BR'),('Río Negro','RA'),('Ríos','RCH'),('Risaralda','CO'),('Rivers','WAN'),('Rivnens´ka','UA'),('Rize','TR'),('Rogaland','N'),('Rondônia','BR'),('Roraima','BR'),('Rostovskaya','R'),('Rukwa','EAT'),('Ruvuma','EAT'),('Rwanda','RWA'),('Ryazanskaya','R'),('S?laj','RO'),('Saarland','D'),('Sabah','MAL'),('Sachsen','D'),('Sachsen-Anhalt','D'),('Saga','J'),('Sagaing','MYA'),('Saint Barthelemy','SBAR'),('Saint Helena','HELX'),('Saint Kitts and Nevis','KN'),('Saint Lucia','WL'),('Saint Martin','SMAR'),('Saint Pierre and Miquelon','SPMI'),('Saint Vincent and the Grenadines','WV'),('Saint-Louis','SN'),('Saitama','J'),('Sakarya','TR'),('Sakha','R'),('Sakhalin','R'),('Salah al-Deen','IRQ'),('Salta','RA'),('Salzburg','A'),('Samara','R'),('Samarqand','UZB'),('Samoa','WS'),('Samsun','TR'),('San Andrés, Providencia y Santa Catalina','CO'),('San José','CR'),('San Juan','RA'),('San Luis','RA'),('San Luis Potosí','MEX'),('San Marino','RSM'),('San Martín','PE'),('Sancti Spíritus','C'),('Sangha','RCB'),('Sankt Gallen','CH'),('Sankt-Peterburg','R'),('Santa Bárbara','HCA'),('Santa Catarina','BR'),('Santa Cruz','BOL'),('Santa Cruz','RA'),('Santa Fe','RA'),('Santa Fe de Bogotá','CO'),('Santander','CO'),('Santarem','P'),('Santiago','RCH'),('Santiago de Cuba','C'),('Santiago de Estero','RA'),('São Paulo','BR'),('Sao Tome and Principe','STP'),('Saratov','R'),('Sarawak','MAL'),('Sardegna','I'),('Saskatchewan','CDN'),('Satu-Mare','RO'),('Savanes','CI'),('Schaffhausen','CH'),('Schleswig-Holstein','D'),('Schwyz','CH'),('Scotland','GB'),('Sédhiou','SN'),('Ségou','RMM'),('Selangor','MAL'),('Semnan','IR'),('Serbia','SRB'),('Sergipe','BR'),('Setubal','P'),('Sevastopol´','UA'),('Seychelles','SY'),('Shaanxi','CN'),('Shan','MYA'),('Shandong','CN'),('Shanghai','CN'),('Shanxi','CN'),('Shiga','J'),('Shimane','J'),('Shinyanga','EAT'),('Shizuoka','J'),('Sibiu','RO'),('Sichuan','CN'),('Sicilia','I'),('Sierra Leone','WAL'),('Siirt','TR'),('Sikasso','RMM'),('Sikkim','IND'),('Simiyu','EAT'),('Sinaloa','MEX'),('Sindh','PK'),('Singapore','SGP'),('Singida','EAT'),('Sinop','TR'),('Sint Maarten','NLSM'),('Sirdaryo','UZB'),('Sistan and Baluchestan','IR'),('Sivas','TR'),('Sjælland','DK'),('Skåne','S'),('Slovenia','SLO'),('Smolenskaya','R'),('Soccsksargen','RP'),('Sofala','MOC'),('Sogn og Fjordane','N'),('Sokoto','WAN'),('Solomon Islands','SLB'),('Solothurn','CH'),('Somali','ETH'),('Somalia','SP'),('Somogy','H'),('Sonora','MEX'),('Souss Massa Daraa','MA'),('South Australia','AUS'),('South Carolina','USA'),('South Dakota','USA'),('South East','GB'),('South Khorasan','IR'),('South Korea','ROK'),('South Sudan','SSD'),('South West','GB'),('South-Kazakhstan','KAZ'),('Southern','Z'),('Sri Lanka','CL'),('St?edo?eský','CZ'),('Stavropol´skiy','R'),('Steiermark','A'),('Stereas Elladas','GR'),('Stockholm','S'),('Suceava','RO'),('Sucre','CO'),('Sucre','YV'),('Sud','CAM'),('Sud-Bandama','CI'),('Sud-Comoé','CI'),('Sud-Kivu','ZRE'),('Sud-Ouest','CAM'),('Sudan','SUD'),('Sughd','TAD'),('Sulawesi Barat','RI'),('Sulawesi Selatan','RI'),('Sulawesi Tengah','RI'),('Sulawesi Tenggara','RI'),('Sulawesi Utara','RI'),('Sumatera Barat','RI'),('Sumatera Selatan','RI'),('Sumatera Utara','RI'),('Sums´ka','UA'),('Suomi','SF'),('Suriname','SME'),('Surxondaryo','UZB'),('Svalbard','SVAX'),('Sverdlov','R'),('Swaziland','SD'),('Syddanmark','DK'),('Sylhet','BD'),('Szabolcs-Szatmár-Bereg','H'),('Södermanland','S'),('Sør-Trøndelag','N'),('Tabasco','MEX'),('Tabora','EAT'),('Tabouk','SA'),('Táchira','YV'),('Tacna','PE'),('Tadla Azilal','MA'),('Tagant','RIM'),('Tahoua','RN'),('Taiwan','RC'),('Tamaulipas','MEX'),('Tambacounda','SN'),('Tambovskaya','R'),('Tamil Nadu','IND'),('Tanga','EAT'),('Tanger Tetouan','MA'),('Tanintharyi','MYA'),('Taraba','WAN'),('Tarapacá','RCH'),('Tarija','BOL'),('Tartus','SYR'),('Tasmania','AUS'),('Tatarstan','R'),('Taza Al Hoceima Taounate','MA'),('Tehran','IR'),('Tekirda?','TR'),('Tel Aviv','IL'),('Telangana','IND'),('Telemark','N'),('Teleorman','RO'),('Tennessee','USA'),('Terengganu','MAL'),('Ternopil´s´ka','UA'),('Tete','MOC'),('Texas','USA'),('Thailand','THA'),('Thessalias','GR'),('Thi Qar','IRQ'),('Thiès','SN'),('Thurgau','CH'),('Thüringen','D'),('Tianjin','CN'),('Ticino','CH'),('Tierra del Fuego','RA'),('Tigray','ETH'),('Tillabéri','RN'),('Timi?','RO'),('Timor-Leste','TL'),('Tiris Zemmour','RIM'),('Tirol','A'),('Tlaxcala','MEX'),('Tocantins','BR'),('Tochigi','J'),('Togo','RT'),('Tokat','TR'),('Tokelau','TOK'),('Tokushima','J'),('Tokyo','J'),('Tolima','CO'),('Tolna','H'),('Tombouctou','RMM'),('Tomsk','R'),('Tonga','TO'),('Toscana','I'),('Toshkent','UZB'),('Toshkent City','UZB'),('Tottori','J'),('Toyama','J'),('Trabzon','TR'),('Trarza','RIM'),('Tren?iansky','SK'),('Trentino-Alto Adige','I'),('Trinidad and Tobago','TT'),('Tripura','IND'),('Trnavský','SK'),('Troms','N'),('Trujillo','YV'),('Tucumán','RA'),('Tulcea','RO'),('Tul´skaya','R'),('Tumbes','PE'),('Tunceli','TR'),('Tunisia','TN'),('Turks and Caicos Islands','TUCA'),('Turku-Pori','SF'),('Tuvalu','TUV'),('Tverskaya','R'),('Tyumen','R'),('Tyva','R'),('U?ak','TR'),('Ucayali','PE'),('Udmurt','R'),('Uganda','EAU'),('Uíge','ANG'),('Ul´yanovsk','R'),('Umbria','I'),('United Arab Emirates','UAE'),('Upper East','GH'),('Upper West','GH'),('Uppsala','S'),('Uri','CH'),('Uruguay','ROU'),('Ústecký','CZ'),('Utah','USA'),('Utrecht','NL'),('Uttar Pradesh','IND'),('Uttarakhand','IND'),('Uusimaa','SF'),('Vaasa','SF'),('Valais','CH'),('Vâlcea','RO'),('Valenciana','E'),('Valle','HCA'),('Valle d\'Aosta','I'),('Valle de Cauca','CO'),('Vallée du Bandama','CI'),('Valparaíso','RCH'),('Van','TR'),('Vanuatu','VU'),('Vargas','YV'),('Vas','H'),('Vaslui','RO'),('Vaud','CH'),('Vaupés','CO'),('Veneto','I'),('Veracruz','MEX'),('Veraguas','PA'),('Vermont','USA'),('Vest-Agder','N'),('Vestfold','N'),('Veszprém','H'),('Viana do Castelo','P'),('Vichada','CO'),('Victoria','AUS'),('Vietnam','VN'),('Vila Real','P'),('Villa Clara','C'),('Vinnyts´ka','UA'),('Virgin Islands','VIRG'),('Virginia','USA'),('Viseu','P'),('Vitebsk','BY'),('Vlaams-Brabant','B'),('Vladimirskaya','R'),('Volgogradskaya','R'),('Vologodskaya','R'),('Volta','GH'),('Volyns´ka','UA'),('Vorarlberg','A'),('Voronezhskaya','R'),('Vrancea','RO'),('Vyso?ina','CZ'),('Värmland','S'),('Västerbotten','S'),('Västernorrland','S'),('Västmanland','S'),('Västra Götaland','S'),('Wakayama','J'),('Wales','GB'),('Wallis and Futuna','WAFU'),('Warmi?sko-Mazurskie','PL'),('Washington','USA'),('Wasit','IRQ'),('West Azarbayejan','IR'),('West Bank','WEST'),('West Bengal','IND'),('West Kazakhstan','KAZ'),('West Midlands','GB'),('West Virginia','USA'),('West-Vlaanderen','B'),('Western','GH'),('Western','Z'),('Western Australia','AUS'),('Western Cape','RSA'),('Western Sahara','WSA'),('Western Visayas','RP'),('Wielkopolskie','PL'),('Wien','A'),('Wisconsin','USA'),('Worodougou','CI'),('Wyoming','USA'),('Xinjiang','CN'),('Xizang','CN'),('Xorazm','UZB'),('Yalova','TR'),('Yamagata','J'),('Yamaguchi','J'),('Yamalo Nenets ao','R'),('Yamanashi','J'),('Yangon','MYA'),('Yaracuy','YV'),('Yaroslavskaya','R'),('Yazd','IR'),('YeDebub Biheroch Bihereseboch na Hizboch','ETH'),('Yemen','YE'),('Yerushalayim','IL'),('Yobe','WAN'),('Yorkshire and the Humber','GB'),('Yoro','HCA'),('Yozgat','TR'),('Yucatán','MEX'),('Yukon','CDN'),('Yunnan','CN'),('Zabaykalskiy','R'),('Zacatecas','MEX'),('Zachodniopomorskie','PL'),('Zaire','ANG'),('Zakarpats´ka','UA'),('Zala','H'),('Zambézia','MOC'),('Zamboanga Peninsula','RP'),('Zamfara','WAN'),('Zanjan','IR'),('Zanzan','CI'),('Zaporiz´ka','UA'),('Zeeland','NL'),('Zhambyl','KAZ'),('Zhejiang','CN'),('Zhytomyrs´ka','UA'),('Ziguinchor','SN'),('Zimbabwe','ZW'),('Zinder','RN'),('Zlínský','CZ'),('Zonguldak','TR'),('Zug','CH'),('Zuid-Holland','NL'),('Zulia','YV'),('Zürich','CH'),('Örebro','S'),('Östergötland','S'),('Žilinský','SK'),('Østfold','N');
 /*!40000 ALTER TABLE `REGION` ENABLE KEYS */;
 UNLOCK TABLES;
-
