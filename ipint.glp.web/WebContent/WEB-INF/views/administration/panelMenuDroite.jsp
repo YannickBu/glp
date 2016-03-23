@@ -10,12 +10,9 @@
 				groupes récemment créés</label>
 		</p>
 		<ul class="menu-droite-1">
-			<c:forEach var="listUtilisateurEnAttente" items="${list}">
-				<a href="#"><li><c:out
-							value="${listUtilisateurEnAttente.nom}" /> <c:out
-							value="${listUtilisateurEnAttente.prenom}" /><span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></li></a>
-			</c:forEach>
+			<img
+							src="${pageContext.servletContext.contextPath}/resources/img/Ninja-Shadow-2.png"
+							class="img-responsive" alt="Responsive image">
 		</ul>
 	</div>
 </div>
