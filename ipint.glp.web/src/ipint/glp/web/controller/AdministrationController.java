@@ -147,7 +147,7 @@ public class AdministrationController {
 			groupeTmp = groupeS.creer(gDTO);
 		} catch (MetierException e) {
 			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
-			return new ModelAndView("redirect:/creergroupeutilisateur", "createdGroupe", "FAIL");
+			return new ModelAndView("createGroupeUtilisateur", "createdGroupe", "FAIL");
 		}
 		try {
 			gDTO = groupeS.trouver(groupeTmp);
@@ -183,7 +183,7 @@ public class AdministrationController {
 		model.addAttribute("utilisateurResponsables", listPersonnel);
 		model.addAttribute("leGroupe", gDTO);
 
-		return new ModelAndView("redirect:/groupe/" + gDTO.getIdGroupe(), "createdGroupe", "SUCCESS");
+		return new ModelAndView("redirect:/groupe/" + gDTO.getIdGroupe());
 	}
 
 	/**

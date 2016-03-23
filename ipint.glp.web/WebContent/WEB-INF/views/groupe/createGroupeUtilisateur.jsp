@@ -90,7 +90,7 @@
 <script>
 	var response = document.getElementById("hiddenResponse").innerHTML;
 	var url = document.getElementById("hiddenUrl").innerHTML;
-	//url = url + "/administration";
+	url = url + "/creergroupeutilisateur";
 	if (response == "SUCCESS") {
 		$('#myModal1').modal('toggle');
 		window.history.replaceState('administration', 'L1NK', url);

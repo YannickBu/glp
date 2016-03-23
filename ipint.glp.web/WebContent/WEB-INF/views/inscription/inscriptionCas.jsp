@@ -31,13 +31,15 @@
 						</c:forEach>
 					</select>
 				</div>
-				<br/>
-				<div class="form-group">
+			</div>
+			<div class="form-group">
+			<label for="selectFormation" class="col-md-4 control-label"></label>
+				<div class="input col-md-4">
 					<a href="${pageContext.servletContext.contextPath}/connexion/">
-						<button type="button" class="btn btn-default col-md-2"
+						<button type="button" class="btn btn-default col-md-6"
 							style="margin-top: 1%;">Retour</button>
 					</a>
-					<button type="submit" class="btn btn-default col-md-2"
+					<button type="submit" class="btn btn-default col-md-6"
 						style="margin-top: 1%;">S'inscrire</button>
 				</div>
 			</div>
