@@ -116,7 +116,7 @@ public class GroupeController {
 	@RequestMapping(value = "/groupe/{id}/supprimerGroupe", method = RequestMethod.POST)
 	public ModelAndView groupesuppression(HttpServletRequest request,
 			@ModelAttribute("utilisateur") UtilisateurDTO utilisateur, @PathVariable String id,
-			@ModelAttribute GroupeDTO leGroupe, Model model) {
+			@ModelAttribute GroupeDTO leGroupe, Model model) throws MetierException {
 		leGroupe.setIdGroupe(Integer.parseInt(id));
 		try {
 			leGroupe = groupeService.trouver(leGroupe);
@@ -125,7 +125,45 @@ public class GroupeController {
 			e.printStackTrace();
 		}
 		groupeService.supprimer(leGroupe);
-		return new ModelAndView("redirect:/");
+		
+		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
+		UtilisateurDTO uDTO = new UtilisateurDTO();
+		uDTO.setEmail(request.getUserPrincipal().getName());
+		try {
+			uDTO = utilisateurService.trouver(uDTO);
+			List<GroupeDTO> groupes = uDTO.getGroupes();
+//			List<GroupeDTO> groupes2 = new ArrayList<>();
+//			groupes2.addAll(groupes);
+			GroupeDTO groupePrincipal = uDTO.getGroupePrincipal();
+//			System.out.println("ArticleController " + "welcomeGet" + groupes);
+			groupes.add(groupePrincipal);
+			articles = articleService.listerParDate(groupes);
+			groupes.remove(groupePrincipal);
+		} catch (MetierException e) {
+			logger.severe("Erreur acces publication GET - UtilisateurService.trouver renvoie : " + e.getMessage());
+			return new ModelAndView("redirect:/erreur");
+		} 
+		
+		List<GroupeDTO> tousLesGroupes = groupeService.listerTousLesGroupes();
+		tousLesGroupes.remove(uDTO.getGroupePrincipal());
+		for(GroupeDTO groupe1 : uDTO.getGroupes()){
+			for(GroupeDTO groupe2 : tousLesGroupes){
+				if(groupe1.equals(groupe2)){
+					groupe2=null;
+				}
+			}
+		}
+		List<GroupeDTO> nouvelle = new ArrayList<GroupeDTO>(tousLesGroupes); 
+		Collections.shuffle(nouvelle);
+		uDTO.getGroupes().remove(uDTO.getGroupePrincipal());
+		model.addAttribute("grpPrincipal",uDTO.getGroupePrincipal());
+		model.addAttribute("tousLesGroupes", nouvelle);
+		model.addAttribute("articles", articles);
+		model.addAttribute("utilisateur", uDTO);
+		
+		
+		model.addAttribute("article", new ArticleDTO());
+		return new ModelAndView("accueil","removedGroupe", "SUCCESS");
 	}
 
 	@RequestMapping(value = "/groupe/{id}/desinscriptionGroupe", method = RequestMethod.GET)
