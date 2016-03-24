@@ -214,40 +214,6 @@ public class AdministrationController {
 			e1.printStackTrace();
 		}
 		UtilisateurDTO uDTO = new UtilisateurDTO();
-		List<UtilisateurDTO> luDTO = new ArrayList<UtilisateurDTO>();
-		String[] moderateurList = request.getParameterValues("utilisateurResponsable.idUtilisateur");
-		int idModerateur = Integer.parseInt(moderateurList[0].toString());
-		String[] animateurList = request.getParameterValues("animateurs");
-		for (int i = 0; i < animateurList.length; i++) {
-			UtilisateurDTO animTmp = new UtilisateurDTO();
-			animTmp.setIdUtilisateur(Integer.parseInt(animateurList[i].toString()));
-			try {
-				luDTO.add(utilisateurS.trouver(animTmp));
-			} catch (MetierException e) {
-				logger.severe("Erreur createGroupePOST - utilisateurS.trouver renvoie : " + e.getMessage());
-			}
-		}
-		uDTO.setIdUtilisateur(idModerateur);
-		gDTO.setNomGroupe(groupeTmp.getNomGroupe());
-		gDTO.setDescription(groupeTmp.getDescription());
-		gDTO.setGroupeOfficiel(true);
-		gDTO.setAnimateurs(luDTO);
-		gDTO.setUtilisateurResponsable(uDTO);
-		try {
-			groupeTmp = groupeS.creer(gDTO);
-		} catch (MetierException e) {
-			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
-			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
-		}
-		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
-		try {
-			listPersonnel = utilisateurS.listerParType("PERSONNEL");
-		} catch (MetierException e) {
-			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
-			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
-		}
-		model.addAttribute("animateurs", listPersonnel);
-		model.addAttribute("utilisateurResponsables", listPersonnel);
 		try {
 			model.addAttribute("groupesOfficiel", groupeS.listerParType(true));
 		} catch (MetierException e) {
@@ -269,6 +235,70 @@ public class AdministrationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		List<UtilisateurDTO> luDTO = new ArrayList<UtilisateurDTO>();
+		String[] moderateurList = request.getParameterValues("utilisateurResponsable.idUtilisateur");
+		int idModerateur = 0;
+		try{
+			if(moderateurList == null){
+				throw new MetierException();
+			}
+			else{
+				idModerateur = Integer.parseInt(moderateurList[0].toString());
+			}
+			
+		}
+		catch(MetierException e){
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
+		}
+		String[] animateurList = request.getParameterValues("animateurs");
+		try{
+			if(animateurList == null){
+				throw new MetierException();
+			}
+			else{
+				for (int i = 0; i < animateurList.length; i++) {
+					UtilisateurDTO animTmp = new UtilisateurDTO();
+					animTmp.setIdUtilisateur(Integer.parseInt(animateurList[i].toString()));
+					try {
+						luDTO.add(utilisateurS.trouver(animTmp));
+					} catch (MetierException e) {
+					  throw new MetierException();
+					}
+				}
+			}
+		}
+		catch(MetierException e){
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
+		}
+		
+		uDTO.setIdUtilisateur(idModerateur);
+		gDTO.setNomGroupe(groupeTmp.getNomGroupe());
+		if(groupeTmp.getNomGroupe().equals("")){
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
+		}
+		if(groupeTmp.getDescription().equals("")){
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
+		}
+		gDTO.setDescription(groupeTmp.getDescription());
+		gDTO.setGroupeOfficiel(true);
+		gDTO.setAnimateurs(luDTO);
+		gDTO.setUtilisateurResponsable(uDTO);
+		try {
+			groupeTmp = groupeS.creer(gDTO);
+		} catch (MetierException e) {
+			logger.severe("Erreur createGroupePOST - groupeS.creer renvoie : " + e.getMessage());
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
+		}
+		List<UtilisateurDTO> listPersonnel = new ArrayList<UtilisateurDTO>();
+		try {
+			listPersonnel = utilisateurS.listerParType("PERSONNEL");
+		} catch (MetierException e) {
+			logger.severe("Erreur createGroupeGET - UtilisateurService.listerPersonnel renvoie : " + e.getMessage());
+			return new ModelAndView("panelAdministration", "createdGroupe", "FAIL");
+		}
+		model.addAttribute("animateurs", listPersonnel);
+		model.addAttribute("utilisateurResponsables", listPersonnel);
+
 		return new ModelAndView("panelAdministration", "createdGroupe", "SUCCESS");
 	}
 
