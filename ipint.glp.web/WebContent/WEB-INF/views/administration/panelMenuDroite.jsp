@@ -4,7 +4,7 @@
 
 <div class="col-md-2 droite">
 	<div class="menu-droite">
-		<p class="suggestion-titre">
+		<%-- <p class="suggestion-titre">
 			<label><span class="glyphicon glyphicon-list-alt"
 				style="font-size: 120%" aria-hidden="true"></span>&nbsp;&nbsp;Les
 				groupes récemment créés</label>
@@ -13,7 +13,7 @@
 			<img
 							src="${pageContext.servletContext.contextPath}/resources/img/Ninja-Shadow-2.png"
 							class="img-responsive" alt="Responsive image">
-		</ul>
+		</ul> --%>
 	</div>
 </div>
 
